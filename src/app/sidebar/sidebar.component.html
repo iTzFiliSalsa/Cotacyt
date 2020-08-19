@@ -1,0 +1,67 @@
+<div class="wrapper">
+	<div class="sidebar">
+
+		<div class="sidebar-menu">
+			<!-- logo tamaulipas -->
+			<div class="profile">
+				<img src="/src/assets/image/logotam.png" alt="">
+				<p>Hola, Bienvenido</p>
+				<p>CP. <span>Marisol Sánchez De León</span></p>
+				<hr>
+			</div>
+			<div class="indicador">
+				<p><span>General</span></p>
+			</div>
+			<li class="item">
+				<a href="#" class="menu-btn">
+					<i class="fas fa-home"></i><span> Inicio <i class="fas fa-chevron-right drop-down"></i></span>
+				</a>
+				<a href="#profile" class="menu-btn">
+					<i class="fas fa-user-circle"></i><span> Proyectos <i
+							class="fas fa-chevron-right drop-down"></i></span>
+				</a>
+			</li>
+
+			<!-- OPCIONES DE ADMINISTRADOR -->
+			<div class="indicador">
+				<p><span>Administrador</span></p>
+			</div>
+
+			<li class="item">
+				<a href="#" class="menu-btn">
+					<i class="fas fa-users"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
+				</a>
+				<a href="#profile" class="menu-btn">
+					<i class="fas fa-pencil-ruler"></i><span> Proyectos <i
+							class="fas fa-chevron-right drop-down"></i></span>
+				</a>
+				<a href="#profile" class="menu-btn">
+					<i class="fas fa-align-left"></i><span> Categorias <i
+							class="fas fa-chevron-right drop-down"></i></span>
+				</a>
+			</li>
+			<!-- TERMINA OPCIONES DE ADMINISTRADOR -->
+
+		</div>
+	</div>
+
+
+
+
+	<div class="main-container">
+		<!-- <div class="sidebar-btn">
+				<i class="fas fa-bars"></i>
+			</div>	 -->
+		<h2>Hola como estan</h2>
+	</div>
+
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(".sidebar-btn").click(function () {
+			$(".wrapper").toggleClass("collapse");
+		});
+	});
+</script>
