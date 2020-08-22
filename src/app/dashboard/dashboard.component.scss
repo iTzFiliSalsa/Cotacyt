@@ -1,0 +1,102 @@
+:root{
+    --grey: #efefef;
+}
+
+.menubar-label-category{
+    font-family: "Poppins";
+    color: rgb(82,82,82);
+    font-size: 12px;
+}
+
+.category-label{
+    font-family: "Poppins";
+    color: white;
+    font-size: 12px;
+    background: rgb(0,125,151);
+    border-radius: 135px 135px 135px 135px;
+    -moz-border-radius: 135px 135px 135px 135px;
+    -webkit-border-radius: 135px 135px 135px 135px;
+    border: 0px solid #000000;
+}
+
+.btn-cog{
+    cursor: pointer;
+}
+.btn-cog:hover{
+    color: rgb(0,125,151);
+}
+
+.bg-grey{
+    background-color: var(--grey) !important;
+}
+
+.text-h1{
+    color: rgb(0,125,151);
+    font-size: 50px;
+    font-weight: bolder;    
+    font-family: "Poppins";
+}
+.text-h6{
+    color: rgb(82,82,82);
+    font-size: 8px;
+    font-weight: 400;
+    font-family: "Poppins";
+}
+
+.btn-see-projects{
+    margin-top: 10px;
+    font-family: "Poppins";
+    font-size: 12px;
+    border-radius: 50px;
+}
+
+
+.card-clock{
+    background-color: rgb(10,175,209);
+    border-radius: 10px;
+    color: white;
+}
+
+.text-h1-panel{
+    margin-left: 20px;
+    color: white;
+    font-size: 40px;
+    font-weight: bolder;    
+    font-family: "Poppins";
+}
+
+.text-h6-panel{
+    margin-right: 10px;
+    color: white;
+    font-size: 10px;
+    font-weight: 400;
+    font-family: "Poppins";
+}
+
+.text-h6-graph{
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: auto;
+    margin-top: auto;
+    font-family: "Poppins";
+}
+
+
+.icon-calendar{
+    margin-right: 10px;
+    justify-content: center;
+}
+// 10 175 209
+
+
+.qualified-projects {
+    height:300px;
+    overflow-y: scroll;
+}
+.qualified-projects::-webkit-scrollbar{
+    width: 5px;
+}
+.qualified-projects::-webkit-scrollbar-thumb{
+    background:  rgb(0,125,151);
+    border-radius: 5px;
+}
