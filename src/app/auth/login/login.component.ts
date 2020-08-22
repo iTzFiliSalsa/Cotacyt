@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { proyecto } from '../models/proyectos.model';
 
 @Component({
   selector: 'app-login',

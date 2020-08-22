@@ -13,10 +13,10 @@
 				<p><span>General</span></p>
 			</div>
 			<li class="item">
-				<a href="#" class="menu-btn">
+				<a [routerLink]="['dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"  class="menu-btn">
 					<i class="fas fa-home"></i><span> Inicio <i class="fas fa-chevron-right drop-down"></i></span>
 				</a>
-				<a href="#profile" class="menu-btn">
+				<a  class="menu-btn">
 					<i class="fas fa-user-circle"></i><span> Proyectos <i
 							class="fas fa-chevron-right drop-down"></i></span>
 				</a>
@@ -28,14 +28,14 @@
 			</div>
 
 			<li class="item">
-				<a href="#" class="menu-btn">
+				<a  [routerLink]="['judges']" routerLinkActive="active" class="menu-btn">
 					<i class="fas fa-users"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
 				</a>
-				<a href="#profile" class="menu-btn">
+				<a  class="menu-btn">
 					<i class="fas fa-pencil-ruler"></i><span> Proyectos <i
 							class="fas fa-chevron-right drop-down"></i></span>
 				</a>
-				<a href="#profile" class="menu-btn">
+				<a class="menu-btn">
 					<i class="fas fa-align-left"></i><span> Categorias <i
 							class="fas fa-chevron-right drop-down"></i></span>
 				</a>
@@ -49,14 +49,11 @@
 
 
 	<div class="main-container">
-		<!-- <div class="sidebar-btn">
-				<i class="fas fa-bars"></i>
-			</div>	 -->
-		<h2>Hola como estan</h2>
+		<router-outlet></router-outlet>
 	</div>
 
 </div>
-
+<!-- 
 
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -64,4 +61,4 @@
 			$(".wrapper").toggleClass("collapse");
 		});
 	});
-</script>
+</script> -->

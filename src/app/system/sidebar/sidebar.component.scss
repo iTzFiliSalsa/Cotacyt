@@ -69,6 +69,12 @@
   transition-property: color;
 }
 
+.active{
+  color: white;
+  background: rgb(52, 73, 94);
+  text-decoration-line: none;
+}
+
 .wrapper .sidebar .sidebar-menu .item .menu-btn:hover{
   color: white;
   background: rgb(52, 73, 94);
