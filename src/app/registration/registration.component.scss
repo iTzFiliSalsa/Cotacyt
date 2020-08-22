@@ -1,0 +1,58 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+input{
+    height: 40px;
+    width: 100%;
+    font-size: 110%;
+}
+
+
+label{
+
+    font-size: 110%;
+}
+
+
+select{
+    width: 100%;
+    height: 40px;
+    
+}
+
+button{
+    width: 400px;
+    height: 50px;
+    border-radius: 20px;
+    background: linear-gradient(to right, #36d1dc, #5b86e5);
+    font-size: 120%;
+    color: azure;
+    border: 0;
+    outline: none;
+
+    
+}
+
+.tamano{
+    height: 100vh;
+    align-content: center;
+}
+
+.color{
+    //background-image: url("../../assets/Degradado.jpg");
+    background-color: white;
+    border-bottom-right-radius: 120px; 
+    
+}
+
+.img{
+    border: 0;
+    width: 500px;
+    height: 400px;
+}
+
+.titulo{
+    text-align: center;
+    font-size: 180%;
+}
