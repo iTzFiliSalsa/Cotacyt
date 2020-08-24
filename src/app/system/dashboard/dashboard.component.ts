@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AreasService } from 'src/app/services/areas.service';
+import { Subscriber } from 'rxjs';
 
 
 @Component({
@@ -26,9 +28,13 @@ export class DashboardComponent implements OnInit {
   
 
 
-  constructor() { }
+  constructor(private _areaservice:AreasService) { }
 
   ngOnInit(): void {
+    this._areaservice.get().subscribe(
+      res=>{console.log(res);},
+      error=>{}
+    );
   }
 
 

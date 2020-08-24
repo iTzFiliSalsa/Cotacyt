@@ -9,6 +9,8 @@ import { SidebarComponent } from './system/sidebar/sidebar.component';
 import { DashboardComponent } from './system/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 
+import { HttpClientModule } from '@angular/common/http/'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,7 @@ import { LoginComponent } from './auth/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
