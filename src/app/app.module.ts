@@ -9,7 +9,8 @@ import { SidebarComponent } from './system/sidebar/sidebar.component';
 import { DashboardComponent } from './system/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 
-import { HttpClientModule } from '@angular/common/http/'
+import { HttpClientModule } from '@angular/common/http/';
+import { ServicesConfig } from './config/services.config';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { HttpClientModule } from '@angular/common/http/'
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ServicesConfig
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
