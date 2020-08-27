@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AreasService } from 'src/app/services/areas.service';
 import { Subscriber } from 'rxjs';
+import { DashboardService } from '../../services/dashboard.service';
+import { JsonPipe } from '@angular/common';
+import { Totales, ProyectosCalificados, ProyectosPorCalificar } from '../../models/dashboard.model';
 
 
 @Component({
@@ -20,21 +23,35 @@ export class DashboardComponent implements OnInit {
   public barChartOptions: any = {
     responsive: true,
   };
-  
+
   public barChartType: string = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
 
-  
 
 
-  constructor(private _areaservice:AreasService) { }
+  totales: Totales[];
+  proyectosCalificados: ProyectosCalificados[];
+  proyectosPorCalificar: ProyectosPorCalificar[];
+
+  constructor(private dashboardService: DashboardService) {
+    this.totales = new Array<Totales>();
+    this.proyectosCalificados = new Array<ProyectosCalificados>();
+  }
 
   ngOnInit(): void {
-    this._areaservice.get().subscribe(
-      res=>{console.log(res);},
-      error=>{}
-    );
+
+    this.dashboardService.getTotales().subscribe( (data) => this.totales = data );
+
+    this.dashboardService.getProyectosPorCategorias().subscribe( data => {
+      console.log ( data );
+    });
+
+    this.dashboardService.getProyectosCalificados().subscribe(
+      (data: any) => this.proyectosCalificados = data.proyectos_calificados );
+
+    this.dashboardService.getProyectosPorCalificar().subscribe(
+      (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar );
   }
 
 
