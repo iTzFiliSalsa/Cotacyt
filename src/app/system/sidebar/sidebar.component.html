@@ -4,7 +4,7 @@
 		<div class="sidebar-menu">
 			<!-- logo tamaulipas -->
 			<div class="profile">
-				<img src="/src/assets/image/logotam.png" alt="">
+				<img src="../../assets/logotam.png" alt="">
 				<p>Hola, Bienvenido</p>
 				<p>CP. <span>Marisol Sánchez De León</span></p>
 				<hr>
@@ -31,7 +31,7 @@
 				<a  [routerLink]="['judges']" routerLinkActive="active" class="menu-btn">
 					<i class="fas fa-users"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
 				</a>
-				<a  class="menu-btn">
+				<a  [routerLink]="['projects']" routerLinkActive="active"  class="menu-btn">
 					<i class="fas fa-pencil-ruler"></i><span> Proyectos <i
 							class="fas fa-chevron-right drop-down"></i></span>
 				</a>
