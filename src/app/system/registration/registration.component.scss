@@ -1,27 +1,23 @@
-*{
+* {
     font-family: 'Poppins', sans-serif;
 }
 
-input{
+input {
     height: 40px;
     width: 100%;
     font-size: 110%;
 }
 
-
-label{
-
+label {
     font-size: 110%;
 }
 
-
-select{
+select {
     width: 100%;
     height: 40px;
-    
 }
 
-button{
+button {
     width: 400px;
     height: 50px;
     border-radius: 20px;
@@ -30,29 +26,38 @@ button{
     color: azure;
     border: 0;
     outline: none;
-
-    
 }
 
-.tamano{
+.btn-disabled {
+    width: 400px;
+    height: 50px;
+    border-radius: 20px;
+    background: linear-gradient(to right, #dc6b36, #e55b5b);
+    font-size: 120%;
+    color: azure;
+    border: 0;
+    outline: none;
+    cursor: not-allowed;
+}
+
+.tamano {
     height: 100vh;
     align-content: center;
 }
 
-.color{
+.color {
     //background-image: url("../../assets/Degradado.jpg");
     background-color: white;
-    border-bottom-right-radius: 120px; 
-    
+    border-bottom-right-radius: 120px;
 }
 
-.img{
+.img {
     border: 0;
     width: 500px;
     height: 400px;
 }
 
-.titulo{
+.titulo {
     text-align: center;
     font-size: 180%;
 }

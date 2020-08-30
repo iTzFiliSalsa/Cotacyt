@@ -4,6 +4,10 @@ import { Subscriber } from 'rxjs';
 import { DashboardService } from '../../services/dashboard.service';
 import { JsonPipe } from '@angular/common';
 import { Totales, ProyectosCalificados, ProyectosPorCalificar } from '../../models/dashboard.model';
+import { Session } from 'src/app/models/session.model';
+import { CategoriasService } from '../../services/categorias.service';
+import { CalificacionesService } from '../../services/calificaciones.service';
+import { Calificaciones } from '../../models/calificaciones.model';
 
 
 @Component({
@@ -31,27 +35,56 @@ export class DashboardComponent implements OnInit {
 
 
   totales: Totales[];
+  categoria: string;
   proyectosCalificados: ProyectosCalificados[];
   proyectosPorCalificar: ProyectosPorCalificar[];
-
-  constructor(private dashboardService: DashboardService) {
+  estadisticasDeProyectos: Calificaciones[];
+  sessionData: Session[];
+  constructor(private dashboardService: DashboardService,
+              private categoriasService: CategoriasService,
+              private calificacionesService: CalificacionesService) {
     this.totales = new Array<Totales>();
     this.proyectosCalificados = new Array<ProyectosCalificados>();
+    this.sessionData = new Array<Session>();
+    this.estadisticasDeProyectos = new Array<Calificaciones>();
   }
 
   ngOnInit(): void {
-
-    this.dashboardService.getTotales().subscribe( (data) => this.totales = data );
-
-    this.dashboardService.getProyectosPorCategorias().subscribe( data => {
-      console.log ( data );
-    });
-
+    // obtiene los totales
+    this.dashboardService.getTotales().subscribe(
+      (data) => this.totales = data,
+      err => console.log( err ) );
+    // obtiene los proyectos por categorias
+    this.dashboardService.getProyectosPorCategorias().subscribe(
+      data => console.log ( data ),
+      err => console.log(err) );
+    // obtiene los proyectos calificados
     this.dashboardService.getProyectosCalificados().subscribe(
-      (data: any) => this.proyectosCalificados = data.proyectos_calificados );
-
+      (data: any) => this.proyectosCalificados = data.proyectos_calificados,
+      err => console.log(err) );
+    // obtiene los proyectos por calificar
     this.dashboardService.getProyectosPorCalificar().subscribe(
-      (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar );
+      (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar,
+      err => console.log(err) );
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
+    // obtiene la categoria de la sesión actual
+    this.categoriasService.getCategorias().subscribe( data => {
+      this.categoria = data.categoria;
+    });
+    // Estadisticas
+    this.calificacionesService.proyectosEstadisticas().subscribe(
+      data => {
+        this.estadisticasDeProyectos = data;
+      },
+      err => console.log(err)
+    );
+  }
+
+  getPercent(porcentaje: string) {
+    Number(porcentaje);
+    return {
+      width: porcentaje + '%'
+    };
   }
 
 

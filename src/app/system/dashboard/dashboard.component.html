@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">Media superior</span></a>
+    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">{{categoria}}</span></a>
     <button class="fas fa-cog btn-cog"></button>
 </nav>
 <div></div>
@@ -161,34 +161,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Lorem</td>
+                                        <tr *ngFor="let proyectos of estadisticasDeProyectos">
+                                            <td>{{proyectos.nombre}}</td>
                                             <td>
                                                 <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width:80%;"></div>
+                                                    <div class="progress-bar bg-info" role="progressbar" [ngStyle]="getPercent(proyectos.total)"></div>
                                                 </div>
                                             </td>
-                                            <td>80%</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Lorem</td>
-                                            <td>
-                                                <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width:73%;"></div>
-                                                </div>
-                                            </td>
-                                            <td>73%</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>
-                                                <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width:65%;"></div>
-                                                </div>
-                                            </td>
-                                            <td>65%</td>
+                                            <td>{{proyectos.total | number}}%</td>
                                         </tr>
                                     </tbody>
                                 </table>

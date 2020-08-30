@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ServicesConfig } from '../config/services.config';
-import { Observable } from 'rxjs';
 import { Session } from '../models/session.model';
+import { Observable } from 'rxjs';
+import { Calificaciones } from '../models/calificaciones.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriasService {
+export class CalificacionesService {
   sessionData: Session[];
   constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
-    this.sessionData = new Array<Session>();
+    this.sessionData = Array<Session>();
   }
 
-  getCategorias(): Observable<any> {
+  proyectosEstadisticas(): Observable<Calificaciones[]> {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
-    return this.http.get( this.servicesConfig.APP_ENDPOINT + 'api/categorias/' + this.sessionData['id_categorias']);
+    return this.http.get<Calificaciones[]>(
+      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-por-categoria/' + this.sessionData['id_categorias']);
   }
 }

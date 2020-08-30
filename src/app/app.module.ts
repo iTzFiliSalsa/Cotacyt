@@ -9,6 +9,9 @@ import { SidebarComponent } from './system/sidebar/sidebar.component';
 import { DashboardComponent } from './system/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 import { HttpClientModule } from '@angular/common/http/';
 import { ServicesConfig } from './config/services.config';
 
@@ -23,7 +26,9 @@ import { ServicesConfig } from './config/services.config';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ServicesConfig
