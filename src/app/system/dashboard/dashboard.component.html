@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">Media superior</span></a>
+    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">{{categoria}}</span></a>
     <button class="fas fa-cog btn-cog"></button>
 </nav>
 <div></div>
@@ -12,29 +12,35 @@
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-3 d-flex my-3">
                     <div class="mx-auto">
-                        <h6 class="text-h6">Proyectos</h6>
-                        <h1 class="text-h1">25</h1>
+
+                        <h6 class="text-h6"> <span> <a href="" class="fas fa-home"></a> </span>Proyectos</h6>
+                        <h1 class="text-h1">{{totales['proyectos']}}</h1>
+
                     </div>
                 </div>
 
                 <div class="col-lg-2 col-md-3 col-sm-3 d-flex my-3">
                     <div class="mx-auto">
-                        <h6 class="text-h6">Participantes</h6>
-                        <h1 class="text-h1">60</h1>
+
+                        <h6 class="text-h6 "> <span> <a href="" class="fas fa-home"></a> </span>Participantes</h6>
+                        <h1 class="text-h1 ">{{totales['autores']}}</h1>
+
                     </div>
                 </div>
 
                 <div class="col-lg-2 col-md-3 col-sm-3 d-flex  my-3">
                     <div class="mx-auto">
-                        <h6 class="text-h6">Categorías</h6>
-                        <h1 class="text-h1"> 7</h1>
+                        <h6 class="text-h6 "> <span> <a href="" class="fas fa-home"></a> </span>Categorías</h6>
+                        <h1 class="text-h1 ">{{totales['categorias']}}</h1>
+
                     </div>
                 </div>
 
                 <div class="col-lg-2 col-md-3 col-sm-3 d-flex  my-3">
                     <div class="mx-auto">
-                        <h6 class="text-h6">Jueces</h6>
-                        <h1 class="text-h1">10</h1>
+                        <h6 class="text-h6 "> <span> <a href="" class="fas fa-home"></a> </span>Jueces</h6>
+                        <h1 class="text-h1 ">{{totales['jueces']}}</h1>
+
                     </div>
                 </div>
 
@@ -92,40 +98,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>11/02/2020</td>
+                                        <tr *ngFor="let proyecto of proyectosCalificados">
+                                            <td>{{proyecto.nombre}}<br><small>{{proyecto.resumen}}</small></td>
+                                            <td>{{proyecto.fecha | date}}</td>
                                             <td><button class="btn-see-projects btn btn-info">Editar</button></td>
                                         </tr>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>11/02/2020</td>
-                                            <td><button class="btn-see-projects btn btn-info">Editar</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>11/02/2020</td>
-                                            <td><button class="btn-see-projects btn btn-info">Editar</button></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>11/02/2020</td>
-                                            <td><button class="btn-see-projects btn btn-info">Editar</button></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>11/02/2020</td>
-                                            <td><button class="btn-see-projects btn btn-info">Editar</button></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>11/02/2020</td>
-                                            <td><button class="btn-see-projects btn btn-info">Editar</button></td>
-                                        </tr>
-
                                     </tbody>
                                 </table>
 
@@ -147,16 +124,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td><button class="btn-see-projects btn btn-success">Calificar</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td><button class="btn-see-projects btn btn-success">Calificar</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem</td>
+                                        <tr *ngFor="let proyecto of proyectosPorCalificar">
+                                            <td>{{proyecto.nombre}}<br><small>{{proyecto.resumen}}</small></td>
                                             <td><button class="btn-see-projects btn btn-success">Calificar</button></td>
                                         </tr>
                                     </tbody>
@@ -200,37 +169,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Lorem</td>
+                                        <tr *ngFor="let proyectos of estadisticasDeProyectos">
+                                            <td>{{proyectos.nombre}}</td>
                                             <td>
                                                 <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-info" role="progressbar"
-                                                        style="width:80%;"></div>
+                                                    <div class="progress-bar bg-info" role="progressbar" [ngStyle]="getPercent(proyectos.total)"></div>
                                                 </div>
                                             </td>
-                                            <td>80%</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Lorem</td>
-                                            <td>
-                                                <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-info" role="progressbar"
-                                                        style="width:73%;"></div>
-                                                </div>
-                                            </td>
-                                            <td>73%</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>
-                                                <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-info" role="progressbar"
-                                                        style="width:65%;"></div>
-                                                </div>
-                                            </td>
-                                            <td>65%</td>
+                                            <td>{{proyectos.total | number}}%</td>
                                         </tr>
                                     </tbody>
                                 </table>

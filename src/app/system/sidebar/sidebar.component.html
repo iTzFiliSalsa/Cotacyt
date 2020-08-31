@@ -1,31 +1,34 @@
 <div class="wrapper">
-	<div class="sidebar">
+    <div class="sidebar">
 
-		<div class="sidebar-menu">
-			<!-- logo tamaulipas -->
-			<div class="profile">
-				<img src="../../assets/logotam.png" alt="">
-				<p>Hola, Bienvenido</p>
-				<p>CP. <span>Marisol Sánchez De León</span></p>
-				<hr>
-			</div>
-			<div class="indicador">
-				<p><span>General</span></p>
-			</div>
-			<li class="item">
-				<a [routerLink]="['dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"  class="menu-btn">
-					<i class="fas fa-home"></i><span> Inicio <i class="fas fa-chevron-right drop-down"></i></span>
-				</a>
-				<a  class="menu-btn">
-					<i class="fas fa-user-circle"></i><span> Proyectos <i
+
+        <div class="sidebar-menu">
+            <!-- logo tamaulipas -->
+            <div class="profile">
+                <img src="/src/assets/image/logotam.png" alt="">
+                <p>Hola, Bienvenido</p>
+                <p>CP. <span>{{sessionData['nombre']}}</span></p>
+                <hr>
+            </div>
+            <div class="indicador">
+                <p><span>General</span></p>
+            </div>
+            <li class="item">
+                <a [routerLink]="['dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="menu-btn">
+                    <i class="fas fa-home"></i><span> Inicio <i class="fas fa-chevron-right drop-down"></i></span>
+                </a>
+                <a class="menu-btn">
+                    <i class="fas fa-user-circle"></i><span> Proyectos <i
+
 							class="fas fa-chevron-right drop-down"></i></span>
-				</a>
-			</li>
+                </a>
+            </li>
 
-			<!-- OPCIONES DE ADMINISTRADOR -->
-			<div class="indicador">
-				<p><span>Administrador</span></p>
-			</div>
+            <!-- OPCIONES DE ADMINISTRADOR -->
+            <div class="indicador">
+                <p><span>Administrador</span></p>
+            </div>
+
 
 			<li class="item">
 				<a  [routerLink]="['judges']" routerLinkActive="active" class="menu-btn">
@@ -33,24 +36,28 @@
 				</a>
 				<a  [routerLink]="['projects']" routerLinkActive="active"  class="menu-btn">
 					<i class="fas fa-pencil-ruler"></i><span> Proyectos <i
+
 							class="fas fa-chevron-right drop-down"></i></span>
-				</a>
-				<a class="menu-btn">
-					<i class="fas fa-align-left"></i><span> Categorias <i
+                </a>
+                <a class="menu-btn">
+                    <i class="fas fa-align-left"></i><span> Categorias <i
 							class="fas fa-chevron-right drop-down"></i></span>
-				</a>
-			</li>
-			<!-- TERMINA OPCIONES DE ADMINISTRADOR -->
+                </a>
+                <a class="menu-btn" (click)="cerrarSesion()" style="cursor: pointer;">
+                    <i class="fa fa-window-close"></i><span> Cerrar sesión</span>
+                </a>
+            </li>
+            <!-- TERMINA OPCIONES DE ADMINISTRADOR -->
 
-		</div>
-	</div>
+        </div>
+    </div>
 
 
 
 
-	<div class="main-container">
-		<router-outlet></router-outlet>
-	</div>
+    <div class="main-container">
+        <router-outlet></router-outlet>
+    </div>
 
 </div>
 <!-- 

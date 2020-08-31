@@ -10,6 +10,12 @@ import { DashboardComponent } from './system/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProjectsComponent } from './projects/projects.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+import { HttpClientModule } from '@angular/common/http/';
+import { ServicesConfig } from './config/services.config';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,9 +28,13 @@ import { ProjectsComponent } from './projects/projects.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ServicesConfig
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
