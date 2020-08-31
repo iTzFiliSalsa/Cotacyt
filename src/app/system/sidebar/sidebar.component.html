@@ -1,6 +1,7 @@
 <div class="wrapper">
     <div class="sidebar">
 
+
         <div class="sidebar-menu">
             <!-- logo tamaulipas -->
             <div class="profile">
@@ -18,6 +19,7 @@
                 </a>
                 <a class="menu-btn">
                     <i class="fas fa-user-circle"></i><span> Proyectos <i
+
 							class="fas fa-chevron-right drop-down"></i></span>
                 </a>
             </li>
@@ -27,12 +29,14 @@
                 <p><span>Administrador</span></p>
             </div>
 
-            <li class="item">
-                <a [routerLink]="['judges']" routerLinkActive="active" class="menu-btn">
-                    <i class="fas fa-users"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
-                </a>
-                <a class="menu-btn">
-                    <i class="fas fa-pencil-ruler"></i><span> Proyectos <i
+
+			<li class="item">
+				<a  [routerLink]="['judges']" routerLinkActive="active" class="menu-btn">
+					<i class="fas fa-users"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
+				</a>
+				<a  [routerLink]="['projects']" routerLinkActive="active"  class="menu-btn">
+					<i class="fas fa-pencil-ruler"></i><span> Proyectos <i
+
 							class="fas fa-chevron-right drop-down"></i></span>
                 </a>
                 <a class="menu-btn">

@@ -8,6 +8,7 @@ import { RegistrationComponent } from './system/registration/registration.compon
 import { SidebarComponent } from './system/sidebar/sidebar.component';
 import { DashboardComponent } from './system/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,7 +22,8 @@ import { ServicesConfig } from './config/services.config';
     RegistrationComponent,
     SidebarComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
