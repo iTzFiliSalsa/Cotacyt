@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">Media superior</span></a>
+    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">{{categoria}}</span></a>
     <button class="fas fa-cog btn-cog"></button>
 </nav>
 <div></div>
@@ -15,44 +15,301 @@
                         <h6>Nuevo proyecto</h6>
                     </div>
                 </div>
-        
                 <div class="card-body">
                     <div class="row d-flex">
                         <h6 class="p-2">Proyecto</h6>
-                        <h6 class="ml-auto p-2">Total</h6>
+                        <h6 class="ml-auto p-2">Status</h6>
                         <h6 class="ml-auto p-2">Opciones</h6>
                     </div>
-                    <div id="accordion">
+                    <div id="accordion" *ngIf="proyectoActual">
                         <div class="card">
                             <div class="SecondHeader card-header">
                                 <div class="d-flex">
-                                    <div class="p-2">Plurector</div>
-                                    <div class="ml-auto p-2"><h6 class="badge badge-danger">Sin calificar</h6></div>
-                                    <div class="ml-auto p-2"><button class="btn-projects btn btn-success" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Calificar</button></div>
+                                    <div class="p-2">{{proyectoActual.nombre}}</div>
+                                    <div class="ml-auto p-2">
+                                        <h6 *ngIf="proyectoActual.status == '0'" class="badge badge-danger">Sin calificar</h6>
+                                        <h6 *ngIf="proyectoActual.status == '1'" class="badge badge-success">Calificado</h6>
+                                    </div>
+                                    <div *ngIf="proyectoActual.status == '0'" class="ml-auto p-2">
+                                        <button class="btn-projects btn btn-success" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Calificar</button>
+                                    </div>
+                                    <div *ngIf="proyectoActual.status == '1'" class="ml-auto p-2">
+                                        <button class="btn-projects btn btn-primary" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Editar</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="collapse" id="collapse1" aria-labelledby="heading1" data-parent="#accordion">
                                 <div class="card-body">
-                                    <table class="table table-hover table-sm">
+                                    <table class="table table-hover table-sm" [ngSwitch]="categoria">
                                         <thead class="thead-ligth">
                                             <tr>
                                                 <th scope="col">Punto</th>
                                                 <th scope="col">Calificación</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody *ngSwitchCase="'petit'">
                                             <tr>
-                                                <td>Creatividad</td>
+                                                <td>Presentación del prototipo</td>
                                                 <td>
                                                     <input type="number">
-                                            </td>
+                                                </td>
+                                                <td>Peso 50</td>
                                             </tr>
                                             <tr>
-                                                <td>Creatividad</td>
-                                                <td> 
+                                                <td>Propuesta y alternativa de solución</td>
+                                                <td>
                                                     <input type="number">
                                                 </td>
-                                            </tr>       
+                                                <td>Peso 30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Observación y planteamiento del problema</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngSwitchCase="'kids'">
+                                            <tr>
+                                                <td>Presentación del prototipo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 50</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Propuesta y alternativa de solución</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Observación y planteamiento del problema</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngSwitchCase="'juvenil'">
+                                            <tr>
+                                                <td>Presentación del prototipo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Propuesta y alternativa de solución</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Observación y planteamiento del problema</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Elemento creativo de innovación</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Análisis de costos</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Justificación</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 15</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngSwitchCase="'media-superior'">
+                                            <tr>
+                                                <td>Presentación del prototipo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Propuesta y alternativa de solución</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Plan de desarrollo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Justificación de la respuesta</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Elemento creativo de la innovación</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Factibilidad tecnica y analisis de costos y precios de ventas</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Observación y planteamiento del problema</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngSwitchCase="'superior'">
+                                            <tr>
+                                                <td>Presentación del prototipo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Propuesta y alternativa de solución</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Plan de desarrollo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Definición del mercado</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Justificación de la respuesta</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Elemento creativo de innovación</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Factibilidad Técnica y análisis de costos y precios de venta</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Observación y planteamiento del problema</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngSwitchCase="'posgrado'">
+                                            <tr>
+                                                <td>Presentación del prototipo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Propuesta y alternativa de solución</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Plan de desarrollo</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Definición del mercado</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Justificación de la respuesta</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Elemento creativo de innovación</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Factibilidad Técnica y análisis de costos y precios de venta</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Plan de inteligencia comercial e investigación de mercado</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Observación y planteamiento del problema</td>
+                                                <td>
+                                                    <input type="number">
+                                                </td>
+                                                <td>Peso 10</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <div class="d-flex justify-content-end">
@@ -63,7 +320,7 @@
                         </div>
                     </div>
                 </div>
-            </div>        
+            </div>
         </div>
         <!-- columna derecha -->
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -81,64 +338,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Lorem</td>
-                                <td>11/02/2020</td>
-                                <td><button class="btn-projects btn btn-info">Editar</button></td>
-                            </tr>
-                            <tr>
-                                <td>Lorem</td>
-                                <td>11/02/2020</td>
-                                <td><button class="btn-projects btn btn-info">Editar</button></td>
-                            </tr>
-                            <tr>
-                                <td>Lorem</td>
-                                <td>11/02/2020</td>
-                                <td><button class="btn-projects btn btn-info">Editar</button></td>
+                            <tr *ngFor="let proyecto of proyectosCalificados">
+                                <td>{{proyecto.nombre}}<br><small>{{proyecto.resumen}}</small></td>
+                                <td>{{proyecto.fecha | date}}</td>
+                                <td>
+                                    <button class="btn-see-projects btn btn-info" (click)="traerProyecto(proyecto.id_proyectos)">Editar</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <br>
-            <div class="CardIzquierdo projects card">
-                <div class="card-header">
+            <div class="CardIzquierdo projects card ">
+                <div class="card-header ">
                     <h6>Proyectos por calificar</h6>
                 </div>
-                <div class="card-body">
-                    <table class="table table-hover table-sm">
-                        <thead class="thead-ligth">
+                <div class="card-body ">
+                    <table class="table table-hover table-sm ">
+                        <thead class="thead-ligth ">
                             <tr>
-                                <th scope="col">Nombre del proyecto</th>
-                                <th scope="col">Opciones</th>
+                                <th scope="col ">Nombre del proyecto</th>
+                                <th scope="col ">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Lorem</td>
-                                <td><button class="btn-projects btn btn-success">Calificar</button></td>
+                            <tr *ngFor="let proyecto of proyectosPorCalificar ">
+                                <td>{{proyecto.nombre}}<br><small>{{proyecto.resumen}}</small></td>
+                                <td><button class="btn-see-projects btn btn-success " (click)="traerProyecto(proyecto.id_proyectos) ">Calificar</button></td>
                             </tr>
-                            <tr>
-                                <td>Lorem</td>
-                                <td><button class="btn-projects btn btn-success">Calificar</button></td>
-                            </tr>
-                            <tr>
-                                <td>Lorem</td>
-                                <td><button class="btn-projects btn btn-success">Calificar</button></td>
-                            </tr>
-                            <tr>
-                                <td>Lorem</td>
-                                <td><button class="btn-projects btn btn-success">Calificar</button></td>
-                            </tr>
-                            <tr>
-                                <td>Lorem</td>
-                                <td><button class="btn-projects btn btn-success">Calificar</button></td>
-                            </tr>
-                            <tr>
-                                <td>Lorem</td>
-                                <td><button class="btn-projects btn btn-success">Calificar</button></td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
