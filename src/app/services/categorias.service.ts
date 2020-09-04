@@ -8,13 +8,12 @@ import { Session } from '../models/session.model';
   providedIn: 'root'
 })
 export class CategoriasService {
-  sessionData: Session[];
+  sessionData: Session;
   constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
-    this.sessionData = new Array<Session>();
   }
 
   getCategorias(): Observable<any> {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
-    return this.http.get( this.servicesConfig.APP_ENDPOINT + 'api/categorias/' + this.sessionData['id_categorias']);
+    return this.http.get( this.servicesConfig.APP_ENDPOINT + 'api/categorias/' + this.sessionData.id_categorias);
   }
 }

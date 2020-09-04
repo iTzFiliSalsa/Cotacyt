@@ -9,9 +9,8 @@ import { Session } from '../models/session.model';
   providedIn: 'root'
 })
 export class DashboardService {
-  sessionData: Session[];
+  sessionData: Session;
   constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
-    this.sessionData = Array<Session>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
   }
 
@@ -21,12 +20,12 @@ export class DashboardService {
 
   getProyectosCalificados(): Observable<ProyectosCalificados[]> {
     return this.http.get<ProyectosCalificados[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-calificados/' + this.sessionData['id_categorias']);
+      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-calificados/' + this.sessionData.id_categorias);
   }
 
   getProyectosPorCalificar(): Observable<ProyectosPorCalificar[]> {
     return this.http.get<ProyectosPorCalificar[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-calificar/' + this.sessionData['id_categorias']);
+      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-calificar/' + this.sessionData.id_categorias);
   }
   getProyectosPorCategorias(): Observable<any> {
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria');

@@ -9,14 +9,13 @@ import { Calificaciones } from '../models/calificaciones.model';
   providedIn: 'root'
 })
 export class CalificacionesService {
-  sessionData: Session[];
+  sessionData: Session;
   constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
-    this.sessionData = Array<Session>();
   }
 
   proyectosEstadisticas(): Observable<Calificaciones[]> {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     return this.http.get<Calificaciones[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-por-categoria/' + this.sessionData['id_categorias']);
+      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-por-categoria/' + this.sessionData.id_categorias);
   }
 }

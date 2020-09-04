@@ -40,280 +40,283 @@
                             </div>
                             <div class="collapse" id="collapse1" aria-labelledby="heading1" data-parent="#accordion">
                                 <div class="card-body">
-                                    <table class="table table-hover table-sm" [ngSwitch]="categoria">
-                                        <thead class="thead-ligth">
-                                            <tr>
-                                                <th scope="col">Punto</th>
-                                                <th scope="col">Calificación</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody *ngSwitchCase="'petit'">
-                                            <tr>
-                                                <td>Presentación del prototipo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Propuesta y alternativa de solución</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Observación y planteamiento del problema</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody *ngSwitchCase="'kids'">
-                                            <tr>
-                                                <td>Presentación del prototipo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Propuesta y alternativa de solución</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Observación y planteamiento del problema</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody *ngSwitchCase="'juvenil'">
-                                            <tr>
-                                                <td>Presentación del prototipo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Propuesta y alternativa de solución</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Observación y planteamiento del problema</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Elemento creativo de innovación</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Análisis de costos</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Justificación</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 15</td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody *ngSwitchCase="'media-superior'">
-                                            <tr>
-                                                <td>Presentación del prototipo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Propuesta y alternativa de solución</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Plan de desarrollo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Justificación de la respuesta</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Elemento creativo de la innovación</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Factibilidad tecnica y analisis de costos y precios de ventas</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Observación y planteamiento del problema</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody *ngSwitchCase="'superior'">
-                                            <tr>
-                                                <td>Presentación del prototipo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Propuesta y alternativa de solución</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Plan de desarrollo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Definición del mercado</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Justificación de la respuesta</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Elemento creativo de innovación</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Factibilidad Técnica y análisis de costos y precios de venta</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Observación y planteamiento del problema</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody *ngSwitchCase="'posgrado'">
-                                            <tr>
-                                                <td>Presentación del prototipo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Propuesta y alternativa de solución</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Plan de desarrollo</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Definición del mercado</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Justificación de la respuesta</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Elemento creativo de innovación</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Factibilidad Técnica y análisis de costos y precios de venta</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Plan de inteligencia comercial e investigación de mercado</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Observación y planteamiento del problema</td>
-                                                <td>
-                                                    <input type="number">
-                                                </td>
-                                                <td>Peso 10</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <form [formGroup]="formPuntos">
+                                        <table class="table table-hover table-sm" [ngSwitch]="categoria">
+                                            <thead class="thead-ligth">
+                                                <tr>
+                                                    <th scope="col">Punto</th>
+                                                    <th scope="col">Calificación</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngSwitchCase="'petit'">
+                                                <tr>
+                                                    <td>Presentación del prototipo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido1" formControlName="obtenido1">
+                                                    </td>
+                                                    <td>Peso 50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Propuesta y alternativa de solución</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido2" formControlName="obtenido2">
+                                                    </td>
+                                                    <td>Peso 30</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Observación y planteamiento del problema</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido3" formControlName="obtenido3">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngSwitchCase="'kids'">
+                                                <tr>
+                                                    <td>Presentación del prototipo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido1" formControlName="obtenido1">
+                                                    </td>
+                                                    <td>Peso 50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Propuesta y alternativa de solución</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido2" formControlName="obtenido2">
+                                                    </td>
+                                                    <td>Peso 30</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Observación y planteamiento del problema</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido3" formControlName="obtenido3">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngSwitchCase="'juvenil'">
+                                                <tr>
+                                                    <td>Presentación del prototipo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido1" formControlName="obtenido1">
+                                                    </td>
+                                                    <td>Peso 30</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Propuesta y alternativa de solución</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido2" formControlName="obtenido2">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Observación y planteamiento del problema</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido3" formControlName="obtenido3">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Elemento creativo de innovación</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido4" formControlName="obtenido4">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Análisis de costos</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido5" formControlName="obtenido5">
+                                                    </td>
+                                                    <td>Peso 15</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Justificación</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido6" formControlName="obtenido6">
+                                                    </td>
+                                                    <td>Peso 15</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngSwitchCase="'media-superior'">
+                                                <tr>
+                                                    <td>Presentación del prototipo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido1" formControlName="obtenido1">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Propuesta y alternativa de solución</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido2" formControlName="obtenido2">
+                                                    </td>
+                                                    <td>Peso 15</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Plan de desarrollo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido3" formControlName="obtenido3">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Justificación de la respuesta</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido4" formControlName="obtenido4">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Elemento creativo de la innovación</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido5" formControlName="obtenido5">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Factibilidad tecnica y analisis de costos y precios de ventas</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido6" formControlName="obtenido6">
+                                                    </td>
+                                                    <td>Peso 15</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Observación y planteamiento del problema</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido7" formControlName="obtenido7">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngSwitchCase="'superior'">
+                                                <tr>
+                                                    <td>Presentación del prototipo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido1" formControlName="obtenido1">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Propuesta y alternativa de solución</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido2" formControlName="obtenido2">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Plan de desarrollo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido3" formControlName="obtenido3">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Definición del mercado</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido4" formControlName="obtenido4">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Justificación de la respuesta</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido5" formControlName="obtenido5">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Elemento creativo de innovación</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido6" formControlName="obtenido6">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Factibilidad Técnica y análisis de costos y precios de venta</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido7" formControlName="obtenido7">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Observación y planteamiento del problema</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido8" formControlName="obtenido8">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngSwitchCase="'posgrado'">
+                                                <tr>
+                                                    <td>Presentación del prototipo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido1" formControlName="obtenido1">
+                                                    </td>
+                                                    <td>Peso 20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Propuesta y alternativa de solución</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido2" formControlName="obtenido2">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Plan de desarrollo</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido3" formControlName="obtenido3">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Definición del mercado</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido4" formControlName="obtenido4">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Justificación de la respuesta</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido5" formControlName="obtenido5">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Elemento creativo de innovación</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido6" formControlName="obtenido6">
+                                                    </td>
+                                                    <td>Peso 15</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Factibilidad Técnica y análisis de costos y precios de venta</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido7" formControlName="obtenido7">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Plan de inteligencia comercial e investigación de mercado</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido8" formControlName="obtenido8">
+                                                    </td>
+                                                    <td>Peso 5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Observación y planteamiento del problema</td>
+                                                    <td>
+                                                        <input type="number" [placeholder]="obtenido9" formControlName="obtenido9">
+                                                    </td>
+                                                    <td>Peso 10</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-primary">Guardar</button>
+                                        <button class="btn btn-primary" *ngIf="!formPuntos.valid" (click)="guardarPuntos()" disabled>Guardar</button>
+                                        <button class="btn btn-primary" *ngIf="formPuntos.valid" (click)="guardarPuntos()">Guardar</button>
                                     </div>
                                 </div>
                             </div>
