@@ -10,6 +10,9 @@ import { CalificacionesService } from '../../services/calificaciones.service';
 import { Calificaciones } from '../../models/calificaciones.model';
 import { AppComponent } from 'src/app/app.component';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
+
 
 
 @Component({
@@ -19,22 +22,18 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class DashboardComponent implements OnInit {
 
-    // graficas
-  public barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
-
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartOptions: any = {
+  public barChartOptions: ChartOptions = {
     responsive: true,
   };
-
-  //PONER EL LOADING EN UN SERVICIO
-
-  public barChartType: string = 'bar';
+  public barChartColors: Color[] = [
+    { backgroundColor: '#007d97' },
+  ]
+  public barChartLabels: Label[] = ['Petit', 'Juvenil', 'Media Superior', 'Superior', 'Postrado'];
+  public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
+
+  public barChartData: ChartDataSets[];
 
 
 
@@ -57,6 +56,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.barChartData = [
+      { data: [28, 48, 40, 19, 86], label: 'Proyectos' }
+    ];
 
     // obtiene los totales
     this.dashboardService.getTotales().subscribe(

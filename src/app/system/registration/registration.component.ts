@@ -9,6 +9,8 @@ import { JuecesService } from '../../services/jueces.service';
 })
 export class RegistrationComponent implements OnInit {
 
+  public isCollapsed = false;
+
   public formsRegistroJuez: FormGroup;
   constructor(public formBuilder: FormBuilder, private juecesService: JuecesService) {
     this.formsRegistroJuez = formBuilder.group({

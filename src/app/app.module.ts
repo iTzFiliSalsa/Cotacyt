@@ -11,10 +11,12 @@ import { LoginComponent } from './auth/login/login.component';
 import { ProjectsComponent } from './projects/projects.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 
 import { HttpClientModule } from '@angular/common/http/';
 import { ServicesConfig } from './config/services.config';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ServicesConfig } from './config/services.config';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
+    ChartsModule
   ],
   providers: [
     ServicesConfig

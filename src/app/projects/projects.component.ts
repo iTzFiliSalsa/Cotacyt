@@ -16,6 +16,8 @@ import { UtilsService } from '../services/utils.service';
 })
 export class ProjectsComponent implements OnInit {
 
+  public isCollapsed = true;
+
   categoria: string;
   proyectosCalificados: ProyectosCalificados[];
   proyectosPorCalificar: ProyectosPorCalificar[];

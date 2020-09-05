@@ -16,11 +16,11 @@ export class AppComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-      // if (!localStorage.getItem('session')) {
-      //   this.router.navigateByUrl('/');
-      // } else {
-      //   this.router.navigateByUrl('home');
-      // }
+      if (!localStorage.getItem('session')) {
+        this.router.navigateByUrl('/');
+      } else {
+        this.router.navigateByUrl('home');
+      }
   }
 
 }

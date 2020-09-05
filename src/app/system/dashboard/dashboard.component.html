@@ -133,10 +133,19 @@
                             <div class="card-header">
                                 <h6>Proyectos por categorias</h6>
                             </div>
-                            <div class="card-body">
-                                <h1 class="text-h1">Gráfica</h1>
-                                <hr>
-                                <button class="btn-see-projects btn btn-info">Actualizar</button>
+                            <div class="card-body p-0">
+                                <div style="display: block;">
+                                    <canvas baseChart 
+                                      [datasets]="barChartData"
+                                      [labels]="barChartLabels"
+                                      [options]="barChartOptions"
+                                      [plugins]="barChartPlugins"
+                                      [legend]="barChartLegend"
+                                      [colors]="barChartColors"
+                                      [chartType]="barChartType">
+                                    </canvas>
+                                  </div>
+                                  
                             </div>
                         </div>
                         <br>

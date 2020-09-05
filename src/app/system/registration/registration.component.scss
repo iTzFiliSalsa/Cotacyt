@@ -30,7 +30,7 @@ form{
     // margin: 32px;
     border: 2px solid #eaeaea;
     border-radius: .5em;
-    background-color: rgb(52, 73, 94);
+    background-color: #007d97;
     position: relative;
     z-index: 2;
 
@@ -42,7 +42,7 @@ form{
         z-index: 1;
         width: 100%;
         height: 20%;
-        background-color: rgb(52, 73, 94);
+        background-color: #007d97;
         border-radius: .5em;
     }
 
@@ -58,14 +58,16 @@ form{
         background-color: #fff;
     }
 }
+.z{
+    z-index: 9;
 
+}
 .img {
-    width: 100%;
+    width: 60%;
 }
 
 .titulo {
     text-align: center;
-    font-size: 180%;
 }
 
 .boton-iniciar{

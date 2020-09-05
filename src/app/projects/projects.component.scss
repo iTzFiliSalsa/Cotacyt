@@ -2,6 +2,10 @@
     color: rgb(82,82,82);
     font-size: 12px;
 }
+
+.table{
+    margin-bottom: 0 !important;
+}
 .category-label{
     color: white;
     font-size: 12px;
@@ -10,6 +14,34 @@
     -moz-border-radius: 135px 135px 135px 135px;
     -webkit-border-radius: 135px 135px 135px 135px;
     border: 0px solid #000000;
+}
+
+.custom-btn-danger{
+    padding: 5px 15px;
+    background-color: #970000;
+    border: none;
+    color: #fff;
+    border-radius: 2em;
+}
+
+.custom-btn-edit{
+    padding: 5px 15px;
+    background-color: #007d97;
+    border: none;
+    color: #fff;
+    border-radius: 2em;
+}
+
+.custom-btn-success{
+    padding: 5px 15px;
+    background-color: #00c300;
+    border: none;
+    color: #fff;
+    border-radius: 2em;
+}
+
+input[type="number"]{
+    width: 50px ;
 }
 .btn-projects{
     margin-top: 3px;
