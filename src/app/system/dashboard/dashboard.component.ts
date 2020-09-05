@@ -24,18 +24,24 @@ export class DashboardComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    }
   };
   public barChartColors: Color[] = [
     { backgroundColor: '#007d97' },
-  ]
-  public barChartLabels: Label[] = ['Petit', 'Juvenil', 'Media Superior', 'Superior', 'Postrado'];
+  ];
+  public barChartLabels: Label[] = ['Petit', 'Kids', 'Juvenil', 'Media Superior', 'Superior', 'Posgrado'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
-
   public barChartData: ChartDataSets[];
-
-
 
   totales: Totales[];
   categoria: string;
@@ -58,7 +64,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.barChartData = [
-      { data: [28, 48, 40, 19, 86], label: 'Proyectos' }
+      { data: [], label: 'Proyectos' }
     ];
 
     // obtiene los totales
@@ -67,15 +73,25 @@ export class DashboardComponent implements OnInit {
       err => console.log( err ) );
     // obtiene los proyectos por categorias
     this.dashboardService.getProyectosPorCategorias().subscribe(
-      data => console.log ( data ),
+      data => {
+        const petit = data.petit;
+        const kids = data.kids;
+        const juvenil = data.juvenil;
+        const mediaSuperior = data['media-superior'];
+        const superior = data.superior;
+        const posgrado = data.posgrado;
+
+        this.barChartData = [
+          { data: [petit, kids, juvenil, mediaSuperior, superior, posgrado], label: 'Proyectos' }
+        ];
+      },
       err => console.log(err) );
     // obtiene los proyectos calificados
     this.dashboardService.getProyectosCalificados().subscribe(
-      (data: any) =>{
-      this.proyectosCalificados = data.proyectos_calificados
-      this._utilsService.loading = false;
-    }
-      ,
+      (data: any) => {
+        this.proyectosCalificados = data.proyectos_calificados
+        this._utilsService.loading = false;
+      },
       err => console.log(err) );
     // obtiene los proyectos por calificar
     this.dashboardService.getProyectosPorCalificar().subscribe(
@@ -93,8 +109,6 @@ export class DashboardComponent implements OnInit {
       },
       err => console.log(err)
     );
-
-    
   }
 
   getPercent(porcentaje: string) {
