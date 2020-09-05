@@ -8,6 +8,8 @@ import { Session } from 'src/app/models/session.model';
 import { CategoriasService } from '../../services/categorias.service';
 import { CalificacionesService } from '../../services/calificaciones.service';
 import { Calificaciones } from '../../models/calificaciones.model';
+import { AppComponent } from 'src/app/app.component';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -28,6 +30,8 @@ export class DashboardComponent implements OnInit {
     responsive: true,
   };
 
+  //PONER EL LOADING EN UN SERVICIO
+
   public barChartType: string = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
@@ -42,14 +46,18 @@ export class DashboardComponent implements OnInit {
   sessionData: Session[];
   constructor(private dashboardService: DashboardService,
               private categoriasService: CategoriasService,
-              private calificacionesService: CalificacionesService) {
+              private calificacionesService: CalificacionesService,
+              private _utilsService: UtilsService
+              ) {
     this.totales = new Array<Totales>();
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.sessionData = new Array<Session>();
     this.estadisticasDeProyectos = new Array<Calificaciones>();
+    this._utilsService.loading = true;
   }
 
   ngOnInit(): void {
+
     // obtiene los totales
     this.dashboardService.getTotales().subscribe(
       (data) => this.totales = data,
@@ -60,7 +68,11 @@ export class DashboardComponent implements OnInit {
       err => console.log(err) );
     // obtiene los proyectos calificados
     this.dashboardService.getProyectosCalificados().subscribe(
-      (data: any) => this.proyectosCalificados = data.proyectos_calificados,
+      (data: any) =>{
+      this.proyectosCalificados = data.proyectos_calificados
+      this._utilsService.loading = false;
+    }
+      ,
       err => console.log(err) );
     // obtiene los proyectos por calificar
     this.dashboardService.getProyectosPorCalificar().subscribe(
@@ -78,6 +90,8 @@ export class DashboardComponent implements OnInit {
       },
       err => console.log(err)
     );
+
+    
   }
 
   getPercent(porcentaje: string) {

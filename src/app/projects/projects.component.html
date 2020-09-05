@@ -1,19 +1,18 @@
-<nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">{{categoria}}</span></a>
-    <button class="fas fa-cog btn-cog"></button>
-</nav>
-<div></div>
-
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-target
+  </button>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <!-- columna Izquierda -->
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <div class="CardPrincipal card">
                 <div class="firstHeader card-header">
-                    <div class="row justify-content-between">
-                        <h6>Proyectos</h6>
-                        <h6>Nuevo proyecto</h6>
-                    </div>
+                        <h6 class="m-0">Proyectos</h6>
                 </div>
                 <div class="card-body">
                     <div class="row d-flex">
@@ -21,27 +20,21 @@
                         <h6 class="ml-auto p-2">Status</h6>
                         <h6 class="ml-auto p-2">Opciones</h6>
                     </div>
+                    
                     <div id="accordion" *ngIf="proyectoActual">
                         <div class="card">
-                            <div class="SecondHeader card-header">
-                                <div class="d-flex">
                                     <div class="p-2">{{proyectoActual.nombre}}</div>
                                     <div class="ml-auto p-2">
                                         <h6 *ngIf="proyectoActual.status == '0'" class="badge badge-danger">Sin calificar</h6>
                                         <h6 *ngIf="proyectoActual.status == '1'" class="badge badge-success">Calificado</h6>
                                     </div>
-                                    <div *ngIf="proyectoActual.status == '0'" class="ml-auto p-2">
-                                        <button class="btn-projects btn btn-success" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Calificar</button>
-                                    </div>
-                                    <div *ngIf="proyectoActual.status == '1'" class="ml-auto p-2">
-                                        <button class="btn-projects btn btn-primary" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Editar</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="collapse" id="collapse1" aria-labelledby="heading1" data-parent="#accordion">
+                                        <!-- <button *ngIf="proyectoActual.status == '0'" class="btn-projects btn btn-success" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Calificar</button> -->
+                                   
+                                        <button *ngIf="proyectoActual.status == '1'" type="button" class="btn-projects btn btn-primary" data-toggle="collapse" data-target="#collapse1">Editar</button>
+                                        <div class="collapse" id="collapse1">
                                 <div class="card-body">
                                     <form [formGroup]="formPuntos">
-                                        <table class="table table-hover table-sm" [ngSwitch]="categoria">
+                                        <table class="table table-hover" [ngSwitch]="categoria">
                                             <thead class="thead-ligth">
                                                 <tr>
                                                     <th scope="col">Punto</th>
@@ -331,19 +324,21 @@
                 <div class="card-header">
                     <h6>Proyectos calificados</h6>
                 </div>
-                <div class="card-body">
-                    <table class="table table-hover table-sm">
+                <div class="card-body scroll p-0">
+                    <table class="table table-hover">
                         <thead class="thead-ligth">
                             <tr>
                                 <th scope="col">Nombre del proyecto</th>
-                                <th scope="col">Fecha de calificación</th>
+                                <!-- <th scope="col">Fecha de calificación</th> -->
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let proyecto of proyectosCalificados">
-                                <td>{{proyecto.nombre}}<br><small>{{proyecto.resumen}}</small></td>
-                                <td>{{proyecto.fecha | date}}</td>
+                                <td>{{proyecto.nombre}}
+                                    <!-- <small>{{proyecto.resumen}}</small> -->
+                                </td>
+                                <!-- <td>{{proyecto.fecha | date}}</td> -->
                                 <td>
                                     <button class="btn-see-projects btn btn-info" (click)="traerProyecto(proyecto.id_proyectos)">Editar</button></td>
                             </tr>
@@ -351,13 +346,12 @@
                     </table>
                 </div>
             </div>
-            <br>
-            <div class="CardIzquierdo projects card ">
+            <div class="CardIzquierdo projects card mt-3">
                 <div class="card-header ">
                     <h6>Proyectos por calificar</h6>
                 </div>
-                <div class="card-body ">
-                    <table class="table table-hover table-sm ">
+                <div class="card-body scroll p-0">
+                    <table class="table table-hover">
                         <thead class="thead-ligth ">
                             <tr>
                                 <th scope="col ">Nombre del proyecto</th>
@@ -366,7 +360,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let proyecto of proyectosPorCalificar ">
-                                <td>{{proyecto.nombre}}<br><small>{{proyecto.resumen}}</small></td>
+                                <td>{{proyecto.nombre}}
+                                    <!-- <br><small>{{proyecto.resumen}}</small> -->
+                                </td>
                                 <td><button class="btn-see-projects btn btn-success " (click)="traerProyecto(proyecto.id_proyectos) ">Calificar</button></td>
                             </tr>
                         </tbody>

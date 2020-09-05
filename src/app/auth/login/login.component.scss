@@ -31,14 +31,14 @@ color: $color;
     padding: 45px;
     border-radius: 1em;
     width: 100%;
-        box-shadow: 0px 0px 3px #252525;
+        box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.3);
     h5{
         @extend %texto;
         @include texto(black);
         font-weight: 500;
     }
     label{
-        @include texto(black);
+        color: #8b8b8b;
     }
 }
 .row{
@@ -68,7 +68,7 @@ input[type="password"]{
     border: none;
 }
 .input-group{
-    box-shadow: 0px 0px 3px #252525;
+    border: 1px solid #eaeaea;
 }
  
 .icon{
@@ -84,12 +84,16 @@ input[type="password"]{
 }
 .boton-iniciar{
     border: none;
-    border-radius: 2em;
+    border-radius: 1em;
     width: 100%;
     background: #0BB5D8;
-    box-shadow: 0px 0px 3px #252525;
-
+    cursor: pointer;
     &:hover{
-        background:black;
+        background: #0898b4;
     }
-    }
+}
+
+.boton-iniciar:disabled{
+    background: #67baca;
+    cursor: default;
+}

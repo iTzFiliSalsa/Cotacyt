@@ -1,40 +1,47 @@
-<div class="container-fluid color">
-    <div class="row ">
-        <div class="col-xs-12 col-md-6 d-flex align-items-center justify-content-center">
-            <img src="../../assets/Ilustracion.png" class="img" alt="">
-        </div>
-        <div class="col-xs-12 col-md-6">
-            <div class="tamano d-flex align-items-center justify-content-center">
-                <form [formGroup]="formsRegistroJuez">
-                    <label class="titulo">Registrar Juez</label>
-                    <div class="form-group">
-                        <label for="">Clave:</label>
-                        <input type="text" class="form-control" formControlName="usuario" placeholder="Clave del juez">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nombre:</label>
-                        <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del juez">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Categoria:</label>
-                        <select formControlName="id_categorias" class="form-control">
+<div class="p-5">
+    <div class="container-fluid color">
+        <div class="row ">
+            <div class="col-xs-12 col-md-6 d-flex align-items-center justify-content-center">
+                <div>
+                    <img src="../../../assets/add_judge.svg" class="img" alt="">
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="tamano d-flex align-items-center justify-content-center p-5">
+                    <form [formGroup]="formsRegistroJuez">
+                        <h3 class="titulo">Registrar Juez</h3>
+                        <div class="form-group">
+                            <label for="">Clave:</label>
+                            <input type="text" class="form-control" formControlName="usuario"
+                                placeholder="Clave del juez">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nombre:</label>
+                            <input type="text" class="form-control" formControlName="nombre"
+                                placeholder="Nombre del juez">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Categoria:</label>
+                            <select formControlName="id_categorias" class="form-control">
                                 <option value="1">Petit</option>
                                 <option value="2">Kits</option>
                                 <option value="3">Juvenil</option>
                                 <option value="4">Media superior</option>
                                 <option value="5">Superior</option>
                                 <option value="6">Posgrado</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Contraseña:</label>
-                        <input type="password" class="form-control" formControlName="contrasena" placeholder="Contraseña">
-                    </div>
-                    <div class="form-group">
-                        <button *ngIf="!formsRegistroJuez.valid" class="btn-disabled" disabled>Registrar</button>
-                        <button *ngIf="formsRegistroJuez.valid" (click)="registrarJuez()">Registrar</button>
-                    </div>
-                </form>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Contraseña:</label>
+                            <input type="password" class="form-control" formControlName="contrasena"
+                                placeholder="Contraseña">
+                        </div>
+                        <button [disabled]="!formsRegistroJuez.valid" class="btn btn-primary boton-iniciar"
+                            (click)="registrarJuez()">Registrar</button>
+
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</div>

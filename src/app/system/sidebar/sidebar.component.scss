@@ -127,14 +127,38 @@
   max-height: 500px;
 }
 
+.menubar-label-category{
+  color: rgb(82,82,82);
+  font-size: 12px;
+}
+
+.category-label{
+  color: white;
+  background: rgb(0,125,151);
+  border-radius: 1em;
+  padding: 2px 10px;
+}
+
+.btn-cog{
+  cursor: pointer;
+}
+.btn-cog:hover{
+  color: rgb(0,125,151);
+}
+
+.bg-grey{
+  background-color: var(--grey) !important;
+}
+
+
 .wrapper .main-container{
-  width: (100% - 250);
-  margin-top: 0px;
+  // width: (100% - 250);
+  // margin-top: 0px;
   margin-left: 250px;
-  padding: 15px;
-  background-size: cover;
-  height: 100vh;
-  transition: 0.3s;
+  // padding: 15px;
+  // background-size: cover;
+  // height: 100vh;
+  // transition: 0.3s;
 }
 
 //tamaño sidebar pequeño

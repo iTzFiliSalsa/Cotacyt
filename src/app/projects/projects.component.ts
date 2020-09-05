@@ -7,6 +7,7 @@ import { ProyectosService } from '../services/proyectos.service';
 import { Proyectos } from '../models/proyectos.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CalificarProyectoService } from '../services/calificar-proyecto.service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-projects',
@@ -34,7 +35,9 @@ export class ProjectsComponent implements OnInit {
               private categoriasService: CategoriasService,
               private proyectosService: ProyectosService,
               private formBuilder: FormBuilder,
-              private calificarProyectoService: CalificarProyectoService) {
+              private calificarProyectoService: CalificarProyectoService,
+              private _utilService: UtilsService
+              ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.obtenido1 = '';
     this.obtenido2 = '';
@@ -50,7 +53,10 @@ export class ProjectsComponent implements OnInit {
       this.categoria = data.categoria;
       this.generarForm(this.categoria);
     });
+
+    this._utilService.loading = true;
   }
+
 
   ngOnInit(): void {
     // obtiene los proyectos calificados
@@ -60,9 +66,12 @@ export class ProjectsComponent implements OnInit {
     // obtiene los proyectos por calificar
     this.dashboardService.getProyectosPorCalificar().subscribe(
       (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar,
-      err => console.log(err));
+      err => console.log(err)).add(() => {
+        this._utilService.loading = false;
+      });
   }
   traerProyecto(idProyecto: string) {
+    this._utilService.loading = true;
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
       data => {
         this.proyectoActual = data;
@@ -135,7 +144,9 @@ export class ProjectsComponent implements OnInit {
         }
       },
       err => console.log(err)
-    );
+    ).add(() => {
+      this._utilService.loading = false;
+    });
   }
   guardarPuntos() {
     console.log(this.formPuntos.value);

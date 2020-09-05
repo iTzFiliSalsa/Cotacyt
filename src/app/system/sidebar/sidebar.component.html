@@ -5,8 +5,8 @@
         <div class="sidebar-menu">
             <!-- logo tamaulipas -->
             <div class="profile">
-                <img src="/src/assets/image/logotam.png" alt="">
-                <p>Hola, Bienvenido</p>
+                <img src="../../../assets/logotam.png" alt="">
+                <!-- <p>Hola, Bienvenido</p> -->
                 <p>CP. <span>{{sessionData['nombre']}}</span></p>
                 <hr>
             </div>
@@ -17,7 +17,7 @@
                 <a [routerLink]="['dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="menu-btn">
                     <i class="fas fa-home"></i><span> Inicio <i class="fas fa-chevron-right drop-down"></i></span>
                 </a>
-                <a class="menu-btn">
+                <a class="menu-btn"   [routerLink]="['projects']" routerLinkActive="active"  >
                     <i class="fas fa-user-circle"></i><span> Proyectos <i
 
 							class="fas fa-chevron-right drop-down"></i></span>
@@ -34,7 +34,7 @@
 				<a  [routerLink]="['judges']" routerLinkActive="active" class="menu-btn">
 					<i class="fas fa-users"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
 				</a>
-				<a  [routerLink]="['projects']" routerLinkActive="active"  class="menu-btn">
+				<a class="menu-btn">
 					<i class="fas fa-pencil-ruler"></i><span> Proyectos <i
 
 							class="fas fa-chevron-right drop-down"></i></span>
@@ -56,6 +56,10 @@
 
 
     <div class="main-container">
+        <nav class="navbar navbar-light bg-light justify-content-between mb-3 p-3">
+            <p class="">Categoria: <span class="ml-3 category-label">{{categoria | titlecase}}</span></p>
+            <button class="fas fa-cog btn-cog"></button>
+        </nav> 
         <router-outlet></router-outlet>
     </div>
 
