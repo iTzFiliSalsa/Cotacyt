@@ -23,7 +23,7 @@ export class ProjectsComponent implements OnInit {
   proyectosPorCalificar: ProyectosPorCalificar[];
   proyectoActual: Proyectos;
   formPuntos: FormGroup;
-  valores: {};
+  valores: any;
   obtenido1: string;
   obtenido2: string;
   obtenido3: string;
@@ -158,17 +158,17 @@ export class ProjectsComponent implements OnInit {
         if (this.proyectoActual.status === '1') {
           this.calificarProyectoService.putCalificacionesPetit(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3).subscribe(
               data => console.log(data),
               err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesPetit(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3).subscribe(
               data => console.log(data),
               err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos);
@@ -179,18 +179,18 @@ export class ProjectsComponent implements OnInit {
         if (this.proyectoActual.status === '1') {
           this.calificarProyectoService.putCalificacionesKids(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3).subscribe(
               data => console.log(data),
               err => console.log(err));
 
         } else {
           this.calificarProyectoService.setCalificacionesKids(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3).subscribe(
               data => console.log(data),
               err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
@@ -202,23 +202,23 @@ export class ProjectsComponent implements OnInit {
         if (this.proyectoActual.status === '1') {
           this.calificarProyectoService.putCalificacionesJvenil(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6).subscribe(
               data => console.log(data),
               err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesJvenil(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6).subscribe(
               data => console.log(data),
               err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
@@ -230,25 +230,25 @@ export class ProjectsComponent implements OnInit {
         if (this.proyectoActual.status === '1') {
           this.calificarProyectoService.putCalificacionesMediaSuperior(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6'],
-            this.valores['obtenido7']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6,
+            this.valores.obtenido7).subscribe(
               data => console.log(data),
               err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesMediaSuperior(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6'],
-            this.valores['obtenido7']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6,
+            this.valores.obtenido7).subscribe(
               data => console.log(data),
               err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
@@ -260,27 +260,27 @@ export class ProjectsComponent implements OnInit {
         if (this.proyectoActual.status === '1') {
           this.calificarProyectoService.putCalificacionesSuperior(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6'],
-            this.valores['obtenido7'],
-            this.valores['obtenido8']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6,
+            this.valores.obtenido7,
+            this.valores.obtenido8).subscribe(
               data => console.log(data),
               err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesSuperior(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6'],
-            this.valores['obtenido7'],
-            this.valores['obtenido8']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6,
+            this.valores.obtenido7,
+            this.valores.obtenido8).subscribe(
               data => console.log(data),
               err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
@@ -292,29 +292,29 @@ export class ProjectsComponent implements OnInit {
         if (this.proyectoActual.status === '1') {
           this.calificarProyectoService.putCalificacionesPosgrado(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6'],
-            this.valores['obtenido7'],
-            this.valores['obtenido8'],
-            this.valores['obtenido9']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6,
+            this.valores.obtenido7,
+            this.valores.obtenido8,
+            this.valores.obtenido9).subscribe(
               data => console.log(data),
               err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesPosgrado(
             Number(this.proyectoActual.id_proyectos),
-            this.valores['obtenido1'],
-            this.valores['obtenido2'],
-            this.valores['obtenido3'],
-            this.valores['obtenido4'],
-            this.valores['obtenido5'],
-            this.valores['obtenido6'],
-            this.valores['obtenido7'],
-            this.valores['obtenido8'],
-            this.valores['obtenido9']).subscribe(
+            this.valores.obtenido1,
+            this.valores.obtenido2,
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            this.valores.obtenido6,
+            this.valores.obtenido7,
+            this.valores.obtenido8,
+            this.valores.obtenido9).subscribe(
               data => console.log(data),
               err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
