@@ -17,6 +17,9 @@ import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http/';
 import { ServicesConfig } from './config/services.config';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddProjectsComponent } from './add-projects/add-projects.component';
+import { JudgesComponent } from './judges/judges.component';
+import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidebarComponent,
     DashboardComponent,
     LoginComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    AddProjectsComponent,
+    JudgesComponent,
+    ProjectsRegisteredComponent
   ],
   imports: [
     BrowserModule,

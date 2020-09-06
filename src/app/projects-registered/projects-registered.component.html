@@ -1,0 +1,186 @@
+<div class="p-3">
+    <div class="container-fluid color">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <h2>Proyectos registrados</h2>
+                <hr>
+                <div class="col-lg-12">
+
+                    <table class="table table-lg table-hover table-responsive-lg">
+                        <thead class="table-info">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Asesores</th>
+                                <th>Areas</th>
+                                <th>Categorias</th>
+                                <th>Sedes</th>
+                                <th>Resumen</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+
+                        <tr class="table">
+                            <td>Proyecto 1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
+                            </td>
+                            <td>
+                                <button class="btn btn-info" data-toggle="modal"
+                                    data-target="#modalEditar">Editar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                    data-target="#modalEliminar">Eliminar</button>
+                            </td>
+                        </tr>
+
+                        <tr class="table">
+                            <td>Proyecto 1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
+                            </td>
+                            <td>
+                                <button class="btn btn-info" data-toggle="modal"
+                                    data-target="#modalEditar">Editar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                    data-target="#modalEliminar">Eliminar</button>
+                            </td>
+                        </tr>
+
+                        <tr class="table">
+                            <td>Proyecto 1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
+                            </td>
+                            <td>
+                                <button class="btn btn-info" data-toggle="modal"
+                                    data-target="#modalEditar">Editar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                    data-target="#modalEliminar">Eliminar</button>
+                            </td>
+                        </tr>
+
+                        <tr class="table">
+                            <td>Proyecto 1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
+                            </td>
+                            <td>
+                                <button class="btn btn-info" data-toggle="modal"
+                                    data-target="#modalEditar">Editar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                    data-target="#modalEliminar">Eliminar</button>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <!-- Modal Eliminar -->
+                    <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog"
+                        aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row justify-content-center">
+                                        <h4>¿Desea eliminar <span class="text-info">Proyecto 1</span>?</h4>
+                                    </div>
+                                    <div class="row justify-content-center mt-3">
+                                        <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
+                                        <button class="btn btn-danger ">Eliminar</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Modal Editar -->
+                    <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Editar Proyecto</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="">Nombre:</label>
+                                            <input type="text" class="form-control" formControlName=""
+                                                placeholder="Nombre del proyecto">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Acesor:</label>
+                                            <select formControlName="" class="form-control">
+                                                <option value="1">Acesor 1</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Sede:</label>
+                                            <select formControlName="" class="form-control">
+                                                <option value="1">Sede 1</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Area:</label>
+                                            <select formControlName="" class="form-control">
+                                                <option value="1">Area 1</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Categoria:</label>
+                                            <select formControlName="id_categorias" class="form-control">
+                                                <option value="1">Petit</option>
+                                                <option value="2">Kits</option>
+                                                <option value="3">Juvenil</option>
+                                                <option value="4">Media superior</option>
+                                                <option value="5">Superior</option>
+                                                <option value="6">Posgrado</option>
+                                            </select>
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <label for="">Resumen:</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                                placeholder="Resumen del proyecto"></textarea>
+                                        </div>
+                
+                                        <button class="btn btn-info btn-block">Guardar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,66 @@
+<div class="p-3">
+    <div>
+        <button [routerLink]="['home/projects-registered']" routerLinkActive="active"
+            class="btn btn-outline-info mb-2"><span><i class="fas fa-users"></i></span> Proyectos registrados</button>
+    </div>
+    <div class="container-fluid color">
+
+        <div class="row ">
+            <div class="col-xs-12 col-md-6 d-flex align-items-center justify-content-center">
+                <div class="z  d-flex align-items-center justify-content-center">
+                    <img src="../../../assets/add_project.svg" class="img" alt="">
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="tamano d-flex align-items-center justify-content-center p-5">
+                    <form>
+                        <h5 class="titulo font-weight-bold">Registrar Proyecto</h5>
+                        <div class="form-group">
+                            <label for="">Nombre:</label>
+                            <input type="text" class="form-control" formControlName=""
+                                placeholder="Nombre del proyecto">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Acesor:</label>
+                            <select formControlName="" class="form-control">
+                                <option value="1">Acesor 1</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Sede:</label>
+                            <select formControlName="" class="form-control">
+                                <option value="1">Sede 1</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Area:</label>
+                            <select formControlName="" class="form-control">
+                                <option value="1">Area 1</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Categoria:</label>
+                            <select formControlName="id_categorias" class="form-control">
+                                <option value="1">Petit</option>
+                                <option value="2">Kits</option>
+                                <option value="3">Juvenil</option>
+                                <option value="4">Media superior</option>
+                                <option value="5">Superior</option>
+                                <option value="6">Posgrado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Resumen:</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Resumen del proyecto"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary boton-iniciar">Registrar</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

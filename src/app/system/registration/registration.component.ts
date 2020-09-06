@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { JuecesService } from '../../services/jueces.service';
+import { RouterLinkActive, Router, ActivatedRoute } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-registration',
@@ -8,6 +11,7 @@ import { JuecesService } from '../../services/jueces.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+
 
   public isCollapsed = false;
 
@@ -25,13 +29,18 @@ export class RegistrationComponent implements OnInit {
   }
   registrarJuez() {
     console.log(this.formsRegistroJuez.value);
-    this.juecesService.registrarJuez( this.formsRegistroJuez.value ).subscribe(
-    data => {
-      alert(data);
-      this.formsRegistroJuez.reset();
-    },
-    err => console.log( err )
+    this.juecesService.registrarJuez(this.formsRegistroJuez.value).subscribe(
+      data => {
+        alert(data);
+        this.formsRegistroJuez.reset();
+      },
+      err => console.log(err)
     );
   }
+
+
+
+
+
 
 }
