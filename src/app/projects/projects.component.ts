@@ -8,6 +8,7 @@ import { Proyectos } from '../models/proyectos.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CalificarProyectoService } from '../services/calificar-proyecto.service';
 import { UtilsService } from '../services/utils.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-projects',
@@ -59,6 +60,13 @@ export class ProjectsComponent implements OnInit {
     this._utilService.loading = true;
   }
 
+  swalModal(text){
+    swal.fire({
+      title: 'Información del proyecto',
+      text
+    })
+  }
+
 
   ngOnInit(): void {
     // obtiene los proyectos calificados
@@ -72,6 +80,7 @@ export class ProjectsComponent implements OnInit {
         this._utilService.loading = false;
       });
   }
+
   traerProyecto(idProyecto: string) {
     this._utilService.loading = true;
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
@@ -151,6 +160,7 @@ export class ProjectsComponent implements OnInit {
     });
   }
   guardarPuntos() {
+    this._utilService.loading = true;
     console.log(this.formPuntos.value);
     this.valores = this.formPuntos.value;
     switch (this.categoria) {
@@ -161,16 +171,40 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido1,
             this.valores.obtenido2,
             this.valores.obtenido3).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              });
         } else {
           this.calificarProyectoService.setCalificacionesPetit(
             Number(this.proyectoActual.id_proyectos),
             this.valores.obtenido1,
             this.valores.obtenido2,
             this.valores.obtenido3).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos);
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias);
         }
@@ -182,8 +216,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido1,
             this.valores.obtenido2,
             this.valores.obtenido3).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
 
         } else {
           this.calificarProyectoService.setCalificacionesKids(
@@ -191,8 +237,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido1,
             this.valores.obtenido2,
             this.valores.obtenido3).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -208,8 +266,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido4,
             this.valores.obtenido5,
             this.valores.obtenido6).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
         } else {
           this.calificarProyectoService.setCalificacionesJvenil(
             Number(this.proyectoActual.id_proyectos),
@@ -219,8 +289,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido4,
             this.valores.obtenido5,
             this.valores.obtenido6).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -237,8 +319,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido5,
             this.valores.obtenido6,
             this.valores.obtenido7).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
         } else {
           this.calificarProyectoService.setCalificacionesMediaSuperior(
             Number(this.proyectoActual.id_proyectos),
@@ -249,8 +343,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido5,
             this.valores.obtenido6,
             this.valores.obtenido7).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -268,8 +374,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido6,
             this.valores.obtenido7,
             this.valores.obtenido8).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
         } else {
           this.calificarProyectoService.setCalificacionesSuperior(
             Number(this.proyectoActual.id_proyectos),
@@ -281,8 +399,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido6,
             this.valores.obtenido7,
             this.valores.obtenido8).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -301,8 +431,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido7,
             this.valores.obtenido8,
             this.valores.obtenido9).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
         } else {
           this.calificarProyectoService.setCalificacionesPosgrado(
             Number(this.proyectoActual.id_proyectos),
@@ -315,8 +457,20 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido7,
             this.valores.obtenido8,
             this.valores.obtenido9).subscribe(
-              data => console.log(data),
-              err => console.log(err));
+              data => {
+                swal.fire({
+                  icon: 'success',
+                  title: 'Exito'
+                })
+              },
+              err =>{
+                swal.fire({
+                  icon: 'error',
+                  title: 'Error'
+                })
+              }).add(() => {
+                this._utilService.loading = false;
+              })
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));

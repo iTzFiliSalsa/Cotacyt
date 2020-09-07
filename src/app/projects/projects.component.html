@@ -643,24 +643,10 @@
                                     <button class="btn-see-projects btn btn-info" (click)="traerProyecto(proyecto.id_proyectos)">Editar</button>
                                 </td>
                                 <td>
-                                    <button class="btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
+                                    <button class="btn custom-btn-edit" (click)="swalModal(proyecto.resumen)">
                                         Información
                                     </button>
-                                    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </td>
                             </tr>
                         </tbody>
@@ -688,24 +674,9 @@
                                     <button class="btn-see-projects btn btn-success " (click)="traerProyecto(proyecto.id_proyectos) ">Calificar</button>
                                 </td>
                                 <td>
-                                    <button class="btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
+                                    <button class="btn custom-btn-edit" (click)="swalModal(proyecto.resumen)">
                                         Información
                                     </button>
-                                    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AreasService } from 'src/app/services/areas.service';
-import { Subscriber } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { JsonPipe } from '@angular/common';
 import { Totales, ProyectosCalificados, ProyectosPorCalificar } from '../../models/dashboard.model';
@@ -8,11 +6,11 @@ import { Session } from 'src/app/models/session.model';
 import { CategoriasService } from '../../services/categorias.service';
 import { CalificacionesService } from '../../services/calificaciones.service';
 import { Calificaciones } from '../../models/calificaciones.model';
-import { AppComponent } from 'src/app/app.component';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { Observable } from 'rxjs';
+import swal from 'sweetalert2';
 
 
 
@@ -35,6 +33,7 @@ export class DashboardComponent implements OnInit {
       ]
     }
   };
+  @ViewChild("modal") test: any;
   public barChartColors: Color[] = [
     { backgroundColor: '#007d97' },
   ];
@@ -43,6 +42,7 @@ export class DashboardComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[];
+  public hT: any;
 
   totales: Totales[];
   categoria: string;
@@ -63,6 +63,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.getTime();
 
     this.barChartData = [
       { data: [], label: 'Proyectos' }
@@ -90,13 +92,17 @@ export class DashboardComponent implements OnInit {
     // obtiene los proyectos calificados
     this.dashboardService.getProyectosCalificados().subscribe(
       (data: any) => {
-        this.proyectosCalificados = data.proyectos_calificados
+        this.proyectosCalificados = data.proyectos_calificados;
         this._utilsService.loading = false;
       },
       err => console.log(err) );
     // obtiene los proyectos por calificar
     this.dashboardService.getProyectosPorCalificar().subscribe(
-      (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar,
+      (data: any) => {
+        this.proyectosPorCalificar = data.proyectos_por_calificar;
+        console.log(this.proyectosPorCalificar);
+      
+      },
       err => console.log(err) );
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     // obtiene la categoria de la sesión actual
@@ -112,6 +118,15 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  swalModal(text){
+    swal.fire({
+      title: 'Información del proyecto',
+      text
+    })
+  }
+
+
+
   getPercent(porcentaje: string) {
     Number(porcentaje);
     return {
@@ -121,9 +136,10 @@ export class DashboardComponent implements OnInit {
 
   getTime(){
     var d = new Date();
-    var hT=d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
-    return hT;
-    setTimeout("getTime()",1000);
+    this.hT=d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+    setTimeout(()=> {
+      this.getTime();
+    }, 1000);
     
   }
                                 

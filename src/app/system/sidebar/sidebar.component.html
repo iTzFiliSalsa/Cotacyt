@@ -37,10 +37,10 @@
 
 							class="fas fa-chevron-right drop-down"></i></span>
                 </a>
-                <a class="menu-btn">
+                <!-- <a class="menu-btn">
                     <i class="fas fa-align-left"></i><span> Categorias <i
 							class="fas fa-chevron-right drop-down"></i></span>
-                </a>
+                </a> -->
                 <a class="menu-btn" (click)="cerrarSesion()" style="cursor: pointer;">
                     <i class="fa fa-window-close"></i><span> Cerrar sesión</span>
                 </a>
@@ -56,7 +56,7 @@
     <div class="main-container">
         <nav class="navbar navbar-light bg-light justify-content-between mb-3 p-3">
             <p class="">Categoria: <span class="ml-3 category-label">{{categoria | titlecase}}</span></p>
-            <button class="fas fa-cog btn-cog"></button>
+            <!-- <button class="fas fa-cog btn-cog"></button> -->
         </nav> 
         <router-outlet></router-outlet>
     </div>

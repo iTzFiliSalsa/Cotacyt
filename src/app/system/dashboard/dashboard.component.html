@@ -3,7 +3,7 @@
     <button class="fas fa-cog btn-cog"></button>
 </nav> -->
 <!-- container -->
-<div onload="getTime()" class="container-fluid">
+<div class="container-fluid">
     <!-- Primera seccion -->
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -42,7 +42,7 @@
                 <div class="col-lg-12">
                     <div class="row justify-content-center">
                         <h1 name="freloj" class="text-h1-panel mt-2"> <span> <a href="" class="fas fa-clock"></a> </span>
-                            {{getTime()}}    
+                            {{hT}}    
                         </h1>
                     </div>
                 </div>
@@ -76,24 +76,9 @@
                             <div class="card-body qualified-projects m-0 p-0">
                                 <ul class="list-group "  *ngFor="let proyecto of proyectosCalificados">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        <button class="ml-auto p-1 btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
+                                        <button class="ml-auto p-1 btn custom-btn-edit" (click)="swalModal(proyecto.resumen)">
                                             Información
                                         </button>
-                                        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </li>
                                 </ul>
 <!-- 
@@ -125,24 +110,9 @@
                             <div class="card-body p-0 qualified-projects">
                                 <ul class="list-group "  *ngFor="let proyecto of proyectosPorCalificar">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        <button class="ml-auto p-1 btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
+                                        <button class="ml-auto p-1 btn custom-btn-edit"  (click)="swalModal(proyecto.resumen)">
                                             Información
                                         </button>
-                                        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </li>
                                 </ul>
                                 <!-- <table class="table table-hover table-sm">

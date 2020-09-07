@@ -20,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddProjectsComponent } from './add-projects/add-projects.component';
 import { JudgesComponent } from './judges/judges.component';
 import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProjectsRegisteredComponent } from './projects-registered/projects-regi
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    SweetAlert2Module
   ],
   providers: [
     ServicesConfig
