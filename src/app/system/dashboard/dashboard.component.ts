@@ -12,6 +12,7 @@ import { AppComponent } from 'src/app/app.component';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
+import { Observable } from 'rxjs';
 
 
 
@@ -34,9 +35,6 @@ export class DashboardComponent implements OnInit {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[];
-
-
-
   totales: Totales[];
   categoria: string;
   proyectosCalificados: ProyectosCalificados[];
@@ -103,6 +101,17 @@ export class DashboardComponent implements OnInit {
       width: porcentaje + '%'
     };
   }
+
+  getTime(){
+    var d = new Date();
+    var hT=d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+    return hT;
+    setTimeout("getTime()",1000);
+    
+  }
+                                
+  //document.write(‘Fecha: ‘+d.getDate(),'<br>Dia de la semana: ‘+d.getDay(),'<br>Mes (0 al 11): ‘+d.getMonth(),'<br>Año:’+d.getFullYear(),'<br>Hora:’+d.getHours(),'<br>HoraUTC: ‘+d.getUTCHours(),'<br>Minutos: ‘+d.getMinutes(),'<br>Segundos: ‘+d.getSeconds());
+  
 
 
 }
