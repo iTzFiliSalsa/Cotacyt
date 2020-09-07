@@ -28,4 +28,7 @@ export class ProyectosService {
     };
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/proyectos-calificados/nuevo', body);
   }
+  postNuevoProyecto(body: any) {
+    return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/nuevo', body);
+  }
 }
