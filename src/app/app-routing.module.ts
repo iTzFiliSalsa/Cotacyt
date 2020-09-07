@@ -5,6 +5,9 @@ import { SidebarComponent } from './system/sidebar/sidebar.component';
 import { RegistrationComponent } from './system/registration/registration.component';
 import { DashboardComponent } from './system/dashboard/dashboard.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { AddProjectsComponent } from './add-projects/add-projects.component'
+import { JudgesComponent } from './judges/judges.component'
+import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component'
 
 
 const routes: Routes = [
@@ -24,7 +27,18 @@ const routes: Routes = [
       },
       {
         path: 'projects', component: ProjectsComponent
-      }
+      },
+      {
+        path: 'add-projects', component: AddProjectsComponent
+      },
+
+      {
+        path: 'registered-judges', component: JudgesComponent
+      },
+
+      {
+        path: 'projects-registered', component: ProjectsRegisteredComponent
+      },
     ]
   }
 ];
