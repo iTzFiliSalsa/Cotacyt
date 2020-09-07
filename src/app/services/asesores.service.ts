@@ -13,4 +13,7 @@ export class AsesoresService {
   getAsesores(): Observable<Asesores[]> {
     return this.http.get<Asesores[]>(this.servicesConfig.APP_ENDPOINT + 'api/asesores/all');
   }
+  postAsesor(body: any): Observable<any> {
+    return this.http.post( this.servicesConfig.APP_ENDPOINT + 'api/asesores/nuevo', body );
+  }
 }

@@ -25,12 +25,6 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Autor:</label>
-                            <select formControlName="" class="form-control">
-                                <option>Autor 1</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="">Sede:</label>
                             <select formControlName="id_sedes" class="form-control">
                                 <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>

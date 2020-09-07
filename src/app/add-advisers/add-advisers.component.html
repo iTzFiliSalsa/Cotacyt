@@ -1,7 +1,6 @@
 <div class="p-3">
     <div>
-        <button [routerLink]="['home/advisers-registered']" routerLinkActive="active"
-            class="btn btn-outline-info mb-2"><span><i class="fas fa-users"></i></span> Asesores registrados</button>
+        <button [routerLink]="['home/advisers-registered']" routerLinkActive="active" class="btn btn-outline-info mb-2"><span><i class="fas fa-users"></i></span> Asesores registrados</button>
     </div>
     <div class="container-fluid color">
 
@@ -13,34 +12,30 @@
             </div>
             <div class="col-xs-12 col-md-6">
                 <div class="tamano d-flex align-items-center justify-content-center p-5">
-                    <form>
+                    <form [formGroup]="formRegistroAsesor">
                         <h5 class="titulo font-weight-bold">Registrar Asesor</h5>
                         <div class="form-group">
                             <label for="">Nombre:</label>
-                            <input type="text" class="form-control" formControlName=""
-                                placeholder="Nombre">
+                            <input type="text" class="form-control" formControlName="nombres" placeholder="Nombre">
                         </div>
                         <div class="form-group">
                             <label for="">Apellido paterno:</label>
-                            <input type="text" class="form-control" formControlName=""
-                                placeholder="Apellido paterno">
+                            <input type="text" class="form-control" formControlName="a_paterno" placeholder="Apellido paterno">
                         </div>
                         <div class="form-group">
                             <label for="">Apellido materno:</label>
-                            <input type="text" class="form-control" formControlName=""
-                                placeholder="Apellido materno">
+                            <input type="text" class="form-control" formControlName="a_materno" placeholder="Apellido materno">
                         </div>
                         <div class="form-group">
                             <label for="">Correo:</label>
-                            <input type="email" class="form-control" formControlName=""
-                                placeholder="Correo">
+                            <input type="email" class="form-control" formControlName="email" placeholder="Correo">
                         </div>
                         <div class="form-group">
                             <label for="">Descripción:</label>
-                            <textarea formControlName="" class="form-control" id="Textarea1" rows="3" placeholder="Descripción"></textarea>
+                            <textarea formControlName="descripcion" class="form-control" id="Textarea1" rows="3" placeholder="Descripción"></textarea>
                         </div>
 
-                        <button class="btn btn-primary boton-iniciar">Registrar</button>
+                        <button (click)="registrarAsesor()" [disabled]="!formRegistroAsesor.valid" class="btn btn-primary boton-iniciar">Registrar</button>
                     </form>
                 </div>
             </div>

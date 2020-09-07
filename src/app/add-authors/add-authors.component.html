@@ -1,7 +1,6 @@
 <div class="p-3">
     <div>
-        <button [routerLink]="['home/projects-registered']" routerLinkActive="active"
-            class="btn btn-outline-info mb-2"><span><i class="fas fa-user-check"></i></span> Autores
+        <button [routerLink]="['home/projects-registered']" routerLinkActive="active" class="btn btn-outline-info mb-2"><span><i class="fas fa-user-check"></i></span> Autores
             registrados</button>
     </div>
     <div class="container-fluid color">
@@ -14,58 +13,58 @@
             </div>
             <div class="col-xs-12 col-md-6">
                 <div class="tamano d-flex align-items-center justify-content-center p-5">
-                    <form>
+                    <form [formGroup]="formRegistroAutores">
                         <h5 class="titulo font-weight-bold">Registrar Autor</h5>
                         <div class="form-group">
                             <label for="">Nombre:</label>
-                            <input type="text" class="form-control" formControlName="" placeholder="Nombre">
+                            <input type="text" class="form-control" formControlName="nombres" placeholder="Nombre">
                         </div>
                         <div class="form-group">
                             <label for="">Apellido paterno:</label>
-                            <input type="text" class="form-control" formControlName="" placeholder="Apellido paterno">
+                            <input type="text" class="form-control" formControlName="a_paterno" placeholder="Apellido paterno">
                         </div>
                         <div class="form-group">
                             <label for="">Apellido materno:</label>
-                            <input type="text" class="form-control" formControlName="" placeholder="Apellido materno">
+                            <input type="text" class="form-control" formControlName="a_materno" placeholder="Apellido materno">
                         </div>
                         <div class="form-group">
                             <label for="">Teléfono:</label>
-                            <input type="text" class="form-control" formControlName="" placeholder="Teléfono">
+                            <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
                         </div>
 
                         <div class="form-group">
                             <label for="">Correo:</label>
-                            <input type="email" class="form-control" formControlName="" placeholder="Correo">
+                            <input type="email" class="form-control" formControlName="email" placeholder="Correo">
                         </div>
 
                         <div class="form-group">
                             <label for="">Proyecto:</label>
-                            <select formControlName="" class="form-control">
-                                <option>Proyecto 1</option>
+                            <select formControlName="id_proyectos" class="form-control">
+                                <option [value]="proyecto.id_proyectos" *ngFor="let proyecto of proyectos">{{proyecto.nombre}}</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="">Escuela:</label>
-                            <select formControlName="" class="form-control">
-                                <option>Escuela 1</option>
+                            <select formControlName="id_escuelas" class="form-control">
+                                <option [value]="escuela.id_escuelas" *ngFor="let escuela of escuelas">{{escuela.escuela}}</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="">Municipio:</label>
-                            <select formControlName="" class="form-control">
-                                <option>Municipio</option>
+                            <select formControlName="id_municipios" class="form-control">
+                                <option [value]="municipio.id_municipios" *ngFor="let municipio of municipios">{{municipio.municipio}}</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="">Localidad:</label>
-                            <select formControlName="" class="form-control">
-                                <option>Localidad</option>
+                            <select formControlName="id_localidades" class="form-control">
+                                <option [value]="localidad.id_localidades" *ngFor="let localidad of localidades">{{localidad.localidad}}</option>
                             </select>
                         </div>
-                        <button class="btn btn-primary boton-iniciar">Registrar</button>
+                        <button (click)="reigstrarAutor()" [disabled]="!formRegistroAutores.valid" class="btn btn-primary boton-iniciar">Registrar</button>
                     </form>
                 </div>
             </div>
