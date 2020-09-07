@@ -20,6 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddProjectsComponent } from './add-projects/add-projects.component';
 import { JudgesComponent } from './judges/judges.component';
 import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component';
+import { AddAdvisersComponent } from './add-advisers/add-advisers.component';
+import { AdvisersRegisteredComponent } from './advisers-registered/advisers-registered.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ProjectsRegisteredComponent } from './projects-registered/projects-regi
     ProjectsComponent,
     AddProjectsComponent,
     JudgesComponent,
-    ProjectsRegisteredComponent
+    ProjectsRegisteredComponent,
+    AddAdvisersComponent,
+    AdvisersRegisteredComponent
   ],
   imports: [
     BrowserModule,

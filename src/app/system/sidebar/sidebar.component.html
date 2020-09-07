@@ -16,7 +16,7 @@
                     <i class="fas fa-home"></i><span> Inicio <i class="fas fa-chevron-right drop-down"></i></span>
                 </a>
                 <a class="menu-btn"   [routerLink]="['projects']" routerLinkActive="active"  >
-                    <i class="fas fa-user-circle"></i><span> Proyectos <i
+                    <i class="fas fa-tasks"></i><span> Proyectos <i
 
 							class="fas fa-chevron-right drop-down"></i></span>
                 </a>
@@ -30,15 +30,15 @@
 
 			<li class="item">
 				<a  [routerLink]="['judges']" routerLinkActive="active" class="menu-btn">
-					<i class="fas fa-users"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
+				<i class="fas fa-balance-scale"></i><span> Jueces <i class="fas fa-chevron-right drop-down"></i></span>
 				</a>
 				<a  [routerLink]="['add-projects']" routerLinkActive="active" class="menu-btn">
 					<i class="fas fa-pencil-ruler"></i><span> Proyectos <i
 
 							class="fas fa-chevron-right drop-down"></i></span>
                 </a>
-                <a class="menu-btn">
-                    <i class="fas fa-align-left"></i><span> Categorias <i
+                <a [routerLink]="['add-advisers']" routerLinkActive="active" class="menu-btn">
+                    <i class="fas fa-users"></i><span> Asesores <i
 							class="fas fa-chevron-right drop-down"></i></span>
                 </a>
                 <a class="menu-btn" (click)="cerrarSesion()" style="cursor: pointer;">
