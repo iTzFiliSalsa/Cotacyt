@@ -12,17 +12,20 @@
                                 <th>Nombre</th>
                                 <th>Clave</th>
                                 <th>Categoria</th>
+                                <th>Usuario</th>
                                 <th>Contraseña</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
 
-                        <tr class="table">
-                            <td>Jesus Emmanuel De Leon Lerma</td>
-                            <td>123</td>
-                            <td>Juez_Petit</td>
-                            <td>1234</td>
+                        <tr class="table" *ngFor="let juez of jueces">
+                            <td>{{juez.nombre}}</td>
+                            <td>{{juez.id_jueces}}</td>
+                            <td>{{juez.categoria}}</td>
+                            <td>{{juez.usuario}}</td>
+                            <td>{{juez.contrasena}}</td>
+
                             <td>
                                 <button class="btn btn-info" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
@@ -32,53 +35,6 @@
                                     data-target="#modalEliminar">Eliminar</button>
                             </td>
                         </tr>
-
-                        <tr class="table">
-                            <td>Raul Alberto Hernandez Arguelles</td>
-                            <td>123</td>
-                            <td>Juez_juvenil</td>
-                            <td>123456</td>
-                            <td>
-                                <button class="btn btn-info" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-
-                        <tr class="table">
-                            <td>Raul Alberto Hernandez Arguelles</td>
-                            <td>123</td>
-                            <td>Juez_juvenil</td>
-                            <td>123456</td>
-                            <td>
-                                <button class="btn btn-info" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-
-                        <tr class="table">
-                            <td>Raul Alberto Hernandez Arguelles</td>
-                            <td>123</td>
-                            <td>Juez_juvenil</td>
-                            <td>123456</td>
-                            <td>
-                                <button class="btn btn-info" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-
-
                     </table>
 
 

@@ -21,6 +21,7 @@ import { AddProjectsComponent } from './add-projects/add-projects.component';
 import { JudgesComponent } from './judges/judges.component';
 import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { JudgesRegisteredService } from './services/judges.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     ProjectsComponent,
     AddProjectsComponent,
     JudgesComponent,
-    ProjectsRegisteredComponent
+    ProjectsRegisteredComponent,
+    JudgesComponent
   ],
   imports: [
     BrowserModule,
