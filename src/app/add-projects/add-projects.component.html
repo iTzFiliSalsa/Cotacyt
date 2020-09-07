@@ -19,9 +19,15 @@
                             <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del proyecto">
                         </div>
                         <div class="form-group">
-                            <label for="">Acesor:</label>
+                            <label for="">Asesor:</label>
                             <select formControlName="id_asesores" class="form-control">
                                 <option [value]="asesor.id_asesores" *ngFor="let asesor of asesores">{{asesor.nombres}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Autor:</label>
+                            <select formControlName="" class="form-control">
+                                <option>Autor 1</option>
                             </select>
                         </div>
                         <div class="form-group">
