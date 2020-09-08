@@ -1,6 +1,6 @@
 <div class="p-3">
     <div>
-        <button [routerLink]="['/home/projects-registered']" routerLinkActive="active" class="btn btn-outline-info mb-2"><span><i class="fas fa-users"></i></span> Proyectos registrados</button>
+        <button [routerLink]="['home/projects-registered']" routerLinkActive="active" class="btn-project-registered btn mb-2"><span><i class="fas fa-pencil-ruler"></i></span> Proyectos registrados</button>
     </div>
     <div class="container-fluid color">
 
@@ -19,7 +19,7 @@
                             <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del proyecto">
                         </div>
                         <div class="form-group">
-                            <label for="">Acesor:</label>
+                            <label for="">Asesor:</label>
                             <select formControlName="id_asesores" class="form-control">
                                 <option [value]="asesor.id_asesores" *ngFor="let asesor of asesores">{{asesor.nombres}}</option>
                             </select>

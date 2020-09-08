@@ -8,6 +8,10 @@ import { ProjectsComponent } from './projects/projects.component';
 import { AddProjectsComponent } from './add-projects/add-projects.component'
 import { JudgesComponent } from './judges/judges.component'
 import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component'
+import { AddAdvisersComponent } from './add-advisers/add-advisers.component'
+import { AdvisersRegisteredComponent } from './advisers-registered/advisers-registered.component'
+import { AddAuthorsComponent } from './add-authors/add-authors.component'
+import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component'
 
 
 const routes: Routes = [
@@ -39,6 +43,18 @@ const routes: Routes = [
       {
         path: 'projects-registered', component: ProjectsRegisteredComponent
       },
+      {
+        path: 'add-advisers', component: AddAdvisersComponent
+      },
+      {
+        path: 'advisers-registered', component: AdvisersRegisteredComponent
+      },
+      {
+        path: 'add-authors', component: AddAuthorsComponent
+      },
+      {
+        path: 'authors-registered', component: AuthorsRegisteredComponent
+      }
     ]
   }
 ];

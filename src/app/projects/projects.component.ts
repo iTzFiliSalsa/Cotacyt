@@ -8,7 +8,6 @@ import { Proyectos } from '../models/proyectos.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CalificarProyectoService } from '../services/calificar-proyecto.service';
 import { UtilsService } from '../services/utils.service';
-import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-projects',
@@ -33,7 +32,6 @@ export class ProjectsComponent implements OnInit {
   obtenido6: string;
   obtenido7: string;
   obtenido8: string;
-  obtenido9: string;
   constructor(private dashboardService: DashboardService,
               private categoriasService: CategoriasService,
               private proyectosService: ProyectosService,
@@ -50,7 +48,6 @@ export class ProjectsComponent implements OnInit {
     this.obtenido6 = '';
     this.obtenido7 = '';
     this.obtenido8 = '';
-    this.obtenido9 = '';
     // Trae la categoria actual
     this.categoriasService.getCategorias().subscribe(data => {
       this.categoria = data.categoria;
@@ -58,13 +55,6 @@ export class ProjectsComponent implements OnInit {
     });
 
     this._utilService.loading = true;
-  }
-
-  swalModal(text){
-    swal.fire({
-      title: 'Información del proyecto',
-      text
-    })
   }
 
 
@@ -80,7 +70,6 @@ export class ProjectsComponent implements OnInit {
         this._utilService.loading = false;
       });
   }
-
   traerProyecto(idProyecto: string) {
     this._utilService.loading = true;
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
@@ -96,11 +85,15 @@ export class ProjectsComponent implements OnInit {
                 this.obtenido1 = calificaciones[0].obtenido1;
                 this.obtenido2 = calificaciones[0].obtenido2;
                 this.obtenido3 = calificaciones[0].obtenido3;
+                this.obtenido4 = calificaciones[0].obtenido4;
+                this.obtenido5 = calificaciones[0].obtenido5;
                 break;
               case 'kids':
                 this.obtenido1 = calificaciones[0].obtenido1;
                 this.obtenido2 = calificaciones[0].obtenido2;
                 this.obtenido3 = calificaciones[0].obtenido3;
+                this.obtenido4 = calificaciones[0].obtenido4;
+                this.obtenido5 = calificaciones[0].obtenido5;
                 break;
               case 'juvenil':
                 this.obtenido1 = calificaciones[0].obtenido1;
@@ -118,6 +111,7 @@ export class ProjectsComponent implements OnInit {
                 this.obtenido5 = calificaciones[0].obtenido5;
                 this.obtenido6 = calificaciones[0].obtenido6;
                 this.obtenido7 = calificaciones[0].obtenido7;
+                this.obtenido8 = calificaciones[0].obtenido8;
                 break;
               case 'superior':
                 this.obtenido1 = calificaciones[0].obtenido1;
@@ -138,7 +132,6 @@ export class ProjectsComponent implements OnInit {
                 this.obtenido6 = calificaciones[0].obtenido6;
                 this.obtenido7 = calificaciones[0].obtenido7;
                 this.obtenido8 = calificaciones[0].obtenido8;
-                this.obtenido9 = calificaciones[0].obtenido9;
                 break;
             }
           });
@@ -151,7 +144,6 @@ export class ProjectsComponent implements OnInit {
           this.obtenido6 = '';
           this.obtenido7 = '';
           this.obtenido8 = '';
-          this.obtenido9 = '';
         }
       },
       err => console.log(err)
@@ -160,7 +152,6 @@ export class ProjectsComponent implements OnInit {
     });
   }
   guardarPuntos() {
-    this._utilService.loading = true;
     console.log(this.formPuntos.value);
     this.valores = this.formPuntos.value;
     switch (this.categoria) {
@@ -170,41 +161,23 @@ export class ProjectsComponent implements OnInit {
             Number(this.proyectoActual.id_proyectos),
             this.valores.obtenido1,
             this.valores.obtenido2,
-            this.valores.obtenido3).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              });
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            ).subscribe(
+              data => console.log(data),
+              err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesPetit(
             Number(this.proyectoActual.id_proyectos),
             this.valores.obtenido1,
             this.valores.obtenido2,
-            this.valores.obtenido3).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            ).subscribe(
+              data => console.log(data),
+              err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos);
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias);
         }
@@ -215,42 +188,24 @@ export class ProjectsComponent implements OnInit {
             Number(this.proyectoActual.id_proyectos),
             this.valores.obtenido1,
             this.valores.obtenido2,
-            this.valores.obtenido3).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            ).subscribe(
+              data => console.log(data),
+              err => console.log(err));
 
         } else {
           this.calificarProyectoService.setCalificacionesKids(
             Number(this.proyectoActual.id_proyectos),
             this.valores.obtenido1,
             this.valores.obtenido2,
-            this.valores.obtenido3).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+            this.valores.obtenido3,
+            this.valores.obtenido4,
+            this.valores.obtenido5,
+            ).subscribe(
+              data => console.log(data),
+              err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -266,20 +221,8 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido4,
             this.valores.obtenido5,
             this.valores.obtenido6).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+              data => console.log(data),
+              err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesJvenil(
             Number(this.proyectoActual.id_proyectos),
@@ -289,20 +232,8 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido4,
             this.valores.obtenido5,
             this.valores.obtenido6).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+              data => console.log(data),
+              err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -318,21 +249,11 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido4,
             this.valores.obtenido5,
             this.valores.obtenido6,
-            this.valores.obtenido7).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+            this.valores.obtenido7,
+            this.valores.obtenido8,
+            ).subscribe(
+              data => console.log(data),
+              err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesMediaSuperior(
             Number(this.proyectoActual.id_proyectos),
@@ -342,21 +263,11 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido4,
             this.valores.obtenido5,
             this.valores.obtenido6,
-            this.valores.obtenido7).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+            this.valores.obtenido7,
+            this.valores.obtenido8,
+            ).subscribe(
+              data => console.log(data),
+              err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -374,20 +285,8 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido6,
             this.valores.obtenido7,
             this.valores.obtenido8).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+              data => console.log(data),
+              err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesSuperior(
             Number(this.proyectoActual.id_proyectos),
@@ -399,20 +298,8 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido6,
             this.valores.obtenido7,
             this.valores.obtenido8).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+              data => console.log(data),
+              err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -429,22 +316,9 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido5,
             this.valores.obtenido6,
             this.valores.obtenido7,
-            this.valores.obtenido8,
-            this.valores.obtenido9).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+            this.valores.obtenido8).subscribe(
+              data => console.log(data),
+              err => console.log(err));
         } else {
           this.calificarProyectoService.setCalificacionesPosgrado(
             Number(this.proyectoActual.id_proyectos),
@@ -455,22 +329,9 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido5,
             this.valores.obtenido6,
             this.valores.obtenido7,
-            this.valores.obtenido8,
-            this.valores.obtenido9).subscribe(
-              data => {
-                swal.fire({
-                  icon: 'success',
-                  title: 'Exito'
-                })
-              },
-              err =>{
-                swal.fire({
-                  icon: 'error',
-                  title: 'Error'
-                })
-              }).add(() => {
-                this._utilService.loading = false;
-              })
+            this.valores.obtenido8).subscribe(
+              data => console.log(data),
+              err => console.log(err));
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
@@ -483,62 +344,66 @@ export class ProjectsComponent implements OnInit {
     switch (categoria) {
       case 'petit':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(50)]],
-          obtenido2: ['', [Validators.required, Validators.max(30)]],
-          obtenido3: ['', [Validators.required, Validators.max(20)]],
+          obtenido1: ['', [Validators.required, Validators.max(10)]],
+          obtenido2: ['', [Validators.required, Validators.max(40)]],
+          obtenido3: ['', [Validators.required, Validators.max(10)]],
+          obtenido4: ['', [Validators.required, Validators.max(20)]],
+          obtenido5: ['', [Validators.required, Validators.max(20)]],
         });
         break;
       case 'kids':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(50)]],
-          obtenido2: ['', [Validators.required, Validators.max(30)]],
-          obtenido3: ['', [Validators.required, Validators.max(20)]],
+          obtenido1: ['', [Validators.required, Validators.max(10)]],
+          obtenido2: ['', [Validators.required, Validators.max(40)]],
+          obtenido3: ['', [Validators.required, Validators.max(10)]],
+          obtenido4: ['', [Validators.required, Validators.max(20)]],
+          obtenido5: ['', [Validators.required, Validators.max(20)]],
         });
         break;
       case 'juvenil':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(30)]],
-          obtenido2: ['', [Validators.required, Validators.max(20)]],
-          obtenido3: ['', [Validators.required, Validators.max(10)]],
-          obtenido4: ['', [Validators.required, Validators.max(10)]],
-          obtenido5: ['', [Validators.required, Validators.max(15)]],
-          obtenido6: ['', [Validators.required, Validators.max(15)]],
+          obtenido1: ['', [Validators.required, Validators.max(10)]],
+          obtenido2: ['', [Validators.required, Validators.max(30)]],
+          obtenido3: ['', [Validators.required, Validators.max(5)]],
+          obtenido4: ['', [Validators.required, Validators.max(15)]],
+          obtenido5: ['', [Validators.required, Validators.max(20)]],
+          obtenido6: ['', [Validators.required, Validators.max(20)]],
         });
         break;
       case 'media-superior':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(20)]],
-          obtenido2: ['', [Validators.required, Validators.max(15)]],
-          obtenido3: ['', [Validators.required, Validators.max(10)]],
-          obtenido4: ['', [Validators.required, Validators.max(10)]],
-          obtenido5: ['', [Validators.required, Validators.max(20)]],
+          obtenido1: ['', [Validators.required, Validators.max(10)]],
+          obtenido2: ['', [Validators.required, Validators.max(30)]],
+          obtenido3: ['', [Validators.required, Validators.max(5)]],
+          obtenido4: ['', [Validators.required, Validators.max(15)]],
+          obtenido5: ['', [Validators.required, Validators.max(15)]],
           obtenido6: ['', [Validators.required, Validators.max(15)]],
-          obtenido7: ['', [Validators.required, Validators.max(10)]],
+          obtenido7: ['', [Validators.required, Validators.max(5)]],
+          obtenido8: ['', [Validators.required, Validators.max(5)]],
         });
         break;
       case 'superior':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(20)]],
-          obtenido2: ['', [Validators.required, Validators.max(10)]],
-          obtenido3: ['', [Validators.required, Validators.max(10)]],
-          obtenido4: ['', [Validators.required, Validators.max(10)]],
-          obtenido5: ['', [Validators.required, Validators.max(10)]],
-          obtenido6: ['', [Validators.required, Validators.max(20)]],
-          obtenido7: ['', [Validators.required, Validators.max(10)]],
-          obtenido8: ['', [Validators.required, Validators.max(10)]],
+          obtenido1: ['', [Validators.required, Validators.max(10)]],
+          obtenido2: ['', [Validators.required, Validators.max(30)]],
+          obtenido3: ['', [Validators.required, Validators.max(5)]],
+          obtenido4: ['', [Validators.required, Validators.max(15)]],
+          obtenido5: ['', [Validators.required, Validators.max(15)]],
+          obtenido6: ['', [Validators.required, Validators.max(15)]],
+          obtenido7: ['', [Validators.required, Validators.max(5)]],
+          obtenido8: ['', [Validators.required, Validators.max(5)]],
         });
         break;
       case 'posgrado':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(20)]],
-          obtenido2: ['', [Validators.required, Validators.max(10)]],
-          obtenido3: ['', [Validators.required, Validators.max(10)]],
-          obtenido4: ['', [Validators.required, Validators.max(10)]],
-          obtenido5: ['', [Validators.required, Validators.max(10)]],
+          obtenido1: ['', [Validators.required, Validators.max(10)]],
+          obtenido2: ['', [Validators.required, Validators.max(30)]],
+          obtenido3: ['', [Validators.required, Validators.max(5)]],
+          obtenido4: ['', [Validators.required, Validators.max(15)]],
+          obtenido5: ['', [Validators.required, Validators.max(15)]],
           obtenido6: ['', [Validators.required, Validators.max(15)]],
-          obtenido7: ['', [Validators.required, Validators.max(10)]],
+          obtenido7: ['', [Validators.required, Validators.max(5)]],
           obtenido8: ['', [Validators.required, Validators.max(5)]],
-          obtenido9: ['', [Validators.required, Validators.max(10)]],
         });
         break;
     }

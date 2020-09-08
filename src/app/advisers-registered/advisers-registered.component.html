@@ -1,34 +1,29 @@
 <div class="p-3">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 ">
-                <h2>Proyectos registrados</h2>
+      
+            <div class="col-lg-12">
+                <h2>Asesores registrados</h2>
                 <hr>
                 <div class="col-lg-12">
-
-                    <table class="table table-lg table-hover table-responsive-lg">
+                    <table class="table table-lg table-hover">
                         <thead class="table-info">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Asesor</th>
-                                <th>Autor</th>
-                                <th>Areas</th>
-                                <th>Categorias</th>
-                                <th>Sedes</th>
-                                <th>Resumen</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido materno</th>
+                                <th>Correo</th>
+                                <th>Descripción</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
-                        <tr class="table" *ngFor="let proyecto of proyectos">
-                            <td>{{proyecto.nombre}}</td>
-                            <td>{{proyecto.id_asesores}}</td>
-                            <td>{{proyecto.id_areas}}</td>
-                            <td>{{proyecto.id_categorias}}</td>
-                            <td>{{proyecto.id_sedes}}</td>
-                            <td>{{proyecto.resumen}}
 
-                            </td>
+                        <tr class="table">
+                            <td>Jesus Emmanuel</td>
+                            <td>De Leon</td>
+                            <td>Lerma</td>
+                            <td>jesus@gmail.com</td>
+                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
                             <td>
                                 <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
@@ -38,6 +33,40 @@
                                     data-target="#modalEliminar">Eliminar</button>
                             </td>
                         </tr>
+
+                        <tr class="table">
+                            <td>Raul Alberto</td>
+                            <td>Hernandez</td>
+                            <td>Arguelles</td>
+                            <td>raul1234@gmail.com</td>
+                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</td>
+                            <td>
+                                <button class="btn btn-edit" data-toggle="modal"
+                                    data-target="#modalEditar">Editar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                    data-target="#modalEliminar">Eliminar</button>
+                            </td>
+                        </tr>
+
+                        <tr class="table">
+                            <td>Gerardo Joaquin</td>
+                            <td>Martinez</td>
+                            <td>Hernandez</td>
+                            <td>gordo123@gmail.com</td>
+                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
+                            <td>
+                                <button class="btn btn-edit" data-toggle="modal"
+                                    data-target="#modalEditar">Editar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                    data-target="#modalEliminar">Eliminar</button>
+                            </td>
+                        </tr>
+
+
                     </table>
 
 
@@ -48,7 +77,7 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <div class="row justify-content-center">
-                                        <h4>¿Desea eliminar <span class="text-name-remove">Proyecto 1</span>?</h4>
+                                        <h4>¿Desea eliminar a <span class="text-name-remove">Jesus Emmanuel</span>?</h4>
                                     </div>
                                     <div class="row justify-content-center mt-3">
                                         <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
@@ -68,71 +97,55 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Editar Proyecto</h5>
+                                    <h5 class="modal-title">Editar Asesor</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
+
                                     <form>
                                         <div class="form-group">
                                             <label for="">Nombre:</label>
                                             <input type="text" class="form-control" formControlName=""
-                                                placeholder="Nombre del proyecto">
+                                                placeholder="Nombre">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Asesor:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option value="1">Acesor 1</option>
-                                            </select>
+                                            <label for="">Apellido paterno:</label>
+                                            <input type="text" class="form-control" formControlName=""
+                                                placeholder="Apellido paterno">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Autor:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option>Autor 1</option>
-                                            </select>
+                                            <label for="">Apellido materno:</label>
+                                            <input type="text" class="form-control" formControlName=""
+                                                placeholder="Apellido materno">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Sede:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option value="1">Sede 1</option>
-                                            </select>
+                                            <label for="">Correo:</label>
+                                            <input type="email" class="form-control" formControlName=""
+                                                placeholder="Correo">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Area:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option value="1">Area 1</option>
-                                            </select>
+                                            <label for="">Descripción:</label>
+                                            <textarea formControlName="" class="form-control" id="Textarea1" rows="3"
+                                                placeholder="Descripción"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="">Categoria:</label>
-                                            <select formControlName="id_categorias" class="form-control">
-                                                <option value="1">Petit</option>
-                                                <option value="2">Kits</option>
-                                                <option value="3">Juvenil</option>
-                                                <option value="4">Media superior</option>
-                                                <option value="5">Superior</option>
-                                                <option value="6">Posgrado</option>
-                                            </select>
-                                        </div>
-                
-                                        <div class="form-group">
-                                            <label for="">Resumen:</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Resumen del proyecto"></textarea>
-                                        </div>
-                
+
                                         <button class="btn-save btn btn-block">Guardar</button>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
                 </div>
+
             </div>
-        </div>
+
+
+
     </div>
 
+    <!-- #007d97 -->
 </div>
