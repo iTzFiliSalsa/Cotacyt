@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLinkActive, Router } from '@angular/router';
+import { JudgesRegisteredService } from '../services/judges.service'
+import { JudgesRegistered } from '../models/judges.model';
 
 @Component({
   selector: 'app-judges',
@@ -8,10 +10,21 @@ import { RouterLinkActive, Router } from '@angular/router';
 })
 export class JudgesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-    
+  jueces: JudgesRegistered[];
+  constructor(private judgesService: JudgesRegisteredService) { 
+    this.jueces = new Array<JudgesRegistered>();
   }
 
+  ngOnInit(): void {
+
+    this.judgesService.getJudges().subscribe(
+      data => {
+        this.jueces = data;
+      },
+      err => {
+        console.log(err);
+      });
+
+  }
+ 
 }

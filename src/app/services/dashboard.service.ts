@@ -31,3 +31,4 @@ export class DashboardService {
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria');
   }
 }
+

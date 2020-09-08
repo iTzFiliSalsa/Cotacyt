@@ -20,15 +20,14 @@
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
+                        <tr class="table" *ngFor="let proyecto of proyectos">
+                            <td>{{proyecto.nombre}}</td>
+                            <td>{{proyecto.id_asesores}}</td>
+                            <td>{{proyecto.id_areas}}</td>
+                            <td>{{proyecto.id_categorias}}</td>
+                            <td>{{proyecto.id_sedes}}</td>
+                            <td>{{proyecto.resumen}}
 
-                        <tr class="table">
-                            <td>Proyecto 1</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
                             </td>
                             <td>
                                 <button class="btn btn-edit" data-toggle="modal"
@@ -39,64 +38,6 @@
                                     data-target="#modalEliminar">Eliminar</button>
                             </td>
                         </tr>
-
-                        <tr class="table">
-                            <td>Proyecto 1</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
-                            </td>
-                            <td>
-                                <button class="btn btn-edit" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-
-                        <tr class="table">
-                            <td>Proyecto 1</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
-                            </td>
-                            <td>
-                                <button class="btn btn-edit" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-
-                        <tr class="table">
-                            <td>Proyecto 1</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
-                            </td>
-                            <td>
-                                <button class="btn-edit btn" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-
                     </table>
 
 

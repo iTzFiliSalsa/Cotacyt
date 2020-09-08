@@ -15,7 +15,6 @@ import { Label, Color } from 'ng2-charts';
 import { Observable } from 'rxjs';
 
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
