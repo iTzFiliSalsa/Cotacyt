@@ -1,5 +1,5 @@
 <div class="p-3">
-    <div class="container-fluid color">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 ">
                 <h2>Proyectos registrados</h2>
@@ -10,7 +10,8 @@
                         <thead class="table-info">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Asesores</th>
+                                <th>Asesor</th>
+                                <th>Autor</th>
                                 <th>Areas</th>
                                 <th>Categorias</th>
                                 <th>Sedes</th>
@@ -24,12 +25,13 @@
                             <td>Proyecto 1</td>
                             <td>1</td>
                             <td>2</td>
+                            <td>2</td>
                             <td>1</td>
                             <td>1</td>
                             <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
                             </td>
                             <td>
-                                <button class="btn btn-info" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -42,12 +44,13 @@
                             <td>Proyecto 1</td>
                             <td>1</td>
                             <td>2</td>
+                            <td>2</td>
                             <td>1</td>
                             <td>1</td>
                             <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
                             </td>
                             <td>
-                                <button class="btn btn-info" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -58,6 +61,7 @@
 
                         <tr class="table">
                             <td>Proyecto 1</td>
+                            <td>2</td>
                             <td>1</td>
                             <td>2</td>
                             <td>1</td>
@@ -65,7 +69,7 @@
                             <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
                             </td>
                             <td>
-                                <button class="btn btn-info" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -76,6 +80,7 @@
 
                         <tr class="table">
                             <td>Proyecto 1</td>
+                            <td>2</td>
                             <td>1</td>
                             <td>2</td>
                             <td>1</td>
@@ -83,7 +88,7 @@
                             <td>Lorem ipsum dolor sit amet ctemporibus saepe commodi nesciunt vitae cupiditate!
                             </td>
                             <td>
-                                <button class="btn btn-info" data-toggle="modal"
+                                <button class="btn-edit btn" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -102,7 +107,7 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <div class="row justify-content-center">
-                                        <h4>¿Desea eliminar <span class="text-info">Proyecto 1</span>?</h4>
+                                        <h4>¿Desea eliminar <span class="text-name-remove">Proyecto 1</span>?</h4>
                                     </div>
                                     <div class="row justify-content-center mt-3">
                                         <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
@@ -135,9 +140,15 @@
                                                 placeholder="Nombre del proyecto">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Acesor:</label>
+                                            <label for="">Asesor:</label>
                                             <select formControlName="" class="form-control">
                                                 <option value="1">Acesor 1</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Autor:</label>
+                                            <select formControlName="" class="form-control">
+                                                <option>Autor 1</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -170,7 +181,7 @@
                                                 placeholder="Resumen del proyecto"></textarea>
                                         </div>
                 
-                                        <button class="btn btn-info btn-block">Guardar</button>
+                                        <button class="btn-save btn btn-block">Guardar</button>
                                     </form>
                                 </div>
                             </div>

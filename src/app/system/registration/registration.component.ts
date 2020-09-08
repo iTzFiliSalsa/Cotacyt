@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { JuecesService } from '../../services/jueces.service';
 import { RouterLinkActive, Router, ActivatedRoute } from '@angular/router';
-import { UtilsService } from '../../services/utils.service';
-import swal from 'sweetalert2';
 
 
 
@@ -18,10 +16,7 @@ export class RegistrationComponent implements OnInit {
   public isCollapsed = false;
 
   public formsRegistroJuez: FormGroup;
-  constructor(
-    public formBuilder: FormBuilder,
-    private juecesService: JuecesService,
-    private _utilService: UtilsService) {
+  constructor(public formBuilder: FormBuilder, private juecesService: JuecesService) {
     this.formsRegistroJuez = formBuilder.group({
       id_categorias: [1, [Validators.required]],
       usuario: ['', [Validators.required, Validators.maxLength(30)]],
@@ -33,27 +28,14 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
   registrarJuez() {
-    this._utilService.loading = true;
     console.log(this.formsRegistroJuez.value);
     this.juecesService.registrarJuez(this.formsRegistroJuez.value).subscribe(
       data => {
-        swal.fire({
-          icon: 'success',
-          title: "Agregado con exito",
-          text: data
-        })
+        alert(data);
         this.formsRegistroJuez.reset();
       },
-      err => {
-        swal.fire({
-          icon: 'error',
-          title: "Error",
-          text: 'Error al agregar'
-        })
-      }
-    ).add(() => {
-      this._utilService.loading = false;
-    });
+      err => console.log(err)
+    );
   }
 
 
