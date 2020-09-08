@@ -16,7 +16,7 @@
     position: absolute ;
     width: 100%;
     height: 100%;
-    background: linear-gradient(#0BB5D8,#1F5D78 ); opacity: .8 ;
+    background: linear-gradient(#0064A7,#43B4E4 ); opacity: .8 ;
 }
 }
 
@@ -86,10 +86,10 @@ input[type="password"]{
     border: none;
     border-radius: 1em;
     width: 100%;
-    background: #0BB5D8;
+    background: #0064A7;
     cursor: pointer;
     &:hover{
-        background: #0898b4;
+        background: #43B4E4;
     }
 }
 

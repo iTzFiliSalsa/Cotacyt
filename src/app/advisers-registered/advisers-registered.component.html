@@ -1,12 +1,11 @@
 <div class="p-3">
     <div class="container">
-        <div class="col-lg-12">
-
-            <h2>Asesores registrados</h2>
-            <hr>
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-lg table-hover table-responsive-lg">
+      
+            <div class="col-lg-12">
+                <h2>Asesores registrados</h2>
+                <hr>
+                <div class="col-lg-12">
+                    <table class="table table-lg table-hover">
                         <thead class="table-info">
                             <tr>
                                 <th>Nombre</th>
@@ -26,7 +25,7 @@
                             <td>jesus@gmail.com</td>
                             <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
                             <td>
-                                <button class="btn btn-info" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -42,7 +41,7 @@
                             <td>raul1234@gmail.com</td>
                             <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</td>
                             <td>
-                                <button class="btn btn-info" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -58,7 +57,7 @@
                             <td>gordo123@gmail.com</td>
                             <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
                             <td>
-                                <button class="btn btn-info" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -78,7 +77,7 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <div class="row justify-content-center">
-                                        <h4>¿Desea eliminar a <span class="text-info">Jesus Emmanuel</span>?</h4>
+                                        <h4>¿Desea eliminar a <span class="text-name-remove">Jesus Emmanuel</span>?</h4>
                                     </div>
                                     <div class="row justify-content-center mt-3">
                                         <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
@@ -128,10 +127,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Descripción:</label>
-                                            <textarea formControlName="" class="form-control" id="Textarea1" rows="3" placeholder="Descripción"></textarea>
+                                            <textarea formControlName="" class="form-control" id="Textarea1" rows="3"
+                                                placeholder="Descripción"></textarea>
                                         </div>
-                
-                                        <button class="btn btn-info btn-block">Guardar</button>
+
+                                        <button class="btn-save btn btn-block">Guardar</button>
                                     </form>
 
                                 </div>
@@ -140,9 +140,10 @@
                     </div>
 
                 </div>
+
             </div>
 
-        </div>
+
 
     </div>
 
