@@ -30,7 +30,7 @@ form{
     // margin: 32px;
     border: 2px solid #eaeaea;
     border-radius: .5em;
-    background-color: #007d97;
+    background-color: #0064A7;
     position: relative;
     z-index: 2;
 
@@ -42,7 +42,7 @@ form{
         z-index: 1;
         width: 100%;
         height: 20%;
-        background-color: #007d97;
+        background-color: #0064A7;
         border-radius: .5em;
     }
 
@@ -77,11 +77,23 @@ form{
     background: #0BB5D8;
     cursor: pointer;
     &:hover{
-        background: #0898b4;
+        background: #43B4E4;
     }
 }
 
 .boton-iniciar:disabled{
     background: #67baca;
     cursor: default;
+}
+
+
+.btn-project-registered{
+    color: #0064A7;
+    border: 1px solid #0064A7;
+    background: #fff;
+}
+
+.btn-project-registered:hover{
+    color: #fff;
+    background: #0064A7;
 }

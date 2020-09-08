@@ -73,7 +73,7 @@
                             <div class="card-header">
                                 <h6>Proyectos calificados</h6>
                             </div>
-                            <div class="card-body qualified-projects m-0 p-0">
+                            <div class="qualified-projects card-body m-0 p-0">
                                 <ul class="list-group "  *ngFor="let proyecto of proyectosCalificados">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
                                         <button class="ml-auto p-1 btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
@@ -168,11 +168,11 @@
                     <!-- colum derecha -->
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                         <!-- card grafica -->
-                        <div class="qualified-projects card">
+                        <div class="card">
                             <div class="card-header">
                                 <h6>Proyectos por categorias</h6>
                             </div>
-                            <div class="card-body p-0">
+                            <div class="qualified-projects card-body p-0">
                                 <div style="display: block;">
                                     <canvas baseChart 
                                       [datasets]="barChartData"
@@ -194,8 +194,7 @@
                                     <h6>Estadistica de proyectos</h6>
                                 
                             </div>
-                            <div class="card-body p-0 qualified-projects">
-
+                            <div class="qualified-projects card-body p-0">
                                 <table class="table">
                                     <thead class="thead-ligth">
                                         <tr>
@@ -209,7 +208,7 @@
                                             <td>{{proyectos.nombre}}</td>
                                             <td>
                                                 <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-info" role="progressbar" [ngStyle]="getPercent(proyectos.total)"></div>
+                                                    <div class="progress-bar bg-custom" role="progressbar" [ngStyle]="getPercent(proyectos.total)"></div>
                                                 </div>
                                             </td>
                                             <td>{{proyectos.total | number}}%</td>
@@ -219,6 +218,7 @@
 
                             </div>
                         </div>
+                        <br>
                     </div>
                 </div>
             </div>
