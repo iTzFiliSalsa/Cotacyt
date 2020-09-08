@@ -3,7 +3,7 @@
     <button class="fas fa-cog btn-cog"></button>
 </nav> -->
 <!-- container -->
-<div onload="getTime()" class="container-fluid">
+<div class="container-fluid">
     <!-- Primera seccion -->
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -42,7 +42,7 @@
                 <div class="col-lg-12">
                     <div class="row justify-content-center">
                         <h1 name="freloj" class="text-h1-panel mt-2"> <span> <a href="" class="fas fa-clock"></a> </span>
-                            {{getTime()}}    
+                            {{ht}}    
                         </h1>
                     </div>
                 </div>
@@ -70,80 +70,32 @@
                     <!-- colum izquierda -->
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                         <div class="card m-0">
-                            <div class="card-header">
+                            <div class="card-header background-table">
                                 <h6>Proyectos calificados</h6>
                             </div>
                             <div class="qualified-projects card-body m-0 p-0">
                                 <ul class="list-group "  *ngFor="let proyecto of proyectosCalificados">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        <button class="ml-auto p-1 btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
-                                            Información
+                                        <button class="ml-auto  btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                            <i class="fas fa-question-circle"></i>
                                         </button>
-                                        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </li>
                                 </ul>
-<!-- 
-                                <table class="table table-hover table-sm">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">Proyecto</th>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Opción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let proyecto of proyectosCalificados">
-                                            <td>{{proyecto.nombre}}<br><small>{{proyecto.resumen}}</small></td>
-                                            <td>{{proyecto.fecha | date}}</td>
-                                            <td><button class="btn-see-projects btn btn-info">Editar</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table> -->
-
                             </div>
                         </div>
                         <br>
 
                         
                         <div class="card ">
-                            <div class="card-header">
+                            <div class="card-header background-table">
                                 <h6>Proyectos por calificar</h6>
                             </div>
                             <div class="card-body p-0 qualified-projects">
                                 <ul class="list-group "  *ngFor="let proyecto of proyectosPorCalificar">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        <button class="ml-auto p-1 btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
-                                            Información
+                                        <button class="ml-auto btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                            <i class="fas fa-question-circle"></i>
                                         </button>
-                                        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </li>
                                 </ul>
                                 <!-- <table class="table table-hover table-sm">
@@ -170,10 +122,10 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                         <!-- card grafica -->
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header background-table">
                                 <h6>Proyectos por categorias</h6>
                             </div>
-                            <div class="qualified-projects card-body p-0">
+                            <div class="qualified-projects2 card-body p-0">
                                 <div style="display: block;">
                                     <canvas baseChart 
                                       [datasets]="barChartData"
@@ -191,7 +143,7 @@
                         <br>
                         <!-- card estadisticas -->
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header background-table">
                                     <h6>Estadistica de proyectos</h6>
                                 
                             </div>

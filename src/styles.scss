@@ -6,6 +6,57 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+@font-face {
+    font-family: 'Novecento wide';
+    src: url('assets/fonts/Novecentowide-Normal.eot');
+    src: url('assets/fonts/Novecentowide-Normal.eot?#iefix') format('embedded-opentype'),
+        url('assets/fonts/Novecentowide-Normal.woff2') format('woff2'),
+        url('assets/fonts/Novecentowide-Normal.woff') format('woff'),
+        url('assets/fonts/Novecentowide-Normal.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Novecento wide';
+    src: url('assets/fonts/Novecentowide-Bold.eot');
+    src: url('assets/fonts/Novecentowide-Bold.eot?#iefix') format('embedded-opentype'),
+        url('assets/fonts/Novecentowide-Bold.woff2') format('woff2'),
+        url('assets/fonts/Novecentowide-Bold.woff') format('woff'),
+        url('assets/fonts/Novecentowide-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Novecento wide';
+    src: url('assets/fonts/Novecentowide-Medium.eot');
+    src: url('assets/fonts/Novecentowide-Medium.eot?#iefix') format('embedded-opentype'),
+        url('assets/fonts/Novecentowide-Medium.woff2') format('woff2'),
+        url('assets/fonts/Novecentowide-Medium.woff') format('woff'),
+        url('assets/fonts/Novecentowide-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Novecento wide';
+    src: url('assets/fonts/Novecentowide-DemiBold.eot');
+    src: url('assets/fonts/Novecentowide-DemiBold.eot?#iefix') format('embedded-opentype'),
+        url('assets/fonts/Novecentowide-DemiBold.woff2') format('woff2'),
+        url('assets/fonts/Novecentowide-DemiBold.woff') format('woff'),
+        url('assets/fonts/Novecentowide-DemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+*{
+    font-family: 'Novecento wide';
+}
 
 
 body{
@@ -17,5 +68,18 @@ body::-webkit-scrollbar{
 body::-webkit-scrollbar-thumb{
     background:  rgb(0,100,167);
 }
+
+.background-table{
+    background:  rgb(0,100,167);
+    color: #FFF;
+}
+
+.subtitle{
+    color: #FFF;
+    padding: 16px;
+    background-color: #97c83c;
+    border-radius: .5em;
+}
+
 
 

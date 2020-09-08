@@ -9,6 +9,8 @@ import { Proyectos } from '../models/proyectos.model';
 import { ProyectosService } from '../services/proyectos.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AutoresService } from '../services/autores.service';
+import swal from 'sweetalert2';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-add-authors',
@@ -27,7 +29,8 @@ export class AddAuthorsComponent implements OnInit {
     private localidadesService: LocalidadesService,
     private proyectosService: ProyectosService,
     private autoresService: AutoresService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _utilService: UtilsService
   ) {
     this.formRegistroAutores = this.formBuilder.group({
       id_proyectos:   ['', [Validators.required]],
@@ -38,7 +41,7 @@ export class AddAuthorsComponent implements OnInit {
       a_paterno:      ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:      ['', [Validators.required, Validators.maxLength(50)]],
       telefono:       ['', [Validators.required, Validators.maxLength(10)]],
-      email:          ['', [Validators.required, Validators.maxLength(50)]],
+      email:          ['', [Validators.required, Validators.maxLength(50)]], 
     });
   }
 
@@ -54,12 +57,27 @@ export class AddAuthorsComponent implements OnInit {
   }
 
   reigstrarAutor() {
+    console.log(this.formRegistroAutores.value);
     this.autoresService.postAutor( this.formRegistroAutores.value )
-    .subscribe( data => {
-      alert(data);
-      this.formRegistroAutores.reset();
-    },
-    err => console.log( err ));
+    .subscribe(
+      data => {
+        swal.fire({
+          icon: 'success',
+          title: 'Exito',
+          text: 'El proyecto se registró correctamente'
+        })
+        this.formRegistroAutores.reset();
+      },
+      err => {
+        swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al registrar el proyecto'
+        })
+      }
+    ).add(() => {
+      this._utilService.loading = false;
+    });
   }
 
 }

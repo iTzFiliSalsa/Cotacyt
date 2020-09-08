@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoriasService } from '../services/categorias.service';
 import { Categorias } from '../models/categorias.model';
 import { ProyectosService } from '../services/proyectos.service';
+import { UtilsService } from '../services/utils.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-projects',
@@ -27,7 +29,8 @@ export class AddProjectsComponent implements OnInit {
     private asesoresService: AsesoresService,
     private categoriasServices: CategoriasService,
     private proyectosService: ProyectosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _utilService: UtilsService
   ) {
     this.areas = new Array<Areas>();
     this.sedes = new Array<Sedes>();
@@ -44,19 +47,39 @@ export class AddProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    //INSERTAR FORK JOIN
     this.areasService.getAreas().subscribe(data => this.areas = data );
     this.sedesService.getSedes().subscribe(data => this.sedes = data );
-    this.asesoresService.getAsesores().subscribe(data => this.asesores = data );
+    this.asesoresService.getAsesores().subscribe(data => {
+      this.asesores = data;
+      console.log(this.asesores);
+    
+    } );
     this.categoriasServices.getAllCategrias().subscribe( data => this.categorias = data );
   }
   registrarProyecto() {
+
+    this._utilService.loading = true;
     this.proyectosService.postNuevoProyecto( this.formRegistroProyecto.value )
     .subscribe(
       data => {
-        alert(data);
+        swal.fire({
+          icon: 'success',
+          title: 'Exito',
+          text: 'El proyecto se registró correctamente'
+        })
         this.formRegistroProyecto.reset();
       },
-      err => console.log(err)
-    );
+      err => {
+        swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al registrar el proyecto'
+        })
+      }
+    ).add(() => {
+      this._utilService.loading = false;
+    });
   }
 }

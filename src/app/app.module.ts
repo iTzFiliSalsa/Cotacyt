@@ -41,7 +41,7 @@ import { AuthorsRegisteredComponent } from './authors-registered/authors-registe
     JudgesComponent,
     ProjectsRegisteredComponent,
 
-    JudgesComponent
+    JudgesComponent,
 
     AddAdvisersComponent,
     AdvisersRegisteredComponent,

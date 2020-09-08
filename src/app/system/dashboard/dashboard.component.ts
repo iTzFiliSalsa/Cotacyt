@@ -13,6 +13,10 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { Observable } from 'rxjs';
+import  swal  from 'sweetalert2';
+import { Util } from 'src/app/utils/utils';
+import { ProjectsRegisteredService } from 'src/app/services/project-registered.service';
+import { ProjectsRegistered } from 'src/app/models/project-regis.model';
 
 
 @Component({
@@ -22,6 +26,7 @@ import { Observable } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 
+  proyectos: ProjectsRegistered[];
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
@@ -35,33 +40,44 @@ export class DashboardComponent implements OnInit {
     }
   };
   public barChartColors: Color[] = [
-    { backgroundColor: '#0064A7' },
+    { backgroundColor: '#97c83c' },
   ];
   public barChartLabels: Label[] = ['Petit', 'Kids', 'Juvenil', 'Media Superior', 'Superior', 'Posgrado'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[];
+  public ht;
+  public util: Util;
 
   totales: Totales[];
   categoria: string;
   proyectosCalificados: ProyectosCalificados[];
   proyectosPorCalificar: ProyectosPorCalificar[];
   estadisticasDeProyectos: Calificaciones[];
-  sessionData: Session[];
+  sessionData: Session;
   constructor(private dashboardService: DashboardService,
               private categoriasService: CategoriasService,
               private calificacionesService: CalificacionesService,
-              private _utilsService: UtilsService
+              private _utilsService: UtilsService,
+              private projectsService: ProjectsRegisteredService,
               ) {
     this.totales = new Array<Totales>();
     this.proyectosCalificados = new Array<ProyectosCalificados>();
-    this.sessionData = new Array<Session>();
+    this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.estadisticasDeProyectos = new Array<Calificaciones>();
     this._utilsService.loading = true;
+    this.util = new Util;
+    this.proyectos = new Array<ProjectsRegistered>();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+    
+    setInterval(() => {
+      var d = new Date();
+      this.ht = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+    }, 1000);
 
     this.barChartData = [
       { data: [], label: 'Proyectos' }
@@ -86,17 +102,30 @@ export class DashboardComponent implements OnInit {
         ];
       },
       err => console.log(err) );
-    // obtiene los proyectos calificados
-    this.dashboardService.getProyectosCalificados().subscribe(
-      (data: any) => {
-        this.proyectosCalificados = data.proyectos_calificados
-        this._utilsService.loading = false;
-      },
-      err => console.log(err) );
-    // obtiene los proyectos por calificar
-    this.dashboardService.getProyectosPorCalificar().subscribe(
-      (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar,
-      err => console.log(err) );
+
+      if(this.sessionData.usuario === 'admin'){
+        this.projectsService.getProjects().subscribe(
+          data => {
+            this.proyectos = data;
+            this.adminProjects(this.proyectos);
+          },
+          err => {
+            console.log(err);
+          }
+        ); 
+      }else{
+        // obtiene los proyectos calificados
+        this.dashboardService.getProyectosCalificados().subscribe(
+          (data: any) => {
+            this.proyectosCalificados = data.proyectos_calificados
+          },
+          err => console.log(err) );
+        // obtiene los proyectos por calificar
+        this.dashboardService.getProyectosPorCalificar().subscribe(
+          (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar,
+          err => console.log(err) );
+      }
+   
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     // obtiene la categoria de la sesión actual
     this.categoriasService.getCategorias().subscribe( data => {
@@ -108,7 +137,19 @@ export class DashboardComponent implements OnInit {
         this.estadisticasDeProyectos = data;
       },
       err => console.log(err)
-    );
+    ).add(() => {
+      this._utilsService.loading = false;
+    });
+  }
+
+  adminProjects(proyectos){
+    proyectos.filter((res) => {
+      if(res.status === '1'){
+        this.proyectosCalificados.push(res);
+      }else{
+        this.proyectosPorCalificar.push(res);
+      }
+    });
   }
 
   getPercent(porcentaje: string) {
@@ -118,14 +159,8 @@ export class DashboardComponent implements OnInit {
     };
   }
 
-  getTime(){
-    var d = new Date();
-    var hT=d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
-    return hT;
-    setTimeout("getTime()",1000);
-    
-  }
-                                
+
+                          
   //document.write(‘Fecha: ‘+d.getDate(),'<br>Dia de la semana: ‘+d.getDay(),'<br>Mes (0 al 11): ‘+d.getMonth(),'<br>Año:’+d.getFullYear(),'<br>Hora:’+d.getHours(),'<br>HoraUTC: ‘+d.getUTCHours(),'<br>Minutos: ‘+d.getMinutes(),'<br>Segundos: ‘+d.getSeconds());
   
 

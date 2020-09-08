@@ -111,8 +111,9 @@
 
     <div class="main-container">
         <nav class="navbar navbar-light bg-light justify-content-between mb-3 p-3">
-            <p class="">Categoria: <span class="ml-3 category-label">{{categoria | titlecase}}</span></p>
-            <button class="fas fa-cog btn-cog"></button>
+            <p class="" *ngIf="admin">Categoria: <span class="ml-3 category-label">Administrador</span></p>
+            <p class="" *ngIf="!admin">Categoria: <span class="ml-3 category-label">{{categoria | titlecase}}</span></p>
+            <!-- <button class="fas fa-cog btn-cog"></button> -->
         </nav>
         <router-outlet></router-outlet>
     </div>

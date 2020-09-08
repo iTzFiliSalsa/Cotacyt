@@ -29,6 +29,10 @@ export class SidebarComponent implements OnInit {
       this.categoria = data.categoria;
       if ( this.sessionData.usuario === 'admin' ) {
         this.admin = true;
+        this._utilService._cargo = true;
+      }else{
+        this.admin = false;
+        this._utilService._cargo = false;
       }
     });
   }

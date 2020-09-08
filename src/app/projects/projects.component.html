@@ -1,10 +1,105 @@
-<div class="container-fluid">
+<div class="container-fluid pb-3">
     <div class="row">
         <!-- columna Izquierda -->
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <div class="CardPrincipal card">
+                <div class="card-header background-table">
+                    <h6>Todos los proyectos</h6>
+                </div>
+                <div class="qualified-projects card-body scroll p-0">
+                    <table class="table table-hover">
+                        <thead class="thead-ligth">
+                            <tr>
+                                <th scope="col">Nombre del proyecto</th>
+                                <!-- <th scope="col">Fecha de calificación</th> -->
+                                <th scope="col">Status</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <tr *ngFor="let i of allProjects">
+                                <td> <button class="btn btn-light mr-3" (click)="util.getInfo(i.resumen)">
+                                    <i class="fas fa-question-circle"></i>
+                                </button>{{i.nombre}}
+                                </td>
+                                <td>
+                                    <h6 *ngIf="i.status == '0'" class="custom-btn-danger text-center">Sin calificar</h6>
+                                    <h6 *ngIf="i.status == '1'" class="custom-btn-success text-center">Calificado</h6>
+                                </td>
+                                <td>
+                                    <button class="btn-edit-project btn-see-projects btn ml-3" (click)="traerProyecto(i.id_proyectos)"><i class="fas fa-edit"></i></button>                       
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- columna derecha -->
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="CardIzquierdoTop projects card">
+                <div class="card-header background-table">
+                    <h6>Proyectos calificados</h6>
+                </div>
+                <div class="qualified-projects card-body scroll p-0">
+                    <table class="table table-hover">
+                        <thead class="thead-ligth">
+                            <tr>
+                                <th scope="col">Nombre del proyecto</th>
+                                <!-- <th scope="col">Fecha de calificación</th> -->
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let proyecto of proyectosCalificados">
+                                <td>{{proyecto.nombre}}
+                                    <!-- <small>{{proyecto.resumen}}</small> -->
+                                </td>
+                                <!-- <td>{{proyecto.fecha | date}}</td> -->
+                                <td class="d-flex">
+                                    <button class="btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                        <i class="fas fa-question-circle"></i>
+                                    </button>
+                                    <button class="btn-edit-project btn-see-projects btn ml-3" (click)="traerProyecto(proyecto.id_proyectos)"><i class="fas fa-edit"></i></button>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="CardIzquierdo projects card mt-3">
+                <div class="card-header background-table">
+                    <h6>Proyectos por calificar</h6>
+                </div>
+                <div class="qualified-projects card-body scroll p-0">
+                    <table class="table table-hover">
+                        <thead class="thead-ligth ">
+                            <tr>
+                                <th scope="col ">Nombre del proyecto</th>
+                                <th scope="col ">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let proyecto of proyectosPorCalificar ">
+                                <td>{{proyecto.nombre}}
+                                    <!-- <br><small>{{proyecto.resumen}}</small> -->
+                                </td>
+                                <td class="d-flex">
+                                    <button class="btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                        <i class="fas fa-question-circle"></i>
+                                    </button>
+                                    <button class="btn-qualify-project btn-see-projects btn ml-3" (click)="traerProyecto(proyecto.id_proyectos) "><i class="fas fa-check"></i></button>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="CardIzquierdo projects2 card mt-3">
                 <div class="firstHeader card-header">
-                    <h6 class="m-0">Proyectos</h6>
+                    <h6 class="m-0">Opciones de proyecto</h6> 
                 </div>
                 <div class="qualified-projects card-body scroll p-0">
                     <table class="table" *ngIf="proyectoActual">
@@ -18,9 +113,9 @@
                         <tbody>
                             <tr>
                                 <td class="text-center">{{proyectoActual.nombre}}</td>
-                                <td class="d-flex align-items-center justify-content-center">
-                                    <h6 *ngIf="proyectoActual.status == '0'" class="custom-btn-danger">Sin calificar</h6>
-                                    <h6 *ngIf="proyectoActual.status == '1'" class="custom-btn-success">Calificado</h6>
+                                <td class="">
+                                    <h6 *ngIf="proyectoActual.status == '0'" class="custom-btn-danger text-center py-1">Sin calificar</h6>
+                                    <h6 *ngIf="proyectoActual.status == '1'" class="custom-btn-success text-center py-1">Calificado</h6>
                                 </td>
                                 <td class="text-center">
                                     <button *ngIf="proyectoActual.status == '0'" class="custom-btn-success" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Calificar</button>
@@ -641,101 +736,6 @@
                             </div> -->
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- columna derecha -->
-        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <div class="CardIzquierdoTop projects card">
-                <div class="card-header">
-                    <h6>Proyectos calificados</h6>
-                </div>
-                <div class="qualified-projects card-body scroll p-0">
-                    <table class="table table-hover">
-                        <thead class="thead-ligth">
-                            <tr>
-                                <th scope="col">Nombre del proyecto</th>
-                                <!-- <th scope="col">Fecha de calificación</th> -->
-                                <th scope="col">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let proyecto of proyectosCalificados">
-                                <td>{{proyecto.nombre}}
-                                    <!-- <small>{{proyecto.resumen}}</small> -->
-                                </td>
-                                <!-- <td>{{proyecto.fecha | date}}</td> -->
-                                <td>
-                                    <button class="btn-edit-project btn-see-projects btn" (click)="traerProyecto(proyecto.id_proyectos)">Editar</button>
-                                </td>
-                                <td>
-                                    <button class="btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
-                                        Información
-                                    </button>
-                                    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="CardIzquierdo projects card mt-3">
-                <div class="card-header ">
-                    <h6>Proyectos por calificar</h6>
-                </div>
-                <div class="qualified-projects card-body scroll p-0">
-                    <table class="table table-hover">
-                        <thead class="thead-ligth ">
-                            <tr>
-                                <th scope="col ">Nombre del proyecto</th>
-                                <th scope="col ">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let proyecto of proyectosPorCalificar ">
-                                <td>{{proyecto.nombre}}
-                                    <!-- <br><small>{{proyecto.resumen}}</small> -->
-                                </td>
-                                <td>
-                                    <button class="btn-qualify-project btn-see-projects btn " (click)="traerProyecto(proyecto.id_proyectos) ">Calificar</button>
-                                </td>
-                                <td>
-                                    <button class="btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
-                                        Información
-                                    </button>
-                                    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

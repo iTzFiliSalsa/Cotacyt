@@ -4,13 +4,17 @@ import { Observable } from 'rxjs';
 import { ProjectsRegistered } from '../models/project-regis.model';
 import { ServicesConfig } from '../config/services.config';
 import { Session } from '../models/session.model';
+import { UtilsService } from './utils.service';
 
 @Injectable({
     providedIn: 'root'
   })
   export class ProjectsRegisteredService {
     sessionData: Session;
-    constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
+    constructor(
+      private http: HttpClient,
+      private servicesConfig: ServicesConfig
+      ) {
       this.sessionData = JSON.parse(localStorage.getItem('session'));
     }
     

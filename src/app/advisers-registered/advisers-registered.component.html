@@ -1,151 +1,100 @@
 <div class="p-3">
-    <div class="container">
-      
-            <div class="col-lg-12">
-                <h2>Asesores registrados</h2>
-                <hr>
-                <div class="col-lg-12">
-                    <table class="table table-lg table-hover">
-                        <thead class="table-info">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellido paterno</th>
-                                <th>Apellido materno</th>
-                                <th>Correo</th>
-                                <th>Descripción</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
 
-                        <tr class="table">
-                            <td>Jesus Emmanuel</td>
-                            <td>De Leon</td>
-                            <td>Lerma</td>
-                            <td>jesus@gmail.com</td>
-                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
-                            <td>
-                                <button class="btn btn-edit" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
+    <div class="subtitle">
+        <h4>Asesores registrados</h4>
+    </div>
+<hr>
+<table class="table table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido paterno</th>
+            <th>Apellido materno</th>
+            <th>Correo</th>
+            <th>Descripción</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
 
-                        <tr class="table">
-                            <td>Raul Alberto</td>
-                            <td>Hernandez</td>
-                            <td>Arguelles</td>
-                            <td>raul1234@gmail.com</td>
-                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</td>
-                            <td>
-                                <button class="btn btn-edit" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
-
-                        <tr class="table">
-                            <td>Gerardo Joaquin</td>
-                            <td>Martinez</td>
-                            <td>Hernandez</td>
-                            <td>gordo123@gmail.com</td>
-                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
-                            <td>
-                                <button class="btn btn-edit" data-toggle="modal"
-                                    data-target="#modalEditar">Editar</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modalEliminar">Eliminar</button>
-                            </td>
-                        </tr>
+    <tr class="table" *ngFor="let i of asesores">
+        <td>{{i.nombres}}</td>
+        <td>{{i.a_materno}}</td>
+        <td>{{i.a_paterno}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.descripcion}}</td>
+        <td class="d-flex">
+            <button class="btn btn-edit mr-3"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+        </td>
+    </tr>
 
 
-                    </table>
+</table>
 
 
-                    <!-- Modal Eliminar -->
-                    <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog"
-                        aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <div class="row justify-content-center">
-                                        <h4>¿Desea eliminar a <span class="text-name-remove">Jesus Emmanuel</span>?</h4>
-                                    </div>
-                                    <div class="row justify-content-center mt-3">
-                                        <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
-                                        <button class="btn btn-danger ">Eliminar</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <!-- Modal Editar -->
-                    <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Editar Asesor</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="">Nombre:</label>
-                                            <input type="text" class="form-control" formControlName=""
-                                                placeholder="Nombre">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Apellido paterno:</label>
-                                            <input type="text" class="form-control" formControlName=""
-                                                placeholder="Apellido paterno">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Apellido materno:</label>
-                                            <input type="text" class="form-control" formControlName=""
-                                                placeholder="Apellido materno">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Correo:</label>
-                                            <input type="email" class="form-control" formControlName=""
-                                                placeholder="Correo">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Descripción:</label>
-                                            <textarea formControlName="" class="form-control" id="Textarea1" rows="3"
-                                                placeholder="Descripción"></textarea>
-                                        </div>
-
-                                        <button class="btn-save btn btn-block">Guardar</button>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+<!-- Modal Eliminar -->
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <h4>¿Desea eliminar a <span class="text-name-remove">Jesus Emmanuel</span>?</h4>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-danger ">Eliminar</button>
                 </div>
 
             </div>
-
-
-
+        </div>
     </div>
+</div>
 
-    <!-- #007d97 -->
+
+
+<!-- Modal Editar -->
+<!-- <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Asesor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label for="">Nombre:</label>
+                        <input type="text" class="form-control" formControlName="" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Apellido paterno:</label>
+                        <input type="text" class="form-control" formControlName="" placeholder="Apellido paterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Apellido materno:</label>
+                        <input type="text" class="form-control" formControlName="" placeholder="Apellido materno">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Correo:</label>
+                        <input type="email" class="form-control" formControlName="" placeholder="Correo">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Descripción:</label>
+                        <textarea formControlName="" class="form-control" id="Textarea1" rows="3"
+                            placeholder="Descripción"></textarea>
+                    </div>
+
+                    <button class="btn-save btn btn-block">Guardar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div> -->
+    
 </div>

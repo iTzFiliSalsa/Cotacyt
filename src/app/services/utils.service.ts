@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UtilsService {
 
   public loading: Boolean = false;
+  public admin: Boolean = true;
 
   constructor() {}
 
@@ -15,5 +16,13 @@ export class UtilsService {
 
   public get _loading(){
     return this.loading;
+  }
+
+  public set _cargo(cargo){
+    this.admin = cargo
+  }
+
+  public get _cargo(){
+    return this.admin;
   }
 }

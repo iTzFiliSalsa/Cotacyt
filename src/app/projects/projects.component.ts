@@ -8,6 +8,10 @@ import { Proyectos } from '../models/proyectos.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CalificarProyectoService } from '../services/calificar-proyecto.service';
 import { UtilsService } from '../services/utils.service';
+import { Util } from '../utils/utils';
+import { ProjectsRegistered } from '../models/project-regis.model';
+import { ProjectsRegisteredService } from '../services/project-registered.service';
+import { Session } from 'src/app/models/session.model';
 
 @Component({
   selector: 'app-projects',
@@ -17,10 +21,13 @@ import { UtilsService } from '../services/utils.service';
 export class ProjectsComponent implements OnInit {
 
   public isCollapsed = true;
+  public allProjects: Array<ProjectsRegistered>;
+  
 
   categoria: string;
   proyectosCalificados: ProyectosCalificados[];
   proyectosPorCalificar: ProyectosPorCalificar[];
+  util: Util = new Util;
   proyectoActual: Proyectos;
   formPuntos: FormGroup;
   valores: any;
@@ -32,14 +39,17 @@ export class ProjectsComponent implements OnInit {
   obtenido6: string;
   obtenido7: string;
   obtenido8: string;
+  sessionData: Session;
   constructor(private dashboardService: DashboardService,
               private categoriasService: CategoriasService,
               private proyectosService: ProyectosService,
               private formBuilder: FormBuilder,
               private calificarProyectoService: CalificarProyectoService,
-              private _utilService: UtilsService
+              private _utilService: UtilsService,
+              private projectsService: ProjectsRegisteredService
               ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
+    this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
     this.obtenido1 = '';
     this.obtenido2 = '';
     this.obtenido3 = '';
@@ -48,6 +58,8 @@ export class ProjectsComponent implements OnInit {
     this.obtenido6 = '';
     this.obtenido7 = '';
     this.obtenido8 = '';
+    this.allProjects = new Array<ProjectsRegistered>();
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     // Trae la categoria actual
     this.categoriasService.getCategorias().subscribe(data => {
       this.categoria = data.categoria;
@@ -59,7 +71,24 @@ export class ProjectsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // obtiene los proyectos calificados
+
+    //TODOS LOS PROYECTOS, ESTO SE CAMBIARA POR CATEGORIAS
+    
+    if(this.sessionData.usuario === 'admin'){
+      this.projectsService.getProjects().subscribe(
+        res => {
+          this.allProjects = res;
+          this.adminProjects(this.allProjects);
+          console.log(res);
+        },
+        err => {
+          console.log(<any>err);
+        }
+      ).add(()=> {
+        this._utilService.loading = false;
+      });
+    }else{
+      // obtiene los proyectos calificados
     this.dashboardService.getProyectosCalificados().subscribe(
       (data: any) => this.proyectosCalificados = data.proyectos_calificados,
       err => console.log(err));
@@ -69,8 +98,22 @@ export class ProjectsComponent implements OnInit {
       err => console.log(err)).add(() => {
         this._utilService.loading = false;
       });
+    }
+
   }
+
+  adminProjects(proyectos){
+    proyectos.filter((res) => {
+      if(res.status === '1'){
+        this.proyectosCalificados.push(res);
+      }else{
+        this.proyectosPorCalificar.push(res);
+      }
+    });
+  }
+
   traerProyecto(idProyecto: string) {
+    this.isCollapsed = true;
     this._utilService.loading = true;
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
       data => {

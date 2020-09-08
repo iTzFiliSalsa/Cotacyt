@@ -4,6 +4,7 @@ import { JuecesService } from '../../services/jueces.service';
 import { ServicesConfig } from '../../config/services.config';
 import { RouterLinkActive, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,11 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('home');
           localStorage.setItem('session', JSON.stringify(data));
         } else {
-          alert('contraseña/correo incorrectas');
+          swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Contraseña incorrecta'
+          })
         }
       },
       err => console.log(err)

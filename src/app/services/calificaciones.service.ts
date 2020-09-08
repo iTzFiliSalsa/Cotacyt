@@ -16,6 +16,7 @@ export class CalificacionesService {
   proyectosEstadisticas(): Observable<Calificaciones[]> {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     return this.http.get<Calificaciones[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-por-categoria/' + this.sessionData.id_categorias);
+      // this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-por-categoria/' + this.sessionData.id_categorias);
+      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-generales');
   }
 }
