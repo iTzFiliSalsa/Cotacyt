@@ -13,19 +13,23 @@ export class SidebarComponent implements OnInit {
   @ViewChild('mobile', {static: true}) mobile: ElementRef;
   public toggleClass: boolean = false;
   public categoria: string;
-  sessionData: Session[];
+  sessionData: Session;
 
-  constructor( private router: Router,
+  constructor(
+    private router: Router,
     private categoriasService: CategoriasService,
     private _utilService: UtilsService ) {
-    this.sessionData = new Array<Session>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
-    this.categoria = 'Cargando...'
+    this.categoria = 'Cargando...';
   }
-
+  admin: boolean;
   ngOnInit(): void {
+    this.admin = false;
     this.categoriasService.getCategorias().subscribe( data => {
       this.categoria = data.categoria;
+      if ( this.sessionData.usuario === 'admin' ) {
+        this.admin = true;
+      }
     });
   }
 

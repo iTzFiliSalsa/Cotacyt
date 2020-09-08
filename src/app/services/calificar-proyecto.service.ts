@@ -65,13 +65,18 @@ export class CalificarProyectoService {
     idProyecto: number,
     obtenido1: number,
     obtenido2: number,
-    obtenido3: number): Observable<any> {
+    obtenido3: number,
+    obtenido4: number,
+    obtenido5: number
+    ): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
       obtenido1,
       obtenido2,
-      obtenido3
+      obtenido3,
+      obtenido4,
+      obtenido5
     };
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/pioneros-petit/nuevo', body);
   }
@@ -80,13 +85,18 @@ export class CalificarProyectoService {
     idProyecto: number,
     obtenido1: number,
     obtenido2: number,
-    obtenido3: number): Observable<any> {
+    obtenido3: number,
+    obtenido4: number,
+    obtenido5: number
+    ): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
       obtenido1,
       obtenido2,
-      obtenido3
+      obtenido3,
+      obtenido4,
+      obtenido5
     };
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/pioneros-kids/nuevo', body);
   }
@@ -120,7 +130,9 @@ export class CalificarProyectoService {
     obtenido4: number,
     obtenido5: number,
     obtenido6: number,
-    obtenido7: number): Observable<any> {
+    obtenido7: number,
+    obtenido8: number
+    ): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
@@ -130,7 +142,8 @@ export class CalificarProyectoService {
       obtenido4,
       obtenido5,
       obtenido6,
-      obtenido7
+      obtenido7,
+      obtenido8
     };
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/nuevo', body);
   }
@@ -169,8 +182,7 @@ export class CalificarProyectoService {
     obtenido5: number,
     obtenido6: number,
     obtenido7: number,
-    obtenido8: number,
-    obtenido9: number): Observable<any> {
+    obtenido8: number): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
@@ -181,8 +193,7 @@ export class CalificarProyectoService {
       obtenido5,
       obtenido6,
       obtenido7,
-      obtenido8,
-      obtenido9
+      obtenido8
     };
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/nuevo', body);
   }
@@ -191,13 +202,18 @@ export class CalificarProyectoService {
     idProyecto: number,
     obtenido1: number,
     obtenido2: number,
-    obtenido3: number): Observable<any> {
+    obtenido3: number,
+    obtenido4: number,
+    obtenido5: number
+    ): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
       obtenido1,
       obtenido2,
       obtenido3,
+      obtenido4,
+      obtenido5,
     };
     return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/modificar', body);
   }
@@ -206,13 +222,18 @@ export class CalificarProyectoService {
     idProyecto: number,
     obtenido1: number,
     obtenido2: number,
-    obtenido3: number): Observable<any> {
+    obtenido3: number,
+    obtenido4: number,
+    obtenido5: number
+    ): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
       obtenido1,
       obtenido2,
-      obtenido3
+      obtenido3,
+      obtenido4,
+      obtenido5,
     };
     return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/pioneros-kids/modificar', body);
   }
@@ -246,7 +267,9 @@ export class CalificarProyectoService {
     obtenido4: number,
     obtenido5: number,
     obtenido6: number,
-    obtenido7: number): Observable<any> {
+    obtenido7: number,
+    obtenido8: number,
+    ): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
@@ -256,7 +279,8 @@ export class CalificarProyectoService {
       obtenido4,
       obtenido5,
       obtenido6,
-      obtenido7
+      obtenido7,
+      obtenido8
     };
     return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/modificar', body);
   }
@@ -295,8 +319,7 @@ export class CalificarProyectoService {
     obtenido5: number,
     obtenido6: number,
     obtenido7: number,
-    obtenido8: number,
-    obtenido9: number): Observable<any> {
+    obtenido8: number): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
       id_jueces: this.sessionData.id_jueces,
@@ -307,8 +330,7 @@ export class CalificarProyectoService {
       obtenido5,
       obtenido6,
       obtenido7,
-      obtenido8,
-      obtenido9
+      obtenido8
     };
     return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/modificar', body);
   }
