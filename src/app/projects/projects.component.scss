@@ -18,7 +18,7 @@
 
 .custom-btn-danger{
     padding: 5px 15px;
-    background-color: #970000;
+    background-color: #DC3545;
     border: none;
     color: #fff;
     border-radius: 2em;
@@ -26,7 +26,7 @@
 
 .custom-btn-edit{
     padding: 5px 15px;
-    background-color: #007d97;
+    background-color: #0064A7;
     border: none;
     color: #fff;
     border-radius: 2em;
@@ -34,7 +34,7 @@
 
 .custom-btn-success{
     padding: 5px 15px;
-    background-color: #00c300;
+    background-color: #97C93D;
     border: none;
     color: #fff;
     border-radius: 2em;
@@ -62,10 +62,11 @@ input[type="number"]{
     border-radius: 0;
 }
 .CardPrincipal{
-    min-height: 78%;
+    min-height: 500px;
+    max-height: 500px;
 }
 .firstHeader{
-    background-color: rgb(0,125,151);
+    background-color: rgb(0,100,167);
     border-radius: 0;
 }
 .firstHeader h6{
@@ -80,7 +81,7 @@ input[type="number"]{
     color: #fff;
 }
 .CardIzquierdo{
-    min-height: 35%;
+    height: 40%;
 }
 .CardIzquierdo h6{
     padding: 0px;
@@ -96,3 +97,27 @@ input[type="number"]{
     margin: 0%;
     padding: 5px;
 }
+
+.btn-edit-project{
+    background-color: rgb(0,100,167);
+    color: #fff;
+}
+
+.btn-qualify-project{
+    background-color: rgb(151,201,61);
+    color: #fff;
+}
+
+
+.qualified-projects{
+    overflow-y: scroll;
+}
+.qualified-projects::-webkit-scrollbar{
+    width: 5px;
+}
+.qualified-projects::-webkit-scrollbar-thumb{
+    background:  rgb(0,100,167);
+    border-radius: 5px;
+}
+
+

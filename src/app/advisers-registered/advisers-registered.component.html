@@ -1,29 +1,31 @@
 <div class="p-3">
     <div class="container">
-        <div class="row">
-        <div class="col-lg-12">
-            <h2>Jueces registrados</h2>
-            <hr>
-                <div class="col-12">
-                    <table class="table table-lg table-hover table-responsive-lg">
+      
+            <div class="col-lg-12">
+                <h2>Asesores registrados</h2>
+                <hr>
+                <div class="col-lg-12">
+                    <table class="table table-lg table-hover">
                         <thead class="table-info">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Clave</th>
-                                <th>Categoria</th>
-                                <th>Contraseña</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido materno</th>
+                                <th>Correo</th>
+                                <th>Descripción</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
 
                         <tr class="table">
-                            <td>Jesus Emmanuel De Leon Lerma</td>
-                            <td>123</td>
-                            <td>Juez_Petit</td>
-                            <td>1234</td>
+                            <td>Jesus Emmanuel</td>
+                            <td>De Leon</td>
+                            <td>Lerma</td>
+                            <td>jesus@gmail.com</td>
+                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
                             <td>
-                                <button class="btn-edit btn" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -33,12 +35,13 @@
                         </tr>
 
                         <tr class="table">
-                            <td>Raul Alberto Hernandez Arguelles</td>
-                            <td>123</td>
-                            <td>Juez_juvenil</td>
-                            <td>123456</td>
+                            <td>Raul Alberto</td>
+                            <td>Hernandez</td>
+                            <td>Arguelles</td>
+                            <td>raul1234@gmail.com</td>
+                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</td>
                             <td>
-                                <button class="btn-edit btn" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -48,12 +51,13 @@
                         </tr>
 
                         <tr class="table">
-                            <td>Raul Alberto Hernandez Arguelles</td>
-                            <td>123</td>
-                            <td>Juez_juvenil</td>
-                            <td>123456</td>
+                            <td>Gerardo Joaquin</td>
+                            <td>Martinez</td>
+                            <td>Hernandez</td>
+                            <td>gordo123@gmail.com</td>
+                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, repudiandae.</td>
                             <td>
-                                <button class="btn-edit btn" data-toggle="modal"
+                                <button class="btn btn-edit" data-toggle="modal"
                                     data-target="#modalEditar">Editar</button>
                             </td>
                             <td>
@@ -61,8 +65,6 @@
                                     data-target="#modalEliminar">Eliminar</button>
                             </td>
                         </tr>
-
-                        
 
 
                     </table>
@@ -75,7 +77,7 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <div class="row justify-content-center">
-                                        <h4>¿Desea eliminar <span class="text-name-remove">Raul Hernandez</span>?</h4>
+                                        <h4>¿Desea eliminar a <span class="text-name-remove">Jesus Emmanuel</span>?</h4>
                                     </div>
                                     <div class="row justify-content-center mt-3">
                                         <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
@@ -95,7 +97,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Editar Juez</h5>
+                                    <h5 class="modal-title">Editar Asesor</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -104,34 +106,32 @@
 
                                     <form>
                                         <div class="form-group">
-                                            <label for="">Clave:</label>
-                                            <input type="text" class="form-control" formControlName="usuario"
-                                                placeholder="Clave del juez">
-                                        </div>
-                                        <div class="form-group">
                                             <label for="">Nombre:</label>
-                                            <input type="text" class="form-control" formControlName="nombre"
-                                                placeholder="Nombre del juez">
+                                            <input type="text" class="form-control" formControlName=""
+                                                placeholder="Nombre">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Categoria:</label>
-                                            <select formControlName="id_categorias" class="form-control">
-                                                <option value="1">Petit</option>
-                                                <option value="2">Kits</option>
-                                                <option value="3">Juvenil</option>
-                                                <option value="4">Media superior</option>
-                                                <option value="5">Superior</option>
-                                                <option value="6">Posgrado</option>
-                                            </select>
+                                            <label for="">Apellido paterno:</label>
+                                            <input type="text" class="form-control" formControlName=""
+                                                placeholder="Apellido paterno">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Contraseña:</label>
-                                            <input type="password" class="form-control" formControlName=""
-                                                placeholder="Contraseña">
+                                            <label for="">Apellido materno:</label>
+                                            <input type="text" class="form-control" formControlName=""
+                                                placeholder="Apellido materno">
                                         </div>
-                                        <hr>
-                                        <button class="btn-save btn btn-block">Guardar</button>
+                                        <div class="form-group">
+                                            <label for="">Correo:</label>
+                                            <input type="email" class="form-control" formControlName=""
+                                                placeholder="Correo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Descripción:</label>
+                                            <textarea formControlName="" class="form-control" id="Textarea1" rows="3"
+                                                placeholder="Descripción"></textarea>
+                                        </div>
 
+                                        <button class="btn-save btn btn-block">Guardar</button>
                                     </form>
 
                                 </div>
@@ -140,9 +140,10 @@
                     </div>
 
                 </div>
+
             </div>
 
-        </div>
+
 
     </div>
 

@@ -20,7 +20,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddProjectsComponent } from './add-projects/add-projects.component';
 import { JudgesComponent } from './judges/judges.component';
 import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AddAdvisersComponent } from './add-advisers/add-advisers.component';
+import { AdvisersRegisteredComponent } from './advisers-registered/advisers-registered.component';
+import { AddAuthorsComponent } from './add-authors/add-authors.component';
+import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,11 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     ProjectsComponent,
     AddProjectsComponent,
     JudgesComponent,
-    ProjectsRegisteredComponent
+    ProjectsRegisteredComponent,
+    AddAdvisersComponent,
+    AdvisersRegisteredComponent,
+    AddAuthorsComponent,
+    AuthorsRegisteredComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +48,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ChartsModule,
-    SweetAlert2Module
+    ChartsModule
   ],
   providers: [
     ServicesConfig

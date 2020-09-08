@@ -7,7 +7,7 @@
                 <div class="firstHeader card-header">
                         <h6 class="m-0">Proyectos</h6>
                 </div>
-                <div class="card-body scroll p-0">
+                <div class="qualified-projects card-body scroll p-0">
                     <table class="table" *ngIf="proyectoActual">
                         <thead>
                             <tr>
@@ -24,9 +24,9 @@
                                     <h6 *ngIf="proyectoActual.status == '1'" class="custom-btn-success">Calificado</h6>
                                 </td>
                                 <td class="text-center">
-                                    <button *ngIf="proyectoActual.status == '0'" class="custom-btn-success" (click)="isCollapsed = !isCollapsed"
+                                    <button *ngIf="proyectoActual.status == '0'" class="btn custom-btn-success" (click)="isCollapsed = !isCollapsed"
                                     [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Calificar</button>                              
-                                    <button *ngIf="proyectoActual.status == '1'" type="button" class="custom-btn-edit" (click)="isCollapsed = !isCollapsed"
+                                    <button *ngIf="proyectoActual.status == '1'" type="button" class="btn custom-btn-edit" (click)="isCollapsed = !isCollapsed"
                                     [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Editar</button>
                                 </td>
                                 
@@ -316,7 +316,7 @@
                                         </form>
                                         <div class="d-flex justify-content-end p-3">
                                             <button class="btn btn-primary" *ngIf="!formPuntos.valid" (click)="guardarPuntos()" disabled>Guardar</button>
-                                            <button class="btn btn-primary" *ngIf="formPuntos.valid" (click)="guardarPuntos()">Guardar</button>
+                                            <button class="btn-edit-project btn-see-projects btn" *ngIf="formPuntos.valid" (click)="guardarPuntos()">Guardar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -624,7 +624,7 @@
                 <div class="card-header">
                     <h6>Proyectos calificados</h6>
                 </div>
-                <div class="card-body scroll p-0">
+                <div class="qualified-projects card-body scroll p-0">
                     <table class="table table-hover">
                         <thead class="thead-ligth">
                             <tr>
@@ -640,13 +640,27 @@
                                 </td>
                                 <!-- <td>{{proyecto.fecha | date}}</td> -->
                                 <td>
-                                    <button class="btn-see-projects btn btn-info" (click)="traerProyecto(proyecto.id_proyectos)">Editar</button>
+                                    <button class="btn-edit-project btn-see-projects btn" (click)="traerProyecto(proyecto.id_proyectos)">Editar</button>
                                 </td>
                                 <td>
-                                    <button class="btn custom-btn-edit" (click)="swalModal(proyecto.resumen)">
+                                    <button class="btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
                                         Información
                                     </button>
-
+                                    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -657,7 +671,7 @@
                 <div class="card-header ">
                     <h6>Proyectos por calificar</h6>
                 </div>
-                <div class="card-body scroll p-0">
+                <div class="qualified-projects card-body scroll p-0">
                     <table class="table table-hover">
                         <thead class="thead-ligth ">
                             <tr>
@@ -671,12 +685,27 @@
                                     <!-- <br><small>{{proyecto.resumen}}</small> -->
                                 </td>
                                 <td>
-                                    <button class="btn-see-projects btn btn-success " (click)="traerProyecto(proyecto.id_proyectos) ">Calificar</button>
+                                    <button class="btn-qualify-project btn-see-projects btn " (click)="traerProyecto(proyecto.id_proyectos) ">Calificar</button>
                                 </td>
                                 <td>
-                                    <button class="btn custom-btn-edit" (click)="swalModal(proyecto.resumen)">
+                                    <button class="btn custom-btn-edit" data-toggle="modal" data-target="#modal1">
                                         Información
                                     </button>
+                                    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="ModalLabel">Información del proyecto</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem iusto quod sapiente temporibus non iure, reiciendis accusantium possimus aspernatur ut vitae inventore autem, enim veritatis? Fugiat nemo laboriosam adipisci tempora!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

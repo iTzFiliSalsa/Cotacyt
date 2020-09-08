@@ -14,6 +14,9 @@ export class ProyectosService {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
   }
 
+  obtenerTodosLosProyectos(): Observable<Proyectos[]> {
+    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all');
+  }
   obtenerProyecto(idProyectos: string): Observable<Proyectos> {
     return this.http.get<Proyectos>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/' + idProyectos);
   }
