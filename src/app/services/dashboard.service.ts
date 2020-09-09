@@ -19,13 +19,21 @@ export class DashboardService {
   }
 
   getProyectosCalificados(): Observable<ProyectosCalificados[]> {
-    return this.http.get<ProyectosCalificados[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-calificados/' + this.sessionData.id_categorias);
+    const body = {
+      id_categorias: this.sessionData.id_categorias,
+      id_jueces: this.sessionData.id_jueces,
+    };
+    return this.http.post<ProyectosCalificados[]>(
+      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-calificados', body);
   }
 
   getProyectosPorCalificar(): Observable<ProyectosPorCalificar[]> {
-    return this.http.get<ProyectosPorCalificar[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-calificar/' + this.sessionData.id_categorias);
+    const body = {
+      id_categorias: this.sessionData.id_categorias,
+      id_jueces: this.sessionData.id_jueces,
+    };
+    return this.http.post<ProyectosPorCalificar[]>(
+      this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-calificar', body);
   }
   getProyectosPorCategorias(): Observable<any> {
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria');

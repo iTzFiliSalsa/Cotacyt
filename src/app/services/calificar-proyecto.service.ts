@@ -215,7 +215,7 @@ export class CalificarProyectoService {
       obtenido4,
       obtenido5,
     };
-    return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/modificar', body);
+    return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/pioneros-petit/modificar', body);
   }
 
   putCalificacionesKids(
@@ -332,6 +332,6 @@ export class CalificarProyectoService {
       obtenido7,
       obtenido8
     };
-    return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/modificar', body);
+    return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/posgrado/modificar', body);
   }
 }

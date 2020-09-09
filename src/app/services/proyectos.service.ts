@@ -21,6 +21,7 @@ export class ProyectosService {
     return this.http.get<Proyectos>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/' + idProyectos);
   }
   actualizarEstado( idProyectos: string ): Observable<any> {
+    console.log(idProyectos);
     return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/modificar-status', {id_proyectos: idProyectos});
   }
   setProyectoCalificado(idProyectos: string, idCategorias): Observable<any> {
@@ -33,5 +34,8 @@ export class ProyectosService {
   }
   postNuevoProyecto(body: any) {
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/nuevo', body);
+  }
+  obtenerTodosLosProyectosDeCategoria(): Observable<Proyectos[]> {
+    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/categoria/' + this.sessionData.id_categorias);
   }
 }

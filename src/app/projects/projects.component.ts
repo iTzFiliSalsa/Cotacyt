@@ -31,14 +31,14 @@ export class ProjectsComponent implements OnInit {
   proyectoActual: Proyectos;
   formPuntos: FormGroup;
   valores: any;
-  obtenido1: string;
-  obtenido2: string;
-  obtenido3: string;
-  obtenido4: string;
-  obtenido5: string;
-  obtenido6: string;
-  obtenido7: string;
-  obtenido8: string;
+  obtenido1: number;
+  obtenido2: number;
+  obtenido3: number;
+  obtenido4: number;
+  obtenido5: number;
+  obtenido6: number;
+  obtenido7: number;
+  obtenido8: number;
   sessionData: Session;
   constructor(private dashboardService: DashboardService,
               private categoriasService: CategoriasService,
@@ -50,14 +50,14 @@ export class ProjectsComponent implements OnInit {
               ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
-    this.obtenido1 = '';
-    this.obtenido2 = '';
-    this.obtenido3 = '';
-    this.obtenido4 = '';
-    this.obtenido5 = '';
-    this.obtenido6 = '';
-    this.obtenido7 = '';
-    this.obtenido8 = '';
+    this.obtenido1 = 0;
+    this.obtenido2 = 0;
+    this.obtenido3 = 0;
+    this.obtenido4 = 0;
+    this.obtenido5 = 0;
+    this.obtenido6 = 0;
+    this.obtenido7 = 0;
+    this.obtenido8 = 0;
     this.allProjects = new Array<ProjectsRegistered>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     // Trae la categoria actual
@@ -98,6 +98,8 @@ export class ProjectsComponent implements OnInit {
       err => console.log(err)).add(() => {
         this._utilService.loading = false;
       });
+    this.proyectosService.obtenerTodosLosProyectosDeCategoria()
+      .subscribe( (data: any) => this.allProjects = data );
     }
 
   }
@@ -122,71 +124,71 @@ export class ProjectsComponent implements OnInit {
           this.calificarProyectoService.getCalificaciones(
             this.categoria, Number(this.proyectoActual.id_proyectos)
           ).subscribe(calificaciones => {
-            console.log(calificaciones);
+            console.log(this.proyectoActual);
             switch (this.categoria) {
               case 'petit':
-                this.obtenido1 = calificaciones[0].obtenido1;
-                this.obtenido2 = calificaciones[0].obtenido2;
-                this.obtenido3 = calificaciones[0].obtenido3;
-                this.obtenido4 = calificaciones[0].obtenido4;
-                this.obtenido5 = calificaciones[0].obtenido5;
+                this.obtenido1 = Number(calificaciones[0].obtenido1);
+                this.obtenido2 = Number(calificaciones[0].obtenido2);
+                this.obtenido3 = Number(calificaciones[0].obtenido3);
+                this.obtenido4 = Number(calificaciones[0].obtenido4);
+                this.obtenido5 = Number(calificaciones[0].obtenido5);
                 break;
               case 'kids':
-                this.obtenido1 = calificaciones[0].obtenido1;
-                this.obtenido2 = calificaciones[0].obtenido2;
-                this.obtenido3 = calificaciones[0].obtenido3;
-                this.obtenido4 = calificaciones[0].obtenido4;
-                this.obtenido5 = calificaciones[0].obtenido5;
+                this.obtenido1 = Number(calificaciones[0].obtenido1);
+                this.obtenido2 = Number(calificaciones[0].obtenido2);
+                this.obtenido3 = Number(calificaciones[0].obtenido3);
+                this.obtenido4 = Number(calificaciones[0].obtenido4);
+                this.obtenido5 = Number(calificaciones[0].obtenido5);
                 break;
               case 'juvenil':
-                this.obtenido1 = calificaciones[0].obtenido1;
-                this.obtenido2 = calificaciones[0].obtenido2;
-                this.obtenido3 = calificaciones[0].obtenido3;
-                this.obtenido4 = calificaciones[0].obtenido4;
-                this.obtenido5 = calificaciones[0].obtenido5;
-                this.obtenido6 = calificaciones[0].obtenido6;
+                this.obtenido1 = Number(calificaciones[0].obtenido1);
+                this.obtenido2 = Number(calificaciones[0].obtenido2);
+                this.obtenido3 = Number(calificaciones[0].obtenido3);
+                this.obtenido4 = Number(calificaciones[0].obtenido4);
+                this.obtenido5 = Number(calificaciones[0].obtenido5);
+                this.obtenido6 = Number(calificaciones[0].obtenido6);
                 break;
               case 'media-superior':
-                this.obtenido1 = calificaciones[0].obtenido1;
-                this.obtenido2 = calificaciones[0].obtenido2;
-                this.obtenido3 = calificaciones[0].obtenido3;
-                this.obtenido4 = calificaciones[0].obtenido4;
-                this.obtenido5 = calificaciones[0].obtenido5;
-                this.obtenido6 = calificaciones[0].obtenido6;
-                this.obtenido7 = calificaciones[0].obtenido7;
-                this.obtenido8 = calificaciones[0].obtenido8;
+                this.obtenido1 = Number(calificaciones[0].obtenido1);
+                this.obtenido2 = Number(calificaciones[0].obtenido2);
+                this.obtenido3 = Number(calificaciones[0].obtenido3);
+                this.obtenido4 = Number(calificaciones[0].obtenido4);
+                this.obtenido5 = Number(calificaciones[0].obtenido5);
+                this.obtenido6 = Number(calificaciones[0].obtenido6);
+                this.obtenido7 = Number(calificaciones[0].obtenido7);
+                this.obtenido8 = Number(calificaciones[0].obtenido8);
                 break;
               case 'superior':
-                this.obtenido1 = calificaciones[0].obtenido1;
-                this.obtenido2 = calificaciones[0].obtenido2;
-                this.obtenido3 = calificaciones[0].obtenido3;
-                this.obtenido4 = calificaciones[0].obtenido4;
-                this.obtenido5 = calificaciones[0].obtenido5;
-                this.obtenido6 = calificaciones[0].obtenido6;
-                this.obtenido7 = calificaciones[0].obtenido7;
-                this.obtenido8 = calificaciones[0].obtenido8;
+                this.obtenido1 = Number(calificaciones[0].obtenido1);
+                this.obtenido2 = Number(calificaciones[0].obtenido2);
+                this.obtenido3 = Number(calificaciones[0].obtenido3);
+                this.obtenido4 = Number(calificaciones[0].obtenido4);
+                this.obtenido5 = Number(calificaciones[0].obtenido5);
+                this.obtenido6 = Number(calificaciones[0].obtenido6);
+                this.obtenido7 = Number(calificaciones[0].obtenido7);
+                this.obtenido8 = Number(calificaciones[0].obtenido8);
                 break;
               case '´posgrado':
-                this.obtenido1 = calificaciones[0].obtenido1;
-                this.obtenido2 = calificaciones[0].obtenido2;
-                this.obtenido3 = calificaciones[0].obtenido3;
-                this.obtenido4 = calificaciones[0].obtenido4;
-                this.obtenido5 = calificaciones[0].obtenido5;
-                this.obtenido6 = calificaciones[0].obtenido6;
-                this.obtenido7 = calificaciones[0].obtenido7;
-                this.obtenido8 = calificaciones[0].obtenido8;
+                this.obtenido1 = Number(calificaciones[0].obtenido1);
+                this.obtenido2 = Number(calificaciones[0].obtenido2);
+                this.obtenido3 = Number(calificaciones[0].obtenido3);
+                this.obtenido4 = Number(calificaciones[0].obtenido4);
+                this.obtenido5 = Number(calificaciones[0].obtenido5);
+                this.obtenido6 = Number(calificaciones[0].obtenido6);
+                this.obtenido7 = Number(calificaciones[0].obtenido7);
+                this.obtenido8 = Number(calificaciones[0].obtenido8);
                 break;
             }
           });
         } else {
-          this.obtenido1 = '';
-          this.obtenido2 = '';
-          this.obtenido3 = '';
-          this.obtenido4 = '';
-          this.obtenido5 = '';
-          this.obtenido6 = '';
-          this.obtenido7 = '';
-          this.obtenido8 = '';
+          this.obtenido1 = 0;
+          this.obtenido2 = 0;
+          this.obtenido3 = 0;
+          this.obtenido4 = 0;
+          this.obtenido5 = 0;
+          this.obtenido6 = 0;
+          this.obtenido7 = 0;
+          this.obtenido8 = 0;
         }
       },
       err => console.log(err)
@@ -197,6 +199,7 @@ export class ProjectsComponent implements OnInit {
   guardarPuntos() {
     console.log(this.formPuntos.value);
     this.valores = this.formPuntos.value;
+    this._utilService.loading = true;
     switch (this.categoria) {
       case 'petit':
         if (this.proyectoActual.status === '1') {
@@ -210,6 +213,9 @@ export class ProjectsComponent implements OnInit {
             ).subscribe(
               data => console.log(data),
               err => console.log(err));
+          this._utilService.loading = false;
+          this.ngOnInit();
+          this.proyectoActual = null;
         } else {
           this.calificarProyectoService.setCalificacionesPetit(
             Number(this.proyectoActual.id_proyectos),
@@ -221,8 +227,13 @@ export class ProjectsComponent implements OnInit {
             ).subscribe(
               data => console.log(data),
               err => console.log(err));
-          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos);
-          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias);
+          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos)
+            .subscribe( data => console.log(data));
+          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+            .subscribe(data => console.log(data));
+          this._utilService.loading = false;
+          this.ngOnInit();
+          this.proyectoActual = null;
         }
         break;
       case 'kids':
@@ -237,7 +248,8 @@ export class ProjectsComponent implements OnInit {
             ).subscribe(
               data => console.log(data),
               err => console.log(err));
-
+          this._utilService.loading = false;
+          this.ngOnInit();
         } else {
           this.calificarProyectoService.setCalificacionesKids(
             Number(this.proyectoActual.id_proyectos),
@@ -252,6 +264,8 @@ export class ProjectsComponent implements OnInit {
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
+          this._utilService.loading = false;
+          this.ngOnInit();
         }
         break;
       case 'juvenil':
@@ -266,6 +280,8 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido6).subscribe(
               data => console.log(data),
               err => console.log(err));
+          this._utilService.loading = false;
+          this.ngOnInit();
         } else {
           this.calificarProyectoService.setCalificacionesJvenil(
             Number(this.proyectoActual.id_proyectos),
@@ -280,6 +296,8 @@ export class ProjectsComponent implements OnInit {
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
+          this._utilService.loading = false;
+          this.ngOnInit();
         }
         break;
       case 'media-superior':
@@ -297,6 +315,8 @@ export class ProjectsComponent implements OnInit {
             ).subscribe(
               data => console.log(data),
               err => console.log(err));
+          this._utilService.loading = false;
+          this.ngOnInit();
         } else {
           this.calificarProyectoService.setCalificacionesMediaSuperior(
             Number(this.proyectoActual.id_proyectos),
@@ -314,6 +334,8 @@ export class ProjectsComponent implements OnInit {
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
+          this._utilService.loading = false;
+          this.ngOnInit();
         }
         break;
       case 'superior':
@@ -330,6 +352,8 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido8).subscribe(
               data => console.log(data),
               err => console.log(err));
+          this._utilService.loading = false;
+          this.ngOnInit();
         } else {
           this.calificarProyectoService.setCalificacionesSuperior(
             Number(this.proyectoActual.id_proyectos),
@@ -346,6 +370,8 @@ export class ProjectsComponent implements OnInit {
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
+          this._utilService.loading = false;
+          this.ngOnInit();
         }
         break;
       case 'posgrado':
@@ -362,6 +388,8 @@ export class ProjectsComponent implements OnInit {
             this.valores.obtenido8).subscribe(
               data => console.log(data),
               err => console.log(err));
+          this._utilService.loading = false;
+          this.ngOnInit();
         } else {
           this.calificarProyectoService.setCalificacionesPosgrado(
             Number(this.proyectoActual.id_proyectos),
@@ -378,6 +406,8 @@ export class ProjectsComponent implements OnInit {
           this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
           this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
           .subscribe( data => console.log(data));
+          this._utilService.loading = false;
+          this.ngOnInit();
         }
         break;
     }
@@ -387,66 +417,66 @@ export class ProjectsComponent implements OnInit {
     switch (categoria) {
       case 'petit':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(10)]],
-          obtenido2: ['', [Validators.required, Validators.max(40)]],
-          obtenido3: ['', [Validators.required, Validators.max(10)]],
-          obtenido4: ['', [Validators.required, Validators.max(20)]],
-          obtenido5: ['', [Validators.required, Validators.max(20)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido2: [0, [Validators.required, Validators.max(40), Validators.min(0)]],
+          obtenido3: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido4: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
+          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
         });
         break;
       case 'kids':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(10)]],
-          obtenido2: ['', [Validators.required, Validators.max(40)]],
-          obtenido3: ['', [Validators.required, Validators.max(10)]],
-          obtenido4: ['', [Validators.required, Validators.max(20)]],
-          obtenido5: ['', [Validators.required, Validators.max(20)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido2: [0, [Validators.required, Validators.max(40), Validators.min(0)]],
+          obtenido3: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido4: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
+          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
         });
         break;
       case 'juvenil':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(10)]],
-          obtenido2: ['', [Validators.required, Validators.max(30)]],
-          obtenido3: ['', [Validators.required, Validators.max(5)]],
-          obtenido4: ['', [Validators.required, Validators.max(15)]],
-          obtenido5: ['', [Validators.required, Validators.max(20)]],
-          obtenido6: ['', [Validators.required, Validators.max(20)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
+          obtenido6: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
         });
         break;
       case 'media-superior':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(10)]],
-          obtenido2: ['', [Validators.required, Validators.max(30)]],
-          obtenido3: ['', [Validators.required, Validators.max(5)]],
-          obtenido4: ['', [Validators.required, Validators.max(15)]],
-          obtenido5: ['', [Validators.required, Validators.max(15)]],
-          obtenido6: ['', [Validators.required, Validators.max(15)]],
-          obtenido7: ['', [Validators.required, Validators.max(5)]],
-          obtenido8: ['', [Validators.required, Validators.max(5)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
         });
         break;
       case 'superior':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(10)]],
-          obtenido2: ['', [Validators.required, Validators.max(30)]],
-          obtenido3: ['', [Validators.required, Validators.max(5)]],
-          obtenido4: ['', [Validators.required, Validators.max(15)]],
-          obtenido5: ['', [Validators.required, Validators.max(15)]],
-          obtenido6: ['', [Validators.required, Validators.max(15)]],
-          obtenido7: ['', [Validators.required, Validators.max(5)]],
-          obtenido8: ['', [Validators.required, Validators.max(5)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
         });
         break;
       case 'posgrado':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: ['', [Validators.required, Validators.max(10)]],
-          obtenido2: ['', [Validators.required, Validators.max(30)]],
-          obtenido3: ['', [Validators.required, Validators.max(5)]],
-          obtenido4: ['', [Validators.required, Validators.max(15)]],
-          obtenido5: ['', [Validators.required, Validators.max(15)]],
-          obtenido6: ['', [Validators.required, Validators.max(15)]],
-          obtenido7: ['', [Validators.required, Validators.max(5)]],
-          obtenido8: ['', [Validators.required, Validators.max(5)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
+          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
         });
         break;
     }
