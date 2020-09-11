@@ -15,7 +15,12 @@ import { Session } from '../models/session.model';
     }
     
     getJudges(): Observable<JudgesRegistered[]>{
-        return this.http.get<JudgesRegistered[]>(this.servicesConfig.APP_ENDPOINT + 'api/jueces/all')
-
+        return this.http.get<JudgesRegistered[]>(this.servicesConfig.APP_ENDPOINT + 'api/jueces/all');
+    }
+    deleteJudges( idJuedge: string): Observable<any> {
+      return this.http.delete(this.servicesConfig.APP_ENDPOINT + 'api/jueces/eliminar/' + idJuedge);
+    }
+    updateJudge( body: any, idJuez: string ) {
+      return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/jueces/modificar/' + idJuez, body);
     }
 }

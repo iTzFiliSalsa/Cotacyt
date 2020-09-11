@@ -11,6 +11,7 @@ import { Categorias } from '../models/categorias.model';
 import { ProyectosService } from '../services/proyectos.service';
 import { UtilsService } from '../services/utils.service';
 import swal from 'sweetalert2';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-projects',
@@ -47,16 +48,19 @@ export class AddProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    //INSERTAR FORK JOIN
-    this.areasService.getAreas().subscribe(data => this.areas = data );
-    this.sedesService.getSedes().subscribe(data => this.sedes = data );
-    this.asesoresService.getAsesores().subscribe(data => {
-      this.asesores = data;
-      console.log(this.asesores);
-    
-    } );
-    this.categoriasServices.getAllCategrias().subscribe( data => this.categorias = data );
+    forkJoin(
+      {
+        areas: this.areasService.getAreas(),
+        sedes: this.sedesService.getSedes(),
+        categorias: this.categoriasServices.getAllCategrias(),
+        asesores: this.asesoresService.getAsesores(),
+      }
+    ).subscribe( data => {
+      this.areas = data.areas;
+      this.sedes = data.sedes;
+      this.categorias = data.categorias;
+      this.asesores = data.asesores;
+    });
   }
   registrarProyecto() {
 

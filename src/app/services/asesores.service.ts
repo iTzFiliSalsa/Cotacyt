@@ -16,4 +16,11 @@ export class AsesoresService {
   postAsesor(body: any): Observable<any> {
     return this.http.post( this.servicesConfig.APP_ENDPOINT + 'api/asesores/nuevo', body );
   }
+  deleteAsesor(idAsesor: string) {
+    return this.http.delete(this.servicesConfig.APP_ENDPOINT + 'api/asesores/eliminar/' + idAsesor);
+  }
+  updateAsesor( body: any, idAsesor: string ): Observable<any> {
+    console.log(idAsesor);
+    return this.http.put( this.servicesConfig.APP_ENDPOINT + 'api/asesores/modificar/' + idAsesor, body);
+  }
 }

@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 import  swal  from 'sweetalert2';
 import { Util } from 'src/app/utils/utils';
 import { ProjectsRegisteredService } from 'src/app/services/project-registered.service';
-import { ProjectsRegistered } from 'src/app/models/project-regis.model';
+import { ProjectRegistered } from 'src/app/models/project-regis.model';
 
 
 @Component({
@@ -26,7 +26,7 @@ import { ProjectsRegistered } from 'src/app/models/project-regis.model';
 })
 export class DashboardComponent implements OnInit {
 
-  proyectos: ProjectsRegistered[];
+  proyectos: ProjectRegistered[];
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
     this.estadisticasDeProyectos = new Array<Calificaciones>();
     this._utilsService.loading = true;
     this.util = new Util;
-    this.proyectos = new Array<ProjectsRegistered>();
+    this.proyectos = new Array<ProjectRegistered>();
   }
 
   ngOnInit(): void {  

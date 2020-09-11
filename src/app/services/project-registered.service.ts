@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProjectsRegistered } from '../models/project-regis.model';
+import { ProjectRegistered } from '../models/project-regis.model';
 import { ServicesConfig } from '../config/services.config';
 import { Session } from '../models/session.model';
 import { UtilsService } from './utils.service';
@@ -18,8 +18,16 @@ import { UtilsService } from './utils.service';
       this.sessionData = JSON.parse(localStorage.getItem('session'));
     }
     
-    getProjects(): Observable<ProjectsRegistered[]>{
-        return this.http.get<ProjectsRegistered[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all')
-
+    getProjects(): Observable<ProjectRegistered[]>{
+        return this.http.get<ProjectRegistered[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all');
+    }
+    obtenerTodosLosProyectosDetalles(): Observable<ProjectRegistered[]> {
+      return this.http.get<ProjectRegistered[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details');
+    }
+    deleteProyectsRegistred(idProject: string): Observable<any> {
+      return this.http.delete( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/eliminar/' + idProject);
+    }
+    updateProyect(body: any, idProyecto: string) {
+      return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/modificar/' + idProyecto, body);
     }
 }

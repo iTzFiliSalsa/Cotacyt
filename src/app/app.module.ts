@@ -56,7 +56,8 @@ import { AuthorsRegisteredComponent } from './authors-registered/authors-registe
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     ServicesConfig

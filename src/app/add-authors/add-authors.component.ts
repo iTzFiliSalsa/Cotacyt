@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AutoresService } from '../services/autores.service';
 import swal from 'sweetalert2';
 import { UtilsService } from '../services/utils.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-authors',
@@ -46,14 +47,20 @@ export class AddAuthorsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.escuelasService.getEscuelas()
-    .subscribe( data => this.escuelas = data, err => console.log( err ));
-    this.localidadesService.getLocalidades()
-    .subscribe( data => this.localidades = data, err => console.log( err ));
-    this.municipiosService.getMunicipios()
-    .subscribe( data => this.municipios = data, err => console.log( err ));
-    this.proyectosService.obtenerTodosLosProyectos()
-    .subscribe( data => this.proyectos = data, err => console.log( err ));
+    forkJoin({
+      escuelas: this.escuelasService.getEscuelas(),
+      localidades: this.localidadesService.getLocalidades(),
+      municipios: this.municipiosService.getMunicipios(),
+      proyectos: this.proyectosService.obtenerTodosLosProyectos(),
+    }).subscribe(
+      data => {
+      this.escuelas = data.escuelas;
+      this.localidades = data.localidades;
+      this.municipios = data.municipios;
+      this.proyectos = data.proyectos;
+    }, err => {
+      console.log(err);
+    });
   }
 
   reigstrarAutor() {
