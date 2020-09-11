@@ -29,6 +29,7 @@ import { AdvisersRegisteredComponent } from './advisers-registered/advisers-regi
 import { AddAuthorsComponent } from './add-authors/add-authors.component';
 import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,6 @@ import { AuthorsRegisteredComponent } from './authors-registered/authors-registe
     AdvisersRegisteredComponent,
     AddAuthorsComponent,
     AuthorsRegisteredComponent
-
   ],
   imports: [
     BrowserModule,
@@ -56,7 +56,8 @@ import { AuthorsRegisteredComponent } from './authors-registered/authors-registe
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [
     ServicesConfig

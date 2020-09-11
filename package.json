@@ -26,10 +26,12 @@
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "jquery": "^3.5.1",
+    "jspdf": "^2.1.1",
     "ng2-charts": "^2.2.4",
     "rxjs": "~6.5.4",
     "sweetalert2": "^10.0.1",
     "tslib": "^1.10.0",
+    "xlsx": "^0.16.6",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -1,6 +1,40 @@
+<swal #swalid title="Confirmar Archivo" [swalOptions]="{customClass: 'clase'}" (confirm)="guardarEnBD($event)" [showCancelButton]="true">
+    <div *swalPortal >
+        <div>
+            <table class="table table-light">
+                <thead> 
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Resumen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let proyecto of data" class="mb-2">
+                        <td>{{proyecto.nombre}}</td>
+                        <td>{{proyecto.resumen}}</td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+</swal>
 <div class="p-3">
-    <div>
-        <button [routerLink]="['/home/projects-registered']" routerLinkActive="active" class="btn-project-registered btn mb-2"><span><i class="fas fa-pencil-ruler"></i></span> Proyectos registrados</button>
+    <div class="col-12">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <button [routerLink]="['/home/projects-registered']" routerLinkActive="active"
+                class="btn-project-registered btn mb-2"><span><i class="fas fa-pencil-ruler"></i></span> Proyectos
+                registrados</button>
+            </div>
+            <div class="col-4">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFileLang" lang="es" (change) = "onFileChange($event)">
+                    <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                  </div>
+            </div>
+            
+        </div>
     </div>
     <div class="container-fluid color">
 
@@ -47,8 +81,9 @@
                             <textarea formControlName="resumen" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Resumen del proyecto"></textarea>
                         </div>
                         <button class="btn btn-primary boton-iniciar" (click)="registrarProyecto()" [disabled]="!formRegistroProyecto.valid">Registrar</button>
+                        
                     </form>
-                </div>
+                </div>  
             </div>
         </div>
     </div>
