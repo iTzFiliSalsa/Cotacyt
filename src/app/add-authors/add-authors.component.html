@@ -43,7 +43,12 @@
                                 <option [value]="proyecto.id_proyectos" *ngFor="let proyecto of proyectos">{{proyecto.nombre}}</option>
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label for="">Sede:</label>
+                            <select formControlName="id_sedes" class="form-control">
+                                <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="">Escuela:</label>
                             <select formControlName="id_escuelas" class="form-control">

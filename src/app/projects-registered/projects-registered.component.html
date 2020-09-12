@@ -10,9 +10,10 @@
             <tr>
                 <th>Nombre</th>
                 <th>Asesor</th>
-                <th>Autor</th>
-                <th>Areas</th>
+                <th>Autores</th>
+                <th>Area</th>
                 <th>Categorias</th>
+                <th>Sede</th>
                 <th>Información</th>
                 <th>Opciones</th>
             </tr>
@@ -20,6 +21,7 @@
         <tr class="table" *ngFor="let proyecto of proyectos">
             <td>{{proyecto.nombre}}</td>
             <td>{{proyecto.asesor}}</td>
+            <td>{{proyecto.autores}}</td>
             <td>{{proyecto.area}}</td>
             <td>{{proyecto.categorias}}</td>
             <td>{{proyecto.sede}}</td>
@@ -64,6 +66,15 @@
                 <select formControlName="id_asesores" class="form-control">
                     <option [value]="asesor.id_asesores" *ngFor="let asesor of asesores">{{asesor.nombres}}</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="">Autores:</label>
+                <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="autores"
+                (onSelect)="addAutor($event)"
+                (onDeSelect)="dropAutor($event)"
+                ></ng-multiselect-dropdown>
             </div>
             <div class="form-group">
                 <label for="">Sede:</label>

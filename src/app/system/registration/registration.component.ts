@@ -4,6 +4,8 @@ import { JuecesService } from '../../services/jueces.service';
 import { RouterLinkActive, Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import swal from 'sweetalert2';
+import { SedesService } from '../../services/sedes.service';
+import { Sedes } from '../../models/sedes.model';
 
 
 
@@ -16,11 +18,12 @@ export class RegistrationComponent implements OnInit {
 
 
   public isCollapsed = false;
-
+  sedes: Sedes[];
   public formsRegistroJuez: FormGroup;
   constructor(
     public formBuilder: FormBuilder,
     private juecesService: JuecesService,
+    private sedesService: SedesService,
     private _utilService: UtilsService
     ) {
     this.formsRegistroJuez = formBuilder.group({
@@ -28,10 +31,12 @@ export class RegistrationComponent implements OnInit {
       usuario: ['', [Validators.required, Validators.maxLength(30)]],
       contrasena: ['', [Validators.required, Validators.maxLength(20)]],
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
+      id_sedes: ['1', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+    this.sedesService.getSedes().subscribe(data => this.sedes = data, err => console.log(err));
   }
   registrarJuez() {
     this._utilService.loading = true;

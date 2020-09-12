@@ -12,6 +12,8 @@ import { AutoresService } from '../services/autores.service';
 import swal from 'sweetalert2';
 import { UtilsService } from '../services/utils.service';
 import { forkJoin } from 'rxjs';
+import { Sedes } from '../models/sedes.model';
+import { SedesService } from '../services/sedes.service';
 
 @Component({
   selector: 'app-add-authors',
@@ -23,6 +25,7 @@ export class AddAuthorsComponent implements OnInit {
   municipios: Municipios[];
   localidades: Localidades[];
   proyectos: Proyectos[];
+  sedes: Sedes[];
   formRegistroAutores: FormGroup;
   constructor(
     private municipiosService: MunicipiosService,
@@ -31,6 +34,7 @@ export class AddAuthorsComponent implements OnInit {
     private proyectosService: ProyectosService,
     private autoresService: AutoresService,
     private formBuilder: FormBuilder,
+    private sedesService: SedesService,
     private _utilService: UtilsService
   ) {
     this.formRegistroAutores = this.formBuilder.group({
@@ -38,6 +42,7 @@ export class AddAuthorsComponent implements OnInit {
       id_escuelas:    ['1', [Validators.required]],
       id_municipios:  ['1', [Validators.required]],
       id_localidades: ['1', [Validators.required]],
+      id_sedes:       ['1', [Validators.required]],
       nombres:        ['', [Validators.required, Validators.maxLength(50)]],
       a_paterno:      ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:      ['', [Validators.required, Validators.maxLength(50)]],
@@ -52,12 +57,14 @@ export class AddAuthorsComponent implements OnInit {
       localidades: this.localidadesService.getLocalidades(),
       municipios: this.municipiosService.getMunicipios(),
       proyectos: this.proyectosService.obtenerTodosLosProyectos(),
+      sedes: this.sedesService.getSedes()
     }).subscribe(
       data => {
       this.escuelas = data.escuelas;
       this.localidades = data.localidades;
       this.municipios = data.municipios;
       this.proyectos = data.proyectos;
+      this.sedes = data.sedes;
     }, err => {
       console.log(err);
     });
