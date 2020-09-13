@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { ProyectosCalificados, ProyectosPorCalificar } from '../models/dashboard.model';
-import { ServicesConfig } from '../config/services.config';
 import { CategoriasService } from '../services/categorias.service';
 import { ProyectosService } from '../services/proyectos.service';
 import { Proyectos } from '../models/proyectos.model';
@@ -9,9 +8,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CalificarProyectoService } from '../services/calificar-proyecto.service';
 import { UtilsService } from '../services/utils.service';
 import { Util } from '../utils/utils';
-import { ProjectsRegistered } from '../models/project-regis.model';
+import { ProjectRegistered } from '../models/project-regis.model';
 import { ProjectsRegisteredService } from '../services/project-registered.service';
 import { Session } from 'src/app/models/session.model';
+import { SwalComponent, SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import swal from 'sweetalert2';
+import { InformacionDeLosProyectos } from '../models/proyectos.model'
+
 
 @Component({
   selector: 'app-projects',
@@ -20,8 +23,13 @@ import { Session } from 'src/app/models/session.model';
 })
 export class ProjectsComponent implements OnInit {
 
+  @ViewChild('swalid1') private swalInformacion: SwalComponent;
+  @ViewChild('swalid2') private swalReproductor: SwalComponent;
+
   public isCollapsed = true;
-  public allProjects: Array<ProjectsRegistered>;
+  public allProjects: Array<ProjectRegistered>;
+
+  informacionDeLosProyectos: InformacionDeLosProyectos[];
   
 
   categoria: string;
@@ -46,7 +54,9 @@ export class ProjectsComponent implements OnInit {
               private formBuilder: FormBuilder,
               private calificarProyectoService: CalificarProyectoService,
               private _utilService: UtilsService,
-              private projectsService: ProjectsRegisteredService
+              private projectsService: ProjectsRegisteredService,
+              private infoProject: ProyectosService,
+              private _utilsService: UtilsService,
               ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
@@ -58,7 +68,7 @@ export class ProjectsComponent implements OnInit {
     this.obtenido6 = 0;
     this.obtenido7 = 0;
     this.obtenido8 = 0;
-    this.allProjects = new Array<ProjectsRegistered>();
+    this.allProjects = new Array<ProjectRegistered>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     // Trae la categoria actual
     this.categoriasService.getCategorias().subscribe(data => {
@@ -120,11 +130,12 @@ export class ProjectsComponent implements OnInit {
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
       data => {
         this.proyectoActual = data;
+        console.log(this.proyectoActual);
         if (this.proyectoActual.status === '1') {
           this.calificarProyectoService.getCalificaciones(
             this.categoria, Number(this.proyectoActual.id_proyectos)
-          ).subscribe(calificaciones => {
-            console.log(this.proyectoActual);
+            ).subscribe(calificaciones => {
+            console.log(calificaciones);
             switch (this.categoria) {
               case 'petit':
                 this.obtenido1 = Number(calificaciones[0].obtenido1);
@@ -413,73 +424,122 @@ export class ProjectsComponent implements OnInit {
     }
   }
   generarForm(categoria: string) {
+    const expReg = RegExp('^[0-9]+$');
     console.log(categoria);
     switch (categoria) {
       case 'petit':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido2: [0, [Validators.required, Validators.max(40), Validators.min(0)]],
-          obtenido3: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido4: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
-          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido2: [0, [Validators.required, Validators.max(40), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido3: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido4: [0, [Validators.required, Validators.max(20), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0), Validators.pattern(expReg)]],
         });
         break;
       case 'kids':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido2: [0, [Validators.required, Validators.max(40), Validators.min(0)]],
-          obtenido3: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido4: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
-          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido2: [0, [Validators.required, Validators.max(40), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido3: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido4: [0, [Validators.required, Validators.max(20), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0), Validators.pattern(expReg)]],
         });
         break;
       case 'juvenil':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
-          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
-          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
-          obtenido6: [0, [Validators.required, Validators.max(20), Validators.min(0)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido5: [0, [Validators.required, Validators.max(20), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido6: [0, [Validators.required, Validators.max(20), Validators.min(0), Validators.pattern(expReg)]],
         });
         break;
-      case 'media-superior':
+      case 'media superior':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
-          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
-          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
-          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
         });
         break;
       case 'superior':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
-          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
-          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
-          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
         });
         break;
       case 'posgrado':
         this.formPuntos = this.formBuilder.group({
-          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0)]],
-          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0)]],
-          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
-          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0)]],
-          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
-          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0)]],
+          obtenido1: [0, [Validators.required, Validators.max(10), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido2: [0, [Validators.required, Validators.max(30), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido3: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido4: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido5: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido6: [0, [Validators.required, Validators.max(15), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido7: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
+          obtenido8: [0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern(expReg)]],
         });
         break;
     }
+  }
+
+
+
+
+  //mostrar informacion de proyecto seleccionado - Todos los proyectos
+  mostrarInfoTodosLosProyectos(proyecto:ProjectRegistered) {
+    this.swalInformacion.fire();
+    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+      data => {
+        console.log(data);
+        this.informacionDeLosProyectos = data;
+        console.log(this.informacionDeLosProyectos);
+      },
+      err => console.log(err)
+    ).add(() => {
+      this._utilsService._loading = false;
+    });
+  }
+
+
+   //mostrar informacion de proyecto seleccionado - Proyectos calificados
+   mostrarInfoCalificados(proyecto:ProyectosCalificados) {
+    this.swalInformacion.fire();
+    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+      data => {
+        this.informacionDeLosProyectos = data;
+        console.log(this.informacionDeLosProyectos);
+      },
+      err => console.log(err)
+    ).add(() => {
+      this._utilsService._loading = false;
+    });
+  }
+
+
+   //mostrar informacion de proyecto seleccionado - Proyectos por calificar
+   mostrarInfoPorCalificar(proyecto:ProyectosCalificados) {
+    this.swalInformacion.fire();
+    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+      data => {
+        this.informacionDeLosProyectos = data;
+        console.log(this.informacionDeLosProyectos);
+      },
+      err => console.log(err)
+    ).add(() => {
+      this._utilsService._loading = false;
+    });
   }
 
 }

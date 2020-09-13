@@ -65,10 +65,7 @@ input[type="number"]{
     // box-shadow: 0 2px 10px 0 rgba(110,130,208, .60);
     border-radius: 0;
 }
-.CardPrincipal{
-    min-height: 100px;
-    max-height: 70%;
-}
+ 
 .firstHeader{
     background-color: rgb(0,100,167);
     border-radius: 0;
@@ -125,4 +122,22 @@ input[type="number"]{
     border-radius: 5px;
 }
 
+.btn-subboton-info{
+    background: #faf9f9;
+    color: rgb(0,100,167);
+}
 
+
+ 
+.qualified-all-projects{
+    max-height: 700px;
+    min-height: 700px;
+    overflow-y: scroll;
+}
+.qualified-all-projects::-webkit-scrollbar{
+    width: 5px;
+}
+.qualified-all-projects::-webkit-scrollbar-thumb{
+    background:  rgb(0,100,167);
+    border-radius: 5px;
+}

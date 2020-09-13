@@ -15,7 +15,6 @@ import * as XLSX from 'xlsx';
 import { forkJoin } from 'rxjs';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
-
 @Component({
   selector: 'app-add-projects',
   templateUrl: './add-projects.component.html',
@@ -55,7 +54,19 @@ export class AddProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    forkJoin(
+      {
+        areas: this.areasService.getAreas(),
+        sedes: this.sedesService.getSedes(),
+        categorias: this.categoriasServices.getAllCategrias(),
+        asesores: this.asesoresService.getAsesores(),
+      }
+    ).subscribe( data => {
+      this.areas = data.areas;
+      this.sedes = data.sedes;
+      this.categorias = data.categorias;
+      this.asesores = data.asesores;
+    });
     //INSERTAR FORK JOIN
     this.areasService.getAreas().subscribe(data => this.areas = data );
     this.sedesService.getSedes().subscribe(data => this.sedes = data );

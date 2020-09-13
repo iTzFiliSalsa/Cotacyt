@@ -19,23 +19,21 @@
         </thead>
         <tr class="table" *ngFor="let proyecto of proyectos">
             <td>{{proyecto.nombre}}</td>
-            <td>{{proyecto.id_asesores}}</td>
-            <td>{{proyecto.id_areas}}</td>
-            <td>{{proyecto.id_categorias}}</td>
-            <td>{{proyecto.id_sedes}}</td>
+            <td>{{proyecto.asesor}}</td>
+            <td>{{proyecto.area}}</td>
+            <td>{{proyecto.categorias}}</td>
+            <td>{{proyecto.sede}}</td>
             <td>{{proyecto.resumen}}
 
             </td>
             <td class="d-flex">
-                <button class="btn btn-edit mr-2" data-toggle="modal" data-target="#modalEditar"><i
+                <button (click)="openSwal(proyecto)" class="btn btn-edit mr-2" data-toggle="modal" data-target="#modalEditar"><i
                         class="fas fa-edit"></i></button>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i
+                <button (click)="setProyectoActual(proyecto)" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i
                         class="fas fa-trash-alt"></i></button>
             </td>
         </tr>
     </table>
-
-
     <!-- Modal Eliminar -->
     <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
         aria-hidden="true">
@@ -43,86 +41,52 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="row justify-content-center">
-                        <h4>¿Desea eliminar <span class="text-name-remove">Proyecto 1</span>?</h4>
+                        <h4>¿Desea eliminar <span *ngIf="proyectoActual" class="text-name-remove">{{proyectoActual.nombre}}</span>?</h4>
                     </div>
                     <div class="row justify-content-center mt-3">
                         <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-danger ">Eliminar</button>
+                        <button class="btn btn-danger" data-dismiss="modal" (click)="deleteProyectRegistred()">Eliminar</button>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-
-
-
-    <!-- Modal Editar -->
-    <!-- <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Editar Proyecto</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="">Nombre:</label>
-                                            <input type="text" class="form-control" formControlName=""
-                                                placeholder="Nombre del proyecto">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Asesor:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option value="1">Acesor 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Autor:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option>Autor 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Sede:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option value="1">Sede 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Area:</label>
-                                            <select formControlName="" class="form-control">
-                                                <option value="1">Area 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Categoria:</label>
-                                            <select formControlName="id_categorias" class="form-control">
-                                                <option value="1">Petit</option>
-                                                <option value="2">Kits</option>
-                                                <option value="3">Juvenil</option>
-                                                <option value="4">Media superior</option>
-                                                <option value="5">Superior</option>
-                                                <option value="6">Posgrado</option>
-                                            </select>
-                                        </div>
-                
-                                        <div class="form-group">
-                                            <label for="">Resumen:</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Resumen del proyecto"></textarea>
-                                        </div>
-                
-                                        <button class="btn-save btn btn-block">Guardar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
-
+    <!-- swal editar  -->
+    <swal (confirm)="editarProyecto()" #swalid title="Editar Proyecto" [showCancelButton] ="true">
+        <form *swalPortal [formGroup]="formProyecto">
+            <div class="form-group">
+                <label for="">Nombre:</label>
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del proyecto">
+            </div>
+            <div class="form-group">
+                <label for="">Asesor:</label>
+                <select formControlName="id_asesores" class="form-control">
+                    <option [value]="asesor.id_asesores" *ngFor="let asesor of asesores">{{asesor.nombres}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Sede:</label>
+                <select formControlName="id_sedes" class="form-control">
+                    <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Area:</label>
+                <select formControlName="id_areas" class="form-control">
+                    <option [value]="area.id_areas" *ngFor="let area of areas">{{area.area}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Categoria:</label>
+                <select formControlName="id_categorias" class="form-control">
+                    <option [value]="categoria.id_categorias" *ngFor="let categoria of categorias">{{categoria.categoria}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Resumen:</label>
+                <textarea formControlName="resumen" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Resumen del proyecto"></textarea>
+            </div>
+        </form>
+    </swal>
 </div>

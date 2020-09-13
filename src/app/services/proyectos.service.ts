@@ -4,6 +4,7 @@ import { ServicesConfig } from '../config/services.config';
 import { Observable } from 'rxjs';
 import { Proyectos } from '../models/proyectos.model';
 import { Session } from '../models/session.model';
+import { InformacionDeLosProyectos } from '../models/proyectos.model'
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +39,11 @@ export class ProyectosService {
   obtenerTodosLosProyectosDeCategoria(): Observable<Proyectos[]> {
     return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/categoria/' + this.sessionData.id_categorias);
   }
+
+  obtenerInformacionDeUnProyecto(id_proyectos:string): Observable<InformacionDeLosProyectos[]>{
+    return this.http.get<InformacionDeLosProyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details/' + id_proyectos)
+  }
+
+
 }
+

@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AutoresService } from '../services/autores.service';
 import swal from 'sweetalert2';
 import { UtilsService } from '../services/utils.service';
+import { forkJoin } from 'rxjs';
 import { Asesores } from '../models/asesores.model';
 import { AsesoresService } from '../services/asesores.service';
 import { jsPDF } from "jspdf";
@@ -51,6 +52,20 @@ export class AddAuthorsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    forkJoin({
+      escuelas: this.escuelasService.getEscuelas(),
+      localidades: this.localidadesService.getLocalidades(),
+      municipios: this.municipiosService.getMunicipios(),
+      proyectos: this.proyectosService.obtenerTodosLosProyectos(),
+    }).subscribe(
+      data => {
+      this.escuelas = data.escuelas;
+      this.localidades = data.localidades;
+      this.municipios = data.municipios;
+      this.proyectos = data.proyectos;
+    }, err => {
+      console.log(err);
+    });
     this.asesoresService.getAsesores().subscribe(data => {
       this.asesores = data;
       console.log(this.asesores);
