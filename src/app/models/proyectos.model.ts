@@ -8,3 +8,17 @@ export interface Proyectos {
     resumen: string;
     status: string;
 }
+
+
+
+export interface InformacionDeLosProyectos{
+    area: string;
+    asesor: string;
+    autores: string;
+    calificacion: string
+    categorias: string;
+    id_proyecto: string;
+    nombre: string;
+    resumen: string;
+    sede: string;
+}

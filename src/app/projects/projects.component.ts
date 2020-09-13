@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { ProyectosCalificados, ProyectosPorCalificar } from '../models/dashboard.model';
 import { CategoriasService } from '../services/categorias.service';
@@ -11,6 +11,10 @@ import { Util } from '../utils/utils';
 import { ProjectRegistered } from '../models/project-regis.model';
 import { ProjectsRegisteredService } from '../services/project-registered.service';
 import { Session } from 'src/app/models/session.model';
+import { SwalComponent, SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import swal from 'sweetalert2';
+import { InformacionDeLosProyectos } from '../models/proyectos.model'
+
 
 @Component({
   selector: 'app-projects',
@@ -19,8 +23,13 @@ import { Session } from 'src/app/models/session.model';
 })
 export class ProjectsComponent implements OnInit {
 
+  @ViewChild('swalid1') private swalInformacion: SwalComponent;
+  @ViewChild('swalid2') private swalReproductor: SwalComponent;
+
   public isCollapsed = true;
   public allProjects: Array<ProjectRegistered>;
+
+  informacionDeLosProyectos: InformacionDeLosProyectos[];
   
 
   categoria: string;
@@ -45,7 +54,9 @@ export class ProjectsComponent implements OnInit {
               private formBuilder: FormBuilder,
               private calificarProyectoService: CalificarProyectoService,
               private _utilService: UtilsService,
-              private projectsService: ProjectsRegisteredService
+              private projectsService: ProjectsRegisteredService,
+              private infoProject: ProyectosService,
+              private _utilsService: UtilsService,
               ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
@@ -481,6 +492,54 @@ export class ProjectsComponent implements OnInit {
         });
         break;
     }
+  }
+
+
+
+
+  //mostrar informacion de proyecto seleccionado - Todos los proyectos
+  mostrarInfoTodosLosProyectos(proyecto:ProjectRegistered) {
+    this.swalInformacion.fire();
+    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+      data => {
+        console.log(data);
+        this.informacionDeLosProyectos = data;
+        console.log(this.informacionDeLosProyectos);
+      },
+      err => console.log(err)
+    ).add(() => {
+      this._utilsService._loading = false;
+    });
+  }
+
+
+   //mostrar informacion de proyecto seleccionado - Proyectos calificados
+   mostrarInfoCalificados(proyecto:ProyectosCalificados) {
+    this.swalInformacion.fire();
+    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+      data => {
+        this.informacionDeLosProyectos = data;
+        console.log(this.informacionDeLosProyectos);
+      },
+      err => console.log(err)
+    ).add(() => {
+      this._utilsService._loading = false;
+    });
+  }
+
+
+   //mostrar informacion de proyecto seleccionado - Proyectos por calificar
+   mostrarInfoPorCalificar(proyecto:ProyectosCalificados) {
+    this.swalInformacion.fire();
+    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+      data => {
+        this.informacionDeLosProyectos = data;
+        console.log(this.informacionDeLosProyectos);
+      },
+      err => console.log(err)
+    ).add(() => {
+      this._utilsService._loading = false;
+    });
   }
 
 }

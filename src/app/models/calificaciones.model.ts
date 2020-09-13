@@ -3,3 +3,11 @@ export interface Calificaciones {
     nombre: string;
     total: string;
 }
+
+
+export interface CalificacionesPorCategoria {
+    id_proyectos: string;
+    nombre: string;
+    total: string;
+}
+ 
