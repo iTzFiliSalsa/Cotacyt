@@ -16,6 +16,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Proyectos } from '../models/proyectos.model';
 import { ProyectosService } from '../services/proyectos.service';
 import Swal from 'sweetalert2';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 
 @Component({
@@ -31,6 +32,9 @@ export class ProjectsRegisteredComponent implements OnInit {
   formProyecto: FormGroup;
   areas: Areas[];
   sedes: Sedes[];
+  autores = [];
+  autoresSeleccionados: any[];
+  dropdownSettings: IDropdownSettings;
   asesores: Asesores[];
   categorias: Categorias[];
   constructor(
@@ -48,6 +52,7 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.sedes = new Array<Sedes>();
     this.asesores = new Array<Asesores>();
     this.categorias = new Array<Categorias>();
+    this.autoresSeleccionados = new Array<any>();
     this._utilService.loading = true;
     this.formProyecto = this.formBuilder.group({
       id_proyectos: [''],
@@ -61,6 +66,21 @@ export class ProjectsRegisteredComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id_autores',
+      textField: 'asesor',
+      itemsShowLimit: 3,
+      limitSelection: 3,
+      allowSearchFilter: true
+    };
+    this.autores =  [
+      { id_autores: 1, asesor: 'kt' },
+      { id_autores: 2, asesor: 'chino' },
+      { id_autores: 3, asesor: 'fili' },
+      { id_autores: 4, asesor: 'santi' },
+      { id_autores: 5, asesor: 'Ne' }
+    ];
     forkJoin(
       {
         areas: this.areasService.getAreas(),
@@ -71,6 +91,7 @@ export class ProjectsRegisteredComponent implements OnInit {
       }
     ).subscribe(
       data => {
+        console.log(data.proyectos);
         this.areas = data.areas;
         this.sedes = data.sedes;
         this.categorias = data.categorias;
@@ -89,11 +110,19 @@ export class ProjectsRegisteredComponent implements OnInit {
     this._utilService.loading = true;
     this.projectsService.deleteProyectsRegistred(this.proyectoActual.id_proyectos)
       .subscribe(data => {
-        // TODO: alert mejor
-        alert(data);
+        Swal.fire({
+          title: 'Se elimino correctamente',
+          icon: 'success'
+        });
         this.ngOnInit();
       },
-        err => console.log(err)
+        err => {
+          console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error',
+            icon: 'error',
+          })
+        }
       ).add(() => {
         this._utilService.loading = false;
       });
@@ -138,6 +167,18 @@ export class ProjectsRegisteredComponent implements OnInit {
         title: 'ocurrio un error al actualizar',
         text: '',
       });
+    });
+  }
+  addAutor(item) {
+    console.log(item);
+    this.autoresSeleccionados.push(item);
+  }
+  dropAutor(item) {
+    console.log(item);
+    this.autoresSeleccionados.map( (res, index) => {
+      if (res.id_autores === item.id_autores) {
+        this.autoresSeleccionados.splice(index, 1);
+      }
     });
   }
 }

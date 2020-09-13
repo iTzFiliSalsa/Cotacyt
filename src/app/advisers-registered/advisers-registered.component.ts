@@ -5,6 +5,9 @@ import { UtilsService } from '../services/utils.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
+import { Sedes } from '../models/sedes.model';
+import { SedesService } from '../services/sedes.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-advisers-registered',
@@ -17,46 +20,55 @@ export class AdvisersRegisteredComponent implements OnInit {
   public asesores: Array<Asesores>;
   asesorActual: Asesores;
   formAsesores: FormGroup;
+  sedes: Sedes[];
   constructor(
     private _asesoresService: AsesoresService,
     private _utilService: UtilsService,
+    private sedesService: SedesService,
     private formBuilder: FormBuilder
   ) {
     this._utilService.loading = true;
     this.formAsesores = this.formBuilder.group({
-      nombres: [''],
-      a_paterno: [''],
-      a_materno: [''],
-      email: [''],
+      nombres:     [''],
+      a_paterno:   [''],
+      a_materno:   [''],
+      email:       [''],
+      id_sedes:    [''],
       descripcion: [''],
     });
   }
 
   ngOnInit(): void {
-    this._asesoresService.getAsesores().subscribe(
-      res => {
-        this.asesores = res;
-        console.log(this.asesores);
-      },
-      err => {
-        console.log(<any>err);
+    forkJoin({
+      asesores: this._asesoresService.getAsesores(),
+      sedes: this.sedesService.getSedes()
+    }).subscribe(
+      data => {
+        this.asesores = data.asesores;
+        this.sedes = data.sedes;
       }
     ).add(() => {
-      this._utilService.loading = false;
+      this._utilService._loading = false;
     });
   }
   setAsesor(asesor: Asesores) {
     this.asesorActual = asesor;
-    console.log(asesor);
   }
   deleteAsesor() {
     this._utilService._loading = true;
     this._asesoresService.deleteAsesor(this.asesorActual.id_asesores)
       .subscribe( data => {
-        alert(data);
+        Swal.fire({
+          title: 'Se elimino el asesor correctamente',
+          icon: 'success'
+        });
       },
       err => {
         console.log(err);
+        Swal.fire({
+          title: 'Ocurrio un error al eliminar',
+          icon: 'error'
+        });
       }).add(() => {
         this._utilService._loading = false;
         this.ngOnInit();
@@ -69,13 +81,13 @@ export class AdvisersRegisteredComponent implements OnInit {
       a_paterno:   asesor.a_paterno,
       a_materno:   asesor.a_materno,
       email:       asesor.email,
+      id_sedes:    asesor.id_sedes,
       descripcion: asesor.descripcion,
     });
     this.swalEdit.fire();
   }
   editarAsesor() {
     this._utilService._loading = true;
-    console.log(this.formAsesores.value);
     this._asesoresService.updateAsesor( this.formAsesores.value, this.asesorActual.id_asesores )
       .subscribe(
         data => {
@@ -83,6 +95,7 @@ export class AdvisersRegisteredComponent implements OnInit {
           title: data,
           icon: 'success'
         });
+        this.ngOnInit();
       }, err => {
         console.log(err);
         Swal.fire({

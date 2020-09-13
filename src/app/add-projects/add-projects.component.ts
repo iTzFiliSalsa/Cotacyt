@@ -15,6 +15,9 @@ import * as XLSX from 'xlsx';
 import { forkJoin } from 'rxjs';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
+
 @Component({
   selector: 'app-add-projects',
   templateUrl: './add-projects.component.html',
@@ -27,6 +30,9 @@ export class AddProjectsComponent implements OnInit {
   sedes: Sedes[];
   asesores: Asesores[];
   categorias: Categorias[];
+  autores = [];
+  autoresSeleccionados: any[];
+  dropdownSettings: IDropdownSettings;
   formRegistroProyecto: FormGroup;
   data: [][];
   funciones = [];
@@ -41,6 +47,7 @@ export class AddProjectsComponent implements OnInit {
   ) {
     this.areas = new Array<Areas>();
     this.sedes = new Array<Sedes>();
+    this.autoresSeleccionados = new Array<any>();
     this.asesores = new Array<Asesores>();
     this.categorias = new Array<Categorias>();
     this.formRegistroProyecto = this.formBuilder.group({
@@ -54,6 +61,21 @@ export class AddProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id_autores',
+      textField: 'asesor',
+      itemsShowLimit: 3,
+      limitSelection: 3,
+      allowSearchFilter: true
+    };
+    this.autores =  [
+      { id_autores: 1, asesor: 'kt' },
+      { id_autores: 2, asesor: 'chino' },
+      { id_autores: 3, asesor: 'fili' },
+      { id_autores: 4, asesor: 'santi' },
+      { id_autores: 5, asesor: 'Ne' }
+    ];
     forkJoin(
       {
         areas: this.areasService.getAreas(),
@@ -175,4 +197,18 @@ export class AddProjectsComponent implements OnInit {
           );
       
       }
+
+  addAutor(item) {
+    console.log(item);
+    this.autoresSeleccionados.push(item);
+  }
+  dropAutor(item) {
+    console.log(item);
+    this.autoresSeleccionados.map( (res, index) => {
+      if (res.id_autores === item.id_autores) {
+        this.autoresSeleccionados.splice(index, 1);
+      }
+    });
+  }
+
 }

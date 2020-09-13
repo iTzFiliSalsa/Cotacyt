@@ -15,6 +15,8 @@ import { forkJoin } from 'rxjs';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { auto } from '@popperjs/core';
 import Swal from 'sweetalert2';
+import { Sedes } from '../models/sedes.model';
+import { SedesService } from '../services/sedes.service';
 
 @Component({
   selector: 'app-authors-registered',
@@ -30,6 +32,7 @@ export class AuthorsRegisteredComponent implements OnInit {
   escuelas: Escuelas[];
   municipios: Municipios[];
   localidades: Localidades[];
+  sedes: Sedes[];
   proyectos: Proyectos[];
   constructor(
     private municipiosService: MunicipiosService,
@@ -38,6 +41,7 @@ export class AuthorsRegisteredComponent implements OnInit {
     private proyectosService: ProyectosService,
     private autoresService: AutoresService,
     private utils: UtilsService,
+    private sedesService: SedesService,
     private formBuilder: FormBuilder
   ) {
     this.formAutores = this.formBuilder.group({
@@ -47,6 +51,7 @@ export class AuthorsRegisteredComponent implements OnInit {
       telefono: [''],
       email: [''],
       id_proyectos: [''],
+      id_sedes: [''],
       id_escuelas: [''],
       id_municipios: [''],
       id_localidades: [''],
@@ -60,6 +65,7 @@ export class AuthorsRegisteredComponent implements OnInit {
       localidades: this.localidadesService.getLocalidades(),
       municipios: this.municipiosService.getMunicipios(),
       proyectos: this.proyectosService.obtenerTodosLosProyectos(),
+      sedes: this.sedesService.getSedes(),
       autores: this.autoresService.getAutores()
     }).subscribe(
       data => {
@@ -68,6 +74,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         this.municipios = data.municipios;
         this.proyectos = data.proyectos;
         this.autores = data.autores;
+        this.sedes = data.sedes;
       }, err => {
         console.log(err);
       }).add(() => {
@@ -93,47 +100,39 @@ export class AuthorsRegisteredComponent implements OnInit {
   }
   openSwal(autor: Autores) {
     this.autorActual = autor;
-    this.autoresService.getAutor(autor.id_autores)
-      .subscribe(data => {
-        this.formAutores.patchValue({
-          nombres:        autor.nombre,
-          a_paterno:      autor.a_paterno,
-          a_materno:      autor.a_materno,
-          telefono:       autor.telefono,
-          email:          autor.email,
-          id_proyectos:   data.id_proyectos,
-          id_escuelas:    data.id_escuelas,
-          id_municipios:  data.id_municipios,
-          id_localidades: data.id_localidades,
-        });
-      }, err => {
-        console.log(err);
-        Swal.fire({
-          title: 'Ocurrio un error al obtener los datos',
-          icon: 'error'
-        });
-      });
+    this.formAutores.patchValue({
+      nombres:        autor.nombre,
+      a_paterno:      autor.a_paterno,
+      a_materno:      autor.a_materno,
+      telefono:       autor.telefono,
+      email:          autor.email,
+      id_proyectos:   autor.id_proyectos,
+      id_sedes:       autor.id_sedes,
+      id_escuelas:    autor.id_escuelas,
+      id_municipios:  autor.id_municipios,
+      id_localidades: autor.id_localidades,
+    });
     this.swalEdit.fire();
   }
   editarAutor() {
     this.utils._loading = true;
-    this.autoresService.updateAutor( this.formAutores.value, this.autorActual.id_autores )
+    this.autoresService.updateAutor(this.formAutores.value, this.autorActual.id_autores)
       .subscribe(
         data => {
-        Swal.fire({
-          title: data,
-          icon: 'success'
+          Swal.fire({
+            title: data,
+            icon: 'success'
+          });
+          this.ngOnInit();
+        }, err => {
+          console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error al actualizar',
+            icon: 'error'
+          });
+        }).add(() => {
+          this.utils._loading = false;
         });
-        this.ngOnInit();
-      }, err => {
-        console.log(err);
-        Swal.fire({
-          title: 'Ocurrio un error al actualizar',
-          icon: 'error'
-        });
-      }).add(() => {
-        this.utils._loading = false;
-      });
   }
 
 }

@@ -31,6 +31,12 @@
                             <input type="email" class="form-control" formControlName="email" placeholder="Correo">
                         </div>
                         <div class="form-group">
+                            <label for="">Sede:</label>
+                            <select formControlName="id_sedes" class="form-control">
+                                <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="">Descripción:</label>
                             <textarea formControlName="descripcion" class="form-control" id="Textarea1" rows="3" placeholder="Descripción"></textarea>
                         </div>
