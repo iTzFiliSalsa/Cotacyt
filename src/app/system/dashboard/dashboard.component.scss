@@ -85,6 +85,22 @@
 // 10 175 209
 
 
+.qualified-projects-principal{
+    min-height:260px;
+    max-height:260px;
+    
+    overflow-y: scroll;
+}
+
+.qualified-projects-principal::-webkit-scrollbar{
+    width: 5px;
+}
+.qualified-projects-principal::-webkit-scrollbar-thumb{
+    background: #97c83c;
+    border-radius: 5px;
+}
+ 
+
 .qualified-projects {
     min-height:300px;
     max-height:300px;
@@ -138,3 +154,47 @@
 .bg-custom{
     background-color: #97c83c;
 }
+
+//-------------
+// TABLA CALIFICACIONES POR CATEGORIAS
+//-----------
+.btn-project-list{
+    background: #97c83c;
+    color: #fff;
+}
+
+.btn-select{
+    background: #97c83c;
+    color: #fff;
+}
+
+ .background-table-projects{
+    background: #97c83c;
+    color: #fff;
+ }
+
+ .badge-position{
+     background:  rgb(0,100,167);
+     color: #fff;
+ }
+
+
+.btn-subboton-video{
+    background: #faf9f9;
+    color: #97c83c;
+}
+
+
+.btn-subboton-info{
+    background: #faf9f9;
+    color: rgb(0,100,167);
+}
+
+
+// ----------------
+// REPRODUCTOR DE VIDEO
+// ----------------
+.contenedor-video{
+    width: 100%;
+}
+

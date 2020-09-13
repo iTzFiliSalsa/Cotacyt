@@ -1,3 +1,81 @@
+<!-- swal tabla informacion -->
+<swal class="swal-wide" #swalid1 title="Información del proyecto" [swalOptions]="{customClass: 'clase'}">
+    <div *swalPortal>
+        <div>
+            <table class="table table-light" *ngFor="let info of informacionDeLosProyectos" >
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Nombre:
+                            </div>
+                        </th>
+                        <td>{{info.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Autores:
+                            </div>
+                        </th>
+                        <td>{{info.autores}}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Asesores:
+                            </div>
+                        </th>
+                        <td>{{info.asesor}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Area:
+                            </div>
+                        </th>
+                        <td> {{info.area}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Categoria:
+                            </div>
+                        </th>
+                        <td> {{info.categorias}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Sede:
+                            </div>
+                        </th>
+                        <td> {{info.sede}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Resumen:
+                            </div>
+                        </th>
+                        <td> {{info.resumen}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Calificación:
+                            </div>
+                        </th>
+                        <td> {{info.calificacion}} </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</swal>
+
+
+
 <div class="container-fluid pb-3">
     <div class="row">
         <!-- columna Izquierda -->
@@ -6,7 +84,7 @@
                 <div class="card-header background-table">
                     <h6>Todos los proyectos</h6>
                 </div>
-                <div class="qualified-projects card-body scroll p-0">
+                <div class="qualified-all-projects card-body p-0">
                     <table class="table table-hover">
                         <thead class="thead-ligth">
                             <tr>
@@ -18,7 +96,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let i of allProjects">
-                                <td> <button class="btn btn-light mr-3" (click)="util.getInfo(i.resumen)">
+                                <td> <button class="btn btn-subboton-info mr-3" (click)="mostrarInfoTodosLosProyectos(i)">
                                     <i class="fas fa-question-circle"></i>
                                 </button>{{i.nombre}}
                                 </td>
@@ -57,7 +135,7 @@
                                 </td>
                                 <!-- <td>{{proyecto.fecha | date}}</td> -->
                                 <td class="d-flex">
-                                    <button class="btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                    <button class="btn btn-subboton-info" (click)="mostrarInfoCalificados(proyecto)">
                                         <i class="fas fa-question-circle"></i>
                                     </button>
                                     <button class="btn-edit-project btn-see-projects btn ml-3" (click)="traerProyecto(proyecto.id_proyectos)"><i class="fas fa-edit"></i></button>
@@ -86,7 +164,7 @@
                                     <!-- <br><small>{{proyecto.resumen}}</small> -->
                                 </td>
                                 <td class="d-flex">
-                                    <button class="btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                    <button class="btn btn-subboton-info" (click)="mostrarInfoPorCalificar(proyecto)">
                                         <i class="fas fa-question-circle"></i>
                                     </button>
                                     <button class="btn-qualify-project btn-see-projects btn ml-3" (click)="traerProyecto(proyecto.id_proyectos) "><i class="fas fa-check"></i></button>
@@ -97,6 +175,8 @@
                     </table>
                 </div>
             </div>
+            
+            
             <div class="CardIzquierdo projects2 card mt-3">
                 <div class="firstHeader card-header">
                     <h6 class="m-0">Opciones de proyecto</h6>

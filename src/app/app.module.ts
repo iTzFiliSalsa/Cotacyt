@@ -30,6 +30,7 @@ import { AddAuthorsComponent } from './add-authors/add-authors.component';
 import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AdvisersRegisteredComponent,
     AddAuthorsComponent,
     AuthorsRegisteredComponent
-
   ],
   imports: [
     BrowserModule,

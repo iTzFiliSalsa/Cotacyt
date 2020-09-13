@@ -12,6 +12,9 @@ import { AutoresService } from '../services/autores.service';
 import swal from 'sweetalert2';
 import { UtilsService } from '../services/utils.service';
 import { forkJoin } from 'rxjs';
+import { Asesores } from '../models/asesores.model';
+import { AsesoresService } from '../services/asesores.service';
+import { jsPDF } from "jspdf";
 import { Sedes } from '../models/sedes.model';
 import { SedesService } from '../services/sedes.service';
 
@@ -22,6 +25,7 @@ import { SedesService } from '../services/sedes.service';
 })
 export class AddAuthorsComponent implements OnInit {
   escuelas: Escuelas[];
+  asesores: Asesores[];
   municipios: Municipios[];
   localidades: Localidades[];
   proyectos: Proyectos[];
@@ -29,6 +33,7 @@ export class AddAuthorsComponent implements OnInit {
   formRegistroAutores: FormGroup;
   constructor(
     private municipiosService: MunicipiosService,
+    private asesoresService: AsesoresService,
     private escuelasService: EscuelasService,
     private localidadesService: LocalidadesService,
     private proyectosService: ProyectosService,
@@ -68,6 +73,19 @@ export class AddAuthorsComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+    this.asesoresService.getAsesores().subscribe(data => {
+      this.asesores = data;
+      console.log(this.asesores);
+    
+    } );
+    this.escuelasService.getEscuelas()
+    .subscribe( data => this.escuelas = data, err => console.log( err ));
+    this.localidadesService.getLocalidades()
+    .subscribe( data => this.localidades = data, err => console.log( err ));
+    this.municipiosService.getMunicipios()
+    .subscribe( data => this.municipios = data, err => console.log( err ));
+    this.proyectosService.obtenerTodosLosProyectos()
+    .subscribe( data => this.proyectos = data, err => console.log( err ));
   }
 
   reigstrarAutor() {
@@ -92,6 +110,14 @@ export class AddAuthorsComponent implements OnInit {
     ).add(() => {
       this._utilService.loading = false;
     });
+  }
+
+  saveAsPdf(){
+    const doc = new jsPDF();
+    doc.text(this.asesores[0]['a_materno'], 90, 100);
+    doc.addImage('assets/image/logo.png', 'png', 10, 18, 60, 30)
+    doc.save("constancia.pdf");
+    
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { SedesService } from '../services/sedes.service';
 import { AreasService } from '../services/areas.service';
 import { AsesoresService } from '../services/asesores.service';
@@ -11,15 +11,21 @@ import { Categorias } from '../models/categorias.model';
 import { ProyectosService } from '../services/proyectos.service';
 import { UtilsService } from '../services/utils.service';
 import swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
 import { forkJoin } from 'rxjs';
+import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
+
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 
 @Component({
   selector: 'app-add-projects',
   templateUrl: './add-projects.component.html',
   styleUrls: ['./add-projects.component.scss']
 })
+
 export class AddProjectsComponent implements OnInit {
+  @ViewChild('swalid') private Variable: SwalComponent;
   areas: Areas[];
   sedes: Sedes[];
   asesores: Asesores[];
@@ -28,7 +34,9 @@ export class AddProjectsComponent implements OnInit {
   autoresSeleccionados: any[];
   dropdownSettings: IDropdownSettings;
   formRegistroProyecto: FormGroup;
-  constructor(
+  data: [][];
+  funciones = [];
+  constructor(public readonly swalTargets: SwalPortalTargets,
     private sedesService: SedesService,
     private areasService: AreasService,
     private asesoresService: AsesoresService,
@@ -81,11 +89,20 @@ export class AddProjectsComponent implements OnInit {
       this.categorias = data.categorias;
       this.asesores = data.asesores;
     });
+    //INSERTAR FORK JOIN
+    this.areasService.getAreas().subscribe(data => this.areas = data );
+    this.sedesService.getSedes().subscribe(data => this.sedes = data );
+    this.asesoresService.getAsesores().subscribe(data => {
+      this.asesores = data;
+      console.log(this.asesores[0]['a_materno']);
+    
+    } );
+    this.categoriasServices.getAllCategrias().subscribe( data => this.categorias = data );
   }
   registrarProyecto() {
 
     this._utilService.loading = true;
-    this.proyectosService.postNuevoProyecto( this.formRegistroProyecto.value )
+    this.proyectosService.postNuevoProyecto( this.formRegistroProyecto.value)
     .subscribe(
       data => {
         swal.fire({
@@ -106,6 +123,81 @@ export class AddProjectsComponent implements OnInit {
       this._utilService.loading = false;
     });
   }
+  onFileChange(evt: any){
+    const TARGET: DataTransfer = <DataTransfer>(evt.target);
+
+    if(TARGET.files.length !== 1){
+      
+      alert("No puedes subir mas de un archivo");
+      TARGET.clearData(evt);
+
+    }
+
+    const READER: FileReader = new FileReader();
+    READER.onload = (e: any) => {
+      const bstr: String = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      this.data = (XLSX.utils.sheet_to_json(ws, {header: 0}));
+      console.log(this.data);
+
+      this.Variable.fire();
+    
+       
+
+      // swal.fire({
+      //   title: "Confirmacion de archivo",
+      //   text: "",
+      //   icon: 'warning',
+      //   showCancelButton: true,
+      //   confirmButtonText: "Subir",
+      //   cancelButtonText: "Cancelar",
+      // }).then(resultado => {
+      //   if(resultado.value){
+      //     this.data.forEach(data => {
+      //       this.funciones.push(this.proyectosService.postNuevoProyecto(data));
+      //     });
+      
+      //     forkJoin(this.funciones).subscribe(
+      //       res => {
+      //         console.log("se registro con exito"+ res);
+      //       },
+      //       err => {
+      //         console.log(<any>err);
+      //       }
+      
+      //     );
+      //   }else{
+      //     console.log("subida cancelada");
+      //   }
+
+      // });
+
+      
+    
+    }
+    READER.readAsBinaryString(TARGET.files[0]);
+  }
+
+  guardarEnBD(evt: any){
+    this.data.forEach(data => {
+            this.funciones.push(this.proyectosService.postNuevoProyecto(data));
+          });
+      
+          forkJoin(this.funciones).subscribe(
+            res => {
+              console.log("se registro con exito"+ res);
+            },
+            err => {
+              console.log(<any>err);
+            }
+      
+          );
+      
+      }
+
   addAutor(item) {
     console.log(item);
     this.autoresSeleccionados.push(item);
@@ -118,4 +210,5 @@ export class AddProjectsComponent implements OnInit {
       }
     });
   }
+
 }
