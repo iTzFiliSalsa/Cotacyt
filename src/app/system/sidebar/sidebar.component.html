@@ -97,6 +97,10 @@
                     <i class="fas fa-user-check"></i><span> Autores <i class="fas fa-chevron-right drop-down"></i></span>
                 </a>
 
+                <a *ngIf="admin" [routerLink]="['add-estadistics']" routerLinkActive="active" class="menu-btn">
+                    <i class="fas fa-user-check"></i><span> Estadísticas <i class="fas fa-chevron-right drop-down"></i></span>
+                </a>
+
                 <a class="menu-btn" (click)="cerrarSesion()" style="cursor: pointer;">
                     <i class="fa fa-window-close"></i><span> Cerrar sesión</span>
                 </a>

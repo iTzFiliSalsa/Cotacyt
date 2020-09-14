@@ -28,6 +28,7 @@ import { AddAdvisersComponent } from './add-advisers/add-advisers.component';
 import { AdvisersRegisteredComponent } from './advisers-registered/advisers-registered.component';
 import { AddAuthorsComponent } from './add-authors/add-authors.component';
 import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component';
+import { EstadisticsComponent } from './estadistics/estadistics.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { AuthorsRegisteredComponent } from './authors-registered/authors-registe
     AddAdvisersComponent,
     AdvisersRegisteredComponent,
     AddAuthorsComponent,
-    AuthorsRegisteredComponent
+    AuthorsRegisteredComponent,
+    EstadisticsComponent
   ],
   imports: [
     BrowserModule,

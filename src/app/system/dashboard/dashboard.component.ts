@@ -197,9 +197,6 @@ export class DashboardComponent implements OnInit {
 
 
 
-
-
-
   //abrir swal de calificaciones por categoria
   mostrarProyectosPorCalificacion(evt: any) {
     this.swalCalificaciones.fire();
