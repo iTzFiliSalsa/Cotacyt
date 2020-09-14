@@ -72,10 +72,10 @@ export class EstadisticsComponent implements OnInit {
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
-
+  
 
   downloadPDF() {
-    var canvas = document.querySelector('#graficaProy1');
+    var canvas: any = document.getElementById('graficaProy1');
     //creates image
     var canvasImg = canvas.toDataURL("image/jpeg", 1.0);
     
