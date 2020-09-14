@@ -17,6 +17,7 @@ import { AsesoresService } from '../services/asesores.service';
 import { jsPDF } from "jspdf";
 import { Sedes } from '../models/sedes.model';
 import { SedesService } from '../services/sedes.service';
+import { Session } from '../models/session.model';
 
 @Component({
   selector: 'app-add-authors',
@@ -30,6 +31,7 @@ export class AddAuthorsComponent implements OnInit {
   localidades: Localidades[];
   proyectos: Proyectos[];
   sedes: Sedes[];
+  sessionData: Session;
   formRegistroAutores: FormGroup;
   constructor(
     private municipiosService: MunicipiosService,
@@ -42,12 +44,13 @@ export class AddAuthorsComponent implements OnInit {
     private sedesService: SedesService,
     private _utilService: UtilsService
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formRegistroAutores = this.formBuilder.group({
       id_proyectos:   ['', [Validators.required]],
       id_escuelas:    ['1', [Validators.required]],
       id_municipios:  ['1', [Validators.required]],
       id_localidades: ['1', [Validators.required]],
-      id_sedes:       ['1', [Validators.required]],
+      id_sedes:       {value: this.sessionData.id_sedes, disabled: true},
       nombres:        ['', [Validators.required, Validators.maxLength(50)]],
       a_paterno:      ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:      ['', [Validators.required, Validators.maxLength(50)]],

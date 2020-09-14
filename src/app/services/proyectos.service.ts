@@ -37,13 +37,23 @@ export class ProyectosService {
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/nuevo', body);
   }
   obtenerTodosLosProyectosDeCategoria(): Observable<Proyectos[]> {
-    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/categoria/' + this.sessionData.id_categorias);
+    return this.http.get<Proyectos[]>(
+      this.servicesConfig.APP_ENDPOINT
+      + 'api/proyectos/all/categoria?id_categorias='
+      + this.sessionData.id_categorias
+      + '&id_sedes=' + this.sessionData.id_sedes
+    );
   }
 
   obtenerInformacionDeUnProyecto(id_proyectos:string): Observable<InformacionDeLosProyectos[]>{
     return this.http.get<InformacionDeLosProyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details/' + id_proyectos)
   }
-
+  getStatusAdmin(idProyectos: string): Observable<any> {
+    const body = {
+      id_proyectos: idProyectos
+    };
+    return this.http.post<any>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/admin/obtener-status', body);
+  }
 
 }
 

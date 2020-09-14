@@ -16,6 +16,7 @@ import { forkJoin } from 'rxjs';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Session } from '../models/session.model';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class AddProjectsComponent implements OnInit {
   formRegistroProyecto: FormGroup;
   data: [][];
   funciones = [];
+  sessionData: Session;
   constructor(public readonly swalTargets: SwalPortalTargets,
     private sedesService: SedesService,
     private areasService: AreasService,
@@ -45,6 +47,7 @@ export class AddProjectsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _utilService: UtilsService
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.areas = new Array<Areas>();
     this.sedes = new Array<Sedes>();
     this.autoresSeleccionados = new Array<any>();
@@ -53,7 +56,7 @@ export class AddProjectsComponent implements OnInit {
     this.formRegistroProyecto = this.formBuilder.group({
       nombre:   ['', [Validators.required, Validators.max(50)]],
       id_asesores:    ['1', [Validators.required]],
-      id_sedes:       ['1', [Validators.required]],
+      id_sedes:       {value: this.sessionData.id_sedes, disabled: true},
       id_areas:       ['1', [Validators.required]],
       id_categorias:  ['1', [Validators.required]],
       resumen:        ['', [Validators.required, Validators.max(150)]]

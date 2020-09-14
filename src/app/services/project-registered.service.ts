@@ -19,7 +19,8 @@ import { UtilsService } from './utils.service';
     }
     
     getProjects(): Observable<ProjectRegistered[]>{
-        return this.http.get<ProjectRegistered[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all');
+        return this.http.get<ProjectRegistered[]>(
+          this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all?id_sedes=' + this.sessionData.id_sedes);
     }
     obtenerTodosLosProyectosDetalles(): Observable<ProjectRegistered[]> {
       return this.http.get<ProjectRegistered[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details');

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Sedes } from '../models/sedes.model';
 import { SedesService } from '../services/sedes.service';
 import { forkJoin } from 'rxjs';
+import { Session } from '../models/session.model';
 
 @Component({
   selector: 'app-advisers-registered',
@@ -20,6 +21,7 @@ export class AdvisersRegisteredComponent implements OnInit {
   public asesores: Array<Asesores>;
   asesorActual: Asesores;
   formAsesores: FormGroup;
+  sessionData: Session;
   sedes: Sedes[];
   constructor(
     private _asesoresService: AsesoresService,
@@ -27,13 +29,14 @@ export class AdvisersRegisteredComponent implements OnInit {
     private sedesService: SedesService,
     private formBuilder: FormBuilder
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this._utilService.loading = true;
     this.formAsesores = this.formBuilder.group({
       nombres:     [''],
       a_paterno:   [''],
       a_materno:   [''],
       email:       [''],
-      id_sedes:    [''],
+      id_sedes:    {value: this.sessionData.id_sedes, disabled: true},
       descripcion: [''],
     });
   }
@@ -81,7 +84,6 @@ export class AdvisersRegisteredComponent implements OnInit {
       a_paterno:   asesor.a_paterno,
       a_materno:   asesor.a_materno,
       email:       asesor.email,
-      id_sedes:    asesor.id_sedes,
       descripcion: asesor.descripcion,
     });
     this.swalEdit.fire();

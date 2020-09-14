@@ -17,6 +17,7 @@ import { auto } from '@popperjs/core';
 import Swal from 'sweetalert2';
 import { Sedes } from '../models/sedes.model';
 import { SedesService } from '../services/sedes.service';
+import { Session } from '../models/session.model';
 
 @Component({
   selector: 'app-authors-registered',
@@ -34,6 +35,7 @@ export class AuthorsRegisteredComponent implements OnInit {
   localidades: Localidades[];
   sedes: Sedes[];
   proyectos: Proyectos[];
+  sessionData: Session;
   constructor(
     private municipiosService: MunicipiosService,
     private escuelasService: EscuelasService,
@@ -44,6 +46,7 @@ export class AuthorsRegisteredComponent implements OnInit {
     private sedesService: SedesService,
     private formBuilder: FormBuilder
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formAutores = this.formBuilder.group({
       nombres: [''],
       a_paterno: [''],
@@ -51,7 +54,7 @@ export class AuthorsRegisteredComponent implements OnInit {
       telefono: [''],
       email: [''],
       id_proyectos: [''],
-      id_sedes: [''],
+      id_sedes: {value: this.sessionData.id_jueces, disabled: true},
       id_escuelas: [''],
       id_municipios: [''],
       id_localidades: [''],
@@ -107,7 +110,6 @@ export class AuthorsRegisteredComponent implements OnInit {
       telefono:       autor.telefono,
       email:          autor.email,
       id_proyectos:   autor.id_proyectos,
-      id_sedes:       autor.id_sedes,
       id_escuelas:    autor.id_escuelas,
       id_municipios:  autor.id_municipios,
       id_localidades: autor.id_localidades,

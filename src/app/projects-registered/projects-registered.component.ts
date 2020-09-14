@@ -17,6 +17,7 @@ import { Proyectos } from '../models/proyectos.model';
 import { ProyectosService } from '../services/proyectos.service';
 import Swal from 'sweetalert2';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Session } from '../models/session.model';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class ProjectsRegisteredComponent implements OnInit {
   dropdownSettings: IDropdownSettings;
   asesores: Asesores[];
   categorias: Categorias[];
+  sessionData: Session;
   constructor(
     private projectsService: ProjectsRegisteredService,
     private _utilService: UtilsService,
@@ -47,6 +49,7 @@ export class ProjectsRegisteredComponent implements OnInit {
     private categoriasServices: CategoriasService,
     private obtenerProyecto: ProyectosService
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.proyectos = new Array<ProjectRegistered>();
     this.areas = new Array<Areas>();
     this.sedes = new Array<Sedes>();
@@ -58,7 +61,7 @@ export class ProjectsRegisteredComponent implements OnInit {
       id_proyectos: [''],
       id_asesores: [''],
       id_areas: [''],
-      id_sedes: [''],
+      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
       id_categorias: [''],
       nombre: [''],
       resumen: [''],
@@ -135,7 +138,6 @@ export class ProjectsRegisteredComponent implements OnInit {
           id_proyectos:  data.id_proyectos,
           id_asesores:   data.id_asesores,
           id_areas:      data.id_areas,
-          id_sedes:      data.id_sedes,
           id_categorias: data.id_categorias,
           nombre:        data.nombre,
           resumen:       data.resumen,

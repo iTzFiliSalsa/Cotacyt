@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AreasService } from 'src/app/services/areas.service';
-import { Subscriber } from 'rxjs';
+import { Subscriber, forkJoin } from 'rxjs';
 import { DashboardService } from '../../services/dashboard.service';
 import { JsonPipe } from '@angular/common';
 import { Totales, ProyectosCalificados, ProyectosPorCalificar } from '../../models/dashboard.model';
@@ -75,7 +75,8 @@ export class DashboardComponent implements OnInit {
   informacionDeLosProyectos: InformacionDeLosProyectos[];
 
   sessionData: Session;
-  constructor(private dashboardService: DashboardService,
+  constructor(
+    private dashboardService: DashboardService,
     private categoriasService: CategoriasService,
     private calificacionesService: CalificacionesService,
     private _utilsService: UtilsService,
@@ -83,6 +84,7 @@ export class DashboardComponent implements OnInit {
     public readonly swalTargets: SwalPortalTargets,
     public formBuilder: FormBuilder,
     private infoProject: ProyectosService,
+    private proyectosService: ProyectosService,
   ) {
 
     this.proyectosCalificacion = new Array<any>();
@@ -132,7 +134,7 @@ export class DashboardComponent implements OnInit {
       },
       err => console.log(err));
 
-    if (this.sessionData.usuario === 'admin') {
+    if (this.sessionData.rol === 'admin') {
       this.projectsService.getProjects().subscribe(
         data => {
           this.proyectos = data;
@@ -143,16 +145,20 @@ export class DashboardComponent implements OnInit {
         }
       );
     } else {
-      // obtiene los proyectos calificados
-      this.dashboardService.getProyectosCalificados().subscribe(
+      forkJoin({
+        proyectosCalificados: this.dashboardService.getProyectosCalificados(),
+        proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar()
+      }).subscribe(
         (data: any) => {
-          this.proyectosCalificados = data.proyectos_calificados
+          console.log(data.proyectosCalificados);
+          console.log(data.proyectosPorCalificar);
+          this.proyectosCalificados = data.proyectosCalificados;
+          this.proyectosPorCalificar = data.proyectosPorCalificar;
         },
-        err => console.log(err));
-      // obtiene los proyectos por calificar
-      this.dashboardService.getProyectosPorCalificar().subscribe(
-        (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar,
-        err => console.log(err));
+        err => {
+          console.log(err);
+        }
+      );
     }
 
     this.sessionData = JSON.parse(localStorage.getItem('session'));
@@ -179,11 +185,14 @@ export class DashboardComponent implements OnInit {
 
   adminProjects(proyectos) {
     proyectos.filter((res) => {
-      if (res.status === '1') {
-        this.proyectosCalificados.push(res);
-      } else {
-        this.proyectosPorCalificar.push(res);
-      }
+      this.proyectosService.getStatusAdmin(res.id_proyectos)
+      .subscribe( data => {
+        if (data[0].status === 1) {
+          this.proyectosCalificados.push(res);
+        } else {
+          this.proyectosPorCalificar.push(res);
+        }
+      });
     });
   }
 

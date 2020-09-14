@@ -5,6 +5,7 @@ import { UtilsService } from '../services/utils.service';
 import swal from 'sweetalert2';
 import { Sedes } from '../models/sedes.model';
 import { SedesService } from '../services/sedes.service';
+import { Session } from '../models/session.model';
 
 @Component({
   selector: 'app-add-advisers',
@@ -14,18 +15,20 @@ import { SedesService } from '../services/sedes.service';
 export class AddAdvisersComponent implements OnInit {
   formRegistroAsesor: FormGroup;
   sedes: Sedes[];
+  sessionData: Session;
   constructor(
     private asesoresService: AsesoresService,
     private formBuilder: FormBuilder,
     private sedesService: SedesService,
     private _utilService: UtilsService
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formRegistroAsesor = this.formBuilder.group({
       nombres: ['', [Validators.required, Validators.maxLength(50)]],
       a_paterno: ['', [Validators.required, Validators.maxLength(50)]],
       a_materno: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.maxLength(50)]],
-      id_sedes: ['1', [Validators.required, Validators.maxLength(2)]],
+      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
       descripcion: ['', [Validators.required, Validators.maxLength(150)]],
     });
   }

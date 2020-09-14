@@ -14,6 +14,7 @@ import { Session } from 'src/app/models/session.model';
 import { SwalComponent, SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import swal from 'sweetalert2';
 import { InformacionDeLosProyectos } from '../models/proyectos.model'
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -84,7 +85,7 @@ export class ProjectsComponent implements OnInit {
 
     //TODOS LOS PROYECTOS, ESTO SE CAMBIARA POR CATEGORIAS
     
-    if(this.sessionData.usuario === 'admin'){
+    if(this.sessionData.rol === 'admin'){
       this.projectsService.getProjects().subscribe(
         res => {
           this.allProjects = res;
@@ -97,30 +98,37 @@ export class ProjectsComponent implements OnInit {
       ).add(()=> {
         this._utilService.loading = false;
       });
-    }else{
-      // obtiene los proyectos calificados
-    this.dashboardService.getProyectosCalificados().subscribe(
-      (data: any) => this.proyectosCalificados = data.proyectos_calificados,
-      err => console.log(err));
-    // obtiene los proyectos por calificar
-    this.dashboardService.getProyectosPorCalificar().subscribe(
-      (data: any) => this.proyectosPorCalificar = data.proyectos_por_calificar,
-      err => console.log(err)).add(() => {
-        this._utilService.loading = false;
+    }else {
+      forkJoin({
+        proyectosCalificados: this.dashboardService.getProyectosCalificados(),
+        proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar(),
+        todosLosProyectos: this.proyectosService.obtenerTodosLosProyectosDeCategoria()
+      }).subscribe (
+        (data: any) => {
+          this.proyectosCalificados = data.proyectosCalificados;
+          this.proyectosPorCalificar = data.proyectosPorCalificar;
+          this.allProjects = data.todosLosProyectos;
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService._loading = false;
       });
-    this.proyectosService.obtenerTodosLosProyectosDeCategoria()
-      .subscribe( (data: any) => this.allProjects = data );
     }
 
   }
 
   adminProjects(proyectos){
     proyectos.filter((res) => {
-      if(res.status === '1'){
-        this.proyectosCalificados.push(res);
-      }else{
-        this.proyectosPorCalificar.push(res);
-      }
+      this.proyectosService.getStatusAdmin(res.id_proyectos)
+      .subscribe( data => {
+        if (data[0].status === 1) {
+          this.proyectosCalificados.push(res);
+        } else {
+          this.proyectosPorCalificar.push(res);
+        }
+      });
     });
   }
 

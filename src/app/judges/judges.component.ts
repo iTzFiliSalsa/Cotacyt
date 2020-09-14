@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Sedes } from '../models/sedes.model';
 import { SedesService } from '../services/sedes.service';
 import { forkJoin } from 'rxjs';
+import { Session } from '../models/session.model';
 
 @Component({
   selector: 'app-judges',
@@ -21,17 +22,19 @@ export class JudgesComponent implements OnInit {
   juezActual: JudgesRegistered;
   sedes: Sedes[];
   formJuez: FormGroup;
+  sessionData: Session;
   constructor(
     private judgesService: JudgesRegisteredService,
     private _utilService: UtilsService,
     private sedesService: SedesService,
     private formBuilder: FormBuilder
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.jueces = new Array<JudgesRegistered>();
     this._utilService.loading = true;
     this.formJuez = this.formBuilder.group({
       id_categorias: ['', [Validators.required]],
-      id_sedes: ['1', [Validators.required]],
+      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
       usuario: ['', [Validators.required]],
       contrasena: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
@@ -84,7 +87,6 @@ export class JudgesComponent implements OnInit {
       usuario: this.juezActual.usuario,
       contrasena: this.juezActual.contrasena,
       nombre: this.juezActual.nombre,
-      id_sedes: this.juezActual.id_sedes,
       id_categorias: this.verificarCat(this.juezActual.categoria)
     });
     this.swalEdit.fire();
