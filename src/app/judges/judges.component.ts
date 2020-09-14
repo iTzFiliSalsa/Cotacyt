@@ -34,10 +34,10 @@ export class JudgesComponent implements OnInit {
     this._utilService.loading = true;
     this.formJuez = this.formBuilder.group({
       id_categorias: ['', [Validators.required]],
-      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
-      usuario: ['', [Validators.required]],
-      contrasena: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
+      id_sedes:      [this.sessionData.id_sedes],
+      usuario:       ['', [Validators.required]],
+      contrasena:    ['', [Validators.required]],
+      nombre:        ['', [Validators.required]],
     });
   }
 
@@ -47,7 +47,6 @@ export class JudgesComponent implements OnInit {
       sedes: this.sedesService.getSedes(),
     }).subscribe(
       data => {
-        console.log(data.jueces);
         this.jueces = data.jueces;
         this.sedes = data.sedes;
       },
@@ -87,6 +86,7 @@ export class JudgesComponent implements OnInit {
       usuario: this.juezActual.usuario,
       contrasena: this.juezActual.contrasena,
       nombre: this.juezActual.nombre,
+      id_sedes: this.sessionData.id_sedes,
       id_categorias: this.verificarCat(this.juezActual.categoria)
     });
     this.swalEdit.fire();

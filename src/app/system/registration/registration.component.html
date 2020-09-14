@@ -15,9 +15,9 @@
                     <form [formGroup]="formsRegistroJuez">
                         <h5 class="titulo font-weight-bold">Registrar Juez</h5>
                         <div class="form-group">
-                            <label for="">Clave:</label>
+                            <label for="">Usuario:</label>
                             <input type="text" class="form-control" formControlName="usuario"
-                                placeholder="Clave del juez">
+                                placeholder="Nombre de usuario">
                         </div>
                         <div class="form-group">
                             <label for="">Nombre:</label>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Sede:</label>
-                            <select formControlName="id_sedes" class="form-control">
+                            <select formControlName="id_sedes" class="form-control" disabled>
                                 <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
                             </select>
                         </div>

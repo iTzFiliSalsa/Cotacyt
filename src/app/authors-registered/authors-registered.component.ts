@@ -54,15 +54,15 @@ export class AuthorsRegisteredComponent implements OnInit {
       telefono: [''],
       email: [''],
       id_proyectos: [''],
-      id_sedes: {value: this.sessionData.id_jueces, disabled: true},
+      id_sedes: this.sessionData.id_jueces,
       id_escuelas: [''],
       id_municipios: [''],
       id_localidades: [''],
     });
+    this.utils._loading = true;
   }
 
   ngOnInit(): void {
-    this.utils._loading = true;
     forkJoin({
       escuelas: this.escuelasService.getEscuelas(),
       localidades: this.localidadesService.getLocalidades(),
@@ -88,6 +88,7 @@ export class AuthorsRegisteredComponent implements OnInit {
   setAutor(autor: Autores) {
     this.autorActual = autor;
   }
+
   deleteAutor() {
     this.utils._loading = true;
     this.autoresService.deleteAutores(this.autorActual.id_autores)
@@ -101,6 +102,7 @@ export class AuthorsRegisteredComponent implements OnInit {
           this.ngOnInit();
         });
   }
+
   openSwal(autor: Autores) {
     this.autorActual = autor;
     this.formAutores.patchValue({
@@ -110,12 +112,14 @@ export class AuthorsRegisteredComponent implements OnInit {
       telefono:       autor.telefono,
       email:          autor.email,
       id_proyectos:   autor.id_proyectos,
+      id_sedes:       this.sessionData.id_sedes,
       id_escuelas:    autor.id_escuelas,
       id_municipios:  autor.id_municipios,
       id_localidades: autor.id_localidades,
     });
     this.swalEdit.fire();
   }
+
   editarAutor() {
     this.utils._loading = true;
     this.autoresService.updateAutor(this.formAutores.value, this.autorActual.id_autores)

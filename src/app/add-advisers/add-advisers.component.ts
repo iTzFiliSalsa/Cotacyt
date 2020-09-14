@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { AsesoresService } from "../services/asesores.service";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { AsesoresService } from '../services/asesores.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UtilsService } from '../services/utils.service';
 import swal from 'sweetalert2';
 import { Sedes } from '../models/sedes.model';
@@ -24,20 +24,24 @@ export class AddAdvisersComponent implements OnInit {
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formRegistroAsesor = this.formBuilder.group({
-      nombres: ['', [Validators.required, Validators.maxLength(50)]],
-      a_paterno: ['', [Validators.required, Validators.maxLength(50)]],
-      a_materno: ['', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.required, Validators.maxLength(50)]],
-      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
+      nombres:     ['', [Validators.required, Validators.maxLength(50)]],
+      a_paterno:   ['', [Validators.required, Validators.maxLength(50)]],
+      a_materno:   ['', [Validators.required, Validators.maxLength(50)]],
+      email:       ['', [Validators.required, Validators.maxLength(50)]],
+      id_sedes:    this.sessionData.id_sedes,
       descripcion: ['', [Validators.required, Validators.maxLength(150)]],
     });
+    this._utilService._loading = true;
   }
 
   ngOnInit(): void {
-    this.sedesService.getSedes().subscribe( data => this.sedes = data, err => console.log(err));
+    this.sedesService.getSedes()
+      .subscribe( data => this.sedes = data, err => console.log(err))
+      .add(() => this._utilService._loading = false);
   }
 
   registrarAsesor() {
+    this._utilService._loading = true;
     this.asesoresService
       .postAsesor(this.formRegistroAsesor.value)
       .subscribe(
@@ -47,7 +51,9 @@ export class AddAdvisersComponent implements OnInit {
             title: 'Exito',
             text: 'El asesor se registró correctamente',
           });
-          this.formRegistroAsesor.reset();
+          this.formRegistroAsesor.reset({
+            id_sedes: this.sessionData.id_sedes
+          });
         },
         (err) => {
           swal.fire({
@@ -55,6 +61,7 @@ export class AddAdvisersComponent implements OnInit {
             title: 'Error',
             text: 'Hubo un error al registrar el asesor',
           });
+          console.error(err);
         }
       )
       .add(() => {

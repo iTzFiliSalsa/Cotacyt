@@ -31,10 +31,10 @@ export class RegistrationComponent implements OnInit {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formsRegistroJuez = formBuilder.group({
       id_categorias: [1, [Validators.required]],
-      usuario: ['', [Validators.required, Validators.maxLength(30)]],
-      contrasena: ['', [Validators.required, Validators.maxLength(20)]],
-      nombre: ['', [Validators.required, Validators.maxLength(100)]],
-      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
+      usuario:       ['', [Validators.required, Validators.maxLength(30)]],
+      contrasena:    ['', [Validators.required, Validators.maxLength(20)]],
+      nombre:        ['', [Validators.required, Validators.maxLength(100)]],
+      id_sedes:      [this.sessionData.id_sedes],
     });
   }
 
@@ -51,14 +51,17 @@ export class RegistrationComponent implements OnInit {
           title: 'Exito',
           text: 'El juez se registro correctamente'
         })
-        this.formsRegistroJuez.reset();
+        this.formsRegistroJuez.reset({
+          id_sedes: this.sessionData.id_sedes
+        });
       },
       err => {
         swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Hubo un error al registrar el juez'
-        })
+        });
+        console.log(err);
       }
     ).add(() => {
       this._utilService.loading = false;

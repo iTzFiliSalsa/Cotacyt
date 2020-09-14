@@ -58,17 +58,18 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.autoresSeleccionados = new Array<any>();
     this._utilService.loading = true;
     this.formProyecto = this.formBuilder.group({
-      id_proyectos: [''],
-      id_asesores: [''],
-      id_areas: [''],
-      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
+      id_proyectos:  [''],
+      id_asesores:   [''],
+      id_areas:      [''],
+      id_sedes:      this.sessionData.id_sedes,
       id_categorias: [''],
-      nombre: [''],
-      resumen: [''],
+      nombre:        [''],
+      resumen:       [''],
     });
   }
 
   ngOnInit(): void {
+    // TODO: traer los asesores para mostrarlos
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id_autores',
@@ -94,7 +95,6 @@ export class ProjectsRegisteredComponent implements OnInit {
       }
     ).subscribe(
       data => {
-        console.log(data.proyectos);
         this.areas = data.areas;
         this.sedes = data.sedes;
         this.categorias = data.categorias;
@@ -138,6 +138,7 @@ export class ProjectsRegisteredComponent implements OnInit {
           id_proyectos:  data.id_proyectos,
           id_asesores:   data.id_asesores,
           id_areas:      data.id_areas,
+          id_sedes:      this.sessionData.id_sedes,
           id_categorias: data.id_categorias,
           nombre:        data.nombre,
           resumen:       data.resumen,
@@ -153,13 +154,11 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.swalEdit.fire();
   }
   editarProyecto() {
-    console.log(this.formProyecto.value);
     this.projectsService.updateProyect( this.formProyecto.value, this.proyectoActual.id_proyectos)
     .subscribe( data => {
       Swal.fire({
         icon: 'success',
         title: data,
-        text: '',
       });
       this.ngOnInit();
     }, err => {
@@ -167,16 +166,13 @@ export class ProjectsRegisteredComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'ocurrio un error al actualizar',
-        text: '',
       });
     });
   }
-  addAutor(item) {
-    console.log(item);
+  addAutor(item: any) {
     this.autoresSeleccionados.push(item);
   }
-  dropAutor(item) {
-    console.log(item);
+  dropAutor(item: { id_autores: any; }) {
     this.autoresSeleccionados.map( (res, index) => {
       if (res.id_autores === item.id_autores) {
         this.autoresSeleccionados.splice(index, 1);

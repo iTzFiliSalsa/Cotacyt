@@ -50,13 +50,14 @@ export class AddAuthorsComponent implements OnInit {
       id_escuelas:    ['1', [Validators.required]],
       id_municipios:  ['1', [Validators.required]],
       id_localidades: ['1', [Validators.required]],
-      id_sedes:       {value: this.sessionData.id_sedes, disabled: true},
+      id_sedes:       this.sessionData.id_sedes,
       nombres:        ['', [Validators.required, Validators.maxLength(50)]],
       a_paterno:      ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:      ['', [Validators.required, Validators.maxLength(50)]],
       telefono:       ['', [Validators.required, Validators.maxLength(10)]],
       email:          ['', [Validators.required, Validators.maxLength(50)]], 
     });
+    this._utilService._loading = true;
   }
 
   ngOnInit(): void {
@@ -75,24 +76,13 @@ export class AddAuthorsComponent implements OnInit {
       this.sedes = data.sedes;
     }, err => {
       console.log(err);
-    });
+    }).add(() => this._utilService._loading = false);
     this.asesoresService.getAsesores().subscribe(data => {
       this.asesores = data;
-      console.log(this.asesores);
-    
     } );
-    this.escuelasService.getEscuelas()
-    .subscribe( data => this.escuelas = data, err => console.log( err ));
-    this.localidadesService.getLocalidades()
-    .subscribe( data => this.localidades = data, err => console.log( err ));
-    this.municipiosService.getMunicipios()
-    .subscribe( data => this.municipios = data, err => console.log( err ));
-    this.proyectosService.obtenerTodosLosProyectos()
-    .subscribe( data => this.proyectos = data, err => console.log( err ));
   }
 
   reigstrarAutor() {
-    console.log(this.formRegistroAutores.value);
     this.autoresService.postAutor( this.formRegistroAutores.value )
     .subscribe(
       data => {
@@ -100,15 +90,17 @@ export class AddAuthorsComponent implements OnInit {
           icon: 'success',
           title: 'Exito',
           text: 'El proyecto se registró correctamente'
-        })
-        this.formRegistroAutores.reset();
+        });
+        this.formRegistroAutores.reset({
+          id_sedes: this.sessionData.id_sedes,
+        });
       },
       err => {
         swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Hubo un error al registrar el proyecto'
-        })
+        });
       }
     ).add(() => {
       this._utilService.loading = false;

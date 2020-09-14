@@ -36,7 +36,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       a_paterno:   [''],
       a_materno:   [''],
       email:       [''],
-      id_sedes:    {value: this.sessionData.id_sedes, disabled: true},
+      id_sedes:    this.sessionData.id_sedes,
       descripcion: [''],
     });
   }
@@ -84,6 +84,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       a_paterno:   asesor.a_paterno,
       a_materno:   asesor.a_materno,
       email:       asesor.email,
+      id_sedes:    this.sessionData.id_sedes,
       descripcion: asesor.descripcion,
     });
     this.swalEdit.fire();

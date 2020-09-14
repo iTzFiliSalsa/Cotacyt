@@ -16,7 +16,7 @@ export class ProyectosService {
   }
 
   obtenerTodosLosProyectos(): Observable<Proyectos[]> {
-    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all');
+    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all?id_sedes=' + this.sessionData.id_sedes);
   }
   obtenerProyecto(idProyectos: string): Observable<Proyectos> {
     return this.http.get<Proyectos>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/' + idProyectos);
