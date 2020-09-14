@@ -22,6 +22,7 @@ export class DashboardService {
     const body = {
       id_categorias: this.sessionData.id_categorias,
       id_jueces: this.sessionData.id_jueces,
+      id_sedes: this.sessionData.id_sedes
     };
     return this.http.post<ProyectosCalificados[]>(
       this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-calificados', body);
@@ -31,6 +32,7 @@ export class DashboardService {
     const body = {
       id_categorias: this.sessionData.id_categorias,
       id_jueces: this.sessionData.id_jueces,
+      id_sedes: this.sessionData.id_sedes
     };
     return this.http.post<ProyectosPorCalificar[]>(
       this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-calificar', body);

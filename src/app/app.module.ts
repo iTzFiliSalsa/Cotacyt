@@ -28,6 +28,8 @@ import { AddAdvisersComponent } from './add-advisers/add-advisers.component';
 import { AdvisersRegisteredComponent } from './advisers-registered/advisers-registered.component';
 import { AddAuthorsComponent } from './add-authors/add-authors.component';
 import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EstadisticsComponent } from './estadistics/estadistics.component';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { AuthorsRegisteredComponent } from './authors-registered/authors-registe
     AddAdvisersComponent,
     AdvisersRegisteredComponent,
     AddAuthorsComponent,
-    AuthorsRegisteredComponent
+    AuthorsRegisteredComponent,
+    EstadisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { AuthorsRegisteredComponent } from './authors-registered/authors-registe
     NgbModule,
     ChartsModule,
     SweetAlert2Module.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     ServicesConfig

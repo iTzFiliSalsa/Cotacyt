@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
     this.admin = false;
     this.categoriasService.getCategorias().subscribe( data => {
       this.categoria = data.categoria;
-      if ( this.sessionData.usuario === 'admin' ) {
+      if ( this.sessionData.rol === 'admin' ) {
         this.admin = true;
         this._utilService._cargo = true;
       }else{

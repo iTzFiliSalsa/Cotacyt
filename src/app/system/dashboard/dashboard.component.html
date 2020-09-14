@@ -1,7 +1,97 @@
-<!-- <nav class="navbar navbar-light bg-light justify-content-between mb-3">
-    <a class="menubar-label-category navbar-brand">Categoria: <span class="category-label">{{categoria}}</span></a>
-    <button class="fas fa-cog btn-cog"></button>
-</nav> -->
+<!-- swal tabla informacion -->
+<swal class="swal-wide" #swalid1 title="Información del proyecto" [swalOptions]="{customClass: 'clase'}">
+    <div *swalPortal>
+        <div>
+            <table *ngFor="let info of informacionDeLosProyectos" class="table table-light">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Nombre:
+                            </div>
+                        </th>
+                        <td>{{info.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Autores:
+                            </div>
+                        </th>
+                        <td>{{info.autores}}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Asesores:
+                            </div>
+                        </th>
+                        <td>{{info.asesor}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Area:
+                            </div>
+                        </th>
+                        <td> {{info.area}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Categoria:
+                            </div>
+                        </th>
+                        <td> {{info.categorias}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Sede:
+                            </div>
+                        </th>
+                        <td> {{info.sede}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Resumen:
+                            </div>
+                        </th>
+                        <td> {{info.resumen}} </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                Calificación:
+                            </div>
+                        </th>
+                        <td> {{info.calificacion}} </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</swal>
+
+
+
+<!-- swal reproductor de video -->
+<swal class="swal-wide " #swalid2 title="Demostración del proyecto" [swalOptions]="{customClass: 'clase'}">
+    <div *swalPortal>
+        <div>
+            <div class="contenedor-video">
+                <video width="400" controls>
+                    <source src="../../../assets/video/video.mp4" type="video/mp4" >
+                </video>
+            </div>
+        </div>
+
+    </div>
+</swal>
+
+
+
 <!-- container -->
 <div class="container-fluid">
     <!-- Primera seccion -->
@@ -9,45 +99,46 @@
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3">
-    
-                        <p class="text-center custom-text">Proyectos</p>
-                        <h1 class="text-h1">{{totales['proyectos']}}</h1>
+
+                    <p class="text-center custom-text">Proyectos</p>
+                    <h1 class="text-h1">{{totales['proyectos']}}</h1>
 
                 </div>
 
                 <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3">
 
-                        <p class="text-center custom-text">Participantes</p>
-                        <h1 class="text-h1 ">{{totales['autores']}}</h1>
+                    <p class="text-center custom-text">Participantes</p>
+                    <h1 class="text-h1 ">{{totales['autores']}}</h1>
 
                 </div>
 
                 <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3">
-                        <p class="text-center custom-text">Categorías</p>
-                        <h1 class="text-h1">{{totales['categorias']}}</h1>
+                    <p class="text-center custom-text">Categorías</p>
+                    <h1 class="text-h1">{{totales['categorias']}}</h1>
 
                 </div>
 
                 <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3">
-                        <p class="text-center custom-text">Jueces</p>
-                        <h1 class="text-h1 ">{{totales['jueces']}}</h1>
+                    <p class="text-center custom-text">Jueces</p>
+                    <h1 class="text-h1 ">{{totales['jueces']}}</h1>
                 </div>
 
             </div>
         </div>
 
         <!-- CRONOMETRO -->
-        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">  
-            <div class="card-clock card"> 
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="card-clock card">
                 <div class="col-lg-12">
                     <div class="row justify-content-center">
-                        <h1 name="freloj" class="text-h1-panel mt-2"> <span> <a href="" class="fas fa-clock"></a> </span>
-                            {{ht}}    
+                        <h1 name="freloj" class="text-h1-panel mt-2"> <span> <a href="" class="fas fa-clock"></a>
+                            </span>
+                            {{ht}}
                         </h1>
                     </div>
                 </div>
             </div>
-               <!-- <div class="row justify-content-around p-1">
+            <!-- <div class="row justify-content-around p-1">
                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                        <h6> Fecha inicio: <span><h6 class="text-h6">10/05/2020</h6></span></h6>
                    </div>
@@ -69,15 +160,74 @@
                 <div class="row">
                     <!-- colum izquierda -->
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+
+                        <button class="btn-project-list btn btn-block mb-1"
+                            (click)="mostrarProyectosPorCalificacion($event)">
+                            Mostrar proyectos por calificación
+                        </button>
+
+                        <!-- ventana sweetalert -->
+                        <swal class="swal-wide" #swalid title="Calificaciones de los proyectos"
+                            [swalOptions]="{customClass: 'clase'}">
+                            <div *swalPortal>
+                                <div>
+                                    <div class="row justify-content-center mb-2">
+                                        <form action="" [formGroup]="formsFiltro">
+                                            <select formControlName="id_categorias" class="custom-select"
+                                                id="inputGroupSelect04">
+                                                <option selected="true" value="petit">Petit</option>
+                                                <option value="kids">Kids</option>
+                                                <option value="juvenil">Juvenil</option>
+                                                <option value="media-superior">Media superior</option>
+                                                <option value="superior">Superior</option>
+                                                <option value="posgrado">Posgrado</option>
+                                            </select>
+                                        </form>
+
+                                        <button (click)="mostrarListaCalificaciones()" class="btn btn-select"
+                                            type="button">Filtrar</button>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <table class="table table-lg table-hover">
+                                            <thead class="background-table-projects">
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Calificación</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tr class="table"
+                                                *ngFor="let proyecto of proyectosCalificacion;let i = index">
+                                                <td>
+                                                    <div class="row">
+                                                        <span class="badge badge-position mr-3"> {{i+1}} </span>
+                                                        {{ proyecto.nombre}}
+                                                    </div>
+                                                </td>
+                                                <td>{{proyecto.total}} </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </swal>
+
+
+
                         <div class="card m-0">
                             <div class="card-header background-table">
                                 <h6>Proyectos calificados</h6>
                             </div>
-                            <div class="qualified-projects card-body m-0 p-0">
-                                <ul class="list-group "  *ngFor="let proyecto of proyectosCalificados">
+                            <div class="qualified-projects-principal card-body m-0 p-0">
+                                <ul class="list-group " *ngFor="let proyecto of proyectosCalificados">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        <button class="ml-auto  btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                        <button class="ml-auto  btn btn-subboton-info"
+                                            (click)="mostrarInfoCalificados(proyecto)">
                                             <i class="fas fa-question-circle"></i>
+                                        </button>
+                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event)">
+                                            <i class="fas fa-play-circle"></i>
                                         </button>
                                     </li>
                                 </ul>
@@ -85,17 +235,23 @@
                         </div>
                         <br>
 
-                        
+
                         <div class="card ">
                             <div class="card-header background-table">
                                 <h6>Proyectos por calificar</h6>
                             </div>
                             <div class="card-body p-0 qualified-projects">
-                                <ul class="list-group "  *ngFor="let proyecto of proyectosPorCalificar">
+                                <ul class="list-group " *ngFor="let proyecto of proyectosPorCalificar">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        <button class="ml-auto btn btn-light" (click)="util.getInfo(proyecto.resumen)">
+                                        <button class="ml-auto btn btn-subboton-info"
+                                            (click)="mostrarInfoPorCalificar(proyecto)">
                                             <i class="fas fa-question-circle"></i>
                                         </button>
+
+                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event)">
+                                            <i class="fas fa-play-circle"></i>
+                                        </button>
+
                                     </li>
                                 </ul>
                                 <!-- <table class="table table-hover table-sm">
@@ -127,25 +283,20 @@
                             </div>
                             <div class="qualified-projects2 card-body p-0">
                                 <div style="display: block;">
-                                    <canvas baseChart 
-                                      [datasets]="barChartData"
-                                      [labels]="barChartLabels"
-                                      [options]="barChartOptions"
-                                      [plugins]="barChartPlugins"
-                                      [legend]="barChartLegend"
-                                      [colors]="barChartColors"
-                                      [chartType]="barChartType">
+                                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                        [options]="barChartOptions" [plugins]="barChartPlugins"
+                                        [legend]="barChartLegend" [colors]="barChartColors" [chartType]="barChartType">
                                     </canvas>
-                                  </div>
-                                  
+                                </div>
+
                             </div>
                         </div>
                         <br>
                         <!-- card estadisticas -->
                         <div class="card">
                             <div class="card-header background-table">
-                                    <h6>Estadistica de proyectos</h6>
-                                
+                                <h6>Estadistica de proyectos</h6>
+
                             </div>
                             <div class="qualified-projects card-body p-0">
                                 <table class="table">
@@ -161,7 +312,8 @@
                                             <td>{{proyectos.nombre}}</td>
                                             <td>
                                                 <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-custom" role="progressbar" [ngStyle]="getPercent(proyectos.total)"></div>
+                                                    <div class="progress-bar bg-custom" role="progressbar"
+                                                        [ngStyle]="getPercent(proyectos.total)"></div>
                                                 </div>
                                             </td>
                                             <td>{{proyectos.total | number}}%</td>

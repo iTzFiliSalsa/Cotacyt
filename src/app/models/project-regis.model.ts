@@ -1,11 +1,10 @@
-export interface ProjectsRegistered {
-    id_proyectos: number;
-    id_asesores: number;
-    id_areas: number;
-    id_categorias: number;
-    id_sedes: number;
-    nombre: String;
-    resumen: String;
-    status: number;
+export interface ProjectRegistered {
+    id_proyectos: string;
+    nombre_asesor: string;
+    area: string;
+    categoria: string;
+    sede: string;
+    nombre: string;
+    resumen: string;
 
 }

@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div id="gg" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        
+            <div class="card">
+                <div class="card-header background-table">
+                    <h6>Proyectos por sede</h6>
+                </div>
+                <div class="card-body">
+                    <div style="display: block">
+                        <canvas #graficaProy1 id="graficaProy1" baseChart
+                          [datasets]="barChartData"
+                          [labels]="barChartLabels"
+                          [options]="barChartOptions"
+                          [plugins]="barChartPlugins"
+                          [legend]="barChartLegend"
+                          [chartType]="barChartType"
+                          [colors]="barChartColors">
+                        </canvas>
+                      </div>
+                      <button id="btn-graf" mat-button mat-raised-button color="primary" (click)="downloadPDF()">Imprimir</button>
+                </div>
+            </div>
+        </div> <!-- fin columna derecha -->
+    </div> <!-- fin row -->
+</div> <!-- fin container-fluid -->
