@@ -5,6 +5,7 @@ import jsPDF from 'jspdf';
 import { Color, defaultColors, Label } from 'ng2-charts';
 import { EstadisticasService } from '../services/estadisticas.service';
 
+
 @Component({
   selector: 'app-estadistics-component',
   templateUrl: './estadistics.component.html',
@@ -56,9 +57,6 @@ export class EstadisticsComponent implements OnInit {
           data: [sede1,sede2,sede3,sede4,sede5,sede6],
           label: 'Proyectos Por Sede'
         }];
-
-        console.log(sede1);
-        console.log(this.estadisticas);
       },
       err => {
         console.log(err);
@@ -75,20 +73,8 @@ export class EstadisticsComponent implements OnInit {
     console.log(event, active);
   }
 
-  public randomize(): void {
-    // Only Change 3 values
-    const data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    this.barChartData[0].data = data;
-  }
 
-  downloadPDF(evt: any) {
+  downloadPDF() {
     var canvas = document.querySelector('#graficaProy1');
     //creates image
     var canvasImg = canvas.toDataURL("image/jpeg", 1.0);

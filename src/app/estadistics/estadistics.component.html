@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div style="display: block">
-                        <canvas id="graficaProy1" class="grafica" baseChart
+                        <canvas id="graficaProy1" baseChart
                           [datasets]="barChartData"
                           [labels]="barChartLabels"
                           [options]="barChartOptions"
@@ -18,10 +18,11 @@
                           [colors]="barChartColors">
                         </canvas>
                       </div>
-                      <button id="btn-graf" mat-button mat-raised-button color="primary" (click)="downloadPDF($event)">Imprimir</button>
+                      <button id="btn-graf" mat-button mat-raised-button color="primary" (click)="downloadPDF()">Imprimir</button>
                 </div>
             </div>
         
+
             <p>Select para la sede</p>
         
             <div class="card">
@@ -30,17 +31,17 @@
                 </div>
                 <div class="card-body">
                     <div style="display: block">
-                        <canvas id="graficaProy1" class="grafica" baseChart
-                          [datasets]="barChartData"
-                          [labels]="barChartLabels"
-                          [options]="barChartOptions"
-                          [plugins]="barChartPlugins"
-                          [legend]="barChartLegend"
-                          [chartType]="barChartType"
-                          [colors]="barChartColors">
+                        <canvas id="graficaProy2" baseChart
+                          [datasets]="barChartData1"
+                          [labels]="barChartLabels1"
+                          [options]="barChartOptions1"
+                          [plugins]="barChartPlugins1"
+                          [legend]="barChartLegend1"
+                          [chartType]="barChartType1"
+                          [colors]="barChartColors1">
                         </canvas>
                       </div>
-                      <button id="btn-graf" mat-button mat-raised-button color="primary" (click)="downloadPDF($event)">Imprimir</button>
+                      <button id="btn-graf" mat-button mat-raised-button color="primary" >Imprimir</button>
                 </div>
             </div>
         </div> <!-- fin columna izquierda -->
@@ -53,7 +54,7 @@
                 </div>
                 <div class="card-body">
                     <div style="display: block">
-                        <canvas id="graficaProy1" class="grafica" baseChart
+                        <canvas id="graficaProy3" class="grafica" baseChart
                           [datasets]="barChartData"
                           [labels]="barChartLabels"
                           [options]="barChartOptions"
@@ -63,7 +64,7 @@
                           [colors]="barChartColors">
                         </canvas>
                       </div>
-                      <button id="btn-graf" mat-button mat-raised-button color="primary" (click)="downloadPDF($event)">Imprimir</button>
+                      <button id="btn-graf" mat-button mat-raised-button color="primary" >Imprimir</button>
                 </div>
             </div>
 
@@ -73,7 +74,7 @@
                 </div>
                 <div class="card-body">
                     <div style="display: block">
-                        <canvas id="graficaProy1" class="grafica" baseChart
+                        <canvas id="graficaProy4" class="grafica" baseChart
                           [datasets]="barChartData"
                           [labels]="barChartLabels"
                           [options]="barChartOptions"
@@ -83,7 +84,7 @@
                           [colors]="barChartColors">
                         </canvas>
                       </div>
-                      <button id="btn-graf" mat-button mat-raised-button color="primary" (click)="downloadPDF($event)">Imprimir</button>
+                      <button id="btn-graf" mat-button mat-raised-button color="primary" >Imprimir</button>
                 </div>
             </div>
         </div> <!-- fin columna derecha -->
