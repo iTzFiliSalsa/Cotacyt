@@ -25,6 +25,12 @@
                                 placeholder="Nombre del juez">
                         </div>
                         <div class="form-group">
+                            <label for="">Sede:</label>
+                            <select formControlName="id_sedes" class="form-control">
+                                <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="">Categoria:</label>
                             <select formControlName="id_categorias" class="form-control">
                                 <option value="1">Petit</option>

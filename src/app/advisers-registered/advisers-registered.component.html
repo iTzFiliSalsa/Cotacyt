@@ -11,6 +11,7 @@
             <th>Apellido paterno</th>
             <th>Apellido materno</th>
             <th>Correo</th>
+            <th>Sede</th>
             <th>Descripción</th>
             <th>Opciones</th>
         </tr>
@@ -21,6 +22,7 @@
         <td>{{i.a_materno}}</td>
         <td>{{i.a_paterno}}</td>
         <td>{{i.email}}</td>
+        <td>{{i.sede}}</td>
         <td>{{i.descripcion}}</td>
         <td class="d-flex">
             <button (click)="openSwal(i)" class="btn btn-edit mr-3"><i class="fas fa-edit"></i></button>
@@ -68,6 +70,12 @@
             <div class="form-group">
                 <label for="">Correo:</label>
                 <input type="email" class="form-control" formControlName="email" placeholder="Correo">
+            </div>
+            <div class="form-group">
+                <label for="">Sede:</label>
+                <select formControlName="id_sedes" class="form-control">
+                    <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="">Descripción:</label>

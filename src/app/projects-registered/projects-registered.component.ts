@@ -16,6 +16,8 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Proyectos } from '../models/proyectos.model';
 import { ProyectosService } from '../services/proyectos.service';
 import Swal from 'sweetalert2';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Session } from '../models/session.model';
 
 
 @Component({
@@ -31,8 +33,12 @@ export class ProjectsRegisteredComponent implements OnInit {
   formProyecto: FormGroup;
   areas: Areas[];
   sedes: Sedes[];
+  autores = [];
+  autoresSeleccionados: any[];
+  dropdownSettings: IDropdownSettings;
   asesores: Asesores[];
   categorias: Categorias[];
+  sessionData: Session;
   constructor(
     private projectsService: ProjectsRegisteredService,
     private _utilService: UtilsService,
@@ -43,17 +49,19 @@ export class ProjectsRegisteredComponent implements OnInit {
     private categoriasServices: CategoriasService,
     private obtenerProyecto: ProyectosService
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.proyectos = new Array<ProjectRegistered>();
     this.areas = new Array<Areas>();
     this.sedes = new Array<Sedes>();
     this.asesores = new Array<Asesores>();
     this.categorias = new Array<Categorias>();
+    this.autoresSeleccionados = new Array<any>();
     this._utilService.loading = true;
     this.formProyecto = this.formBuilder.group({
       id_proyectos: [''],
       id_asesores: [''],
       id_areas: [''],
-      id_sedes: [''],
+      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
       id_categorias: [''],
       nombre: [''],
       resumen: [''],
@@ -61,6 +69,21 @@ export class ProjectsRegisteredComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id_autores',
+      textField: 'asesor',
+      itemsShowLimit: 3,
+      limitSelection: 3,
+      allowSearchFilter: true
+    };
+    this.autores =  [
+      { id_autores: 1, asesor: 'kt' },
+      { id_autores: 2, asesor: 'chino' },
+      { id_autores: 3, asesor: 'fili' },
+      { id_autores: 4, asesor: 'santi' },
+      { id_autores: 5, asesor: 'Ne' }
+    ];
     forkJoin(
       {
         areas: this.areasService.getAreas(),
@@ -71,6 +94,7 @@ export class ProjectsRegisteredComponent implements OnInit {
       }
     ).subscribe(
       data => {
+        console.log(data.proyectos);
         this.areas = data.areas;
         this.sedes = data.sedes;
         this.categorias = data.categorias;
@@ -89,11 +113,19 @@ export class ProjectsRegisteredComponent implements OnInit {
     this._utilService.loading = true;
     this.projectsService.deleteProyectsRegistred(this.proyectoActual.id_proyectos)
       .subscribe(data => {
-        // TODO: alert mejor
-        alert(data);
+        Swal.fire({
+          title: 'Se elimino correctamente',
+          icon: 'success'
+        });
         this.ngOnInit();
       },
-        err => console.log(err)
+        err => {
+          console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error',
+            icon: 'error',
+          })
+        }
       ).add(() => {
         this._utilService.loading = false;
       });
@@ -106,7 +138,6 @@ export class ProjectsRegisteredComponent implements OnInit {
           id_proyectos:  data.id_proyectos,
           id_asesores:   data.id_asesores,
           id_areas:      data.id_areas,
-          id_sedes:      data.id_sedes,
           id_categorias: data.id_categorias,
           nombre:        data.nombre,
           resumen:       data.resumen,
@@ -138,6 +169,18 @@ export class ProjectsRegisteredComponent implements OnInit {
         title: 'ocurrio un error al actualizar',
         text: '',
       });
+    });
+  }
+  addAutor(item) {
+    console.log(item);
+    this.autoresSeleccionados.push(item);
+  }
+  dropAutor(item) {
+    console.log(item);
+    this.autoresSeleccionados.map( (res, index) => {
+      if (res.id_autores === item.id_autores) {
+        this.autoresSeleccionados.splice(index, 1);
+      }
     });
   }
 }

@@ -5,6 +5,10 @@ import { UtilsService } from '../services/utils.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Sedes } from '../models/sedes.model';
+import { SedesService } from '../services/sedes.service';
+import { forkJoin } from 'rxjs';
+import { Session } from '../models/session.model';
 
 @Component({
   selector: 'app-judges',
@@ -16,16 +20,21 @@ export class JudgesComponent implements OnInit {
   @ViewChild('swalid') private swalEdit: SwalComponent;
   jueces: JudgesRegistered[];
   juezActual: JudgesRegistered;
+  sedes: Sedes[];
   formJuez: FormGroup;
+  sessionData: Session;
   constructor(
     private judgesService: JudgesRegisteredService,
     private _utilService: UtilsService,
+    private sedesService: SedesService,
     private formBuilder: FormBuilder
   ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.jueces = new Array<JudgesRegistered>();
     this._utilService.loading = true;
     this.formJuez = this.formBuilder.group({
       id_categorias: ['', [Validators.required]],
+      id_sedes: {value: this.sessionData.id_sedes, disabled: true},
       usuario: ['', [Validators.required]],
       contrasena: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
@@ -33,15 +42,21 @@ export class JudgesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.judgesService.getJudges().subscribe(
+    forkJoin({
+      jueces: this.judgesService.getJudges(),
+      sedes: this.sedesService.getSedes(),
+    }).subscribe(
       data => {
-        this.jueces = data;
+        console.log(data.jueces);
+        this.jueces = data.jueces;
+        this.sedes = data.sedes;
       },
       err => {
         console.log(err);
-      }).add(() => {
-        this._utilService.loading = false;
-      });
+      }
+    ).add(() => {
+      this._utilService.loading = false;
+    });
   }
   setJudge(juez: JudgesRegistered) {
     this.juezActual = juez;
@@ -50,10 +65,17 @@ export class JudgesComponent implements OnInit {
     this._utilService._loading = true;
     this.judgesService.deleteJudges(this.juezActual.id_jueces)
       .subscribe(data => {
-        alert(data);
+        Swal.fire({
+          title: 'Se elimino correctamente',
+          icon: 'success',
+        });
       },
         err => {
           console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error al eliminar',
+            icon: 'error',
+          });
         }).add(() => {
           this._utilService._loading = false;
           this.ngOnInit();
@@ -71,17 +93,21 @@ export class JudgesComponent implements OnInit {
   }
   editarJuez() {
     this._utilService._loading = true;
+    console.log(this.formJuez.value);
     this.judgesService.updateJudge(this.formJuez.value, this.juezActual.id_jueces)
       .subscribe(data => {
         Swal.fire({
           icon: 'success',
           title: data,
-          text: '',
         });
         this.ngOnInit();
       },
         err => {
           console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error',
+            icon: 'error'
+          })
         }).add(() => {
           this._utilService._loading = false;
         });

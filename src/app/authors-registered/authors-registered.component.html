@@ -14,6 +14,7 @@
                 <th>Teléfono</th>
                 <th>Correo</th>
                 <th>Proyecto</th>
+                <th>Sede</th>
                 <th>Escuela</th>
                 <th>Municipio</th>
                 <th>Localidad</th>
@@ -29,6 +30,7 @@
             <td>{{autor.telefono}}</td>
             <td>{{autor.email}}</td>
             <td>{{autor.proyecto}}</td>
+            <td>{{autor.sede}}</td>
             <td>{{autor.escuela}}</td>
             <td>{{autor.municipio}}</td>
             <td>{{autor.localidad}}</td>
@@ -87,7 +89,12 @@
                     <option [value]="proyecto.id_proyectos" *ngFor="let proyecto of proyectos">{{proyecto.nombre}}</option>
                 </select>
             </div>
-
+            <div class="form-group">
+                <label for="">Sede:</label>
+                <select formControlName="id_sedes" class="form-control">
+                    <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="">Escuela:</label>
                 <select formControlName="id_escuelas" class="form-control">

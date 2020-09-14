@@ -14,7 +14,6 @@ import swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   public formLoginJudge: FormGroup;
-  usaurios: [];
   constructor(public formBuilder: FormBuilder,
               private juecesService: JuecesService,
               private router: Router,
@@ -26,12 +25,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.juecesService.getJueces().subscribe(
-      data => this.usaurios = data,
-      err => console.log(err));
-  }
-  
+  ngOnInit(): void { }
+
   iniciarSesion() {
     this._utilService.loading = true;
     console.log(this.formLoginJudge.value);
@@ -39,6 +34,7 @@ export class LoginComponent implements OnInit {
       data => {
         if (data) {
           this.router.navigateByUrl('home');
+          console.log(data);
           localStorage.setItem('session', JSON.stringify(data));
         } else {
           swal.fire({
