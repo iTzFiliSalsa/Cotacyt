@@ -12,7 +12,7 @@ import { AddAdvisersComponent } from './add-advisers/add-advisers.component'
 import { AdvisersRegisteredComponent } from './advisers-registered/advisers-registered.component'
 import { AddAuthorsComponent } from './add-authors/add-authors.component'
 import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component'
-
+import { EstadisticsComponent } from './estadistics/estadistics.component'
 
 const routes: Routes = [
   {
@@ -51,6 +51,9 @@ const routes: Routes = [
       },
       {
         path: 'add-authors', component: AddAuthorsComponent
+      },
+      {
+        path: 'add-estadistics', component: EstadisticsComponent
       },
       {
         path: 'authors-registered', component: AuthorsRegisteredComponent

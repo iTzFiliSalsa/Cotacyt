@@ -29,6 +29,7 @@ import { AdvisersRegisteredComponent } from './advisers-registered/advisers-regi
 import { AddAuthorsComponent } from './add-authors/add-authors.component';
 import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EstadisticsComponent } from './estadistics/estadistics.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AddAdvisersComponent,
     AdvisersRegisteredComponent,
     AddAuthorsComponent,
-    AuthorsRegisteredComponent
+    AuthorsRegisteredComponent,
+    EstadisticsComponent
   ],
   imports: [
     BrowserModule,
