@@ -90,6 +90,8 @@ export class DashboardComponent implements OnInit {
     // obtiene los proyectos por categorias
     this.dashboardService.getProyectosPorCategorias().subscribe(
       data => {
+        console.log(data);
+        
         const petit = data.petit;
         const kids = data.kids;
         const juvenil = data.juvenil;
