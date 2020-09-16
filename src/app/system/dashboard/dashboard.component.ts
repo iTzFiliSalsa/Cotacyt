@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit {
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.estadisticasDeProyectos = new Array<Calificaciones>();
-    this._utilsService.loading = true;
+    this._utilsService._loading = true;
     this.util = new Util;
     this.proyectos = new Array<ProjectRegistered>();
     this.proyectosCalificadosPorCategoria = new Array<CalificacionesPorCategoria>();
@@ -158,7 +158,9 @@ export class DashboardComponent implements OnInit {
         err => {
           console.log(err);
         }
-      );
+      ).add(() => {
+        this._utilsService._loading = false;
+      });
     }
 
     this.sessionData = JSON.parse(localStorage.getItem('session'));

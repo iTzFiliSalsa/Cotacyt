@@ -84,8 +84,7 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
 
     //TODOS LOS PROYECTOS, ESTO SE CAMBIARA POR CATEGORIAS
-    
-    if(this.sessionData.rol === 'admin'){
+    if (this.sessionData.rol === 'admin') {
       this.projectsService.getProjects().subscribe(
         res => {
           this.allProjects = res;
@@ -98,7 +97,7 @@ export class ProjectsComponent implements OnInit {
       ).add(()=> {
         this._utilService.loading = false;
       });
-    }else {
+    } else {
       forkJoin({
         proyectosCalificados: this.dashboardService.getProyectosCalificados(),
         proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar(),
@@ -119,7 +118,7 @@ export class ProjectsComponent implements OnInit {
 
   }
 
-  adminProjects(proyectos){
+  adminProjects(proyectos) {
     proyectos.filter((res) => {
       this.proyectosService.getStatusAdmin(res.id_proyectos)
       .subscribe( data => {
@@ -138,77 +137,80 @@ export class ProjectsComponent implements OnInit {
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
       data => {
         this.proyectoActual = data;
-        console.log(this.proyectoActual);
-        if (this.proyectoActual.status === '1') {
-          this.calificarProyectoService.getCalificaciones(
-            this.categoria, Number(this.proyectoActual.id_proyectos)
-            ).subscribe(calificaciones => {
-            console.log(calificaciones);
-            switch (this.categoria) {
-              case 'petit':
-                this.obtenido1 = Number(calificaciones[0].obtenido1);
-                this.obtenido2 = Number(calificaciones[0].obtenido2);
-                this.obtenido3 = Number(calificaciones[0].obtenido3);
-                this.obtenido4 = Number(calificaciones[0].obtenido4);
-                this.obtenido5 = Number(calificaciones[0].obtenido5);
-                break;
-              case 'kids':
-                this.obtenido1 = Number(calificaciones[0].obtenido1);
-                this.obtenido2 = Number(calificaciones[0].obtenido2);
-                this.obtenido3 = Number(calificaciones[0].obtenido3);
-                this.obtenido4 = Number(calificaciones[0].obtenido4);
-                this.obtenido5 = Number(calificaciones[0].obtenido5);
-                break;
-              case 'juvenil':
-                this.obtenido1 = Number(calificaciones[0].obtenido1);
-                this.obtenido2 = Number(calificaciones[0].obtenido2);
-                this.obtenido3 = Number(calificaciones[0].obtenido3);
-                this.obtenido4 = Number(calificaciones[0].obtenido4);
-                this.obtenido5 = Number(calificaciones[0].obtenido5);
-                this.obtenido6 = Number(calificaciones[0].obtenido6);
-                break;
-              case 'media-superior':
-                this.obtenido1 = Number(calificaciones[0].obtenido1);
-                this.obtenido2 = Number(calificaciones[0].obtenido2);
-                this.obtenido3 = Number(calificaciones[0].obtenido3);
-                this.obtenido4 = Number(calificaciones[0].obtenido4);
-                this.obtenido5 = Number(calificaciones[0].obtenido5);
-                this.obtenido6 = Number(calificaciones[0].obtenido6);
-                this.obtenido7 = Number(calificaciones[0].obtenido7);
-                this.obtenido8 = Number(calificaciones[0].obtenido8);
-                break;
-              case 'superior':
-                this.obtenido1 = Number(calificaciones[0].obtenido1);
-                this.obtenido2 = Number(calificaciones[0].obtenido2);
-                this.obtenido3 = Number(calificaciones[0].obtenido3);
-                this.obtenido4 = Number(calificaciones[0].obtenido4);
-                this.obtenido5 = Number(calificaciones[0].obtenido5);
-                this.obtenido6 = Number(calificaciones[0].obtenido6);
-                this.obtenido7 = Number(calificaciones[0].obtenido7);
-                this.obtenido8 = Number(calificaciones[0].obtenido8);
-                break;
-              case '´posgrado':
-                this.obtenido1 = Number(calificaciones[0].obtenido1);
-                this.obtenido2 = Number(calificaciones[0].obtenido2);
-                this.obtenido3 = Number(calificaciones[0].obtenido3);
-                this.obtenido4 = Number(calificaciones[0].obtenido4);
-                this.obtenido5 = Number(calificaciones[0].obtenido5);
-                this.obtenido6 = Number(calificaciones[0].obtenido6);
-                this.obtenido7 = Number(calificaciones[0].obtenido7);
-                this.obtenido8 = Number(calificaciones[0].obtenido8);
-                break;
+        this.proyectosService.getStatusAdmin(this.proyectoActual.id_proyectos)
+          .subscribe( ( res ) => {
+            console.log(res);
+            if (res[0].status === 1) {
+              this.calificarProyectoService.getCalificaciones(
+                this.categoria, Number(this.proyectoActual.id_proyectos)
+                ).subscribe(calificaciones => {
+                console.log(calificaciones);
+                switch (this.categoria) {
+                  case 'petit':
+                    this.obtenido1 = Number(calificaciones[0].obtenido1);
+                    this.obtenido2 = Number(calificaciones[0].obtenido2);
+                    this.obtenido3 = Number(calificaciones[0].obtenido3);
+                    this.obtenido4 = Number(calificaciones[0].obtenido4);
+                    this.obtenido5 = Number(calificaciones[0].obtenido5);
+                    break;
+                  case 'kids':
+                    this.obtenido1 = Number(calificaciones[0].obtenido1);
+                    this.obtenido2 = Number(calificaciones[0].obtenido2);
+                    this.obtenido3 = Number(calificaciones[0].obtenido3);
+                    this.obtenido4 = Number(calificaciones[0].obtenido4);
+                    this.obtenido5 = Number(calificaciones[0].obtenido5);
+                    break;
+                  case 'juvenil':
+                    this.obtenido1 = Number(calificaciones[0].obtenido1);
+                    this.obtenido2 = Number(calificaciones[0].obtenido2);
+                    this.obtenido3 = Number(calificaciones[0].obtenido3);
+                    this.obtenido4 = Number(calificaciones[0].obtenido4);
+                    this.obtenido5 = Number(calificaciones[0].obtenido5);
+                    this.obtenido6 = Number(calificaciones[0].obtenido6);
+                    break;
+                  case 'media-superior':
+                    this.obtenido1 = Number(calificaciones[0].obtenido1);
+                    this.obtenido2 = Number(calificaciones[0].obtenido2);
+                    this.obtenido3 = Number(calificaciones[0].obtenido3);
+                    this.obtenido4 = Number(calificaciones[0].obtenido4);
+                    this.obtenido5 = Number(calificaciones[0].obtenido5);
+                    this.obtenido6 = Number(calificaciones[0].obtenido6);
+                    this.obtenido7 = Number(calificaciones[0].obtenido7);
+                    this.obtenido8 = Number(calificaciones[0].obtenido8);
+                    break;
+                  case 'superior':
+                    this.obtenido1 = Number(calificaciones[0].obtenido1);
+                    this.obtenido2 = Number(calificaciones[0].obtenido2);
+                    this.obtenido3 = Number(calificaciones[0].obtenido3);
+                    this.obtenido4 = Number(calificaciones[0].obtenido4);
+                    this.obtenido5 = Number(calificaciones[0].obtenido5);
+                    this.obtenido6 = Number(calificaciones[0].obtenido6);
+                    this.obtenido7 = Number(calificaciones[0].obtenido7);
+                    this.obtenido8 = Number(calificaciones[0].obtenido8);
+                    break;
+                  case 'posgrado':
+                    this.obtenido1 = Number(calificaciones[0].obtenido1);
+                    this.obtenido2 = Number(calificaciones[0].obtenido2);
+                    this.obtenido3 = Number(calificaciones[0].obtenido3);
+                    this.obtenido4 = Number(calificaciones[0].obtenido4);
+                    this.obtenido5 = Number(calificaciones[0].obtenido5);
+                    this.obtenido6 = Number(calificaciones[0].obtenido6);
+                    this.obtenido7 = Number(calificaciones[0].obtenido7);
+                    this.obtenido8 = Number(calificaciones[0].obtenido8);
+                    break;
+                }
+              });
+            } else {
+              this.obtenido1 = 0;
+              this.obtenido2 = 0;
+              this.obtenido3 = 0;
+              this.obtenido4 = 0;
+              this.obtenido5 = 0;
+              this.obtenido6 = 0;
+              this.obtenido7 = 0;
+              this.obtenido8 = 0;
             }
           });
-        } else {
-          this.obtenido1 = 0;
-          this.obtenido2 = 0;
-          this.obtenido3 = 0;
-          this.obtenido4 = 0;
-          this.obtenido5 = 0;
-          this.obtenido6 = 0;
-          this.obtenido7 = 0;
-          this.obtenido8 = 0;
-        }
       },
       err => console.log(err)
     ).add(() => {
@@ -219,217 +221,213 @@ export class ProjectsComponent implements OnInit {
     console.log(this.formPuntos.value);
     this.valores = this.formPuntos.value;
     this._utilService.loading = true;
-    switch (this.categoria) {
-      case 'petit':
-        if (this.proyectoActual.status === '1') {
-          this.calificarProyectoService.putCalificacionesPetit(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            ).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this._utilService.loading = false;
-          this.ngOnInit();
-          this.proyectoActual = null;
-        } else {
-          this.calificarProyectoService.setCalificacionesPetit(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            ).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos)
-            .subscribe( data => console.log(data));
-          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-            .subscribe(data => console.log(data));
-          this._utilService.loading = false;
-          this.ngOnInit();
-          this.proyectoActual = null;
-        }
-        break;
-      case 'kids':
-        if (this.proyectoActual.status === '1') {
-          this.calificarProyectoService.putCalificacionesKids(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            ).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        } else {
-          this.calificarProyectoService.setCalificacionesKids(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            ).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
-          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-          .subscribe( data => console.log(data));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        }
-        break;
-      case 'juvenil':
-        if (this.proyectoActual.status === '1') {
-          this.calificarProyectoService.putCalificacionesJvenil(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        } else {
-          this.calificarProyectoService.setCalificacionesJvenil(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
-          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-          .subscribe( data => console.log(data));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        }
-        break;
-      case 'media-superior':
-        if (this.proyectoActual.status === '1') {
-          this.calificarProyectoService.putCalificacionesMediaSuperior(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6,
-            this.valores.obtenido7,
-            this.valores.obtenido8,
-            ).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        } else {
-          this.calificarProyectoService.setCalificacionesMediaSuperior(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6,
-            this.valores.obtenido7,
-            this.valores.obtenido8,
-            ).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
-          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-          .subscribe( data => console.log(data));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        }
-        break;
-      case 'superior':
-        if (this.proyectoActual.status === '1') {
-          this.calificarProyectoService.putCalificacionesSuperior(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6,
-            this.valores.obtenido7,
-            this.valores.obtenido8).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        } else {
-          this.calificarProyectoService.setCalificacionesSuperior(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6,
-            this.valores.obtenido7,
-            this.valores.obtenido8).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
-          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-          .subscribe( data => console.log(data));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        }
-        break;
-      case 'posgrado':
-        if (this.proyectoActual.status === '1') {
-          this.calificarProyectoService.putCalificacionesPosgrado(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6,
-            this.valores.obtenido7,
-            this.valores.obtenido8).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        } else {
-          this.calificarProyectoService.setCalificacionesPosgrado(
-            Number(this.proyectoActual.id_proyectos),
-            this.valores.obtenido1,
-            this.valores.obtenido2,
-            this.valores.obtenido3,
-            this.valores.obtenido4,
-            this.valores.obtenido5,
-            this.valores.obtenido6,
-            this.valores.obtenido7,
-            this.valores.obtenido8).subscribe(
-              data => console.log(data),
-              err => console.log(err));
-          this.proyectosService.actualizarEstado(this.proyectoActual.id_proyectos).subscribe( data => console.log(data));
-          this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-          .subscribe( data => console.log(data));
-          this._utilService.loading = false;
-          this.ngOnInit();
-        }
-        break;
-    }
+    this.proyectosService.getStatusAdmin(this.proyectoActual.id_proyectos)
+          .subscribe( ( res ) => {
+              switch (this.categoria) {
+                case 'petit':
+                  if (res[0].status === 1) {
+                    this.calificarProyectoService.putCalificacionesPetit(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      ).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                    this.proyectoActual = null;
+                  } else {
+                    this.calificarProyectoService.setCalificacionesPetit(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      ).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                      .subscribe(data => console.log(data));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                    this.proyectoActual = null;
+                  }
+                  break;
+                case 'kids':
+                  if (res[0].status === 1) {
+                    this.calificarProyectoService.putCalificacionesKids(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      ).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  } else {
+                    this.calificarProyectoService.setCalificacionesKids(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      ).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                    .subscribe( data => console.log(data));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  }
+                  break;
+                case 'juvenil':
+                  if (res[0].status === 1) {
+                    this.calificarProyectoService.putCalificacionesJvenil(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  } else {
+                    this.calificarProyectoService.setCalificacionesJvenil(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                    .subscribe( data => console.log(data));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  }
+                  break;
+                case 'media-superior':
+                  if (res[0].status === 1) {
+                    this.calificarProyectoService.putCalificacionesMediaSuperior(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6,
+                      this.valores.obtenido7,
+                      this.valores.obtenido8,
+                      ).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  } else {
+                    this.calificarProyectoService.setCalificacionesMediaSuperior(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6,
+                      this.valores.obtenido7,
+                      this.valores.obtenido8,
+                      ).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                    .subscribe( data => console.log(data));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  }
+                  break;
+                case 'superior':
+                  if (res[0].status === 1) {
+                    this.calificarProyectoService.putCalificacionesSuperior(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6,
+                      this.valores.obtenido7,
+                      this.valores.obtenido8).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  } else {
+                    this.calificarProyectoService.setCalificacionesSuperior(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6,
+                      this.valores.obtenido7,
+                      this.valores.obtenido8).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                    .subscribe( data => console.log(data));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  }
+                  break;
+                case 'posgrado':
+                  if (res[0].status === 1) {
+                    this.calificarProyectoService.putCalificacionesPosgrado(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6,
+                      this.valores.obtenido7,
+                      this.valores.obtenido8).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  } else {
+                    this.calificarProyectoService.setCalificacionesPosgrado(
+                      Number(this.proyectoActual.id_proyectos),
+                      this.valores.obtenido1,
+                      this.valores.obtenido2,
+                      this.valores.obtenido3,
+                      this.valores.obtenido4,
+                      this.valores.obtenido5,
+                      this.valores.obtenido6,
+                      this.valores.obtenido7,
+                      this.valores.obtenido8).subscribe(
+                        data => console.log(data),
+                        err => console.log(err));
+                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                    .subscribe( data => console.log(data));
+                    this._utilService.loading = false;
+                    this.ngOnInit();
+                  }
+                  break;
+              }
+        });
   }
   generarForm(categoria: string) {
     const expReg = RegExp('^[0-9]+$');
