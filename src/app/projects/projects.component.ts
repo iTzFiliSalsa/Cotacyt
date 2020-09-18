@@ -106,6 +106,7 @@ export class ProjectsComponent implements OnInit {
         (data: any) => {
           this.proyectosCalificados = data.proyectosCalificados;
           this.proyectosPorCalificar = data.proyectosPorCalificar;
+          console.log(data.todosLosProyectos);
           this.allProjects = data.todosLosProyectos;
         },
         err => {
