@@ -52,6 +52,7 @@ export class AdvisersRegisteredComponent implements OnInit {
         console.log(data.asesores);
         this.asesores = data.asesores;
         this.sedes = data.sedes;
+        console.log(this.asesores);
       }
     ).add(() => {
       this._utilService._loading = false;
