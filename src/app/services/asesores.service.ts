@@ -11,7 +11,7 @@ export class AsesoresService {
 
   constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) { }
   getAsesores(): Observable<Asesores[]> {
-    return this.http.get<Asesores[]>(this.servicesConfig.APP_ENDPOINT + 'api/asesores/all');
+    return this.http.get<Asesores[]>(this.servicesConfig.APP_ENDPOINT + 'api/asesores/all-projects');
   }
   postAsesor(body: any): Observable<any> {
     return this.http.post( this.servicesConfig.APP_ENDPOINT + 'api/asesores/nuevo', body );

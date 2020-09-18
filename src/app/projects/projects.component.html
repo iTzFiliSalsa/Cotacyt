@@ -198,8 +198,8 @@
                                     <h6 *ngIf="proyectoActual.status == '1'" class="custom-btn-success text-center py-1">Calificado</h6>
                                 </td>
                                 <td class="text-center">
-                                    <button *ngIf="proyectoActual.status == '0'" class="custom-btn-success" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Calificar</button>
-                                    <button *ngIf="proyectoActual.status == '1'" type="button" class="custom-btn-edit" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Editar</button>
+                                    <button  class="custom-btn-success" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Calificar</button>
+                                    <button  type="button" class="custom-btn-edit" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Editar</button>
 
                                 </td>
 

@@ -9,6 +9,8 @@ import { Sedes } from '../models/sedes.model';
 import { SedesService } from '../services/sedes.service';
 import { forkJoin } from 'rxjs';
 import { Session } from '../models/session.model';
+import { jsPDF } from "jspdf";
+
 
 @Component({
   selector: 'app-advisers-registered',
@@ -109,5 +111,78 @@ export class AdvisersRegisteredComponent implements OnInit {
         this._utilService._loading = false;
       });
   }
+  saveAsPdf(asesor: Asesores){
+    this.asesorActual = asesor;
+    console.log(this.asesorActual);
+  switch(this.asesorActual.id_sedes){
+    case '1':
+      const doc = new jsPDF();
+      doc.addImage('assets/image/certificadoAsesorMante.jpg', 'jpg', 0, 0, 210, 300);
+      doc.text(this.asesorActual.nombres+ " "+ this.asesorActual.a_paterno + " " + this.asesorActual.a_materno , 65, 185);
+      doc.text(this.asesorActual.proyecto, 80, 225);
+      doc.setFontSize(16);
+      doc.setFont('Helvetica');
+      doc.save("constanciaAsesor.pdf");
+    break;
+    case '2':
+      const doc1 = new jsPDF();
+      doc1.addImage('assets/image/certificadoAsesorReynosa.jpg', 'jpg', 0, 0, 210, 300);
+      doc.text(this.asesorActual.nombres+ " "+ this.asesorActual.a_paterno + " " + this.asesorActual.a_materno , 65, 185);
+      doc.text(this.asesorActual.proyecto, 80, 225);
+      doc1.setFontSize(16);
+      doc1.setFont('Helvetica');
+      doc1.save("constanciaAsesor.pdf");
+    break;
+    case '3':
+      const doc2 = new jsPDF();
+      doc2.addImage('assets/image/certificadoAsesorMatamoros.jpg', 'jpg', 0, 0, 210, 300);
+      doc.text(this.asesorActual.nombres+ " "+ this.asesorActual.a_paterno + " " + this.asesorActual.a_materno , 65, 185);
+      doc.text(this.asesorActual.proyecto, 80, 225);
+      doc2.setFontSize(16);
+      doc2.setFont('Helvetica');
+      doc2.save("constanciaAsesor.pdf");
+    break;
+    case '4':
+      const doc3 = new jsPDF();
+      doc3.addImage('assets/image/certificadoAsesorMadero.jpg', 'jpg', 0, 0, 210, 300);
+      doc.text(this.asesorActual.nombres+ " "+ this.asesorActual.a_paterno + " " + this.asesorActual.a_materno , 65, 185);
+      doc.text(this.asesorActual.proyecto, 80, 225);
+      doc3.setFontSize(16);
+      doc3.setFont('Helvetica');
+      doc3.save("constanciaAsesor.pdf");
+    break;
+    case '5':
+      const doc4 = new jsPDF();
+      doc4.addImage('assets/image/certificadoAsesorJaumave.jpg', 'jpg', 0, 0, 210, 300);
+      doc.text(this.asesorActual.nombres+ " "+ this.asesorActual.a_paterno + " " + this.asesorActual.a_materno , 65, 185);
+      doc.text(this.asesorActual.proyecto, 80, 225);
+      doc4.setFontSize(16);
+      doc4.setFont('Helvetica');
+      doc4.save("constanciaAsesor.pdf");
+    break;
+    case '6':
+      const doc5 = new jsPDF();
+      doc5.addImage('assets/image/certificadoAsesorNuevoLaredo.jpg', 'jpg', 0, 0, 210, 300);
+      doc.text(this.asesorActual.nombres+ " "+ this.asesorActual.a_paterno + " " + this.asesorActual.a_materno , 65, 185);
+      doc.text(this.asesorActual.proyecto, 80, 225);
+      doc5.setFontSize(16);
+      doc5.setFont('Helvetica');
+      doc5.save("constanciaAsesor.pdf");
+    break;
+    case '7':
+      const doc6 = new jsPDF();
+      doc6.addImage('assets/image/certificadoAsesorVictoria.jpg', 'jpg', 0, 0, 210, 300);
+      doc.text(this.asesorActual.nombres+ " "+ this.asesorActual.a_paterno + " " + this.asesorActual.a_materno , 65, 185);
+      doc.text(this.asesorActual.proyecto, 80, 225  );
+      doc5.setFontSize(16);
+      doc5.setFont('Helvetica');
+      doc5.save("constanciaAsesor.pdf");
+    break;
+    default:
+      console.log('sede no encontrada');
+    break;
+      
 
+}
+  }
 }

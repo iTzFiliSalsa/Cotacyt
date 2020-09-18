@@ -8,6 +8,7 @@ export interface Calificaciones {
 export interface CalificacionesPorCategoria {
     id_proyectos: string;
     nombre: string;
+    sede: string;
     total: string;
 }
  

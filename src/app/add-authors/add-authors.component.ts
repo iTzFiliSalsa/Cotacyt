@@ -109,8 +109,10 @@ export class AddAuthorsComponent implements OnInit {
 
   saveAsPdf(){
     const doc = new jsPDF();
-    doc.text(this.asesores[0]['a_materno'], 90, 100);
-    doc.addImage('assets/image/logo.png', 'png', 10, 18, 60, 30)
+    doc.addImage('assets/image/certificadoJurado.jpg', 'jpg', 0, 0, 210, 300);
+    doc.text(this.sessionData['nombre'], 65, 185);
+    doc.setFontSize(16);
+    doc.setFont('Arial');
     doc.save("constancia.pdf");
     
   }

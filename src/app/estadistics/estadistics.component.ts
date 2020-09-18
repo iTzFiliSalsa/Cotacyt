@@ -46,6 +46,8 @@ export class EstadisticsComponent implements OnInit {
     this.estadisticasService.getEstadisticas().subscribe(
       data => {
         this.estadisticas = data;
+        console.log(data);
+        
         const sede1 = data['El Mante'];
         const sede2 = data['Jaumave'];
         const sede3 = data['Madero'];
