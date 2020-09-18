@@ -24,6 +24,8 @@ export class SidebarComponent implements OnInit {
   }
   admin: boolean;
   ngOnInit(): void {
+    console.log(this.sessionData);
+    
     this.admin = false;
     this.categoriasService.getCategorias().subscribe( data => {
       this.categoria = data.categoria;

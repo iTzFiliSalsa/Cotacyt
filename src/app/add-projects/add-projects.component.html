@@ -31,7 +31,7 @@
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFileLang" lang="es" (change) = "onFileChange($event)">
                     <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                  </div>
+                </div>
             </div>
             
         </div>
@@ -58,7 +58,13 @@
                                 <option [value]="asesor.id_asesores" *ngFor="let asesor of asesores">{{asesor.nombres}}</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <p class="mb-0">Video</p>
+                        <div class="custom-file m-0">
+                            <input #fileUpload accept="video/mp4,video/x-m4v,video/*" (change)="handleFileInput($event.target.files)" type="file" class="custom-file-input" id="validatedCustomFile" required>
+                            <label class="custom-file-label" for="validatedCustomFile">{{ label }}</label>
+                        </div>
+                        <!-- <button (click)="check()">checar</button> -->
+                        <div class="form-group mt-2">
                             <label for="">Autores:</label>
                             <ng-multiselect-dropdown
                             [settings]="dropdownSettings"
@@ -86,11 +92,20 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="">Autores:</label>
+                            <ng-multiselect-dropdown formControlName="ids_autores"
+                            [settings]="dropdownSettings"
+                            [data]="autores"
+                            (onSelect)="addAutor($event)"
+                            (onDeSelect)="dropAutor($event)"
+                            ></ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group">
                             <label for="">Resumen:</label>
                             <textarea formControlName="resumen" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Resumen del proyecto"></textarea>
                         </div>
                         <button class="btn btn-primary boton-iniciar" (click)="registrarProyecto()" [disabled]="!formRegistroProyecto.valid">Registrar</button>
-                        
+
                     </form>
                 </div>  
             </div>

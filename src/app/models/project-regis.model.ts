@@ -6,5 +6,6 @@ export interface ProjectRegistered {
     sede: string;
     nombre: string;
     resumen: string;
+    asesor: string;
 
 }

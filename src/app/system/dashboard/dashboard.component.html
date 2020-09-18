@@ -205,7 +205,10 @@
                                                         {{ proyecto.nombre}}
                                                     </div>
                                                 </td>
-                                                <td>{{proyecto.total}} </td>
+                                                <td>{{proyecto.total | number:'1.0-0'}} </td>                                                    
+                                                <td>
+                                                    <button class="btn btn-primary" (click)="saveAsPdf(i, proyecto.autores, proyecto)"><i class="fas fa-download"></i></button>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>

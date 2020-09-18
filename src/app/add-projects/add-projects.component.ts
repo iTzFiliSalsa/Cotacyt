@@ -18,6 +18,9 @@ import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Session } from '../models/session.model';
 import Swal from 'sweetalert2';
+import { DataService } from '../services/data.service';
+import { Autores } from '../models/autores.model';
+import { AutoresService } from '../services/autores.service';
 
 
 @Component({
@@ -27,18 +30,23 @@ import Swal from 'sweetalert2';
 })
 
 export class AddProjectsComponent implements OnInit {
+
+  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;
+  public files  = [];
   @ViewChild('swalid') private Variable: SwalComponent;
+  fileToUpload: File = null;
   areas: Areas[];
   sedes: Sedes[];
   asesores: Asesores[];
   categorias: Categorias[];
-  autores = [];
+  autores: Autores[];
   autoresSeleccionados: any[];
   dropdownSettings: IDropdownSettings;
   formRegistroProyecto: FormGroup;
   data: [][];
   funciones = [];
   sessionData: Session;
+  label: string = 'Sube un archivo...';
   constructor(
     public readonly swalTargets: SwalPortalTargets,
     private sedesService: SedesService,
@@ -46,14 +54,17 @@ export class AddProjectsComponent implements OnInit {
     private asesoresService: AsesoresService,
     private categoriasServices: CategoriasService,
     private proyectosService: ProyectosService,
+    private autoresService: AutoresService,
     private formBuilder: FormBuilder,
-    private _utilService: UtilsService
+    private _utilService: UtilsService,
+    private _dataService: DataService
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.areas = new Array<Areas>();
     this.sedes = new Array<Sedes>();
     this.autoresSeleccionados = new Array<any>();
     this.asesores = new Array<Asesores>();
+    this.autores = new Array<Autores>();
     this.categorias = new Array<Categorias>();
     this.formRegistroProyecto = this.formBuilder.group({
       nombre:         ['', [Validators.required, Validators.max(50)]],
@@ -61,34 +72,20 @@ export class AddProjectsComponent implements OnInit {
       id_sedes:       this.sessionData.id_sedes,
       id_areas:       ['1', [Validators.required]],
       id_categorias:  ['1', [Validators.required]],
+      ids_autores:    ['', [Validators.required]],
       resumen:        ['', [Validators.required, Validators.max(150)]]
     });
     this._utilService._loading = true;
   }
 
   ngOnInit(): void {
-    // TODO: traer los autores para mostrarlos
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'id_autores',
-      textField: 'asesor',
-      itemsShowLimit: 3,
-      limitSelection: 3,
-      allowSearchFilter: true
-    };
-    this.autores =  [
-      { id_autores: 1, asesor: 'kt' },
-      { id_autores: 2, asesor: 'chino' },
-      { id_autores: 3, asesor: 'fili' },
-      { id_autores: 4, asesor: 'santi' },
-      { id_autores: 5, asesor: 'Ne' }
-    ];
     forkJoin(
       {
         areas: this.areasService.getAreas(),
         sedes: this.sedesService.getSedes(),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
+        autores: this.autoresService.getAutores(),
       }
     ).subscribe(
       data => {
@@ -96,15 +93,23 @@ export class AddProjectsComponent implements OnInit {
       this.sedes = data.sedes;
       this.categorias = data.categorias;
       this.asesores = data.asesores;
+      this.autores = data.autores;
     }, err => {
       console.log(err);
     }
     ).add(() => {
       this._utilService._loading = false;
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'id_autores',
+        textField: 'nombre',
+        itemsShowLimit: 3,
+        limitSelection: 3,
+        allowSearchFilter: true
+      };
     });
   }
   registrarProyecto() {
-
     this._utilService.loading = true;
     this.proyectosService.postNuevoProyecto( this.formRegistroProyecto.value)
     .subscribe(
@@ -113,7 +118,7 @@ export class AddProjectsComponent implements OnInit {
           icon: 'success',
           title: 'Exito',
           text: 'El proyecto se registró correctamente'
-        })
+        });
         this.formRegistroProyecto.reset({
           id_sedes: this.sessionData.id_sedes
         });
@@ -182,6 +187,38 @@ export class AddProjectsComponent implements OnInit {
     READER.readAsBinaryString(TARGET.files[0]);
   }
 
+  handleFileInput(files: FileList){
+    // this.fileToUpload = files.item(0);
+    console.log(files[0].name);
+    this.label = files[0].name;
+  }
+
+  check(){
+    const fileUpload = this.fileUpload.nativeElement;
+    var reader = new FileReader();
+    reader.readAsBinaryString(fileUpload.files[0]);
+
+    reader.onload = () => {
+
+      const data =  btoa(<string>reader.result);
+      console.log("La data es: ", data);
+
+      this._dataService.putData(data).subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+
+    };
+  }
+
+  uploadFile(file){
+
+  }
+
   guardarEnBD(evt: any) {
     this.data.forEach(data => {
             this.funciones.push(this.proyectosService.postNuevoProyecto(data));
@@ -198,16 +235,13 @@ export class AddProjectsComponent implements OnInit {
       }
 
   addAutor(item) {
-    console.log(item);
     this.autoresSeleccionados.push(item);
   }
   dropAutor(item) {
-    console.log(item);
     this.autoresSeleccionados.map( (res, index) => {
       if (res.id_autores === item.id_autores) {
         this.autoresSeleccionados.splice(index, 1);
       }
     });
   }
-
 }
