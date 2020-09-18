@@ -79,10 +79,10 @@
 <!-- swal reproductor de video -->
 <swal class="swal-wide " #swalid2 title="Demostración del proyecto" [swalOptions]="{customClass: 'clase'}">
     <div *swalPortal>
-        <div>
+        <div *ngIf="video">
             <div class="contenedor-video">
-                <video width="400" controls>
-                    <source src="../../../assets/video/video.mp4" type="video/mp4" >
+                <video  width="400" controls>
+                    <source [src]="video" type="video/mp4" >
                 </video>
             </div>
         </div>
@@ -229,7 +229,7 @@
                                             (click)="mostrarInfoCalificados(proyecto)">
                                             <i class="fas fa-question-circle"></i>
                                         </button>
-                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event)">
+                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.id_proyectos)">
                                             <i class="fas fa-play-circle"></i>
                                         </button>
                                     </li>
@@ -251,7 +251,7 @@
                                             <i class="fas fa-question-circle"></i>
                                         </button>
 
-                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event)">
+                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.id_proyectos)">
                                             <i class="fas fa-play-circle"></i>
                                         </button>
 

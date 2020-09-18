@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AreasService } from 'src/app/services/areas.service';
 import { Subscriber, forkJoin } from 'rxjs';
 import { DashboardService } from '../../services/dashboard.service';
@@ -38,8 +38,10 @@ export class DashboardComponent implements OnInit {
   @ViewChild('swalid') private swalCalificaciones: SwalComponent;
   @ViewChild('swalid1') private swalInformacion: SwalComponent;
   @ViewChild('swalid2') private swalReproductor: SwalComponent;
+  @ViewChild('video') private videoTag: any;
 
 
+  public video: string;
   public formsFiltro: FormGroup;
   proyectosCalificacion: any[];
   proyectos: ProjectRegistered[];
@@ -158,7 +160,7 @@ export class DashboardComponent implements OnInit {
         proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar()
       }).subscribe(
         (data: any) => {
-          console.log(data.proyectosCalificados);
+          console.log("proyectos calificados: ", data.proyectosCalificados);
           console.log(data.proyectosPorCalificar);
           this.proyectosCalificados = data.proyectosCalificados;
           this.proyectosPorCalificar = data.proyectosPorCalificar;
@@ -326,7 +328,10 @@ export class DashboardComponent implements OnInit {
 
 
 
-  abrirReproductor(evento: any) {
+  abrirReproductor(evento: any, id) {
+    console.log(this.videoTag);
+    console.log(id);
+    this.video = 'https://mante.hosting.acm.org/API_COTACYT/video/fotos/'+id+'.mp4';
     this.swalReproductor.fire();
   }
 
