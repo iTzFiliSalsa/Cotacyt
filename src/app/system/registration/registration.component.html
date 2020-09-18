@@ -3,7 +3,6 @@
         <a   [routerLink]="['/home/registered-judges']" routerLinkActive="active"  class="btn-judges-registered btn mb-2"><span><i class="fas fa-balance-scale"></i></span> Jueces registrados</a>
     </div>
     <div class="container-fluid color">
-       
         <div class="row ">
             <div class="col-xs-12 col-md-6 d-flex align-items-center justify-content-center">
                 <div class="z  d-flex align-items-center justify-content-center">
@@ -32,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Categoria:</label>
-                            <select formControlName="id_categorias" class="form-control">
+                            <select #s (change)="categoriaActual(s.value)"formControlName="id_categorias" class="form-control">
                                 <option value="1">Petit</option>
                                 <option value="2">Kits</option>
                                 <option value="3">Juvenil</option>
@@ -42,13 +41,21 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="">Proyectos:</label>
+                            <ng-multiselect-dropdown formControlName="ids_proyectos"
+                            [settings]="dropdownSettingsProyecto"
+                            [data]="proyectos"
+                            (onSelect)="addProyecto($event)"
+                            (onDeSelect)="dropProyecto($event)"
+                            ></ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group">
                             <label for="">Contraseña:</label>
                             <input type="password" class="form-control" formControlName="contrasena"
                                 placeholder="Contraseña">
                         </div>
                         <button [disabled]="!formsRegistroJuez.valid" class="btn btn-primary boton-iniciar"
                             (click)="registrarJuez()">Registrar</button>
-
                     </form>
                 </div>
             </div>

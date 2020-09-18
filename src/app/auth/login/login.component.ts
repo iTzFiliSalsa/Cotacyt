@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
             icon: 'error',
             title: 'Error',
             text: 'Contraseña incorrecta'
-          })
+          });
         }
       },
       err => console.log(err)

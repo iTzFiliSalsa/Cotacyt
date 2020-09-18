@@ -1,12 +1,17 @@
-import { Attribute, Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { JuecesService } from '../../services/jueces.service';
-import { RouterLinkActive, Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import swal from 'sweetalert2';
 import { SedesService } from '../../services/sedes.service';
 import { Sedes } from '../../models/sedes.model';
 import { Session } from '../../models/session.model';
+import { Proyectos } from '../../models/proyectos.model';
+import { ProyectosService } from 'src/app/services/proyectos.service';
+import { JudgesRegisteredService } from '../../services/judges.service';
+import { forkJoin } from 'rxjs';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import Swal from 'sweetalert2';
 
 
 
@@ -16,18 +21,23 @@ import { Session } from '../../models/session.model';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
-
   public isCollapsed = false;
   sedes: Sedes[];
   sessionData: Session;
+  proyectos: Proyectos[];
+  proyectosSeleccionados: Proyectos[];
+  dropdownSettingsProyecto: IDropdownSettings;
   public formsRegistroJuez: FormGroup;
   constructor(
     public formBuilder: FormBuilder,
     private juecesService: JuecesService,
     private sedesService: SedesService,
+    private judgeRegistredService: JudgesRegisteredService,
+    private proyectosService: ProyectosService,
     private _utilService: UtilsService
     ) {
+    this.proyectos = new Array<Proyectos>();
+    this.proyectosSeleccionados = new Array<Proyectos>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formsRegistroJuez = formBuilder.group({
       id_categorias: [1, [Validators.required]],
@@ -35,42 +45,80 @@ export class RegistrationComponent implements OnInit {
       contrasena:    ['', [Validators.required, Validators.maxLength(20)]],
       nombre:        ['', [Validators.required, Validators.maxLength(100)]],
       id_sedes:      [this.sessionData.id_sedes],
+      ids_proyectos: ['', [Validators.required]]
     });
+    this._utilService._loading = true;
   }
 
   ngOnInit(): void {
-    this.sedesService.getSedes().subscribe(data => this.sedes = data, err => console.log(err));
-  }
-  registrarJuez() {
-    this._utilService.loading = true;
-    console.log(this.formsRegistroJuez.value);
-    this.juecesService.registrarJuez(this.formsRegistroJuez.value).subscribe(
+    forkJoin({
+      jueces: this.judgeRegistredService.getJudges(),
+      proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
+      sedes: this.sedesService.getSedes()
+    }).subscribe(
       data => {
-        swal.fire({
-          icon: 'success',
-          title: 'Exito',
-          text: 'El juez se registro correctamente'
-        })
-        this.formsRegistroJuez.reset({
-          id_sedes: this.sessionData.id_sedes
-        });
-      },
-      err => {
-        swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Hubo un error al registrar el juez'
-        });
-        console.log(err);
+        this.proyectos = data.proyectos;
+        this.sedes = data.sedes;
       }
-    ).add(() => {
-      this._utilService.loading = false;
+      ).add(() => {
+        this._utilService._loading = false;
+        // Settings para proyecto
+        this.dropdownSettingsProyecto = {
+          singleSelection: false,
+          idField: 'id_proyectos',
+          textField: 'nombre',
+          allowSearchFilter: true
+        };
+      });
+    }
+    registrarJuez() {
+    if (this.proyectosSeleccionados.length > 0) {
+      this._utilService.loading = true;
+      console.log(this.formsRegistroJuez.value);
+      this.juecesService.registrarJuez(this.formsRegistroJuez.value).subscribe(
+        data => {
+          swal.fire({
+            icon: 'success',
+            title: 'Exito',
+            text: 'El juez se registro correctamente'
+          });
+          this.formsRegistroJuez.reset({
+            id_sedes: this.sessionData.id_sedes
+          });
+        },
+        err => {
+          swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al registrar el juez'
+          });
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService.loading = false;
+      });
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'Selecciona al menos un proyecto para registrar el juez',
+        icon: 'error'
+      });
+    }
+  }
+  addProyecto(item: any) {
+    this.proyectosSeleccionados.push(item);
+  }
+  dropProyecto(item: any) {
+    this.proyectosSeleccionados.map( (res, index) => {
+      if (res.id_proyectos === item.id_proyectos) {
+        this.proyectosSeleccionados.splice(index, 1);
+      }
     });
   }
-
-
-
-
-
-
+  categoriaActual(value) {
+    this.proyectosService.obtenerTodosLosProyectosCategoria(value)
+      .subscribe( data => {
+        this.proyectos = data;
+      });
+  }
 }
