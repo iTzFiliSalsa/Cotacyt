@@ -1,10 +1,11 @@
-<div class="container-fluid">
-    <div class="row">
-        <div id="gg" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+<div class="container-fluid color">
+    <div class="row">    
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
         
             <div class="card">
-                <div class="card-header background-table">
-                    <h6>Proyectos por sede</h6>
+                <div class="card-header background-table d-flex justify-content-between">
+                    <h6 class="p-2">Proyectos por sede</h6>
+                    <button class="btn btn-primary background-table" color="primary" (click)="downloadPDF()"><i class="fas fa-download"></i></button>
                 </div>
                 <div class="card-body">
                     <div style="display: block">
@@ -18,9 +19,30 @@
                           [colors]="barChartColors">
                         </canvas>
                       </div>
-                      <button id="btn-graf" mat-button mat-raised-button color="primary" (click)="downloadPDF()">Imprimir</button>
                 </div>
-            </div>
+            </div> 
+             <!-- grafica por sede y categoria -->
+        </div> <!-- fin columna izquierda -->
+
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <app-gra-for-cat></app-gra-for-cat>
         </div> <!-- fin columna derecha -->
     </div> <!-- fin row -->
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <app-gra-for-ase></app-gra-for-ase>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <app-gra-for-part></app-gra-for-part>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+            <app-gra-for-proy></app-gra-for-proy>
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
 </div> <!-- fin container-fluid -->

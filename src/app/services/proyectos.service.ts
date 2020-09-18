@@ -55,5 +55,21 @@ export class ProyectosService {
     return this.http.post<any>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/admin/obtener-status', body);
   }
 
+  getProyectosPorCategoria(): Observable<any>{
+    return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria'); 
+  }
+
+  getAsesoresPorSede(): Observable<any>{
+    return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/asesores-por-sede');
+  }
+
+  getParticipantesPorSede(): Observable<any>{
+    return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/participantes-por-sede');
+  }
+
+  getParticipantesPorCategoria(): Observable<any>{
+    return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/participantes-por-categoria');
+  }
+
 }
 

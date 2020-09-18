@@ -30,6 +30,11 @@ import { AddAuthorsComponent } from './add-authors/add-authors.component';
 import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EstadisticsComponent } from './estadistics/estadistics.component';
+import { GraForSGComponent } from './gra-for-sg/gra-for-sg.component';
+import { GraForCatComponent } from './gra-for-cat/gra-for-cat.component';
+import { GraForAseComponent } from './gra-for-ase/gra-for-ase.component';
+import { GraForPartComponent } from './gra-for-part/gra-for-part.component';
+import { GraForProyComponent } from './gra-for-proy/gra-for-proy.component';
 
 
 @NgModule({
@@ -50,7 +55,12 @@ import { EstadisticsComponent } from './estadistics/estadistics.component';
     AdvisersRegisteredComponent,
     AddAuthorsComponent,
     AuthorsRegisteredComponent,
-    EstadisticsComponent
+    EstadisticsComponent,
+    GraForSGComponent,
+    GraForCatComponent,
+    GraForAseComponent,
+    GraForPartComponent,
+    GraForProyComponent
   ],
   imports: [
     BrowserModule,

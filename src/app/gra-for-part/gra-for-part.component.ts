@@ -1,26 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets, plugins } from 'chart.js';
 import plugin, * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import jsPDF from 'jspdf';
 import { Color, defaultColors, Label } from 'ng2-charts';
-import { EstadisticasService } from '../services/estadisticas.service';
-
+import jsPDF from 'jspdf';
+import { ProyectosService } from '../services/proyectos.service';
 
 @Component({
-  selector: 'app-estadistics-component',
-  templateUrl: './estadistics.component.html',
-  styleUrls: ['./estadistics.component.scss']
+  selector: 'app-gra-for-part',
+  templateUrl: './gra-for-part.component.html',
+  styleUrls: ['./gra-for-part.component.scss']
 })
-export class EstadisticsComponent implements OnInit {
+export class GraForPartComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [
-      {
-        ticks: {
-          beginAtZero: true
-          }
-      }] },
+    scales: { xAxes: [{}], yAxes: [{}] },
     plugins: {
       datalabels: {
         anchor: 'center',
@@ -29,6 +23,7 @@ export class EstadisticsComponent implements OnInit {
       },
     }
   };
+
   public barChartColors: Color[] = [
     { backgroundColor: '#97c83c'},
   ];
@@ -36,20 +31,21 @@ export class EstadisticsComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
+
   public barChartData: ChartDataSets[];
 
-  estadisticas:[];
+  participantes:[];
 
-  constructor(private estadisticasService: EstadisticasService) { }
+  constructor(private participantesPorSede: ProyectosService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.barChartData = [{
       data: [],
-      label: 'Proyectos por sede'
+      label: 'Participantes por sede'
     }];
-    this.estadisticasService.getEstadisticas().subscribe(
+    this.participantesPorSede.getParticipantesPorSede().subscribe(
       data => {
-        this.estadisticas = data;
+        this.participantes = data;
         const sede1 = data['El Mante'];
         const sede2 = data['Jaumave'];
         const sede3 = data['Madero'];
@@ -60,13 +56,14 @@ export class EstadisticsComponent implements OnInit {
         
         this.barChartData = [{
           data: [sede1, sede2, sede3, sede4, sede5, sede6, sede7],
-          label: 'Proyectos Por Sede'
+          label: 'Participantes Por Sede'
         }];
       },
       err => {
         console.log(err);
       }
-    );
+    )
+
   }
 
   // events
@@ -77,10 +74,9 @@ export class EstadisticsComponent implements OnInit {
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
-  
 
   downloadPDF() {
-    var canvas: any = document.getElementById('graficaProy1');
+    var canvas: any = document.getElementById('graficaProy5');
     //creates image
     var canvasImg = canvas.toDataURL("image/png", 1.0);
     
@@ -88,8 +84,7 @@ export class EstadisticsComponent implements OnInit {
     var doc = new jsPDF('landscape');
     doc.setFontSize(20);
     doc.addImage(canvasImg, 'JPEG', 10, 10, 280, 150 );
-    doc.save('Proyectos-Por-Sede.pdf');
+    doc.save('Participantes-Por-Sede.pdf');
   }
-
 
 }
