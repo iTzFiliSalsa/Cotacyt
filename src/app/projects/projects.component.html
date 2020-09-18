@@ -186,17 +186,12 @@
                         <thead>
                             <tr>
                                 <th class="font-weight-bold text-center">Proyecto</th>
-                                <th class="font-weight-bold text-center">Status</th>
                                 <th class="font-weight-bold text-center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="text-center">{{proyectoActual.nombre}}</td>
-                                <td class="">
-                                    <!-- <h6 *ngIf="proyectoActual.status == '0'" class="custom-btn-danger text-center py-1">Sin calificar</h6>
-                                    <h6 *ngIf="proyectoActual.status == '1'" class="custom-btn-success text-center py-1">Calificado</h6> -->
-                                </td>
                                 <td class="text-center">
                                     <button class="custom-btn-success" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Calificar</button>
                                 </td>

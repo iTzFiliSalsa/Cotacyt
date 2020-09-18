@@ -47,6 +47,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       sedes: this.sedesService.getSedes()
     }).subscribe(
       data => {
+        console.log(data.asesores);
         this.asesores = data.asesores;
         this.sedes = data.sedes;
       }
