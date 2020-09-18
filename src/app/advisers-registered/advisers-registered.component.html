@@ -26,8 +26,10 @@
         <td>{{i.descripcion}}</td>
         <td class="d-flex">
             <button (click)="openSwal(i)" class="btn btn-edit mr-3"><i class="fas fa-edit"></i></button>
-            <button (click)="setAsesor(i)" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i
+            <button (click)="setAsesor(i)" class="btn btn-danger mr-3" data-toggle="modal" data-target="#modalEliminar"><i
                 class="fas fa-trash-alt"></i></button>
+            <button class="btn btn-primary" (click)="saveAsPdf(i)"><i class="fas fa-download"></i></button>
+            
         </td>
     </tr>
 

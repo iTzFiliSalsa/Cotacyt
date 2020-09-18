@@ -4,7 +4,8 @@ export interface Asesores {
     a_paterno: string;
     a_materno: string;
     email: string;
-    sedeS: string;
+    sede: string;
     id_sedes: string;
     descripcion: string;
+    proyecto: string;
 }

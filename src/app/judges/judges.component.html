@@ -22,11 +22,12 @@
                 <td>{{juez.sede}}</td>
                 <td>{{juez.usuario}}</td>
                 <td>{{juez.contrasena}}</td>
-                <td>
-                    <button (click)="open(juez)" class="btn btn-edit" data-toggle="modal" data-target="#modalEditar">Editar</button>
-                </td>
-                <td>
-                    <button (click)="setJudge(juez)" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button>
+                <td class="d-flex">
+                    <button (click)="open(juez)" class="btn btn-edit mr-3" data-toggle="modal" data-target="#modalEditar"><i class="fas fa-edit"></i></button>
+                
+                    <button (click)="setJudge(juez)" class="btn btn-danger mr-3" data-toggle="modal" data-target="#modalEliminar"><i class="fas fa-trash-alt"></i></button>
+            
+                    <button (click)="saveAsPdf(juez)" class="btn btn-primary"><i class="fas fa-download"></i></button>
                 </td>
             </tr>
         </table>

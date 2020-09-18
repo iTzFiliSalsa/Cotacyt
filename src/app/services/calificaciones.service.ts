@@ -25,7 +25,7 @@ export class CalificacionesService {
   listaDeCalificaciones(): Observable < CalificacionesPorCategoria[]>{
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     return this.http.get < CalificacionesPorCategoria[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-generales-por-categoria');
+      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-generales-por-categoria?id_sedes=' + this.sessionData.id_sedes);
   }
 
   
