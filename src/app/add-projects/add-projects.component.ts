@@ -18,6 +18,7 @@ import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Session } from '../models/session.model';
 import Swal from 'sweetalert2';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -27,7 +28,11 @@ import Swal from 'sweetalert2';
 })
 
 export class AddProjectsComponent implements OnInit {
+
+  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;
+  public files  = [];
   @ViewChild('swalid') private Variable: SwalComponent;
+  fileToUpload: File = null;
   areas: Areas[];
   sedes: Sedes[];
   asesores: Asesores[];
@@ -39,6 +44,7 @@ export class AddProjectsComponent implements OnInit {
   data: [][];
   funciones = [];
   sessionData: Session;
+  label: string = 'Sube un archivo...';
   constructor(
     public readonly swalTargets: SwalPortalTargets,
     private sedesService: SedesService,
@@ -47,7 +53,8 @@ export class AddProjectsComponent implements OnInit {
     private categoriasServices: CategoriasService,
     private proyectosService: ProyectosService,
     private formBuilder: FormBuilder,
-    private _utilService: UtilsService
+    private _utilService: UtilsService,
+    private _dataService: DataService
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.areas = new Array<Areas>();
@@ -180,6 +187,38 @@ export class AddProjectsComponent implements OnInit {
 
     };
     READER.readAsBinaryString(TARGET.files[0]);
+  }
+
+  handleFileInput(files: FileList){
+    // this.fileToUpload = files.item(0);
+    console.log(files[0].name);
+    this.label = files[0].name;
+  }
+
+  check(){
+    const fileUpload = this.fileUpload.nativeElement;
+    var reader = new FileReader();
+    reader.readAsBinaryString(fileUpload.files[0]);
+
+    reader.onload = () => {
+
+      const data =  btoa(<string>reader.result);
+      console.log("La data es: ", data);
+
+      this._dataService.putData(data).subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+
+    };
+  }
+
+  uploadFile(file){
+
   }
 
   guardarEnBD(evt: any) {
