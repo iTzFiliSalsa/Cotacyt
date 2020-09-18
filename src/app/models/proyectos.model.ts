@@ -22,3 +22,7 @@ export interface InformacionDeLosProyectos{
     resumen: string;
     sede: string;
 }
+
+export interface AllProjectsCat{
+    
+}

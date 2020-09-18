@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-header background-table">
+        <h6>Proyectos por sede y categoría</h6>
+    </div>
+    <div class="card-body">
+        <div style="display: block">
+            <canvas  id="graficaProy2" baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              [colors]="barChartColors">
+            </canvas>
+          </div>
+          <button class="btn btn-primary background-table" color="primary" (click)="downloadPDF()">Imprimir</button>
+    </div>
+</div>
