@@ -16,7 +16,15 @@ export class ProyectosService {
   }
 
   obtenerTodosLosProyectos(): Observable<Proyectos[]> {
-    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all?id_sedes=' + this.sessionData.id_sedes);
+    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT
+      + 'api/proyectos/all?id_sedes='
+      + this.sessionData.id_sedes);
+  }
+  obtenerTodosLosProyectosCategoria(idCategorias: string): Observable<Proyectos[]> {
+    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT
+      + 'api/proyectos/all-categoria?id_sedes='
+      + this.sessionData.id_sedes
+      + '&id_categorias=' + idCategorias);
   }
   obtenerProyecto(idProyectos: string): Observable<Proyectos> {
     return this.http.get<Proyectos>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/' + idProyectos);
@@ -42,6 +50,7 @@ export class ProyectosService {
       + 'api/proyectos/all/categoria?id_categorias='
       + this.sessionData.id_categorias
       + '&id_sedes=' + this.sessionData.id_sedes
+      + '&id_jueces=' + this.sessionData.id_jueces
     );
   }
 

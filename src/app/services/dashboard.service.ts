@@ -15,7 +15,11 @@ export class DashboardService {
   }
 
   getTotales(): Observable<Totales[]> {
-    return this.http.get<Totales[]>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/totales');
+    return this.http.get<Totales[]>(this.servicesConfig.APP_ENDPOINT
+    + 'api/dashboard/totales?id_categorias='
+    + this.sessionData.id_categorias
+    + '&id_sedes='
+    + this.sessionData.id_sedes);
   }
 
   getProyectosCalificados(): Observable<ProyectosCalificados[]> {
