@@ -109,19 +109,48 @@ export class AddProjectsComponent implements OnInit {
       };
     });
   }
+
+  check(id){
+    this._utilService.loading = true;
+    const fileUpload = this.fileUpload.nativeElement;
+    var reader = new FileReader();
+    reader.readAsBinaryString(fileUpload.files[0]);
+
+    reader.onload = () => {
+
+      const data =  btoa(<string>reader.result);
+      // console.log("La data es: ", data);
+
+      this._dataService.putData(data, id).subscribe(
+        res => {
+          swal.fire({
+            icon: 'success',
+            title: 'Exito',
+            text: 'El proyecto se registró correctamente'
+          });
+
+          this.formRegistroProyecto.reset({
+            id_sedes: this.sessionData.id_sedes
+          });
+
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService.loading = false;
+      })
+
+    };
+  }
+
   registrarProyecto() {
+    // console.log(this.formRegistroProyecto.value);
     this._utilService.loading = true;
     this.proyectosService.postNuevoProyecto( this.formRegistroProyecto.value)
     .subscribe(
       data => {
-        swal.fire({
-          icon: 'success',
-          title: 'Exito',
-          text: 'El proyecto se registró correctamente'
-        });
-        this.formRegistroProyecto.reset({
-          id_sedes: this.sessionData.id_sedes
-        });
+        this.check(data);
       },
       err => {
         swal.fire({
@@ -193,27 +222,7 @@ export class AddProjectsComponent implements OnInit {
     this.label = files[0].name;
   }
 
-  check(){
-    const fileUpload = this.fileUpload.nativeElement;
-    var reader = new FileReader();
-    reader.readAsBinaryString(fileUpload.files[0]);
-
-    reader.onload = () => {
-
-      const data =  btoa(<string>reader.result);
-      console.log("La data es: ", data);
-
-      this._dataService.putData(data).subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log(err);
-        }
-      )
-
-    };
-  }
+  
 
   uploadFile(file){
 

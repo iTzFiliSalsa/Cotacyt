@@ -10,9 +10,9 @@ export class DataService {
     private _httpClient: HttpClient
   ) { }
 
-  putData(data){
+  putData(data, id){
     return this._httpClient.post("https://mante.hosting.acm.org/API_COTACYT/video/guardarFoto.php", {
-      'name': 'ejemplo2',
+      'name': id,
       'data': data,
       'type': 'mp4'
     });
