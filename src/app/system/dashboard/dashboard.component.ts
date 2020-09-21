@@ -24,6 +24,7 @@ import { CalificacionesPorCategoria } from '../../models/calificaciones.model'
 import { InformacionDeLosProyectos } from '../../models/proyectos.model'
 import { ProyectosService } from '../../services/proyectos.service'
 import { jsPDF } from "jspdf";
+import '../../../assets/fonts/Helvetica.ttf';
 
 
 @Component({
@@ -850,12 +851,12 @@ export class DashboardComponent implements OnInit {
     let array = 1;
     for (let i = 0; i < autores.length; i++) {
       const doc5 = new jsPDF();
-      doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300);
-      doc5.text(autores[i].autor, 80, 175);
+      doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+      doc5.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc5.text(nombre, 85, 215);
       doc5.setFontSize(16);
       doc5.setFont('Helvetica');
-      doc5.save("constanciaPrimerLugar.pdf");      
+      doc5.save("constancia Primer Lugar proyecto "+nombre+".pdf");      
     }
   }
 
@@ -863,23 +864,23 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < autores.length; i++) {
       console.log(nombre);
       const doc6 = new jsPDF();
-      doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300);  
-      doc6.text(autores[i].autor, 80, 175);
+      doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');  
+      doc6.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc6.text(nombre, 85, 215);
       doc6.setFontSize(16);
       doc6.setFont('Helvetica');
-      doc6.save("constanciaSegundoLugar.pdf");
+      doc6.save("constancia Segundo Lugar proyecto "+nombre+".pdf");
     }
   }
   thirdPlace({nombre = ''}, autores: any[], sede: string, categoriaSede: string) {
     for (let i = 0; i < autores.length; i++) {
       const doc7 = new jsPDF();
-      doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300);
-      doc7.text(autores[i].autor, 80, 175);
+      doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+      doc7.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc7.text(nombre, 85, 215);
       doc7.setFontSize(16);
       doc7.setFont('Helvetica');
-      doc7.save("constanciaTercerLugar.pdf");
+      doc7.save("constancia Tercer Lugar proyecto "+nombre+".pdf");
     }
   }
 }
