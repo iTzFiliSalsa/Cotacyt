@@ -1,7 +1,7 @@
 export interface JudgesRegistered {
     id_jueces: string;
     categoria: string;
-    sedes: string;
+    sede: string;
     id_sedes: string;
     usuario: string;
     contrasena: string;
