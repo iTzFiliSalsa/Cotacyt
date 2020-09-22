@@ -144,12 +144,13 @@ export class AuthorsRegisteredComponent implements OnInit {
         });
   }
 
-  saveAsPdf(autor: Autores){
+  saveAsPdf(autor: Autores) {
     this.autorActual = autor;
     console.log(this.autorActual);
-    switch(this.autorActual.id_sedes){
+    switch (this.autorActual.id_sedes) {
       case '1':
         const doc = new jsPDF();
+
         doc.addImage('assets/image/ConstanciaParticipantesMante.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc.text(this.autorActual.nombre +" "+ this.autorActual.a_paterno+" "+this.autorActual.a_materno , 60, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc.text(this.autorActual.proyecto, 72, 225);
@@ -191,6 +192,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc4.setFont('Helvetica');
         doc4.save("Constancia Autor "+this.autorActual.nombre+".pdf");
       break;
+
       case '6':
         const doc5 = new jsPDF();
         doc5.addImage('assets/image/certificadoJuradoNuevoLaredo.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
@@ -210,9 +212,8 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc6.save("Constancia Autor "+this.autorActual.nombre+".pdf");
       break;
       default:
-        console.log("sede no encontrada");
-      break;
+        console.log('sede no encontrada');
+        break;
     }
-  
 }
 }

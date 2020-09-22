@@ -85,11 +85,12 @@ export class EstadisticsComponent implements OnInit {
     var canvas: any = document.getElementById('graficaProy1');
     //creates image
     var canvasImg = canvas.toDataURL("image/png", 1.0);
-    
     //creates PDF from img
     var doc = new jsPDF('landscape');
     doc.setFontSize(20);
-    doc.addImage(canvasImg, 'JPEG', 10, 10, 280, 150 );
+    doc.addImage('assets/logotamColor.png', 'png', 9, 7, 57, 28);
+    doc.addImage('assets/cecit.png','png', 243, 5, 50, 40);
+    doc.addImage(canvasImg, 'JPEG', 15, 50, 260, 135 );
     doc.save('Proyectos-Por-Sede.pdf');
   }
 

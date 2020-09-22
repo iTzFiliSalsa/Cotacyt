@@ -19,7 +19,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Session } from '../models/session.model';
 import Swal from 'sweetalert2';
 import { DataService } from '../services/data.service';
-import { Autores } from '../models/autores.model';
+import { Autores, AutoresSelect } from '../models/autores.model';
 import { AutoresService } from '../services/autores.service';
 
 
@@ -39,7 +39,7 @@ export class AddProjectsComponent implements OnInit {
   sedes: Sedes[];
   asesores: Asesores[];
   categorias: Categorias[];
-  autores: Autores[];
+  autores: AutoresSelect[];
   autoresSeleccionados: any[];
   dropdownSettings: IDropdownSettings;
   formRegistroProyecto: FormGroup;
@@ -85,7 +85,7 @@ export class AddProjectsComponent implements OnInit {
         sedes: this.sedesService.getSedes(),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
-        autores: this.autoresService.getAutores(),
+        autores: this.autoresService.getAutoresSelect(),
       }
     ).subscribe(
       data => {
@@ -146,23 +146,32 @@ export class AddProjectsComponent implements OnInit {
 
   registrarProyecto() {
     // console.log(this.formRegistroProyecto.value);
-    this._utilService.loading = true;
-    this.proyectosService.postNuevoProyecto( this.formRegistroProyecto.value)
-    .subscribe(
-      data => {
-        this.check(data);
-      },
-      err => {
-        swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Hubo un error al registrar el proyecto'
-        });
-        console.log(err);
-      }
-    ).add(() => {
-      this._utilService.loading = false;
-    });
+    const fileUpload = this.fileUpload.nativeElement;
+    if (!fileUpload.value) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Hace falta subir el video',
+        icon: 'error'
+      });
+    } else {
+      this._utilService.loading = true;
+      this.proyectosService.postNuevoProyecto( this.formRegistroProyecto.value)
+      .subscribe(
+        data => {
+          this.check(data);
+        },
+        err => {
+          swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error al registrar el proyecto'
+          });
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService.loading = false;
+      });
+    }
   }
   onFileChange(evt: any) {
     const TARGET: DataTransfer = <DataTransfer>(evt.target);

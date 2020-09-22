@@ -15,6 +15,7 @@ import { SwalComponent, SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import swal from 'sweetalert2';
 import { InformacionDeLosProyectos } from '../models/proyectos.model'
 import { forkJoin } from 'rxjs';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class ProjectsComponent implements OnInit {
   public allProjects: Array<ProjectRegistered>;
 
   informacionDeLosProyectos: InformacionDeLosProyectos[];
-  
+
 
   categoria: string;
   proyectosCalificados: ProyectosCalificados[];
@@ -49,16 +50,17 @@ export class ProjectsComponent implements OnInit {
   obtenido7: number;
   obtenido8: number;
   sessionData: Session;
-  constructor(private dashboardService: DashboardService,
-              private categoriasService: CategoriasService,
-              private proyectosService: ProyectosService,
-              private formBuilder: FormBuilder,
-              private calificarProyectoService: CalificarProyectoService,
-              private _utilService: UtilsService,
-              private projectsService: ProjectsRegisteredService,
-              private infoProject: ProyectosService,
-              private _utilsService: UtilsService,
-              ) {
+  constructor(
+    private dashboardService: DashboardService,
+    private categoriasService: CategoriasService,
+    private proyectosService: ProyectosService,
+    private formBuilder: FormBuilder,
+    private calificarProyectoService: CalificarProyectoService,
+    private _utilService: UtilsService,
+    private projectsService: ProjectsRegisteredService,
+    private infoProject: ProyectosService,
+    private _utilsService: UtilsService,
+  ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
     this.obtenido1 = 0;
@@ -94,7 +96,7 @@ export class ProjectsComponent implements OnInit {
         err => {
           console.log(<any>err);
         }
-      ).add(()=> {
+      ).add(() => {
         this._utilService.loading = false;
       });
     } else {
@@ -102,11 +104,10 @@ export class ProjectsComponent implements OnInit {
         proyectosCalificados: this.dashboardService.getProyectosCalificados(),
         proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar(),
         todosLosProyectos: this.proyectosService.obtenerTodosLosProyectosDeCategoria()
-      }).subscribe (
+      }).subscribe(
         (data: any) => {
           this.proyectosCalificados = data.proyectosCalificados;
           this.proyectosPorCalificar = data.proyectosPorCalificar;
-          console.log(data.todosLosProyectos);
           this.allProjects = data.todosLosProyectos;
         },
         err => {
@@ -122,13 +123,13 @@ export class ProjectsComponent implements OnInit {
   adminProjects(proyectos) {
     proyectos.filter((res) => {
       this.proyectosService.getStatusAdmin(res.id_proyectos)
-      .subscribe( data => {
-        if (data[0].status === 1) {
-          this.proyectosCalificados.push(res);
-        } else {
-          this.proyectosPorCalificar.push(res);
-        }
-      });
+        .subscribe(data => {
+          if (data[0].status === 1) {
+            this.proyectosCalificados.push(res);
+          } else {
+            this.proyectosPorCalificar.push(res);
+          }
+        });
     });
   }
 
@@ -138,14 +139,13 @@ export class ProjectsComponent implements OnInit {
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
       data => {
         this.proyectoActual = data;
-        this.proyectosService.getStatusAdmin(this.proyectoActual.id_proyectos)
-          .subscribe( ( res ) => {
+        this.proyectosService.getStatusProyecto(this.proyectoActual.id_proyectos)
+          .subscribe((res) => {
             console.log(res);
             if (res[0].status === 1) {
               this.calificarProyectoService.getCalificaciones(
                 this.categoria, Number(this.proyectoActual.id_proyectos)
-                ).subscribe(calificaciones => {
-                console.log(calificaciones);
+              ).subscribe(calificaciones => {
                 switch (this.categoria) {
                   case 'petit':
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
@@ -169,7 +169,7 @@ export class ProjectsComponent implements OnInit {
                     this.obtenido5 = Number(calificaciones[0].obtenido5);
                     this.obtenido6 = Number(calificaciones[0].obtenido6);
                     break;
-                  case 'media-superior':
+                  case 'media superior':
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
                     this.obtenido2 = Number(calificaciones[0].obtenido2);
                     this.obtenido3 = Number(calificaciones[0].obtenido3);
@@ -200,7 +200,7 @@ export class ProjectsComponent implements OnInit {
                     this.obtenido8 = Number(calificaciones[0].obtenido8);
                     break;
                 }
-              });
+              }, err => console.log(err));
             } else {
               this.obtenido1 = 0;
               this.obtenido2 = 0;
@@ -219,216 +219,390 @@ export class ProjectsComponent implements OnInit {
     });
   }
   guardarPuntos() {
-    console.log(this.formPuntos.value);
     this.valores = this.formPuntos.value;
     this._utilService.loading = true;
-    this.proyectosService.getStatusAdmin(this.proyectoActual.id_proyectos)
-          .subscribe( ( res ) => {
-              switch (this.categoria) {
-                case 'petit':
-                  if (res[0].status === 1) {
-                    this.calificarProyectoService.putCalificacionesPetit(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      ).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                    this.proyectoActual = null;
-                  } else {
-                    this.calificarProyectoService.setCalificacionesPetit(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      ).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-                      .subscribe(data => console.log(data));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                    this.proyectoActual = null;
-                  }
-                  break;
-                case 'kids':
-                  if (res[0].status === 1) {
-                    this.calificarProyectoService.putCalificacionesKids(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      ).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  } else {
-                    this.calificarProyectoService.setCalificacionesKids(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      ).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-                    .subscribe( data => console.log(data));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  }
-                  break;
-                case 'juvenil':
-                  if (res[0].status === 1) {
-                    this.calificarProyectoService.putCalificacionesJvenil(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  } else {
-                    this.calificarProyectoService.setCalificacionesJvenil(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-                    .subscribe( data => console.log(data));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  }
-                  break;
-                case 'media-superior':
-                  if (res[0].status === 1) {
-                    this.calificarProyectoService.putCalificacionesMediaSuperior(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6,
-                      this.valores.obtenido7,
-                      this.valores.obtenido8,
-                      ).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  } else {
-                    this.calificarProyectoService.setCalificacionesMediaSuperior(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6,
-                      this.valores.obtenido7,
-                      this.valores.obtenido8,
-                      ).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-                    .subscribe( data => console.log(data));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  }
-                  break;
-                case 'superior':
-                  if (res[0].status === 1) {
-                    this.calificarProyectoService.putCalificacionesSuperior(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6,
-                      this.valores.obtenido7,
-                      this.valores.obtenido8).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  } else {
-                    this.calificarProyectoService.setCalificacionesSuperior(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6,
-                      this.valores.obtenido7,
-                      this.valores.obtenido8).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-                    .subscribe( data => console.log(data));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  }
-                  break;
-                case 'posgrado':
-                  if (res[0].status === 1) {
-                    this.calificarProyectoService.putCalificacionesPosgrado(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6,
-                      this.valores.obtenido7,
-                      this.valores.obtenido8).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  } else {
-                    this.calificarProyectoService.setCalificacionesPosgrado(
-                      Number(this.proyectoActual.id_proyectos),
-                      this.valores.obtenido1,
-                      this.valores.obtenido2,
-                      this.valores.obtenido3,
-                      this.valores.obtenido4,
-                      this.valores.obtenido5,
-                      this.valores.obtenido6,
-                      this.valores.obtenido7,
-                      this.valores.obtenido8).subscribe(
-                        data => console.log(data),
-                        err => console.log(err));
-                    this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
-                    .subscribe( data => console.log(data));
-                    this._utilService.loading = false;
-                    this.ngOnInit();
-                  }
-                  break;
-              }
-        });
+    this.proyectosService.getStatusProyecto(this.proyectoActual.id_proyectos)
+      .subscribe((res) => {
+        switch (this.categoria) {
+          case 'petit':
+            if (res[0].status === 1) {
+              this.calificarProyectoService.putCalificacionesPetit(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+              ).subscribe(
+                data => {
+                  Swal.fire({
+                    title: 'El proyecto se califico',
+                    icon: 'success'
+                  });
+                },
+                err => {
+                  console.log(err);
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+              this.proyectoActual = null;
+            } else {
+              this.calificarProyectoService.setCalificacionesPetit(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+              ).subscribe(
+                data => {
+                  Swal.fire({
+                    title: 'El proyecto se califico',
+                    icon: 'success'
+                  });
+                },
+                err => {
+                  console.log(err);
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                .subscribe(data => {
+                  console.log(data);
+                }, err => {
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+              this.proyectoActual = null;
+            }
+            break;
+          case 'kids':
+            if (res[0].status === 1) {
+              this.calificarProyectoService.putCalificacionesKids(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+              ).subscribe(
+                data => {
+                  Swal.fire({
+                    title: 'El proyecto se califico',
+                    icon: 'success'
+                  });
+                },
+                err => {
+                  console.log(err);
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            } else {
+              this.calificarProyectoService.setCalificacionesKids(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+              ).subscribe(
+                data => {
+                  Swal.fire({
+                    title: 'El proyecto se califico',
+                    icon: 'success'
+                  });
+                },
+                err => {
+                  console.log(err);
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                .subscribe(data => {
+                  console.log(data);
+                }, err => {
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            }
+            break;
+          case 'juvenil':
+            if (res[0].status === 1) {
+              this.calificarProyectoService.putCalificacionesJvenil(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6)
+                .subscribe(
+                  data => {
+                    Swal.fire({
+                      title: 'El proyecto se califico',
+                      icon: 'success'
+                    });
+                  },
+                  err => {
+                    console.log(err);
+                    Swal.fire({
+                      title: 'Ocurrio un error',
+                      icon: 'error'
+                    });
+                  });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            } else {
+              this.calificarProyectoService.setCalificacionesJvenil(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6).subscribe(
+                  data => {
+                    Swal.fire({
+                      title: 'El proyecto se califico',
+                      icon: 'success'
+                    });
+                  },
+                  err => {
+                    console.log(err);
+                    Swal.fire({
+                      title: 'Ocurrio un error',
+                      icon: 'error'
+                    });
+                  });
+              this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                .subscribe(data => {
+                  console.log(data);
+                }, err => {
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            }
+            break;
+          case 'media-superior':
+            if (res[0].status === 1) {
+              this.calificarProyectoService.putCalificacionesMediaSuperior(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6,
+                this.valores.obtenido7,
+                this.valores.obtenido8,
+              ).subscribe(
+                data => {
+                  Swal.fire({
+                    title: 'El proyecto se califico',
+                    icon: 'success'
+                  });
+                },
+                err => {
+                  console.log(err);
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            } else {
+              this.calificarProyectoService.setCalificacionesMediaSuperior(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6,
+                this.valores.obtenido7,
+                this.valores.obtenido8,
+              ).subscribe(
+                data => {
+                  Swal.fire({
+                    title: 'El proyecto se califico',
+                    icon: 'success'
+                  });
+                },
+                err => {
+                  console.log(err);
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                .subscribe(data => {
+                  console.log(data);
+                }, err => {
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            }
+            break;
+          case 'superior':
+            if (res[0].status === 1) {
+              this.calificarProyectoService.putCalificacionesSuperior(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6,
+                this.valores.obtenido7,
+                this.valores.obtenido8).subscribe(
+                  data => {
+                    Swal.fire({
+                      title: 'El proyecto se califico',
+                      icon: 'success'
+                    });
+                  },
+                  err => {
+                    console.log(err);
+                    Swal.fire({
+                      title: 'Ocurrio un error',
+                      icon: 'error'
+                    });
+                  });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            } else {
+              this.calificarProyectoService.setCalificacionesSuperior(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6,
+                this.valores.obtenido7,
+                this.valores.obtenido8).subscribe(
+                  data => {
+                    Swal.fire({
+                      title: 'El proyecto se califico',
+                      icon: 'success'
+                    });
+                  },
+                  err => {
+                    console.log(err);
+                    Swal.fire({
+                      title: 'Ocurrio un error',
+                      icon: 'error'
+                    });
+                  });
+              this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                .subscribe(data => {
+                  console.log(data);
+                }, err => {
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            }
+            break;
+          case 'posgrado':
+            if (res[0].status === 1) {
+              this.calificarProyectoService.putCalificacionesPosgrado(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6,
+                this.valores.obtenido7,
+                this.valores.obtenido8).subscribe(
+                  data => {
+                    Swal.fire({
+                      title: 'El proyecto se califico',
+                      icon: 'success'
+                    });
+                  },
+                  err => {
+                    console.log(err);
+                    Swal.fire({
+                      title: 'Ocurrio un error',
+                      icon: 'error'
+                    });
+                  });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            } else {
+              this.calificarProyectoService.setCalificacionesPosgrado(
+                Number(this.proyectoActual.id_proyectos),
+                this.valores.obtenido1,
+                this.valores.obtenido2,
+                this.valores.obtenido3,
+                this.valores.obtenido4,
+                this.valores.obtenido5,
+                this.valores.obtenido6,
+                this.valores.obtenido7,
+                this.valores.obtenido8).subscribe(
+                  data => {
+                    Swal.fire({
+                      title: 'El proyecto se califico',
+                      icon: 'success'
+                    });
+                  },
+                  err => {
+                    console.log(err);
+                    Swal.fire({
+                      title: 'Ocurrio un error',
+                      icon: 'error'
+                    });
+                  });
+              this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
+                .subscribe(data => {
+                  console.log(data);
+                }, err => {
+                  Swal.fire({
+                    title: 'Ocurrio un error',
+                    icon: 'error'
+                  });
+                });
+              this._utilService.loading = false;
+              this.ngOnInit();
+            }
+            break;
+        }
+      });
   }
   generarForm(categoria: string) {
     const expReg = RegExp('^[0-9]+$');
@@ -505,7 +679,7 @@ export class ProjectsComponent implements OnInit {
 
 
   //mostrar informacion de proyecto seleccionado - Todos los proyectos
-  mostrarInfoTodosLosProyectos(proyecto:ProjectRegistered) {
+  mostrarInfoTodosLosProyectos(proyecto: ProjectRegistered) {
     this.swalInformacion.fire();
     this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
       data => {
@@ -520,8 +694,8 @@ export class ProjectsComponent implements OnInit {
   }
 
 
-   //mostrar informacion de proyecto seleccionado - Proyectos calificados
-   mostrarInfoCalificados(proyecto:ProyectosCalificados) {
+  //mostrar informacion de proyecto seleccionado - Proyectos calificados
+  mostrarInfoCalificados(proyecto: ProyectosCalificados) {
     this.swalInformacion.fire();
     this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
       data => {
@@ -535,8 +709,8 @@ export class ProjectsComponent implements OnInit {
   }
 
 
-   //mostrar informacion de proyecto seleccionado - Proyectos por calificar
-   mostrarInfoPorCalificar(proyecto:ProyectosCalificados) {
+  //mostrar informacion de proyecto seleccionado - Proyectos por calificar
+  mostrarInfoPorCalificar(proyecto: ProyectosCalificados) {
     this.swalInformacion.fire();
     this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
       data => {

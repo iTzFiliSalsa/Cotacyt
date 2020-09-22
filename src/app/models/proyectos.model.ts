@@ -26,3 +26,7 @@ export interface InformacionDeLosProyectos{
 export interface AllProjectsCat{
     
 }
+export interface ProyectSelect {
+    id_proyectos: string;
+    nombre: string;
+}

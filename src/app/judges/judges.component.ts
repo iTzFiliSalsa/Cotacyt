@@ -11,6 +11,9 @@ import { forkJoin } from 'rxjs';
 import { Session } from '../models/session.model';
 import { jsPDF } from "jspdf";
 import '../../assets/fonts/Helvetica.ttf';
+import { Proyectos, ProyectSelect } from '../models/proyectos.model';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ProyectosService } from '../services/proyectos.service';
 
 @Component({
   selector: 'app-judges',
@@ -25,32 +28,57 @@ export class JudgesComponent implements OnInit {
   sedes: Sedes[];
   formJuez: FormGroup;
   sessionData: Session;
+  proyectos: Proyectos[];
+  proyectosViejos: ProyectSelect[];
+  proyectosNuevos: Proyectos[];
+  settingsProyectosViejos: IDropdownSettings;
+  settingsProyectosNuevos: IDropdownSettings;
   constructor(
     private judgesService: JudgesRegisteredService,
     private _utilService: UtilsService,
     private sedesService: SedesService,
+    private proyectosService: ProyectosService,
     private formBuilder: FormBuilder
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.jueces = new Array<JudgesRegistered>();
+    this.proyectosNuevos = Array<any>();
+    this.proyectosViejos = Array<any>();
     this._utilService.loading = true;
     this.formJuez = this.formBuilder.group({
+      id_jueces: [''],
       id_categorias: ['', [Validators.required]],
       id_sedes:      [this.sessionData.id_sedes],
       usuario:       ['', [Validators.required]],
       contrasena:    ['', [Validators.required]],
+      ids_proyectos_viejos: [''],
+      ids_proyectos_nuevos: [''],
       nombre:        ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+    this.settingsProyectosViejos = {
+      singleSelection: false,
+      idField: 'id_proyectos',
+      textField: 'nombre',
+      allowSearchFilter: true
+    };
+    this.settingsProyectosNuevos = {
+      singleSelection: false,
+      idField: 'id_proyectos',
+      textField: 'nombre',
+      allowSearchFilter: true
+    };
     forkJoin({
-      jueces: this.judgesService.getJudges(),
+      jueces: this.judgesService.getJudgesDetails(),
       sedes: this.sedesService.getSedes(),
+      proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
     }).subscribe(
       data => {
         this.jueces = data.jueces;
         this.sedes = data.sedes;
+        this.proyectos = data.proyectos;
       },
       err => {
         console.log(err);
@@ -84,7 +112,12 @@ export class JudgesComponent implements OnInit {
   }
   open(juez: JudgesRegistered) {
     this.juezActual = juez;
+    this.proyectosService.obtenerProyectosSelect(this.juezActual.id_jueces)
+      .subscribe( data => {
+        this.proyectosViejos = data;
+      });
     this.formJuez.patchValue({
+      id_jueces: this.juezActual.id_jueces,
       usuario: this.juezActual.usuario,
       contrasena: this.juezActual.contrasena,
       nombre: this.juezActual.nombre,
@@ -95,8 +128,7 @@ export class JudgesComponent implements OnInit {
   }
   editarJuez() {
     this._utilService._loading = true;
-    console.log(this.formJuez.value);
-    this.judgesService.updateJudge(this.formJuez.value, this.juezActual.id_jueces)
+    this.judgesService.updateJudge(this.formJuez.value)
       .subscribe(data => {
         Swal.fire({
           icon: 'success',
@@ -114,6 +146,32 @@ export class JudgesComponent implements OnInit {
           this._utilService._loading = false;
         });
   }
+  dropProyectoViejo(item) {
+    this.proyectosViejos.map( (res, index) => {
+      if (res.id_proyectos === item.id_proyectos) {
+        this.proyectosViejos.splice(index, 1);
+      }
+    });
+  }
+  addProyectoViejo(item) {
+    this.proyectosViejos.push(item);
+  }
+  dropProyectoNuevo(item) {
+    this.proyectosNuevos.map( (res, index) => {
+      if (res.id_proyectos === item.id_proyectos) {
+        this.proyectosNuevos.splice(index, 1);
+      }
+    });
+  }
+  addProyectoNuevo(item) {
+    this.proyectosNuevos.push(item);
+  }
+  categoriaActual(value) {
+    this.proyectosService.obtenerTodosLosProyectosCategoria(value)
+      .subscribe( data => {
+        this.proyectos = data;
+      });
+  }
   verificarCat(categoria: string) {
     switch (categoria) {
       case 'petit':
@@ -130,7 +188,7 @@ export class JudgesComponent implements OnInit {
         return 6;
     }
   }
-  saveAsPdf(juez: JudgesRegistered){
+  saveAsPdf(juez: JudgesRegistered) {
     this.juezActual = juez;
     console.log(this.juezActual);
     switch(this.juezActual.sede){
@@ -176,7 +234,5 @@ export class JudgesComponent implements OnInit {
         doc5.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
     }
-    
-    
   }
 }

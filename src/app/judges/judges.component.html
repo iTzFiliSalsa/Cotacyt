@@ -10,6 +10,7 @@
                     <th>Id</th>
                     <th>Categoria</th>
                     <th>Sede</th>
+                    <th>Proyectos</th>
                     <th>Usuario</th>
                     <th>Contraseña</th>
                     <th>Opciones</th>
@@ -20,6 +21,7 @@
                 <td>{{juez.id_jueces}}</td>
                 <td>{{juez.categoria}}</td>
                 <td>{{juez.sede}}</td>
+                <td>{{juez.proyectoss}}</td>
                 <td>{{juez.usuario}}</td>
                 <td>{{juez.contrasena}}</td>
                 <td class="d-flex">
@@ -53,6 +55,35 @@
     <swal (confirm)="editarJuez()" #swalid title="Editar Juez" [showCancelButton] ="true">
         <form *swalPortal [formGroup]="formJuez">
             <div class="form-group">
+                <label for="">Categoria:</label>
+                <select #s (change)="categoriaActual(s.value)" [value]="verificarCat(juezActual.categoria)" formControlName="id_categorias" class="form-control">
+                    <option value="1">Petit</option>
+                    <option value="2">Kits</option>
+                    <option value="3">Juvenil</option>
+                    <option value="4">Media superior</option>
+                    <option value="5">Superior</option>
+                    <option value="6">Posgrado</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Seleccione los proyectos a quitar:</label>
+                <ng-multiselect-dropdown formControlName="ids_proyectos_viejos"
+                [settings]="settingsProyectosViejos"
+                [data]="proyectosViejos"
+                (onSelect)="addProyectoViejo($event)"
+                (onDeSelect)="dropProyectoViejo($event)"
+                ></ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+                <label for="">Seleccione los proyectos nuevos:</label>
+                <ng-multiselect-dropdown formControlName="ids_proyectos_nuevos"
+                [settings]="settingsProyectosNuevos"
+                [data]="proyectos"
+                (onSelect)="addProyectoNuevo($event)"
+                (onDeSelect)="dropProyectoNuevo($event)"
+                ></ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
                 <label for="">Usuario:</label>
                 <input type="text" class="form-control" formControlName="usuario"
                     placeholder="Clave del juez">
@@ -61,17 +92,6 @@
                 <label for="">Nombre:</label>
                 <input type="text" class="form-control" formControlName="nombre"
                     placeholder="Nombre del juez">
-            </div>
-            <div class="form-group">
-                <label for="">Categoria:</label>
-                <select [value]="verificarCat(juezActual.categoria)" formControlName="id_categorias" class="form-control">
-                    <option value="1">Petit</option>
-                    <option value="2">Kits</option>
-                    <option value="3">Juvenil</option>
-                    <option value="4">Media superior</option>
-                    <option value="5">Superior</option>
-                    <option value="6">Posgrado</option>
-                </select>
             </div>
             <div class="form-group">
                 <label for="">Sede:</label>
