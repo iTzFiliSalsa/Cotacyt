@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ServicesConfig } from '../config/services.config';
 import { Observable } from 'rxjs';
-import { Proyectos } from '../models/proyectos.model';
+import { Proyectos, ProyectSelect } from '../models/proyectos.model';
 import { Session } from '../models/session.model';
 import { InformacionDeLosProyectos } from '../models/proyectos.model'
 
@@ -63,6 +63,14 @@ export class ProyectosService {
     };
     return this.http.post<any>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/admin/obtener-status', body);
   }
+  getStatusProyecto(idProyecto: string): Observable<any> {
+    const body = {
+      id_proyectos: idProyecto,
+      id_jueces: this.sessionData.id_jueces,
+      id_categoria: this.sessionData.id_categorias
+    };
+    return this.http.post<any>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/obtener-status', body);
+  }
 
   getProyectosPorCategoria(): Observable<any>{
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria'); 
@@ -79,6 +87,14 @@ export class ProyectosService {
   getParticipantesPorCategoria(): Observable<any>{
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/participantes-por-categoria');
   }
-
+  getAutoresProyecto(idProyecto: string): Observable<any> {
+    return this.http.get(this.servicesConfig.APP_ENDPOINT
+      + 'api/autores/per-project?id_sedes=' + this.sessionData.id_sedes
+      + '&id_proyectos=' + idProyecto);
+  }
+  obtenerProyectosSelect(idJueces: string): Observable<ProyectSelect[]> {
+    return this.http.get<ProyectSelect[]>(this.servicesConfig.APP_ENDPOINT
+      + 'api/proyectos/all/per-judge?id_jueces=' + idJueces );
+  }
 }
 

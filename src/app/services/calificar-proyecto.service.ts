@@ -37,7 +37,7 @@ export class CalificarProyectoService {
           + idProyecto + '&id_jueces='
           + this.sessionData.id_jueces
         );
-      case 'media-superior':
+      case 'media superior':
         return this.http.get(this.servicesConfig.APP_ENDPOINT
           + 'api/media-superior'
           + '?id_proyectos='

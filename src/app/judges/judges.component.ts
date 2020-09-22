@@ -10,6 +10,9 @@ import { SedesService } from '../services/sedes.service';
 import { forkJoin } from 'rxjs';
 import { Session } from '../models/session.model';
 import { jsPDF } from "jspdf";
+import { Proyectos, ProyectSelect } from '../models/proyectos.model';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ProyectosService } from '../services/proyectos.service';
 
 @Component({
   selector: 'app-judges',
@@ -24,32 +27,57 @@ export class JudgesComponent implements OnInit {
   sedes: Sedes[];
   formJuez: FormGroup;
   sessionData: Session;
+  proyectos: Proyectos[];
+  proyectosViejos: ProyectSelect[];
+  proyectosNuevos: Proyectos[];
+  settingsProyectosViejos: IDropdownSettings;
+  settingsProyectosNuevos: IDropdownSettings;
   constructor(
     private judgesService: JudgesRegisteredService,
     private _utilService: UtilsService,
     private sedesService: SedesService,
+    private proyectosService: ProyectosService,
     private formBuilder: FormBuilder
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.jueces = new Array<JudgesRegistered>();
+    this.proyectosNuevos = Array<any>();
+    this.proyectosViejos = Array<any>();
     this._utilService.loading = true;
     this.formJuez = this.formBuilder.group({
+      id_jueces: [''],
       id_categorias: ['', [Validators.required]],
       id_sedes:      [this.sessionData.id_sedes],
       usuario:       ['', [Validators.required]],
       contrasena:    ['', [Validators.required]],
+      ids_proyectos_viejos: [''],
+      ids_proyectos_nuevos: [''],
       nombre:        ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+    this.settingsProyectosViejos = {
+      singleSelection: false,
+      idField: 'id_proyectos',
+      textField: 'nombre',
+      allowSearchFilter: true
+    };
+    this.settingsProyectosNuevos = {
+      singleSelection: false,
+      idField: 'id_proyectos',
+      textField: 'nombre',
+      allowSearchFilter: true
+    };
     forkJoin({
-      jueces: this.judgesService.getJudges(),
+      jueces: this.judgesService.getJudgesDetails(),
       sedes: this.sedesService.getSedes(),
+      proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
     }).subscribe(
       data => {
         this.jueces = data.jueces;
         this.sedes = data.sedes;
+        this.proyectos = data.proyectos;
       },
       err => {
         console.log(err);
@@ -83,7 +111,12 @@ export class JudgesComponent implements OnInit {
   }
   open(juez: JudgesRegistered) {
     this.juezActual = juez;
+    this.proyectosService.obtenerProyectosSelect(this.juezActual.id_jueces)
+      .subscribe( data => {
+        this.proyectosViejos = data;
+      });
     this.formJuez.patchValue({
+      id_jueces: this.juezActual.id_jueces,
       usuario: this.juezActual.usuario,
       contrasena: this.juezActual.contrasena,
       nombre: this.juezActual.nombre,
@@ -94,8 +127,7 @@ export class JudgesComponent implements OnInit {
   }
   editarJuez() {
     this._utilService._loading = true;
-    console.log(this.formJuez.value);
-    this.judgesService.updateJudge(this.formJuez.value, this.juezActual.id_jueces)
+    this.judgesService.updateJudge(this.formJuez.value)
       .subscribe(data => {
         Swal.fire({
           icon: 'success',
@@ -113,6 +145,32 @@ export class JudgesComponent implements OnInit {
           this._utilService._loading = false;
         });
   }
+  dropProyectoViejo(item) {
+    this.proyectosViejos.map( (res, index) => {
+      if (res.id_proyectos === item.id_proyectos) {
+        this.proyectosViejos.splice(index, 1);
+      }
+    });
+  }
+  addProyectoViejo(item) {
+    this.proyectosViejos.push(item);
+  }
+  dropProyectoNuevo(item) {
+    this.proyectosNuevos.map( (res, index) => {
+      if (res.id_proyectos === item.id_proyectos) {
+        this.proyectosNuevos.splice(index, 1);
+      }
+    });
+  }
+  addProyectoNuevo(item) {
+    this.proyectosNuevos.push(item);
+  }
+  categoriaActual(value) {
+    this.proyectosService.obtenerTodosLosProyectosCategoria(value)
+      .subscribe( data => {
+        this.proyectos = data;
+      });
+  }
   verificarCat(categoria: string) {
     switch (categoria) {
       case 'petit':
@@ -129,18 +187,18 @@ export class JudgesComponent implements OnInit {
         return 6;
     }
   }
-  saveAsPdf(juez: JudgesRegistered){
+  saveAsPdf(juez: JudgesRegistered) {
     this.juezActual = juez;
     console.log(this.juezActual);
-    switch(this.juezActual.sedes){
+    switch (this.juezActual.sede) {
       case 'El mante':
         const doc = new jsPDF();
         doc.addImage('assets/image/ReconocimientoJuradoMante.jpg', 'jpg', 0, 0, 210, 300);
         doc.text(this.juezActual.nombre, 75, 180);
         doc.setFontSize(16);
         doc.setFont('Arial');
-        doc.save("constanciaJuez.pdf");
-      break;
+        doc.save('constanciaJuez.pdf');
+        break;
 
       case 'Reynosa':
         const doc1 = new jsPDF();
@@ -148,8 +206,8 @@ export class JudgesComponent implements OnInit {
         doc1.text(this.juezActual.nombre, 75, 180);
         doc1.setFontSize(16);
         doc1.setFont('Arial');
-        doc1.save("constanciaJuez.pdf");
-      break;
+        doc1.save('constanciaJuez.pdf');
+        break;
 
       case 'Matamoros':
         const doc2 = new jsPDF();
@@ -157,8 +215,8 @@ export class JudgesComponent implements OnInit {
         doc2.text(this.juezActual.nombre, 75, 180);
         doc2.setFontSize(16);
         doc2.setFont('Arial');
-        doc2.save("constanciaJuez.pdf");
-      break;
+        doc2.save('constanciaJuez.pdf');
+        break;
 
       case 'Madero':
         const doc3 = new jsPDF();
@@ -166,8 +224,8 @@ export class JudgesComponent implements OnInit {
         doc3.text(this.juezActual.nombre, 75, 180);
         doc3.setFontSize(16);
         doc3.setFont('Arial');
-        doc3.save("constanciaJuez.pdf");
-      break;
+        doc3.save('constanciaJuez.pdf');
+        break;
 
       case 'Jaumave':
         const doc4 = new jsPDF();
@@ -175,8 +233,8 @@ export class JudgesComponent implements OnInit {
         doc4.text(this.juezActual.nombre, 75, 180);
         doc4.setFontSize(16);
         doc4.setFont('Arial');
-        doc4.save("constanciaJuez.pdf");
-      break;
+        doc4.save('constanciaJuez.pdf');
+        break;
 
       case 'Nuevo Laredo':
         const doc5 = new jsPDF();
@@ -184,10 +242,8 @@ export class JudgesComponent implements OnInit {
         doc5.text(this.juezActual.nombre, 75, 180);
         doc5.setFontSize(16);
         doc5.setFont('Arial');
-        doc5.save("constanciaJuez.pdf");
-      break;
+        doc5.save('constanciaJuez.pdf');
+        break;
     }
-    
-    
   }
 }

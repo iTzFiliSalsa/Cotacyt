@@ -44,7 +44,8 @@ export class SidebarComponent implements OnInit {
     setTimeout(() => {
       this._utilService.loading = false;
       localStorage.removeItem('session');
-      this.router.navigateByUrl('/');
+      window.location.reload();
+      // this.router.navigateByUrl('/');
     }, 2000);
   }
 

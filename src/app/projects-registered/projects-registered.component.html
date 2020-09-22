@@ -69,9 +69,18 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="">Autores:</label>
-                <ng-multiselect-dropdown
-                [settings]="dropdownSettings"
+                <label for="">Seleccione los autores a quitar:</label>
+                <ng-multiselect-dropdown formControlName="ids_autores_viejos"
+                [settings]="settingsAutoresViejos"
+                [data]="autoresViejos"
+                (onSelect)="addAutorViejo($event)"
+                (onDeSelect)="dropAutorViejo($event)"
+                ></ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+                <label for="">Seleccione los nuevos autores:</label>
+                <ng-multiselect-dropdown formControlName="ids_autores_nuevos"
+                [settings]="settingsAutoresNuevos"
                 [data]="autores"
                 (onSelect)="addAutor($event)"
                 (onDeSelect)="dropAutor($event)"

@@ -15,6 +15,10 @@ export interface Autores {
     telefono: string;
     email: string;
 }
+export interface AutoresSelect {
+    id_autores: string;
+    nombre: string;
+}
 
 export interface AutorIds {
     id_autores: string;

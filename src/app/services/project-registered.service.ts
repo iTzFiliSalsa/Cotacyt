@@ -28,7 +28,7 @@ import { UtilsService } from './utils.service';
     deleteProyectsRegistred(idProject: string): Observable<any> {
       return this.http.delete( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/eliminar/' + idProject);
     }
-    updateProyect(body: any, idProyecto: string) {
-      return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/modificar/' + idProyecto, body);
+    updateProyect(body: any) {
+      return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/modificar', body);
     }
 }

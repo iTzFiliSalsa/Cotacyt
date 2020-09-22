@@ -72,6 +72,7 @@ export class AddAuthorsComponent implements OnInit {
       this.escuelas = data.escuelas;
       this.localidades = data.localidades;
       this.municipios = data.municipios;
+      console.log(data.proyectos);
       this.proyectos = data.proyectos;
       this.sedes = data.sedes;
     }, err => {
@@ -83,6 +84,7 @@ export class AddAuthorsComponent implements OnInit {
   }
 
   reigstrarAutor() {
+    console.log(this.formRegistroAutores.value);
     this.autoresService.postAutor( this.formRegistroAutores.value )
     .subscribe(
       data => {

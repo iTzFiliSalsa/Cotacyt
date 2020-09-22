@@ -19,6 +19,9 @@ import Swal from 'sweetalert2';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Session } from '../models/session.model';
 import { jsPDF } from "jspdf";
+import { Autores, AutoresSelect } from '../models/autores.model';
+import { AutoresService } from '../services/autores.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -34,26 +37,37 @@ export class ProjectsRegisteredComponent implements OnInit {
   formProyecto: FormGroup;
   areas: Areas[];
   sedes: Sedes[];
-  autores = [];
+  autoresViejos: AutoresSelect[];
+  autores: AutoresSelect[];
   autoresSeleccionados: any[];
-  dropdownSettings: IDropdownSettings;
+  autoresViejosSeleccionados: any[];
+  settingsAutoresNuevos: IDropdownSettings;
+  settingsAutoresViejos: IDropdownSettings;
   asesores: Asesores[];
   categorias: Categorias[];
+  lenght: number;
+  agregado: number;
   sessionData: Session;
   constructor(
     private projectsService: ProjectsRegisteredService,
     private _utilService: UtilsService,
     private formBuilder: FormBuilder,
     private sedesService: SedesService,
+    private autoresService: AutoresService,
     private areasService: AreasService,
     private asesoresService: AsesoresService,
     private categoriasServices: CategoriasService,
+    private router: Router,
     private obtenerProyecto: ProyectosService
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.proyectos = new Array<ProjectRegistered>();
     this.areas = new Array<Areas>();
     this.sedes = new Array<Sedes>();
+    this.lenght = 0;
+    this.autoresViejos = new Array<AutoresSelect>();
+    this.autoresViejosSeleccionados = new Array<AutoresSelect>();
+    this.autores = new Array<AutoresSelect>();
     this.asesores = new Array<Asesores>();
     this.categorias = new Array<Categorias>();
     this.autoresSeleccionados = new Array<any>();
@@ -64,32 +78,19 @@ export class ProjectsRegisteredComponent implements OnInit {
       id_areas:      [''],
       id_sedes:      this.sessionData.id_sedes,
       id_categorias: [''],
+      ids_autores_viejos: [''],
+      ids_autores_nuevos : [''],
       nombre:        [''],
       resumen:       [''],
     });
   }
 
   ngOnInit(): void {
-    // TODO: traer los asesores para mostrarlos
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'id_autores',
-      textField: 'asesor',
-      itemsShowLimit: 3,
-      limitSelection: 3,
-      allowSearchFilter: true
-    };
-    this.autores =  [
-      { id_autores: 1, asesor: 'kt' },
-      { id_autores: 2, asesor: 'chino' },
-      { id_autores: 3, asesor: 'fili' },
-      { id_autores: 4, asesor: 'santi' },
-      { id_autores: 5, asesor: 'Ne' }
-    ];
     forkJoin(
       {
         areas: this.areasService.getAreas(),
         sedes: this.sedesService.getSedes(),
+        autores: this.autoresService.getAutoresSelect(),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
         proyectos: this.projectsService.obtenerTodosLosProyectosDetalles()
@@ -98,9 +99,19 @@ export class ProjectsRegisteredComponent implements OnInit {
       data => {
         this.areas = data.areas;
         this.sedes = data.sedes;
+        this.autores = data.autores;
         this.categorias = data.categorias;
         this.asesores = data.asesores;
         this.proyectos = data.proyectos;
+
+        this.settingsAutoresNuevos = {
+          singleSelection: false,
+          idField: 'id_autores',
+          textField: 'nombre',
+          itemsShowLimit: 3,
+          limitSelection: 3,
+          allowSearchFilter: true
+        };
       },
       err => console.log(err)
     ).add(() => {
@@ -125,7 +136,7 @@ export class ProjectsRegisteredComponent implements OnInit {
           Swal.fire({
             title: 'Ocurrio un error',
             icon: 'error',
-          })
+          });
         }
       ).add(() => {
         this._utilService.loading = false;
@@ -133,6 +144,19 @@ export class ProjectsRegisteredComponent implements OnInit {
   }
   openSwal(proyecto: ProjectRegistered) {
     this.proyectoActual = proyecto;
+    this.obtenerProyecto.getAutoresProyecto(this.proyectoActual.id_proyectos)
+    .subscribe( data => {
+      this.autoresViejos = data;
+      this.agregado = (3 - this.autoresViejos.length);
+      this.settingsAutoresViejos = {
+        singleSelection: false,
+        idField: 'id_autores',
+        textField: 'nombre',
+        itemsShowLimit: 3,
+        limitSelection: this.autoresViejos.length,
+        allowSearchFilter: true
+      };
+    });
     this.obtenerProyecto.obtenerProyecto(proyecto.id_proyectos).subscribe(
       data => {
         this.formProyecto.patchValue({
@@ -155,13 +179,16 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.swalEdit.fire();
   }
   editarProyecto() {
-    this.projectsService.updateProyect( this.formProyecto.value, this.proyectoActual.id_proyectos)
+    console.log(this.formProyecto.value);
+    this.projectsService.updateProyect( this.formProyecto.value)
     .subscribe( data => {
       Swal.fire({
         icon: 'success',
         title: data,
       });
       this.ngOnInit();
+      this.autoresSeleccionados = Array<AutoresSelect>();
+      this.autoresViejosSeleccionados = Array<AutoresSelect>();
     }, err => {
       console.log(err);
       Swal.fire({
@@ -177,6 +204,20 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.autoresSeleccionados.map( (res, index) => {
       if (res.id_autores === item.id_autores) {
         this.autoresSeleccionados.splice(index, 1);
+      }
+    });
+  }
+  addAutorViejo(item: AutoresSelect) {
+    this.autoresViejosSeleccionados.push(item);
+    this.lenght = (this.autoresViejosSeleccionados.length + this.agregado);
+    this.settingsAutoresNuevos = Object.assign({}, this.settingsAutoresNuevos, {limitSelection: this.lenght});
+  }
+  dropAutorViejo(item: AutoresSelect) {
+    this.autoresViejosSeleccionados.map( (res, index) => {
+      if (res.id_autores === item.id_autores) {
+        this.autoresViejosSeleccionados.splice(index, 1);
+        this.lenght = (this.autoresViejosSeleccionados.length +  this.agregado);
+        this.settingsAutoresNuevos = Object.assign({}, this.settingsAutoresNuevos, {limitSelection: this.lenght});
       }
     });
   }
