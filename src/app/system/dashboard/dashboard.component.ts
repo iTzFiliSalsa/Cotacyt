@@ -25,6 +25,7 @@ import { InformacionDeLosProyectos } from '../../models/proyectos.model'
 import { ProyectosService } from '../../services/proyectos.service'
 import { jsPDF } from "jspdf";
 import '../../../assets/fonts/Helvetica.ttf';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -928,14 +929,19 @@ export class DashboardComponent implements OnInit {
         for (let i = 0; i < proyecto.length; i++) {
 
           nombrePetit = nombrePetit.concat(proyecto[i].nombre, '\r\n');
-          totalPetit = totalPetit.concat(proyecto[i].total, '\r\n');
+          totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
           sedePetit2 = sedePetit2.concat(proyecto[i].sede, '\r\n');
 
         }
         const doc1 = new jsPDF();
-        doc1.text(nombrePetit, 25, 25);
-        doc1.text(totalPetit, 80, 25);
-        doc1.text(sedePetit2, 130, 25);
+        doc1.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
+        doc1.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
+        doc1.text('Proyecto'.toUpperCase(), 35, 65);
+        doc1.text(nombrePetit, 35,  80);
+        doc1.text('Calificación'.toUpperCase(), 100, 65);
+        doc1.text(totalPetit, 100,   80);
+        doc1.text('Sede'.toUpperCase(), 150, 65);
+        doc1.text(sedePetit2, 150,  80);
         doc1.setFontSize(16);
         doc1.setFont('Helvetica');
         doc1.save("lista petit.pdf");
@@ -949,17 +955,22 @@ export class DashboardComponent implements OnInit {
         for (let i = 0; i < proyecto.length; i++) {
 
           nombreKids = nombreKids.concat(proyecto[i].nombre, '\r\n');
-          totalKids = totalKids.concat(proyecto[i].total, '\r\n');
+          totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
           sedeKids = sedeKids.concat(proyecto[i].sede, '\r\n');
 
         }
         const doc8 = new jsPDF();
-        doc8.text(nombreKids, 25, 25);
-        doc8.text(totalKids, 80, 25);
-        doc8.text(sedeKids, 130, 25);
+        doc8.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
+        doc8.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
+        doc8.text('Proyecto'.toUpperCase(), 35, 65);
+        doc8.text(nombreKids, 35,  80);
+        doc8.text('Calificación'.toUpperCase(), 100, 65);
+        doc8.text(totalKids, 100,   80);
+        doc8.text('Sede'.toUpperCase(), 150, 65);
+        doc8.text(sedeKids, 150,  80);
         doc8.setFontSize(16);
         doc8.setFont('Helvetica');
-        doc8.save("lista petit.pdf");
+        doc8.save("lista kids.pdf");
 
         break;
 
@@ -967,21 +978,26 @@ export class DashboardComponent implements OnInit {
         console.log('hola' + categoria);
         let nombreJuvenil = '';
         let totalJuvenil = '';
-        let sedePetit = '';
+        let sedeJuvenil = '';
         for (let i = 0; i < proyecto.length; i++) {
 
           nombreJuvenil = nombreJuvenil.concat(proyecto[i].nombre, '\r\n');
-          totalJuvenil = totalJuvenil.concat(proyecto[i].total, '\r\n');
-          sedePetit = sedePetit.concat(proyecto[i].sede, '\r\n');
+          totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+          sedeJuvenil = sedeJuvenil.concat(proyecto[i].sede, '\r\n');
 
         }
         const doc7 = new jsPDF();
-        doc7.text(nombreJuvenil, 25, 25);
-        doc7.text(totalJuvenil, 80, 25);
-        doc7.text(sedePetit, 130, 25);
+        doc7.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
+        doc7.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
+        doc7.text('Proyecto'.toUpperCase(), 35, 65);
+        doc7.text(nombreJuvenil, 35,  80);
+        doc7.text('Calificación'.toUpperCase(), 100, 65);
+        doc7.text(totalJuvenil, 100,   80);
+        doc7.text('Sede'.toUpperCase(), 150, 65);
+        doc7.text(sedeJuvenil, 150,  80);
         doc7.setFontSize(16);
         doc7.setFont('Helvetica');
-        doc7.save("lista petit.pdf");
+        doc7.save("lista juvenil.pdf");
         break;
 
       case 'media-superior':
@@ -992,17 +1008,22 @@ export class DashboardComponent implements OnInit {
         for (let i = 0; i < proyecto.length; i++) {
 
           nombreMS = nombreMS.concat(proyecto[i].nombre, '\r\n');
-          totalMS = totalMS.concat(proyecto[i].total, '\r\n');
+          totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
           sedeMS = sedeMS.concat(proyecto[i].sede, '\r\n');
 
         }
         const doc2 = new jsPDF();
-        doc2.text(nombreMS, 25, 25);
-        doc2.text(totalMS, 80, 25);
-        doc2.text(sedeMS, 130, 25);
+        doc2.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
+        doc2.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
+        doc2.text('Proyecto'.toUpperCase(), 35, 65);
+        doc2.text(nombreMS, 35,  80);
+        doc2.text('Calificación'.toUpperCase(), 100, 65);
+        doc2.text(totalMS, 100,   80);
+        doc2.text('Sede'.toUpperCase(), 150, 65);
+        doc2.text(sedeMS, 150,  80);
         doc2.setFontSize(16);
         doc2.setFont('Helvetica');
-        doc2.save("lista petit.pdf");
+        doc2.save("lista media-superior.pdf");
 
         break;
 
@@ -1014,17 +1035,22 @@ export class DashboardComponent implements OnInit {
         for (let i = 0; i < proyecto.length; i++) {
 
           nombreSuperior = nombreSuperior.concat(proyecto[i].nombre, '\r\n');
-          totalSuperior = totalSuperior.concat(proyecto[i].total, '\r\n');
+          totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
           sedeSuperior = sedeSuperior.concat(proyecto[i].sede, '\r\n');
 
         }
         const doc3 = new jsPDF();
-        doc3.text(nombreSuperior, 25, 25);
-        doc3.text(totalSuperior, 80, 25);
-        doc3.text(sedeSuperior, 130, 25);
+        doc3.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
+        doc3.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
+        doc3.text('Proyecto'.toUpperCase(), 35, 65);
+        doc3.text(nombreSuperior, 35,  80);
+        doc3.text('Calificación'.toUpperCase(), 100, 65);
+        doc3.text(totalSuperior, 100,   80);
+        doc3.text('Sede'.toUpperCase(), 150, 65);
+        doc3.text(sedeSuperior, 150,  80);
         doc3.setFontSize(16);
         doc3.setFont('Helvetica');
-        doc3.save("lista petit.pdf");
+        doc3.save("lista superior.pdf");
 
         break;
 
@@ -1036,17 +1062,22 @@ export class DashboardComponent implements OnInit {
         for (let i = 0; i < proyecto.length; i++) {
 
           nombrePosgrado = nombrePosgrado.concat(proyecto[i].nombre, '\r\n');
-          totalPosgrado = totalPosgrado.concat(proyecto[i].total, '\r\n');
+          totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
           sedePosgrado = sedePosgrado.concat(proyecto[i].sede, '\r\n');
 
         }
         const doc4 = new jsPDF();
-        doc4.text(nombrePosgrado, 25, 25);
-        doc4.text(totalPosgrado, 80, 25);
-        doc4.text(sedePosgrado, 130, 25);
+        doc4.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
+        doc4.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
+        doc4.text('Proyecto'.toUpperCase(), 35, 65);
+        doc4.text(nombrePosgrado, 35,  80);
+        doc4.text('Calificación'.toUpperCase(), 100, 65);
+        doc4.text(totalPosgrado, 100,   80);
+        doc4.text('Sede'.toUpperCase(), 150, 65);
+        doc4.text(sedePosgrado, 150,  80);
         doc4.setFontSize(16);
         doc4.setFont('Helvetica');
-        doc4.save("lista petit.pdf");
+        doc4.save("lista posgrado.pdf");
 
         break;
       default:
