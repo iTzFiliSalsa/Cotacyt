@@ -54,8 +54,16 @@ export class ProyectosService {
     );
   }
 
-  obtenerInformacionDeUnProyecto(id_proyectos:string): Observable<InformacionDeLosProyectos[]>{
-    return this.http.get<InformacionDeLosProyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details/' + id_proyectos)
+  obtenerInformacionDeUnProyecto(idProyectos: string): Observable<InformacionDeLosProyectos[]> {
+    const body = {
+      id_proyectos: idProyectos,
+      id_jueces: this.sessionData.id_jueces,
+      id_categorias: this.sessionData.id_categorias
+    };
+    return this.http.post<InformacionDeLosProyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/calificacion', body);
+  }
+  obtenerInformacionDeUnProyectoAdmin(id_proyectos:string): Observable<InformacionDeLosProyectos[]> {
+    return this.http.get<InformacionDeLosProyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details/' + id_proyectos);
   }
   getStatusAdmin(idProyectos: string): Observable<any> {
     const body = {
@@ -66,8 +74,7 @@ export class ProyectosService {
   getStatusProyecto(idProyecto: string): Observable<any> {
     const body = {
       id_proyectos: idProyecto,
-      id_jueces: this.sessionData.id_jueces,
-      id_categoria: this.sessionData.id_categorias
+      id_jueces: this.sessionData.id_jueces
     };
     return this.http.post<any>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/obtener-status', body);
   }

@@ -195,7 +195,7 @@ export class CalificarProyectoService {
       obtenido7,
       obtenido8
     };
-    return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/media-superior/nuevo', body);
+    return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/posgrado/nuevo', body);
   }
 
   putCalificacionesPetit(
