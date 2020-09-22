@@ -200,7 +200,7 @@ export class DashboardComponent implements OnInit {
     proyectos.filter((res) => {
       this.proyectosService.getStatusAdmin(res.id_proyectos)
         .subscribe(data => {
-          if (data[0].status === 1) {
+          if (data[0].status === '1') {
             this.proyectosCalificados.push(res);
           } else {
             this.proyectosPorCalificar.push(res);

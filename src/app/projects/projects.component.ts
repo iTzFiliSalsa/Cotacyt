@@ -124,7 +124,7 @@ export class ProjectsComponent implements OnInit {
     proyectos.filter((res) => {
       this.proyectosService.getStatusAdmin(res.id_proyectos)
         .subscribe(data => {
-          if (data[0].status === 1) {
+          if (data[0].status === '1') {
             this.proyectosCalificados.push(res);
           } else {
             this.proyectosPorCalificar.push(res);
@@ -339,7 +339,7 @@ export class ProjectsComponent implements OnInit {
             }
             break;
           case 'kids':
-            if (res[0].status === 1) {
+            if (res[0].status === '1') {
               this.calificarProyectoService.putCalificacionesKids(
                 Number(this.proyectoActual.id_proyectos),
                 this.valores.obtenido1,
@@ -399,7 +399,7 @@ export class ProjectsComponent implements OnInit {
             }
             break;
           case 'juvenil':
-            if (res[0].status === 1) {
+            if (res[0].status === '1') {
               this.calificarProyectoService.putCalificacionesJvenil(
                 Number(this.proyectoActual.id_proyectos),
                 this.valores.obtenido1,
@@ -460,7 +460,7 @@ export class ProjectsComponent implements OnInit {
             }
             break;
           case 'media-superior':
-            if (res[0].status === 1) {
+            if (res[0].status === '1') {
               this.calificarProyectoService.putCalificacionesMediaSuperior(
                 Number(this.proyectoActual.id_proyectos),
                 this.valores.obtenido1,
