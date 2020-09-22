@@ -89,23 +89,21 @@
                         <thead class="thead-ligth">
                             <tr>
                                 <th scope="col">Nombre del proyecto</th>
-                                <!-- <th scope="col">Fecha de calificación</th> -->
-                                <!-- <th scope="col">Status</th> -->
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let i of allProjects">
-                                <td> <button class="btn btn-subboton-info mr-3" (click)="mostrarInfoTodosLosProyectos(i)">
-                                    <i class="fas fa-question-circle"></i>
-                                </button>{{i.nombre}}
-                                </td>
                                 <td>
-                                    <!-- <h6 *ngIf="i.status == '0'" class="custom-btn-danger text-center">Sin calificar</h6>
-                                    <h6 *ngIf="i.status == '1'" class="custom-btn-success text-center">Calificado</h6> -->
+                                    {{i.nombre}}
                                 </td>
-                                <td>
-                                    <button class="btn-edit-project btn-see-projects btn ml-3" (click)="traerProyecto(i.id_proyectos)"><i class="fas fa-edit"></i></button>
+                                <td class="d-flex"> 
+                                    <button class="btn btn-subboton-info" (click)="mostrarInfoTodosLosProyectos(i)">
+                                        <i class="fas fa-question-circle"></i>
+                                    </button>
+                                    <button class="btn-edit-project btn-see-projects btn ml-3" (click)="traerProyecto(i.id_proyectos)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

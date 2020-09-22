@@ -1,0 +1,4 @@
+if (self.CavalryLogger) { CavalryLogger.start_js(["f03Hw"]); }
+
+__d("ContentAccessAndControlFalcoEvent",["FalcoLoggerInternal","getSamplingPolicyConfig_DO_NOT_USE"],(function(a,b,c,d,e,f){"use strict";a=b("getSamplingPolicyConfig_DO_NOT_USE")("falco","content_access_and_control");c=b("FalcoLoggerInternal").create(a);e.exports=c}),null);
+__d("ContentAccessAndControlEventType",[],(function(a,b,c,d,e,f){a=Object.freeze({CLICK_BEGIN:"content_access_and_control_click_begin",IMPRESSION:"content_access_and_control_impression",IS_ELIGIBLE:"content_access_and_control_is_eligible",LOAD_OPTION:"content_access_and_control_load_option",SERVER_MUTATION_BEGIN:"content_access_and_control_mutation_begin",SERVER_MUTATION_FAILURE:"content_access_and_control_mutation_failure",SERVER_MUTATION_SUCCESS:"content_access_and_control_mutation_success"});e.exports=a}),null);
