@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
         this.totales = data
         console.log(data);
       },
-      
+
       err => console.log(err));
     // obtiene los proyectos por categorias
     this.dashboardService.getProyectosPorCategorias().subscribe(
@@ -250,39 +250,46 @@ export class DashboardComponent implements OnInit {
         const mediaSuperior = data['media_superior'];
         const superior = data['superior'];
         const posgrado = data['posgrado'];
-
+        const category = this.formsFiltro.value['id_categorias'];
         switch (this.formsFiltro.value['id_categorias']) {
           case 'petit':
             console.log(petit);
             this.proyectosCalificacion = petit;
+            this.imprimir(this.proyectosCalificacion, category);
             console.log(this.proyectosCalificacion.sort(function (prev: any, next: any) {
               return next.total - prev.total;
+
             }));
             break;
 
           case 'kids':
             console.log(kids);
             this.proyectosCalificacion = kids;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'juvenil':
             console.log(juvenil);
             this.proyectosCalificacion = juvenil;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'media-superior':
             console.log(mediaSuperior);
             this.proyectosCalificacion = mediaSuperior;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'superior':
             console.log(superior);
             this.proyectosCalificacion = superior;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'posgrado':
             console.log(posgrado);
             this.proyectosCalificacion = posgrado;
+            this.imprimir(this.proyectosCalificacion, category);
 
             break;
           default: this.proyectosCalificacion = petit;
@@ -332,24 +339,24 @@ export class DashboardComponent implements OnInit {
   abrirReproductor(evento: any, id) {
     console.log(this.videoTag);
     console.log(id);
-    this.video = 'https://mante.hosting.acm.org/API_COTACYT/video/fotos/'+id+'.mp4';
+    this.video = 'https://mante.hosting.acm.org/API_COTACYT/video/fotos/' + id + '.mp4';
     this.swalReproductor.fire();
   }
 
   saveAsPdf(index: number, autores: string[], proyecto: any) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     if (index === 0) {
-      if(!autores){
+      if (!autores) {
         swal.fire({
           icon: 'error',
           title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
         });
       }
-      
+
       switch (this.sessionData.id_sedes) {
         case '1':
           switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit': 
+            case 'petit':
               this.firstPlace(proyecto, autores, 'mante', 'PetitMante');
               break;
             case 'kids':
@@ -505,7 +512,7 @@ export class DashboardComponent implements OnInit {
       }
     } else {
       if (index === 1) {
-        if(!autores){
+        if (!autores) {
           swal.fire({
             icon: 'error',
             title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
@@ -515,7 +522,7 @@ export class DashboardComponent implements OnInit {
         console.log(this.formsFiltro.value['id_categorias']);
         switch (this.sessionData.id_sedes) {
           case '1':
-            switch (this.formsFiltro.value['id_categorias']) {  
+            switch (this.formsFiltro.value['id_categorias']) {
               case 'petit':
                 this.secondPlace(proyecto, autores, 'mante', 'PetitMante');
                 break;
@@ -671,7 +678,7 @@ export class DashboardComponent implements OnInit {
         }
       } else {
         if (index === 2) {
-          if(!autores){
+          if (!autores) {
             swal.fire({
               icon: 'error',
               title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
@@ -836,51 +843,193 @@ export class DashboardComponent implements OnInit {
               }
               break;
           }
-        }else{
+        } else {
           swal.fire({
             icon: 'error',
-            title: 'Solo puedes imprimir los 3 primeros lugares' 
+            title: 'Solo puedes imprimir los 3 primeros lugares'
           });
         }
       }
     }
   }
 
-  firstPlace({nombre = ''}, autores: any[], sede: string = '', categoriaSede: string = '') {
+  firstPlace({ nombre = '' }, autores: any[], sede: string = '', categoriaSede: string = '') {
     //console.log(autores[0].autor);
     let array = 1;
     for (let i = 0; i < autores.length; i++) {
       const doc5 = new jsPDF();
       doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc5.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc5.text(nombre, 85, 215);
+      doc5.text(autores[i].autor.toUpperCase(), 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+      doc5.text(nombre.toUpperCase(), 85, 215);
       doc5.setFontSize(16);
       doc5.setFont('Helvetica');
-      doc5.save("constancia Primer Lugar proyecto "+nombre+".pdf");      
+      doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
     }
   }
 
-  secondPlace({nombre = ''}, autores: any[], sede: string, categoriaSede: string) {
+  secondPlace({ nombre = '' }, autores: any[], sede: string, categoriaSede: string) {
     for (let i = 0; i < autores.length; i++) {
       console.log(nombre);
       const doc6 = new jsPDF();
-      doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');  
-      doc6.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc6.text(nombre, 85, 215);
+      doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+      doc6.text(autores[i].autor.toUpperCase(), 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+      doc6.text(nombre.toUpperCase(), 85, 215);
       doc6.setFontSize(16);
       doc6.setFont('Helvetica');
-      doc6.save("constancia Segundo Lugar proyecto "+nombre+".pdf");
+      doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
     }
   }
-  thirdPlace({nombre = ''}, autores: any[], sede: string, categoriaSede: string) {
+  thirdPlace({ nombre = '' }, autores: any[], sede: string, categoriaSede: string) {
     for (let i = 0; i < autores.length; i++) {
       const doc7 = new jsPDF();
       doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc7.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc7.text(nombre, 85, 215);
+      doc7.text(autores[i].autor.toUpperCase(), 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+      doc7.text(nombre.toUpperCase(), 85, 215);
       doc7.setFontSize(16);
       doc7.setFont('Helvetica');
-      doc7.save("constancia Tercer Lugar proyecto "+nombre+".pdf");
+      doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+    }
+  }
+
+  imprimir(proyecto: any, categoria: any) {
+
+    switch (categoria) {
+      case 'petit':
+        console.log('hola' + categoria);
+        let nombrePetit = '';
+        let totalPetit = '';
+        let sedePetit2 = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombrePetit = nombrePetit.concat(proyecto[i].nombre, '\r\n');
+          totalPetit = totalPetit.concat(proyecto[i].total, '\r\n');
+          sedePetit2 = sedePetit2.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc1 = new jsPDF();
+        doc1.text(nombrePetit, 25, 25);
+        doc1.text(totalPetit, 80, 25);
+        doc1.text(sedePetit2, 130, 25);
+        doc1.setFontSize(16);
+        doc1.setFont('Helvetica');
+        doc1.save("lista petit.pdf");
+        break;
+
+      case 'kids':
+        console.log('hola' + categoria);
+        let nombreKids = '';
+        let totalKids = '';
+        let sedeKids = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreKids = nombreKids.concat(proyecto[i].nombre, '\r\n');
+          totalKids = totalKids.concat(proyecto[i].total, '\r\n');
+          sedeKids = sedeKids.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc8 = new jsPDF();
+        doc8.text(nombreKids, 25, 25);
+        doc8.text(totalKids, 80, 25);
+        doc8.text(sedeKids, 130, 25);
+        doc8.setFontSize(16);
+        doc8.setFont('Helvetica');
+        doc8.save("lista petit.pdf");
+
+        break;
+
+      case 'juvenil':
+        console.log('hola' + categoria);
+        let nombreJuvenil = '';
+        let totalJuvenil = '';
+        let sedePetit = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreJuvenil = nombreJuvenil.concat(proyecto[i].nombre, '\r\n');
+          totalJuvenil = totalJuvenil.concat(proyecto[i].total, '\r\n');
+          sedePetit = sedePetit.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc7 = new jsPDF();
+        doc7.text(nombreJuvenil, 25, 25);
+        doc7.text(totalJuvenil, 80, 25);
+        doc7.text(sedePetit, 130, 25);
+        doc7.setFontSize(16);
+        doc7.setFont('Helvetica');
+        doc7.save("lista petit.pdf");
+        break;
+
+      case 'media-superior':
+        console.log('hola' + categoria);
+        let nombreMS = '';
+        let totalMS = '';
+        let sedeMS = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreMS = nombreMS.concat(proyecto[i].nombre, '\r\n');
+          totalMS = totalMS.concat(proyecto[i].total, '\r\n');
+          sedeMS = sedeMS.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc2 = new jsPDF();
+        doc2.text(nombreMS, 25, 25);
+        doc2.text(totalMS, 80, 25);
+        doc2.text(sedeMS, 130, 25);
+        doc2.setFontSize(16);
+        doc2.setFont('Helvetica');
+        doc2.save("lista petit.pdf");
+
+        break;
+
+      case 'superior':
+        console.log('hola' + categoria);
+        let nombreSuperior = '';
+        let totalSuperior = '';
+        let sedeSuperior = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreSuperior = nombreSuperior.concat(proyecto[i].nombre, '\r\n');
+          totalSuperior = totalSuperior.concat(proyecto[i].total, '\r\n');
+          sedeSuperior = sedeSuperior.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc3 = new jsPDF();
+        doc3.text(nombreSuperior, 25, 25);
+        doc3.text(totalSuperior, 80, 25);
+        doc3.text(sedeSuperior, 130, 25);
+        doc3.setFontSize(16);
+        doc3.setFont('Helvetica');
+        doc3.save("lista petit.pdf");
+
+        break;
+
+      case 'posgrado':
+        console.log('hola' + categoria);
+        let nombrePosgrado = '';
+        let totalPosgrado = '';
+        let sedePosgrado = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombrePosgrado = nombrePosgrado.concat(proyecto[i].nombre, '\r\n');
+          totalPosgrado = totalPosgrado.concat(proyecto[i].total, '\r\n');
+          sedePosgrado = sedePosgrado.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc4 = new jsPDF();
+        doc4.text(nombrePosgrado, 25, 25);
+        doc4.text(totalPosgrado, 80, 25);
+        doc4.text(sedePosgrado, 130, 25);
+        doc4.setFontSize(16);
+        doc4.setFont('Helvetica');
+        doc4.save("lista petit.pdf");
+
+        break;
+      default:
+        swal.fire({
+          icon: 'error',
+          title: 'No se encontró la categoría'
+        });
+        break;
+
     }
   }
 }
