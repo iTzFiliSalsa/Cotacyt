@@ -142,12 +142,19 @@ export class ProjectsComponent implements OnInit {
         this.proyectosService.getStatusProyecto(this.proyectoActual.id_proyectos)
           .subscribe((res) => {
             console.log(res);
-            if (res[0].status === 1) {
+            if (res[0].status === '1') {
               this.calificarProyectoService.getCalificaciones(
                 this.categoria, Number(this.proyectoActual.id_proyectos)
               ).subscribe(calificaciones => {
                 switch (this.categoria) {
                   case 'petit':
+                    this.formPuntos.patchValue({
+                      obtenido1: Number(calificaciones[0].obtenido1),
+                      obtenido2: Number(calificaciones[0].obtenido2),
+                      obtenido3: Number(calificaciones[0].obtenido3),
+                      obtenido4: Number(calificaciones[0].obtenido4),
+                      obtenido5: Number(calificaciones[0].obtenido5),
+                    });
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
                     this.obtenido2 = Number(calificaciones[0].obtenido2);
                     this.obtenido3 = Number(calificaciones[0].obtenido3);
@@ -155,6 +162,13 @@ export class ProjectsComponent implements OnInit {
                     this.obtenido5 = Number(calificaciones[0].obtenido5);
                     break;
                   case 'kids':
+                    this.formPuntos.patchValue({
+                      obtenido1: Number(calificaciones[0].obtenido1),
+                      obtenido2: Number(calificaciones[0].obtenido2),
+                      obtenido3: Number(calificaciones[0].obtenido3),
+                      obtenido4: Number(calificaciones[0].obtenido4),
+                      obtenido5: Number(calificaciones[0].obtenido5),
+                    });
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
                     this.obtenido2 = Number(calificaciones[0].obtenido2);
                     this.obtenido3 = Number(calificaciones[0].obtenido3);
@@ -162,6 +176,14 @@ export class ProjectsComponent implements OnInit {
                     this.obtenido5 = Number(calificaciones[0].obtenido5);
                     break;
                   case 'juvenil':
+                    this.formPuntos.patchValue({
+                      obtenido1: Number(calificaciones[0].obtenido1),
+                      obtenido2: Number(calificaciones[0].obtenido2),
+                      obtenido3: Number(calificaciones[0].obtenido3),
+                      obtenido4: Number(calificaciones[0].obtenido4),
+                      obtenido5: Number(calificaciones[0].obtenido5),
+                      obtenido6: Number(calificaciones[0].obtenido6),
+                    });
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
                     this.obtenido2 = Number(calificaciones[0].obtenido2);
                     this.obtenido3 = Number(calificaciones[0].obtenido3);
@@ -170,6 +192,16 @@ export class ProjectsComponent implements OnInit {
                     this.obtenido6 = Number(calificaciones[0].obtenido6);
                     break;
                   case 'media superior':
+                    this.formPuntos.patchValue({
+                      obtenido1: Number(calificaciones[0].obtenido1),
+                      obtenido2: Number(calificaciones[0].obtenido2),
+                      obtenido3: Number(calificaciones[0].obtenido3),
+                      obtenido4: Number(calificaciones[0].obtenido4),
+                      obtenido5: Number(calificaciones[0].obtenido5),
+                      obtenido6: Number(calificaciones[0].obtenido6),
+                      obtenido7: Number(calificaciones[0].obtenido7),
+                      obtenido8: Number(calificaciones[0].obtenido8),
+                    });
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
                     this.obtenido2 = Number(calificaciones[0].obtenido2);
                     this.obtenido3 = Number(calificaciones[0].obtenido3);
@@ -180,6 +212,16 @@ export class ProjectsComponent implements OnInit {
                     this.obtenido8 = Number(calificaciones[0].obtenido8);
                     break;
                   case 'superior':
+                    this.formPuntos.patchValue({
+                      obtenido1: Number(calificaciones[0].obtenido1),
+                      obtenido2: Number(calificaciones[0].obtenido2),
+                      obtenido3: Number(calificaciones[0].obtenido3),
+                      obtenido4: Number(calificaciones[0].obtenido4),
+                      obtenido5: Number(calificaciones[0].obtenido5),
+                      obtenido6: Number(calificaciones[0].obtenido6),
+                      obtenido7: Number(calificaciones[0].obtenido7),
+                      obtenido8: Number(calificaciones[0].obtenido8),
+                    });
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
                     this.obtenido2 = Number(calificaciones[0].obtenido2);
                     this.obtenido3 = Number(calificaciones[0].obtenido3);
@@ -190,6 +232,16 @@ export class ProjectsComponent implements OnInit {
                     this.obtenido8 = Number(calificaciones[0].obtenido8);
                     break;
                   case 'posgrado':
+                    this.formPuntos.patchValue({
+                      obtenido1: Number(calificaciones[0].obtenido1),
+                      obtenido2: Number(calificaciones[0].obtenido2),
+                      obtenido3: Number(calificaciones[0].obtenido3),
+                      obtenido4: Number(calificaciones[0].obtenido4),
+                      obtenido5: Number(calificaciones[0].obtenido5),
+                      obtenido6: Number(calificaciones[0].obtenido6),
+                      obtenido7: Number(calificaciones[0].obtenido7),
+                      obtenido8: Number(calificaciones[0].obtenido8),
+                    });
                     this.obtenido1 = Number(calificaciones[0].obtenido1);
                     this.obtenido2 = Number(calificaciones[0].obtenido2);
                     this.obtenido3 = Number(calificaciones[0].obtenido3);
@@ -225,7 +277,7 @@ export class ProjectsComponent implements OnInit {
       .subscribe((res) => {
         switch (this.categoria) {
           case 'petit':
-            if (res[0].status === 1) {
+            if (res[0].status === '1') {
               this.calificarProyectoService.putCalificacionesPetit(
                 Number(this.proyectoActual.id_proyectos),
                 this.valores.obtenido1,
@@ -474,7 +526,7 @@ export class ProjectsComponent implements OnInit {
             }
             break;
           case 'superior':
-            if (res[0].status === 1) {
+            if (res[0].status === '1') {
               this.calificarProyectoService.putCalificacionesSuperior(
                 Number(this.proyectoActual.id_proyectos),
                 this.valores.obtenido1,
@@ -538,7 +590,7 @@ export class ProjectsComponent implements OnInit {
             }
             break;
           case 'posgrado':
-            if (res[0].status === 1) {
+            if (res[0].status === '1') {
               this.calificarProyectoService.putCalificacionesPosgrado(
                 Number(this.proyectoActual.id_proyectos),
                 this.valores.obtenido1,
@@ -680,47 +732,84 @@ export class ProjectsComponent implements OnInit {
 
   //mostrar informacion de proyecto seleccionado - Todos los proyectos
   mostrarInfoTodosLosProyectos(proyecto: ProjectRegistered) {
+    if ( this.sessionData.rol === 'admin') {
+      this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
+        data => {
+          console.log(data);
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+        ).add(() => {
+          this._utilsService._loading = false;
+        });
+      } else {
+        this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+          data => {
+            console.log(data);
+            this.informacionDeLosProyectos = data;
+            console.log(this.informacionDeLosProyectos);
+          },
+          err => console.log(err)
+          ).add(() => {
+            this._utilsService._loading = false;
+          });
+        }
     this.swalInformacion.fire();
-    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
-      data => {
-        console.log(data);
-        this.informacionDeLosProyectos = data;
-        console.log(this.informacionDeLosProyectos);
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService._loading = false;
-    });
   }
 
 
   //mostrar informacion de proyecto seleccionado - Proyectos calificados
   mostrarInfoCalificados(proyecto: ProyectosCalificados) {
+    if(this.sessionData.rol === 'admin') {
+      this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
+        data => {
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+      ).add(() => {
+        this._utilsService._loading = false;
+      });
+    } else {
+      this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+        data => {
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+      ).add(() => {
+        this._utilsService._loading = false;
+      });
+    }
     this.swalInformacion.fire();
-    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
-      data => {
-        this.informacionDeLosProyectos = data;
-        console.log(this.informacionDeLosProyectos);
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService._loading = false;
-    });
   }
 
 
   //mostrar informacion de proyecto seleccionado - Proyectos por calificar
   mostrarInfoPorCalificar(proyecto: ProyectosCalificados) {
+    if(this.sessionData.rol === 'admin' ) {
+      this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
+        data => {
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+        ).add(() => {
+          this._utilsService._loading = false;
+        });
+    } else {
+      this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+        data => {
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+        ).add(() => {
+          this._utilsService._loading = false;
+        });
+    }
     this.swalInformacion.fire();
-    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
-      data => {
-        this.informacionDeLosProyectos = data;
-        console.log(this.informacionDeLosProyectos);
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService._loading = false;
-    });
-  }
+    }
 
 }
