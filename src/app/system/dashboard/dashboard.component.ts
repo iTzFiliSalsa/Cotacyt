@@ -298,33 +298,59 @@ export class DashboardComponent implements OnInit {
 
   //mostrar informacion de proyecto seleccionado
   mostrarInfoCalificados(proyecto: ProyectosCalificados) {
+    if (this.sessionData.rol === 'admin') {
+      this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
+        data => {
+          console.log(data);
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+      ).add(() => {
+        this._utilsService._loading = false;
+      });
+    } else {
+      this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+        data => {
+          console.log(data);
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+      ).add(() => {
+        this._utilsService._loading = false;
+      });
+    }
     this.swalInformacion.fire();
-    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
-      data => {
-        console.log(data);
-        this.informacionDeLosProyectos = data;
-        console.log(this.informacionDeLosProyectos);
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService._loading = false;
-    });
   }
 
 
   //mostrar informacion de proyecto seleccionado
   mostrarInfoPorCalificar(proyecto: ProyectosPorCalificar) {
+    if (this.sessionData.rol === 'admin') {
+      this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
+        data => {
+          console.log(data);
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+      ).add(() => {
+        this._utilsService._loading = false;
+      });
+    } else {
+      this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
+        data => {
+          console.log(data);
+          this.informacionDeLosProyectos = data;
+          console.log(this.informacionDeLosProyectos);
+        },
+        err => console.log(err)
+      ).add(() => {
+        this._utilsService._loading = false;
+      });
+    }
     this.swalInformacion.fire();
-    this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
-      data => {
-        console.log(data);
-        this.informacionDeLosProyectos = data;
-        console.log(this.informacionDeLosProyectos);
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService._loading = false;
-    });
   }
 
 
