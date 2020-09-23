@@ -24,15 +24,13 @@ export class SidebarComponent implements OnInit {
   }
   admin: boolean;
   ngOnInit(): void {
-    console.log(this.sessionData);
-    
     this.admin = false;
     this.categoriasService.getCategorias().subscribe( data => {
       this.categoria = data.categoria;
-      if ( this.sessionData.rol === 'admin' ) {
+      if ( this.sessionData.rol === 'admin' || this.sessionData.rol === 'superuser' ) {
         this.admin = true;
         this._utilService._cargo = true;
-      }else{
+      } else {
         this.admin = false;
         this._utilService._cargo = false;
       }

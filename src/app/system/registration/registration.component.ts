@@ -28,6 +28,7 @@ export class RegistrationComponent implements OnInit {
   proyectosSeleccionados: Proyectos[];
   dropdownSettingsProyecto: IDropdownSettings;
   public formsRegistroJuez: FormGroup;
+  superUser: boolean;
   constructor(
     public formBuilder: FormBuilder,
     private juecesService: JuecesService,
@@ -48,6 +49,11 @@ export class RegistrationComponent implements OnInit {
       ids_proyectos: ['', [Validators.required]]
     });
     this._utilService._loading = true;
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
   }
 
   ngOnInit(): void {

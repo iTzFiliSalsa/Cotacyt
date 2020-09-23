@@ -15,6 +15,7 @@ import { Session } from '../models/session.model';
 export class AddAdvisersComponent implements OnInit {
   formRegistroAsesor: FormGroup;
   sedes: Sedes[];
+  superUser: boolean;
   sessionData: Session;
   constructor(
     private asesoresService: AsesoresService,
@@ -35,6 +36,11 @@ export class AddAdvisersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
     this.sedesService.getSedes()
       .subscribe( data => this.sedes = data, err => console.log(err))
       .add(() => this._utilService._loading = false);

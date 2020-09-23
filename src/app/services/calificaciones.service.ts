@@ -12,18 +12,25 @@ import { CalificacionesPorCategoria }  from '../models/calificaciones.model'
 export class CalificacionesService {
   sessionData: Session;
   constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
+    this.sessionData = JSON.parse(localStorage.getItem('session'));
   }
 
   proyectosEstadisticas(): Observable<Calificaciones[]> {
-    this.sessionData = JSON.parse(localStorage.getItem('session'));
     return this.http.get<Calificaciones[]>(
       // this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-por-categoria/' + this.sessionData.id_categorias);
       this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-generales');
   }
-
+  proyectosEstadisticasJuez(): Observable<Calificaciones[]> {
+    return this.http.get<Calificaciones[]>(this.servicesConfig.APP_ENDPOINT
+    + 'api/calificaciones/categoria?id_categorias=' + this.sessionData.id_categorias
+    + '&id_sedes=' + this.sessionData.id_sedes);
+  }
+  proyectosEstadisticasAdmin(): Observable<Calificaciones[]> {
+    return this.http.get<Calificaciones[]>(this.servicesConfig.APP_ENDPOINT
+      + 'api/calificaciones-generales-por-sede?id_sedes=' + this.sessionData.id_sedes);
+  }
   //obtener calificaciones por categorias
   listaDeCalificaciones(): Observable < CalificacionesPorCategoria[]>{
-    this.sessionData = JSON.parse(localStorage.getItem('session'));
     return this.http.get < CalificacionesPorCategoria[]>(
       this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-generales-por-categoria?id_sedes=' + this.sessionData.id_sedes);
   }

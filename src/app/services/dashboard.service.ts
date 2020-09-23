@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Totales, ProyectosCalificados, ProyectosPorCalificar } from '../models/dashboard.model';
 import { ServicesConfig } from '../config/services.config';
 import { Session } from '../models/session.model';
+import { Proyectos } from '../models/proyectos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,13 @@ export class DashboardService {
     + this.sessionData.id_categorias
     + '&id_sedes='
     + this.sessionData.id_sedes);
+  }
+  getTotalesAdmin(): Observable<Totales[]> {
+    return this.http.get<Totales[]>(this.servicesConfig.APP_ENDPOINT
+      + 'api/dashboard/totales-coordinador?id_sedes=' + this.sessionData.id_sedes);
+  }
+  getTotalesSuperUser(): Observable<Totales[]> {
+    return this.http.get<Totales[]>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/totales-chino');
   }
 
   getProyectosCalificados(): Observable<ProyectosCalificados[]> {
@@ -43,6 +51,13 @@ export class DashboardService {
   }
   getProyectosPorCategorias(): Observable<any> {
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria');
+  }
+  getProyectosPorCategoriasAdmin(): Observable<any> {
+    return this.http.get<any>(this.servicesConfig.APP_ENDPOINT
+      + 'api/dashboard/proyectos-por-categoria-sede?id_sedes=' + this.sessionData.id_sedes);
+  }
+  getProyectosSuperUser(): Observable<Proyectos[]> {
+    return this.http.get<Proyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details');
   }
 }
 

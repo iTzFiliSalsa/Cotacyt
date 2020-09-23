@@ -47,6 +47,7 @@ export class AddProjectsComponent implements OnInit {
   funciones = [];
   arreglo: any[];
   importes: any[];
+  superUser: boolean;
   sessionData: Session;
   label: string = 'Sube un archivo...';
   constructor(
@@ -80,6 +81,11 @@ export class AddProjectsComponent implements OnInit {
       resumen: ['', [Validators.required, Validators.max(150)]]
     });
     this._utilService._loading = true;
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
   }
 
   ngOnInit(): void {

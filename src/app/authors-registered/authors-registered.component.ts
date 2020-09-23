@@ -39,6 +39,7 @@ export class AuthorsRegisteredComponent implements OnInit {
   sedes: Sedes[];
   proyectos: Proyectos[];
   sessionData: Session;
+  superUser: boolean;
   constructor(
     private municipiosService: MunicipiosService,
     private escuelasService: EscuelasService,
@@ -63,6 +64,11 @@ export class AuthorsRegisteredComponent implements OnInit {
       id_localidades: [''],
     });
     this.utils._loading = true;
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
   }
 
   ngOnInit(): void {

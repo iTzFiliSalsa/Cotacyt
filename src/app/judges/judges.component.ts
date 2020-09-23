@@ -34,6 +34,7 @@ export class JudgesComponent implements OnInit {
   proyectosNuevos: Proyectos[];
   settingsProyectosViejos: IDropdownSettings;
   settingsProyectosNuevos: IDropdownSettings;
+  superUser: boolean;
   constructor(
     private judgesService: JudgesRegisteredService,
     private _utilService: UtilsService,
@@ -56,6 +57,11 @@ export class JudgesComponent implements OnInit {
       ids_proyectos_nuevos: [''],
       nombre:        ['', [Validators.required]],
     });
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
   }
 
   ngOnInit(): void {
