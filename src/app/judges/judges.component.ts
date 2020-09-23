@@ -13,8 +13,9 @@ import { jsPDF } from "jspdf";
 import '../../assets/fonts/Helvetica.ttf';
 import { Proyectos, ProyectSelect } from '../models/proyectos.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { ProyectosService } from '../services/proyectos.service';
 import { TitleCasePipe } from '@angular/common';
+import { ProyectosService } from '../services/proyectos.service';
+
   
 
 
@@ -41,8 +42,9 @@ export class JudgesComponent implements OnInit {
     private _utilService: UtilsService,
     private sedesService: SedesService,
     private proyectosService: ProyectosService,
-    private formBuilder: FormBuilder,
-    private titlecasePipe:TitleCasePipe 
+    private titlecasePipe:TitleCasePipe,
+    private formBuilder: FormBuilder
+     
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.jueces = new Array<JudgesRegistered>();
@@ -192,6 +194,7 @@ export class JudgesComponent implements OnInit {
         return 6;
     }
   }
+
   saveAsPdf(juez: JudgesRegistered) {
     
     this.juezActual = juez;

@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Contraseña incorrecta'
+            text: 'Usuario y/o contraseña incorrectos'
           });
         }
       },
