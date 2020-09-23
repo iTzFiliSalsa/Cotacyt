@@ -17,13 +17,16 @@ import { UtilsService } from './utils.service';
       ) {
       this.sessionData = JSON.parse(localStorage.getItem('session'));
     }
-    
     getProjects(): Observable<ProjectRegistered[]>{
         return this.http.get<ProjectRegistered[]>(
           this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all?id_sedes=' + this.sessionData.id_sedes);
     }
     obtenerTodosLosProyectosDetalles(): Observable<ProjectRegistered[]> {
       return this.http.get<ProjectRegistered[]>( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details');
+    }
+    obtenerTodosLosProyectosDetallesAdmin(): Observable<ProjectRegistered[]> {
+      return this.http.get<ProjectRegistered[]>( this.servicesConfig.APP_ENDPOINT
+        + 'api/proyectos/all-sedes?id_sedes=' + this.sessionData.id_sedes);
     }
     deleteProyectsRegistred(idProject: string): Observable<any> {
       return this.http.delete( this.servicesConfig.APP_ENDPOINT + 'api/proyectos/eliminar/' + idProject);

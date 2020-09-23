@@ -14,7 +14,11 @@ export class AsesoresService {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
   }
   getAsesores(): Observable<Asesores[]> {
-    return this.http.get<Asesores[]>(this.servicesConfig.APP_ENDPOINT + 'api/asesores/all?id_sedes=' + this.sessionData.id_sedes);
+    return this.http.get<Asesores[]>(this.servicesConfig.APP_ENDPOINT
+      + 'api/asesores/all?id_sedes=' + this.sessionData.id_sedes);
+  }
+  getAsesoresSuperUser(): Observable<Asesores[]> {
+    return this.http.get<Asesores[]>(this.servicesConfig.APP_ENDPOINT + 'api/asesores/all-admin');
   }
   postAsesor(body: any): Observable<any> {
     return this.http.post( this.servicesConfig.APP_ENDPOINT + 'api/asesores/nuevo', body );

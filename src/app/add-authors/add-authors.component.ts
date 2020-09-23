@@ -60,9 +60,9 @@ export class AddAuthorsComponent implements OnInit {
     });
     this._utilService._loading = true;
     if (this.sessionData.rol === 'superuser') {
-      this.superUser = true;
-    } else {
       this.superUser = false;
+    } else {
+      this.superUser = true;
     }
   }
 

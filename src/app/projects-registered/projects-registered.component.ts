@@ -85,9 +85,9 @@ export class ProjectsRegisteredComponent implements OnInit {
       resumen:       [''],
     });
     if (this.sessionData.rol === 'superuser') {
-      this.superUser = true;
-    } else {
       this.superUser = false;
+    } else {
+      this.superUser = true;
     }
   }
 
@@ -99,7 +99,9 @@ export class ProjectsRegisteredComponent implements OnInit {
         autores: this.autoresService.getAutoresSelect(),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
-        proyectos: this.projectsService.obtenerTodosLosProyectosDetalles()
+        proyectos: this.superUser
+        ? this.projectsService.obtenerTodosLosProyectosDetallesAdmin()
+        : this.projectsService.obtenerTodosLosProyectosDetalles()
       }
     ).subscribe(
       data => {

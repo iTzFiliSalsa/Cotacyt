@@ -44,15 +44,17 @@ export class AdvisersRegisteredComponent implements OnInit {
       descripcion: [''],
     });
     if (this.sessionData.rol === 'superuser') {
-      this.superUser = true;
-    } else {
       this.superUser = false;
+    } else {
+      this.superUser = true;
     }
   }
 
   ngOnInit(): void {
     forkJoin({
-      asesores: this._asesoresService.getAsesores(),
+      asesores: this.superUser
+      ? this._asesoresService.getAsesores()
+      : this._asesoresService.getAsesoresSuperUser(),
       sedes: this.sedesService.getSedes()
     }).subscribe(
       data => {

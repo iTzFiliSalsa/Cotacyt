@@ -21,6 +21,9 @@ export class AutoresService {
     return this.http.get<Autores[]>( this.servicesConfig.APP_ENDPOINT
       + 'api/autores/all?id_sedes=' + this.sessionData.id_sedes);
   }
+  getAutoresSuperUser(): Observable<Autores[]> {
+    return this.http.get<Autores[]>(this.servicesConfig.APP_ENDPOINT + '/api/autores/all-admin');
+  }
   deleteAutores(idAutores: string): Observable<any> {
     return this.http.delete( this.servicesConfig.APP_ENDPOINT + 'api/asesores/eliminar/' + idAutores);
   }
@@ -33,5 +36,9 @@ export class AutoresService {
   getAutoresSelect(): Observable<Autores[]> {
     return this.http.get<Autores[]>(this.servicesConfig.APP_ENDPOINT
       + 'api/autores/all-list?id_sedes=' + this.sessionData.id_sedes);
+  }
+  getAutoresSelectSuperUser(): Observable<Autores[]> {
+    return this.http.get<Autores[]>(this.servicesConfig.APP_ENDPOINT
+      + 'api/autores/all-admin');
   }
 }

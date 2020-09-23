@@ -49,33 +49,54 @@ export class RegistrationComponent implements OnInit {
       ids_proyectos: ['', [Validators.required]]
     });
     this._utilService._loading = true;
-    if (this.sessionData.rol === 'superuser') {
-      this.superUser = true;
-    } else {
-      this.superUser = false;
-    }
   }
 
   ngOnInit(): void {
-    forkJoin({
-      jueces: this.judgeRegistredService.getJudges(),
-      proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
-      sedes: this.sedesService.getSedes()
-    }).subscribe(
-      data => {
-        this.proyectos = data.proyectos;
-        this.sedes = data.sedes;
-      }
-      ).add(() => {
-        this._utilService._loading = false;
-        // Settings para proyecto
-        this.dropdownSettingsProyecto = {
-          singleSelection: false,
-          idField: 'id_proyectos',
-          textField: 'nombre',
-          allowSearchFilter: true
-        };
-      });
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = false;
+    } else {
+      this.superUser = true;
+    }
+    if ( this.sessionData.rol === 'superuser') {
+      forkJoin({
+        proyectos: this.proyectosService.obtenerProyectosSuperUser('1'),
+        sedes: this.sedesService.getSedes()
+      }).subscribe(
+        data => {
+          this.proyectos = data.proyectos;
+          console.log(data.proyectos, 'superuser');
+          this.sedes = data.sedes;
+        }
+        ).add(() => {
+          this._utilService._loading = false;
+          // Settings para proyecto
+          this.dropdownSettingsProyecto = {
+            singleSelection: false,
+            idField: 'id_proyectos',
+            textField: 'nombre',
+            allowSearchFilter: true
+          };
+        });
+    } else {
+      forkJoin({
+        proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
+        sedes: this.sedesService.getSedes()
+      }).subscribe(
+        data => {
+          this.proyectos = data.proyectos;
+          this.sedes = data.sedes;
+        }
+        ).add(() => {
+          this._utilService._loading = false;
+          // Settings para proyecto
+          this.dropdownSettingsProyecto = {
+            singleSelection: false,
+            idField: 'id_proyectos',
+            textField: 'nombre',
+            allowSearchFilter: true
+          };
+        });
+    }
     }
     registrarJuez() {
     if (this.proyectosSeleccionados.length > 0) {
@@ -122,9 +143,16 @@ export class RegistrationComponent implements OnInit {
     });
   }
   categoriaActual(value) {
-    this.proyectosService.obtenerTodosLosProyectosCategoria(value)
-      .subscribe( data => {
-        this.proyectos = data;
-      });
+    if ( this.sessionData.rol === 'admin') {
+      this.proyectosService.obtenerProyectosSuperUser(value)
+        .subscribe( data => {
+          this.proyectos = data;
+        });
+      } else {
+        this.proyectosService.obtenerTodosLosProyectosCategoria(value)
+          .subscribe( data => {
+            this.proyectos = data;
+          });
+      }
   }
 }

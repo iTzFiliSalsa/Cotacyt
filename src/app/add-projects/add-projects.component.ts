@@ -82,9 +82,9 @@ export class AddProjectsComponent implements OnInit {
     });
     this._utilService._loading = true;
     if (this.sessionData.rol === 'superuser') {
-      this.superUser = true;
-    } else {
       this.superUser = false;
+    } else {
+      this.superUser = true;
     }
   }
 
@@ -95,7 +95,7 @@ export class AddProjectsComponent implements OnInit {
         sedes: this.sedesService.getSedes(),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
-        autores: this.autoresService.getAutoresSelect(),
+        autores: this.superUser ? this.autoresService.getAutoresSelect() : this.autoresService.getAutoresSelectSuperUser(),
       }
     ).subscribe(
       data => {
@@ -249,6 +249,7 @@ export class AddProjectsComponent implements OnInit {
             categoria_proyecto: this.arreglo[40],
             status_proyecto: this.arreglo[41],
             ruta_proyecto: this.arreglo[42],
+            pdf_proyecto: this.arreglo[43]
           };
           this.importes.push(json);
         }

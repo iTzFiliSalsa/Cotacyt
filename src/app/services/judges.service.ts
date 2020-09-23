@@ -17,6 +17,10 @@ import { Session } from '../models/session.model';
         return this.http.get<JudgesRegistered[]>(this.servicesConfig.APP_ENDPOINT
           + 'api/jueces/all?id_sedes=' + this.sessionData.id_sedes);
     }
+    getJudgesSueperUser(): Observable<JudgesRegistered[]> {
+      return this.http.get<JudgesRegistered[]>(this.servicesConfig.APP_ENDPOINT
+        + 'api/jueces/all-list');
+    }
     getJudgesDetails(): Observable<JudgesRegistered[]> {
         return this.http.get<JudgesRegistered[]>(this.servicesConfig.APP_ENDPOINT
           + 'api/jueces/all/details?id_sedes=' + this.sessionData.id_sedes);

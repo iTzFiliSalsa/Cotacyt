@@ -37,9 +37,9 @@ export class AddAdvisersComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.sessionData.rol === 'superuser') {
-      this.superUser = true;
-    } else {
       this.superUser = false;
+    } else {
+      this.superUser = true;
     }
     this.sedesService.getSedes()
       .subscribe( data => this.sedes = data, err => console.log(err))

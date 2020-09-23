@@ -26,6 +26,10 @@ export class ProyectosService {
       + this.sessionData.id_sedes
       + '&id_categorias=' + idCategorias);
   }
+  obtenerProyectosSuperUser(idCategorias: string): Observable<Proyectos[]> {
+    return this.http.get<Proyectos[]>(this.servicesConfig.APP_ENDPOINT
+      + 'api/proyectos/all-list-categoria?id_categorias=' + idCategorias);
+  }
   obtenerProyecto(idProyectos: string): Observable<Proyectos> {
     return this.http.get<Proyectos>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/' + idProyectos);
   }

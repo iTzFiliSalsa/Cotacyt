@@ -57,14 +57,16 @@ export class JudgesComponent implements OnInit {
       ids_proyectos_nuevos: [''],
       nombre:        ['', [Validators.required]],
     });
-    if (this.sessionData.rol === 'superuser') {
-      this.superUser = true;
-    } else {
-      this.superUser = false;
-    }
   }
 
   ngOnInit(): void {
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = false;
+      console.log(this.superUser);
+    } else {
+      this.superUser = true;
+      console.log(this.superUser);
+    }
     this.settingsProyectosViejos = {
       singleSelection: false,
       idField: 'id_proyectos',
@@ -77,22 +79,41 @@ export class JudgesComponent implements OnInit {
       textField: 'nombre',
       allowSearchFilter: true
     };
-    forkJoin({
-      jueces: this.judgesService.getJudgesDetails(),
-      sedes: this.sedesService.getSedes(),
-      proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
-    }).subscribe(
-      data => {
-        this.jueces = data.jueces;
-        this.sedes = data.sedes;
-        this.proyectos = data.proyectos;
-      },
-      err => {
-        console.log(err);
-      }
-    ).add(() => {
-      this._utilService.loading = false;
-    });
+    if (this.sessionData.rol === 'superuser') {
+      forkJoin({
+        jueces: this.judgesService.getJudgesSueperUser(),
+        sedes: this.sedesService.getSedes(),
+        proyectos: this.proyectosService.obtenerProyectosSuperUser('1'),
+      }).subscribe(
+        data => {
+          this.jueces = data.jueces;
+          this.sedes = data.sedes;
+          this.proyectos = data.proyectos;
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService.loading = false;
+      });
+    } else {
+      forkJoin({
+        jueces: this.judgesService.getJudgesDetails(),
+        sedes: this.sedesService.getSedes(),
+        proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
+      }).subscribe(
+        data => {
+          this.jueces = data.jueces;
+          this.sedes = data.sedes;
+          this.proyectos = data.proyectos;
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService.loading = false;
+      });
+    }
   }
   setJudge(juez: JudgesRegistered) {
     this.juezActual = juez;
@@ -174,10 +195,17 @@ export class JudgesComponent implements OnInit {
     this.proyectosNuevos.push(item);
   }
   categoriaActual(value) {
-    this.proyectosService.obtenerTodosLosProyectosCategoria(value)
+    if (this.sessionData.rol === 'superuser') {
+      this.proyectosService.obtenerProyectosSuperUser(value)
       .subscribe( data => {
         this.proyectos = data;
       });
+    } else {
+      this.proyectosService.obtenerTodosLosProyectosCategoria(value)
+      .subscribe( data => {
+        this.proyectos = data;
+      });
+    }
   }
   verificarCat(categoria: string) {
     switch (categoria) {
