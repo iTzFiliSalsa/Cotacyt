@@ -26,6 +26,7 @@ export class AdvisersRegisteredComponent implements OnInit {
   formAsesores: FormGroup;
   sessionData: Session;
   sedes: Sedes[];
+  superUser: boolean;
   constructor(
     private _asesoresService: AsesoresService,
     private _utilService: UtilsService,
@@ -35,13 +36,18 @@ export class AdvisersRegisteredComponent implements OnInit {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this._utilService.loading = true;
     this.formAsesores = this.formBuilder.group({
-      nombres:     [''],
-      a_paterno:   [''],
-      a_materno:   [''],
-      email:       [''],
-      id_sedes:    this.sessionData.id_sedes,
+      nombres: [''],
+      a_paterno: [''],
+      a_materno: [''],
+      email: [''],
+      id_sedes: this.sessionData.id_sedes,
       descripcion: [''],
     });
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
   }
 
   ngOnInit(): void {
@@ -65,56 +71,56 @@ export class AdvisersRegisteredComponent implements OnInit {
   deleteAsesor() {
     this._utilService._loading = true;
     this._asesoresService.deleteAsesor(this.asesorActual.id_asesores)
-      .subscribe( data => {
+      .subscribe(data => {
         Swal.fire({
           title: 'Se elimino el asesor correctamente',
           icon: 'success'
         });
       },
-      err => {
-        console.log(err);
-        Swal.fire({
-          title: 'Ocurrio un error al eliminar',
-          icon: 'error'
+        err => {
+          console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error al eliminar',
+            icon: 'error'
+          });
+        }).add(() => {
+          this._utilService._loading = false;
+          this.ngOnInit();
         });
-      }).add(() => {
-        this._utilService._loading = false;
-        this.ngOnInit();
-      });
   }
   openSwal(asesor: Asesores) {
     this.asesorActual = asesor;
     this.formAsesores.patchValue({
-      nombres:     asesor.nombres,
-      a_paterno:   asesor.a_paterno,
-      a_materno:   asesor.a_materno,
-      email:       asesor.email,
-      id_sedes:    this.sessionData.id_sedes,
+      nombres: asesor.nombres,
+      a_paterno: asesor.a_paterno,
+      a_materno: asesor.a_materno,
+      email: asesor.email,
+      id_sedes: this.sessionData.id_sedes,
       descripcion: asesor.descripcion,
     });
     this.swalEdit.fire();
   }
   editarAsesor() {
     this._utilService._loading = true;
-    this._asesoresService.updateAsesor( this.formAsesores.value, this.asesorActual.id_asesores )
+    this._asesoresService.updateAsesor(this.formAsesores.value, this.asesorActual.id_asesores)
       .subscribe(
         data => {
-        Swal.fire({
-          title: data,
-          icon: 'success'
+          Swal.fire({
+            title: data,
+            icon: 'success'
+          });
+          this.ngOnInit();
+        }, err => {
+          console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error al editar',
+            icon: 'error'
+          });
+        }).add(() => {
+          this._utilService._loading = false;
         });
-        this.ngOnInit();
-      }, err => {
-        console.log(err);
-        Swal.fire({
-          title: 'Ocurrio un error al editar',
-          icon: 'error'
-        });
-      }).add(() => {
-        this._utilService._loading = false;
-      });
   }
-  saveAsPdf(asesor: any){
+  saveAsPdf(asesor: any) {
     this.asesorActual = asesor;
     console.log(this.asesorActual);
   switch(this.asesorActual.id_sedes){
@@ -199,7 +205,6 @@ export class AdvisersRegisteredComponent implements OnInit {
       console.log('sede no encontrada');
     break;
       
-
-}
+    }
   }
 }

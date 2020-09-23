@@ -47,6 +47,7 @@ export class ProjectsRegisteredComponent implements OnInit {
   categorias: Categorias[];
   lenght: number;
   agregado: number;
+  superUser: boolean;
   sessionData: Session;
   constructor(
     private projectsService: ProjectsRegisteredService,
@@ -83,6 +84,11 @@ export class ProjectsRegisteredComponent implements OnInit {
       nombre:        [''],
       resumen:       [''],
     });
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
   }
 
   ngOnInit(): void {

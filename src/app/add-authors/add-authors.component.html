@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Sede:</label>
-                            <select formControlName="id_sedes" class="form-control" disabled>
+                            <select formControlName="id_sedes" class="form-control" [attr.disabled]="superUser">
                                 <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
                             </select>
                         </div>

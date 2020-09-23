@@ -29,12 +29,10 @@ export class LoginComponent implements OnInit {
 
   iniciarSesion() {
     this._utilService.loading = true;
-    console.log(this.formLoginJudge.value);
     this.juecesService.iniciarSesionJuez(this.formLoginJudge.value).subscribe(
       data => {
         if (data) {
           this.router.navigateByUrl('home');
-          console.log(data);
           localStorage.setItem('session', JSON.stringify(data));
         } else {
           swal.fire({

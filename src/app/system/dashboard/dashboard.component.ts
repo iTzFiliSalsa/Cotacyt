@@ -111,69 +111,70 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     setInterval(() => {
-      var d = new Date();
-      this.ht = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      const d = new Date();
+      this.ht = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
     }, 1000);
 
     this.barChartData = [
       { data: [], label: 'Proyectos' }
     ];
-
-    // obtiene los totales
-    this.dashboardService.getTotales().subscribe(
-      (data) => {
-        this.totales = data
-        console.log(data);
-      },
-
-      err => console.log(err));
-    // obtiene los proyectos por categorias
-    this.dashboardService.getProyectosPorCategorias().subscribe(
-      data => {
-        console.log(data);
-
-        const petit = data.petit;
-        const kids = data.kids;
-        const juvenil = data.juvenil;
-        const mediaSuperior = data['media-superior'];
-        const superior = data.superior;
-        const posgrado = data.posgrado;
-
-        this.barChartData = [
-          { data: [petit, kids, juvenil, mediaSuperior, superior, posgrado], label: 'Proyectos' }
-        ];
-      },
-      err => console.log(err));
-
-    if (this.sessionData.rol === 'admin') {
-      this.projectsService.getProjects().subscribe(
+    if ( this.sessionData.rol === 'superuser') {
+      forkJoin({
+        proyectos: this.dashboardService.getProyectosSuperUser(),
+        totales: this.dashboardService.getTotalesSuperUser(),
+        estadisticas: this.calificacionesService.proyectosEstadisticas(),
+        grafica: this.dashboardService.getProyectosPorCategorias(),
+      }).subscribe (
         data => {
-          this.proyectos = data;
-          this.adminProjects(this.proyectos);
+          this.totales = data.totales;
+          this.adminProjects(data.proyectos);
+          this.estadisticasDeProyectos = data.estadisticas;
+          this.construirGrafica(data.grafica);
+        }
+      ).add(() => this._utilsService._loading = false);
+      this.dashboardService.getTotalesSuperUser().subscribe(
+        data => {
+          this.totales = data;
+        },
+        err => console.log(err)
+      );
+    } else if (this.sessionData.rol === 'admin') {
+      forkJoin({
+        totales: this.dashboardService.getTotalesAdmin(),
+        proyectos: this.projectsService.getProjects(),
+        estadisticas: this.calificacionesService.proyectosEstadisticasAdmin(),
+        grafica: this.dashboardService.getProyectosPorCategoriasAdmin(),
+      }).subscribe(
+        data => {
+          this.totales = data.totales;
+          this.adminProjects(data.proyectos);
+          this.estadisticasDeProyectos = data.estadisticas;
+          this.construirGrafica(data.grafica);
         },
         err => {
           console.log(err);
         }
-      );
+      ).add(() => this._utilsService._loading = false);
     } else {
       forkJoin({
         proyectosCalificados: this.dashboardService.getProyectosCalificados(),
-        proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar()
+        totales: this.dashboardService.getTotales(),
+        proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar(),
+        estadisticas: this.calificacionesService.proyectosEstadisticasJuez(),
+        grafica: this.dashboardService.getProyectosPorCategoriasAdmin()
       }).subscribe(
-        (data: any) => {
-          console.log("proyectos calificados: ", data.proyectosCalificados);
-          console.log(data.proyectosPorCalificar);
+        data => {
           this.proyectosCalificados = data.proyectosCalificados;
           this.proyectosPorCalificar = data.proyectosPorCalificar;
+          this.estadisticasDeProyectos = data.estadisticas;
+          this.construirGrafica(data.grafica);
+          this.totales = data.totales;
         },
         err => {
           console.log(err);
         }
-      ).add(() => {
-        this._utilsService._loading = false;
-      });
+      ).add(() => this._utilsService._loading = false);
     }
 
     this.sessionData = JSON.parse(localStorage.getItem('session'));
@@ -181,23 +182,18 @@ export class DashboardComponent implements OnInit {
     this.categoriasService.getCategorias().subscribe(data => {
       this.categoria = data.categoria;
     });
-    // Estadisticas
-    this.calificacionesService.proyectosEstadisticas().subscribe(
-      data => {
-        this.estadisticasDeProyectos = data;
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService.loading = false;
-    });
-
-
-
-
-
-  }//cerrar on onit
-
-
+  }
+  construirGrafica(data: any) {
+    const petit = data.petit;
+    const kids = data.kids;
+    const juvenil = data.juvenil;
+    const mediaSuperior = data['media-superior'];
+    const superior = data.superior;
+    const posgrado = data.posgrado;
+    this.barChartData = [
+      { data: [petit, kids, juvenil, mediaSuperior, superior, posgrado], label: 'Proyectos' }
+    ];
+  }
   adminProjects(proyectos) {
     proyectos.filter((res) => {
       this.proyectosService.getStatusAdmin(res.id_proyectos)
@@ -222,8 +218,6 @@ export class DashboardComponent implements OnInit {
   mostrarProyectosPorCalificacion(evt: any) {
     this.swalCalificaciones.fire();
     this.calificacionesService.listaDeCalificaciones().subscribe(
-
-
       data => {
         console.log(this.formsFiltro.value['id_categorias']);
         this.proyectosCalificadosPorCategoria = data;
@@ -231,8 +225,6 @@ export class DashboardComponent implements OnInit {
         this.proyectosCalificacion = petit;
       },
       err => console.log(err)
-
-
     ).add(() => {
       this._utilsService.loading = false;
     });

@@ -32,6 +32,7 @@ export class AddAuthorsComponent implements OnInit {
   proyectos: Proyectos[];
   sedes: Sedes[];
   sessionData: Session;
+  superUser: boolean;
   formRegistroAutores: FormGroup;
   constructor(
     private municipiosService: MunicipiosService,
@@ -58,6 +59,11 @@ export class AddAuthorsComponent implements OnInit {
       email:          ['', [Validators.required, Validators.maxLength(50)]], 
     });
     this._utilService._loading = true;
+    if (this.sessionData.rol === 'superuser') {
+      this.superUser = true;
+    } else {
+      this.superUser = false;
+    }
   }
 
   ngOnInit(): void {
