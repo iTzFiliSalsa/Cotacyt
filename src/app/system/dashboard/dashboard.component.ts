@@ -25,7 +25,8 @@ import { InformacionDeLosProyectos } from '../../models/proyectos.model'
 import { ProyectosService } from '../../services/proyectos.service'
 import { jsPDF } from "jspdf";
 import '../../../assets/fonts/Helvetica.ttf';
-import { stringify } from 'querystring';
+import '../../../assets/fonts/Caviar.ttf';
+
 
 
 @Component({
@@ -878,8 +879,8 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < autores.length; i++) {
       const doc5 = new jsPDF();
       doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc5.text(autores[i].autor.toUpperCase(), 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc5.text(nombre.toUpperCase(), 85, 215);
+      doc5.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+      doc5.text(nombre, 85, 215);
       doc5.setFontSize(16);
       doc5.setFont('Helvetica');
       doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
@@ -891,8 +892,8 @@ export class DashboardComponent implements OnInit {
       console.log(nombre);
       const doc6 = new jsPDF();
       doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc6.text(autores[i].autor.toUpperCase(), 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc6.text(nombre.toUpperCase(), 85, 215);
+      doc6.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+      doc6.text(nombre, 85, 215);
       doc6.setFontSize(16);
       doc6.setFont('Helvetica');
       doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
@@ -902,8 +903,8 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < autores.length; i++) {
       const doc7 = new jsPDF();
       doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc7.text(autores[i].autor.toUpperCase(), 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc7.text(nombre.toUpperCase(), 85, 215);
+      doc7.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+      doc7.text(nombre, 85, 215);
       doc7.setFontSize(16);
       doc7.setFont('Helvetica');
       doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
@@ -926,16 +927,18 @@ export class DashboardComponent implements OnInit {
 
         }
         const doc1 = new jsPDF();
-        doc1.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
-        doc1.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
-        doc1.text('Proyecto'.toUpperCase(), 35, 65);
-        doc1.text(nombrePetit, 35,  80);
-        doc1.text('Calificación'.toUpperCase(), 100, 65);
-        doc1.text(totalPetit, 100,   80);
-        doc1.text('Sede'.toUpperCase(), 150, 65);
-        doc1.text(sedePetit2, 150,  80);
+        doc1.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc1.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc1.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc1.text('Lista de Proyectos Categoría Petit', 64, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc1.text('Proyecto', 35, 75);
+        doc1.text(nombrePetit, 35, 90);
+        doc1.text('Calificación', 100, 75);
+        doc1.text(totalPetit, 100,  90);
+        doc1.text('Sede', 150, 75);
+        doc1.text(sedePetit2, 150, 90);
         doc1.setFontSize(16);
-        doc1.setFont('Helvetica');
+        doc1.setFont('Caviar');
         doc1.save("lista petit.pdf");
         break;
 
@@ -952,16 +955,18 @@ export class DashboardComponent implements OnInit {
 
         }
         const doc8 = new jsPDF();
-        doc8.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
-        doc8.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
-        doc8.text('Proyecto'.toUpperCase(), 35, 65);
-        doc8.text(nombreKids, 35,  80);
-        doc8.text('Calificación'.toUpperCase(), 100, 65);
-        doc8.text(totalKids, 100,   80);
-        doc8.text('Sede'.toUpperCase(), 150, 65);
-        doc8.text(sedeKids, 150,  80);
+        doc8.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc8.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc8.text('Lista de Proyectos Categoría Kids', 64, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc8.text('Proyecto', 35, 75);
+        doc8.text(nombreKids, 35, 90);
+        doc8.text('Calificación', 100, 75);
+        doc8.text(totalKids, 100,  90);
+        doc8.text('Sede', 150, 75);
+        doc8.text(sedeKids, 150, 90);
         doc8.setFontSize(16);
-        doc8.setFont('Helvetica');
+        doc8.setFont('Caviar');
         doc8.save("lista kids.pdf");
 
         break;
@@ -979,16 +984,18 @@ export class DashboardComponent implements OnInit {
 
         }
         const doc7 = new jsPDF();
-        doc7.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
-        doc7.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
-        doc7.text('Proyecto'.toUpperCase(), 35, 65);
-        doc7.text(nombreJuvenil, 35,  80);
-        doc7.text('Calificación'.toUpperCase(), 100, 65);
-        doc7.text(totalJuvenil, 100,   80);
-        doc7.text('Sede'.toUpperCase(), 150, 65);
-        doc7.text(sedeJuvenil, 150,  80);
+        doc7.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc7.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc7.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc7.text('Lista de Proyectos Categoría Juvenil', 61, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc7.text('Proyecto', 35, 75);
+        doc7.text(nombreJuvenil, 35, 90);
+        doc7.text('Calificación', 100, 75);
+        doc7.text(totalJuvenil, 100,  90);
+        doc7.text('Sede', 150, 75);
+        doc7.text(sedeJuvenil, 150, 90);
         doc7.setFontSize(16);
-        doc7.setFont('Helvetica');
+        doc7.setFont('Caviar');
         doc7.save("lista juvenil.pdf");
         break;
 
@@ -1005,16 +1012,18 @@ export class DashboardComponent implements OnInit {
 
         }
         const doc2 = new jsPDF();
-        doc2.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
-        doc2.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
-        doc2.text('Proyecto'.toUpperCase(), 35, 65);
-        doc2.text(nombreMS, 35,  80);
-        doc2.text('Calificación'.toUpperCase(), 100, 65);
-        doc2.text(totalMS, 100,   80);
-        doc2.text('Sede'.toUpperCase(), 150, 65);
-        doc2.text(sedeMS, 150,  80);
+        doc2.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc2.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc2.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc2.text('Lista de Proyectos Categoría Media-Superior', 53, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc2.text('Proyecto', 35, 75);
+        doc2.text(nombreMS, 35, 90);
+        doc2.text('Calificación', 100, 75);
+        doc2.text(totalMS, 100,  90);
+        doc2.text('Sede', 150, 75);
+        doc2.text(sedeMS, 150, 90);
         doc2.setFontSize(16);
-        doc2.setFont('Helvetica');
+        doc2.setFont('Caviar');
         doc2.save("lista media-superior.pdf");
 
         break;
@@ -1032,16 +1041,18 @@ export class DashboardComponent implements OnInit {
 
         }
         const doc3 = new jsPDF();
-        doc3.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
-        doc3.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
-        doc3.text('Proyecto'.toUpperCase(), 35, 65);
-        doc3.text(nombreSuperior, 35,  80);
-        doc3.text('Calificación'.toUpperCase(), 100, 65);
-        doc3.text(totalSuperior, 100,   80);
-        doc3.text('Sede'.toUpperCase(), 150, 65);
-        doc3.text(sedeSuperior, 150,  80);
+        doc3.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc3.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc3.text('Lista de Proyectos Categoría Superior', 61, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc3.text('Proyecto', 35, 75);
+        doc3.text(nombreSuperior, 35, 90);
+        doc3.text('Calificación', 100, 75);
+        doc3.text(totalSuperior, 100,  90);
+        doc3.text('Sede', 150, 75);
+        doc3.text(sedeSuperior, 150, 90);
         doc3.setFontSize(16);
-        doc3.setFont('Helvetica');
+        doc3.setFont('Caviar');
         doc3.save("lista superior.pdf");
 
         break;
@@ -1059,16 +1070,18 @@ export class DashboardComponent implements OnInit {
 
         }
         const doc4 = new jsPDF();
-        doc4.addImage('assets/image/logotamColor.png','png', 15, 15, 45,20);
-        doc4.addImage('assets/image/cecit.png','png', 160, 10, 35,35);
-        doc4.text('Proyecto'.toUpperCase(), 35, 65);
-        doc4.text(nombrePosgrado, 35,  80);
-        doc4.text('Calificación'.toUpperCase(), 100, 65);
-        doc4.text(totalPosgrado, 100,   80);
-        doc4.text('Sede'.toUpperCase(), 150, 65);
-        doc4.text(sedePosgrado, 150,  80);
+        doc4.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc4.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc4.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc4.text('Lista de Proyectos Categoría Posgrado', 61, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc4.text('Proyecto', 35, 75);
+        doc4.text(nombrePosgrado, 35, 90);
+        doc4.text('Calificación', 100, 75);
+        doc4.text(totalPosgrado, 100,  90);
+        doc4.text('Sede', 150, 75);
+        doc4.text(sedePosgrado, 150, 90);
         doc4.setFontSize(16);
-        doc4.setFont('Helvetica');
+        doc4.setFont('Caviar');
         doc4.save("lista posgrado.pdf");
 
         break;
