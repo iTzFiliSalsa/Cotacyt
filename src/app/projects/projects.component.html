@@ -66,7 +66,7 @@
                                 Calificación:
                             </div>
                         </th>
-                        <td> {{info.calificacion}} </td>
+                        <td> {{info.calificacion | number:'1.0-0'}} </td>
                     </tr>
                 </thead>
             </table>
@@ -211,7 +211,7 @@
                                         <tr>
                                             <th scope="col">Punto</th>
                                             <th scope="col">Calificación</th>
-                                            <th scope="col">Porcentaje</th>
+                                            <th scope="col">Puntos</th>
                                         </tr>
                                     </thead>
                                     <tbody *ngSwitchCase="'petit'">
@@ -220,35 +220,35 @@
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido1" formControlName="obtenido1">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Presentación del prototipo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido2" formControlName="obtenido2">
                                             </td>
-                                            <td>40%</td>
+                                            <td>40</td>
                                         </tr>
                                         <tr>
                                             <td>Identificación del problema</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido3" formControlName="obtenido3">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Propuesta de solución</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido4" formControlName="obtenido4">
                                             </td>
-                                            <td>20%</td>
+                                            <td>20</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento creativo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido5" formControlName="obtenido5">
                                             </td>
-                                            <td>20%</td>
+                                            <td>20</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngSwitchCase="'kids'">
@@ -257,35 +257,35 @@
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido1" formControlName="obtenido1">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Presentación del prototipo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido2" formControlName="obtenido2">
                                             </td>
-                                            <td>40%</td>
+                                            <td>40</td>
                                         </tr>
                                         <tr>
                                             <td>Identificación del problema</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido3" formControlName="obtenido3">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Propuesta de solución</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido4" formControlName="obtenido4">
                                             </td>
-                                            <td>20%</td>
+                                            <td>20</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento creativo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido5" formControlName="obtenido5">
                                             </td>
-                                            <td>20%</td>
+                                            <td>20</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngSwitchCase="'juvenil'">
@@ -294,42 +294,42 @@
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido1" formControlName="obtenido1">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Presentación del prototipo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido2" formControlName="obtenido2">
                                             </td>
-                                            <td>30%</td>
+                                            <td>30</td>
                                         </tr>
                                         <tr>
                                             <td>Identificación del problema</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido3" formControlName="obtenido3">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                         <tr>
                                             <td>Propuesta de solución</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido4" formControlName="obtenido4">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento creativo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido5" formControlName="obtenido5">
                                             </td>
-                                            <td>20%</td>
+                                            <td>20</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento de innovación</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido6" formControlName="obtenido6">
                                             </td>
-                                            <td>20%</td>
+                                            <td>20</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngSwitchCase="'media superior'">
@@ -338,56 +338,56 @@
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido1" formControlName="obtenido1">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Presentación del prototipo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido2" formControlName="obtenido2">
                                             </td>
-                                            <td>30%</td>
+                                            <td>30</td>
                                         </tr>
                                         <tr>
                                             <td>Identificación del problema</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido3" formControlName="obtenido3">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                         <tr>
                                             <td>Propuesta de solución</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido4" formControlName="obtenido4">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento creativo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido5" formControlName="obtenido5">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento de innovación</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido6" formControlName="obtenido6">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Factibilidad técnica-financiera</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido7" formControlName="obtenido7">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                         <tr>
                                             <td>Definicíon de mercado y comercialización</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido8" formControlName="obtenido8">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngSwitchCase="'superior'">
@@ -396,56 +396,56 @@
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido1" formControlName="obtenido1">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Presentación del prototipo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido2" formControlName="obtenido2">
                                             </td>
-                                            <td>30%</td>
+                                            <td>30</td>
                                         </tr>
                                         <tr>
                                             <td>Identificación del problema</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido3" formControlName="obtenido3">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                         <tr>
                                             <td>Propuesta de solución</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido4" formControlName="obtenido4">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento creativo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido5" formControlName="obtenido5">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento de innovación</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido6" formControlName="obtenido6">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Factibilidad técnica-financiera</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido7" formControlName="obtenido7">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                         <tr>
                                             <td>Definicíon de mercado y comercialización</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido8" formControlName="obtenido8">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngSwitchCase="'posgrado'">
@@ -454,56 +454,56 @@
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido1" formControlName="obtenido1">
                                             </td>
-                                            <td>10%</td>
+                                            <td>10</td>
                                         </tr>
                                         <tr>
                                             <td>Presentación del prototipo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido2" formControlName="obtenido2">
                                             </td>
-                                            <td>30%</td>
+                                            <td>30</td>
                                         </tr>
                                         <tr>
                                             <td>Identificación del problema</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido3" formControlName="obtenido3">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                         <tr>
                                             <td>Propuesta de solución</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido4" formControlName="obtenido4">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento creativo</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido5" formControlName="obtenido5">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Elemento de innovación</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido6" formControlName="obtenido6">
                                             </td>
-                                            <td>15%</td>
+                                            <td>15</td>
                                         </tr>
                                         <tr>
                                             <td>Factibilidad técnica-financiera</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido7" formControlName="obtenido7">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                         <tr>
                                             <td>Definicíon de mercado y comercialización</td>
                                             <td>
                                                 <input min="0" type="number" [value]="obtenido8" formControlName="obtenido8">
                                             </td>
-                                            <td>5%</td>
+                                            <td>5</td>
                                         </tr>
                                     </tbody>
                                 </table>

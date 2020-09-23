@@ -203,35 +203,35 @@ export class JudgesComponent implements OnInit {
       case 'Reynosa':
         const doc1 = new jsPDF();
         doc1.addImage('assets/image/ReconocimientoJuradoReynosa.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc1.text(this.juezActual.nombre.toUpperCase(), 50, 185);
+        doc1.text(this.juezActual.nombre, 50, 185);
         doc1.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
       case 'Matamoros':
         const doc2 = new jsPDF();
         doc2.addImage('assets/image/ReconocimientoJuradoMatamoros.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc2.text(this.juezActual.nombre.toUpperCase(), 50, 185);
+        doc2.text(this.juezActual.nombre, 50, 185);
         doc2.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
       case 'Madero':
         const doc3 = new jsPDF();
         doc3.addImage('assets/image/ReconocimientoJuradoMadero.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc3.text(this.juezActual.nombre.toUpperCase(), 50, 185);
+        doc3.text(this.juezActual.nombre, 50, 185);
         doc3.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
       case 'Jaumave':
         const doc4 = new jsPDF();
         doc4.addImage('assets/image/ReconocimientoJuradoJaumave.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc4.text(this.juezActual.nombre.toUpperCase(), 50, 185);
+        doc4.text(this.juezActual.nombre, 50, 185);
         doc4.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
       case 'Nuevo Laredo':
         const doc5 = new jsPDF();
         doc5.addImage('assets/image/ReconocimientoJuradoNuevoLaredo.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc5.text(this.juezActual.nombre.toUpperCase(), 50, 185);
+        doc5.text(this.juezActual.nombre, 50, 185);
         doc5.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
     }
