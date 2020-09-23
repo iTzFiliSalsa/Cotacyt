@@ -44,6 +44,9 @@ export class ProyectosService {
   postNuevoProyecto(body: any) {
     return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/nuevo', body);
   }
+  importProyectoExcel(body: any): Observable<any> {
+    return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/upload-excel', body);
+  }
   obtenerTodosLosProyectosDeCategoria(): Observable<Proyectos[]> {
     return this.http.get<Proyectos[]>(
       this.servicesConfig.APP_ENDPOINT

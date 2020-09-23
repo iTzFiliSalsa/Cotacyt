@@ -1,21 +1,7 @@
 <swal #swalid title="Confirmar Archivo" [swalOptions]="{customClass: 'clase'}" (confirm)="guardarEnBD($event)" [showCancelButton]="true">
     <div *swalPortal >
         <div>
-            <table class="table table-light">
-                <thead> 
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Resumen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let proyecto of data" class="mb-2">
-                        <td>{{proyecto.nombre}}</td>
-                        <td>{{proyecto.resumen}}</td>
-                    </tr>
-                </tbody>
-                
-            </table>
+            <h6>¿Estas seguro que deseas importar el archivo a la base de datos?</h6>
         </div>
     </div>
 </swal>

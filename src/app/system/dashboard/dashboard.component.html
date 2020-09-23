@@ -66,7 +66,7 @@
                                 Calificación:
                             </div>
                         </th>
-                        <td> {{info.calificacion}} </td>
+                        <td> {{info.calificacion | number:'1.0-0'}} </td>
                     </tr>
                 </thead>
             </table>
@@ -185,15 +185,17 @@
                                             </select>
                                         </form>
 
-                                        <button (click)="mostrarListaCalificaciones()" class="btn btn-select"
+                                        <button (click)="mostrarListaCalificaciones()" class="btn btn-select "
                                             type="button">Filtrar</button>
+                                           
                                     </div>
                                     <div class="row justify-content-center">
-                                        <table class="table table-lg table-hover">
-                                            <thead class="background-table-projects">
+                                        <table class="table table-lg table-hover" >
+                                            <thead class="background-table-projects" >
                                                 <tr>
                                                     <th>Nombre</th>
                                                     <th>Calificación</th>
+                                                                                                        
                                                 </tr>
                                             </thead>
 

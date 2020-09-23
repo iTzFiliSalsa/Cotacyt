@@ -17,6 +17,7 @@ import { ProyectosService } from '../services/proyectos.service';
 import { TitleCasePipe } from '@angular/common';
   
 
+
 @Component({
   selector: 'app-judges',
   templateUrl: './judges.component.html',

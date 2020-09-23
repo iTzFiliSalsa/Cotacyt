@@ -154,7 +154,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc.addImage('assets/image/ConstanciaParticipantesMante.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc.text(this.autorActual.nombre +" "+ this.autorActual.a_paterno+" "+this.autorActual.a_materno , 60, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc.text(this.autorActual.proyecto, 72, 225);
-        doc.save("Constancia Autor "+this.autorActual.nombre+".pdf");
+        doc.save("Constancia Autor "+this.autorActual+".pdf");
       break;
       case '2':
         const doc1 = new jsPDF();

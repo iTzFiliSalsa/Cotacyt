@@ -16,6 +16,18 @@
   transition-property: color;
 }
 
+.sidebar-s {
+  overflow-y: scroll;
+}
+.sidebar-s::-webkit-scrollbar{
+  width: 5px;
+}
+.sidebar-s::-webkit-scrollbar-thumb{
+  // color: #fff;
+  background: #97c83c;
+  border-radius: 5px;
+}
+
 
 .wrapper .sidebar-btn:hover{
   color: rgb(0, 100, 167);

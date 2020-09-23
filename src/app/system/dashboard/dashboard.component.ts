@@ -25,6 +25,8 @@ import { InformacionDeLosProyectos } from '../../models/proyectos.model'
 import { ProyectosService } from '../../services/proyectos.service'
 import { jsPDF } from "jspdf";
 import '../../../assets/fonts/Helvetica.ttf';
+import '../../../assets/fonts/Caviar.ttf';
+
 
 
 @Component({
@@ -125,7 +127,7 @@ export class DashboardComponent implements OnInit {
         this.totales = data
         console.log(data);
       },
-      
+
       err => console.log(err));
     // obtiene los proyectos por categorias
     this.dashboardService.getProyectosPorCategorias().subscribe(
@@ -200,7 +202,7 @@ export class DashboardComponent implements OnInit {
     proyectos.filter((res) => {
       this.proyectosService.getStatusAdmin(res.id_proyectos)
         .subscribe(data => {
-          if (data[0].status === 1) {
+          if (data[0].status === '1') {
             this.proyectosCalificados.push(res);
           } else {
             this.proyectosPorCalificar.push(res);
@@ -250,39 +252,46 @@ export class DashboardComponent implements OnInit {
         const mediaSuperior = data['media_superior'];
         const superior = data['superior'];
         const posgrado = data['posgrado'];
-
+        const category = this.formsFiltro.value['id_categorias'];
         switch (this.formsFiltro.value['id_categorias']) {
           case 'petit':
             console.log(petit);
             this.proyectosCalificacion = petit;
+            this.imprimir(this.proyectosCalificacion, category);
             console.log(this.proyectosCalificacion.sort(function (prev: any, next: any) {
               return next.total - prev.total;
+
             }));
             break;
 
           case 'kids':
             console.log(kids);
             this.proyectosCalificacion = kids;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'juvenil':
             console.log(juvenil);
             this.proyectosCalificacion = juvenil;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'media-superior':
             console.log(mediaSuperior);
             this.proyectosCalificacion = mediaSuperior;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'superior':
             console.log(superior);
             this.proyectosCalificacion = superior;
+            this.imprimir(this.proyectosCalificacion, category);
             break;
 
           case 'posgrado':
             console.log(posgrado);
             this.proyectosCalificacion = posgrado;
+            this.imprimir(this.proyectosCalificacion, category);
 
             break;
           default: this.proyectosCalificacion = petit;
@@ -358,24 +367,24 @@ export class DashboardComponent implements OnInit {
   abrirReproductor(evento: any, id) {
     console.log(this.videoTag);
     console.log(id);
-    this.video = 'https://mante.hosting.acm.org/API_COTACYT/video/fotos/'+id+'.mp4';
+    this.video = 'https://mante.hosting.acm.org/API_COTACYT/video/fotos/' + id + '.mp4';
     this.swalReproductor.fire();
   }
 
   saveAsPdf(index: number, autores: string[], proyecto: any) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     if (index === 0) {
-      if(!autores){
+      if (!autores) {
         swal.fire({
           icon: 'error',
           title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
         });
       }
-      
+
       switch (this.sessionData.id_sedes) {
         case '1':
           switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit': 
+            case 'petit':
               this.firstPlace(proyecto, autores, 'mante', 'PetitMante');
               break;
             case 'kids':
@@ -531,7 +540,7 @@ export class DashboardComponent implements OnInit {
       }
     } else {
       if (index === 1) {
-        if(!autores){
+        if (!autores) {
           swal.fire({
             icon: 'error',
             title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
@@ -541,7 +550,7 @@ export class DashboardComponent implements OnInit {
         console.log(this.formsFiltro.value['id_categorias']);
         switch (this.sessionData.id_sedes) {
           case '1':
-            switch (this.formsFiltro.value['id_categorias']) {  
+            switch (this.formsFiltro.value['id_categorias']) {
               case 'petit':
                 this.secondPlace(proyecto, autores, 'mante', 'PetitMante');
                 break;
@@ -697,7 +706,7 @@ export class DashboardComponent implements OnInit {
         }
       } else {
         if (index === 2) {
-          if(!autores){
+          if (!autores) {
             swal.fire({
               icon: 'error',
               title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
@@ -862,17 +871,17 @@ export class DashboardComponent implements OnInit {
               }
               break;
           }
-        }else{
+        } else {
           swal.fire({
             icon: 'error',
-            title: 'Solo puedes imprimir los 3 primeros lugares' 
+            title: 'Solo puedes imprimir los 3 primeros lugares'
           });
         }
       }
     }
   }
 
-  firstPlace({nombre = ''}, autores: any[], sede: string = '', categoriaSede: string = '') {
+  firstPlace({ nombre = '' }, autores: any[], sede: string = '', categoriaSede: string = '') {
     //console.log(autores[0].autor);
     let array = 1;
     for (let i = 0; i < autores.length; i++) {
@@ -882,23 +891,23 @@ export class DashboardComponent implements OnInit {
       doc5.text(nombre, 85, 215);
       doc5.setFontSize(16);
       doc5.setFont('Helvetica');
-      doc5.save("constancia Primer Lugar proyecto "+nombre+".pdf");      
+      doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
     }
   }
 
-  secondPlace({nombre = ''}, autores: any[], sede: string, categoriaSede: string) {
+  secondPlace({ nombre = '' }, autores: any[], sede: string, categoriaSede: string) {
     for (let i = 0; i < autores.length; i++) {
       console.log(nombre);
       const doc6 = new jsPDF();
-      doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');  
+      doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
       doc6.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc6.text(nombre, 85, 215);
       doc6.setFontSize(16);
       doc6.setFont('Helvetica');
-      doc6.save("constancia Segundo Lugar proyecto "+nombre+".pdf");
+      doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
     }
   }
-  thirdPlace({nombre = ''}, autores: any[], sede: string, categoriaSede: string) {
+  thirdPlace({ nombre = '' }, autores: any[], sede: string, categoriaSede: string) {
     for (let i = 0; i < autores.length; i++) {
       const doc7 = new jsPDF();
       doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
@@ -906,7 +915,191 @@ export class DashboardComponent implements OnInit {
       doc7.text(nombre, 85, 215);
       doc7.setFontSize(16);
       doc7.setFont('Helvetica');
-      doc7.save("constancia Tercer Lugar proyecto "+nombre+".pdf");
+      doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+    }
+  }
+
+  imprimir(proyecto: any, categoria: any) {
+
+    switch (categoria) {
+      case 'petit':
+        console.log('hola' + categoria);
+        let nombrePetit = '';
+        let totalPetit = '';
+        let sedePetit2 = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombrePetit = nombrePetit.concat(proyecto[i].nombre, '\r\n');
+          totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+          sedePetit2 = sedePetit2.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc1 = new jsPDF();
+        doc1.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc1.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc1.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc1.text('Lista de Proyectos Categoría Petit', 64, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc1.text('Proyecto', 35, 75);
+        doc1.text(nombrePetit, 35, 90);
+        doc1.text('Calificación', 100, 75);
+        doc1.text(totalPetit, 100,  90);
+        doc1.text('Sede', 150, 75);
+        doc1.text(sedePetit2, 150, 90);
+        doc1.setFontSize(16);
+        doc1.setFont('Caviar');
+        doc1.save("lista petit.pdf");
+        break;
+
+      case 'kids':
+        console.log('hola' + categoria);
+        let nombreKids = '';
+        let totalKids = '';
+        let sedeKids = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreKids = nombreKids.concat(proyecto[i].nombre, '\r\n');
+          totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+          sedeKids = sedeKids.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc8 = new jsPDF();
+        doc8.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc8.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc8.text('Lista de Proyectos Categoría Kids', 64, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc8.text('Proyecto', 35, 75);
+        doc8.text(nombreKids, 35, 90);
+        doc8.text('Calificación', 100, 75);
+        doc8.text(totalKids, 100,  90);
+        doc8.text('Sede', 150, 75);
+        doc8.text(sedeKids, 150, 90);
+        doc8.setFontSize(16);
+        doc8.setFont('Caviar');
+        doc8.save("lista kids.pdf");
+
+        break;
+
+      case 'juvenil':
+        console.log('hola' + categoria);
+        let nombreJuvenil = '';
+        let totalJuvenil = '';
+        let sedeJuvenil = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreJuvenil = nombreJuvenil.concat(proyecto[i].nombre, '\r\n');
+          totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+          sedeJuvenil = sedeJuvenil.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc7 = new jsPDF();
+        doc7.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc7.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc7.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc7.text('Lista de Proyectos Categoría Juvenil', 61, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc7.text('Proyecto', 35, 75);
+        doc7.text(nombreJuvenil, 35, 90);
+        doc7.text('Calificación', 100, 75);
+        doc7.text(totalJuvenil, 100,  90);
+        doc7.text('Sede', 150, 75);
+        doc7.text(sedeJuvenil, 150, 90);
+        doc7.setFontSize(16);
+        doc7.setFont('Caviar');
+        doc7.save("lista juvenil.pdf");
+        break;
+
+      case 'media-superior':
+        console.log('hola' + categoria);
+        let nombreMS = '';
+        let totalMS = '';
+        let sedeMS = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreMS = nombreMS.concat(proyecto[i].nombre, '\r\n');
+          totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+          sedeMS = sedeMS.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc2 = new jsPDF();
+        doc2.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc2.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc2.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc2.text('Lista de Proyectos Categoría Media-Superior', 53, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc2.text('Proyecto', 35, 75);
+        doc2.text(nombreMS, 35, 90);
+        doc2.text('Calificación', 100, 75);
+        doc2.text(totalMS, 100,  90);
+        doc2.text('Sede', 150, 75);
+        doc2.text(sedeMS, 150, 90);
+        doc2.setFontSize(16);
+        doc2.setFont('Caviar');
+        doc2.save("lista media-superior.pdf");
+
+        break;
+
+      case 'superior':
+        console.log('hola' + categoria);
+        let nombreSuperior = '';
+        let totalSuperior = '';
+        let sedeSuperior = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombreSuperior = nombreSuperior.concat(proyecto[i].nombre, '\r\n');
+          totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+          sedeSuperior = sedeSuperior.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc3 = new jsPDF();
+        doc3.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc3.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc3.text('Lista de Proyectos Categoría Superior', 61, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc3.text('Proyecto', 35, 75);
+        doc3.text(nombreSuperior, 35, 90);
+        doc3.text('Calificación', 100, 75);
+        doc3.text(totalSuperior, 100,  90);
+        doc3.text('Sede', 150, 75);
+        doc3.text(sedeSuperior, 150, 90);
+        doc3.setFontSize(16);
+        doc3.setFont('Caviar');
+        doc3.save("lista superior.pdf");
+
+        break;
+
+      case 'posgrado':
+        console.log('hola' + categoria);
+        let nombrePosgrado = '';
+        let totalPosgrado = '';
+        let sedePosgrado = '';
+        for (let i = 0; i < proyecto.length; i++) {
+
+          nombrePosgrado = nombrePosgrado.concat(proyecto[i].nombre, '\r\n');
+          totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+          sedePosgrado = sedePosgrado.concat(proyecto[i].sede, '\r\n');
+
+        }
+        const doc4 = new jsPDF();
+        doc4.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
+        doc4.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+        doc4.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc4.text('Lista de Proyectos Categoría Posgrado', 61, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc4.text('Proyecto', 35, 75);
+        doc4.text(nombrePosgrado, 35, 90);
+        doc4.text('Calificación', 100, 75);
+        doc4.text(totalPosgrado, 100,  90);
+        doc4.text('Sede', 150, 75);
+        doc4.text(sedePosgrado, 150, 90);
+        doc4.setFontSize(16);
+        doc4.setFont('Caviar');
+        doc4.save("lista posgrado.pdf");
+
+        break;
+      default:
+        swal.fire({
+          icon: 'error',
+          title: 'No se encontró la categoría'
+        });
+        break;
+
     }
   }
 }
