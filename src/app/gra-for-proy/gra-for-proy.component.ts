@@ -81,7 +81,8 @@ export class GraForProyComponent implements OnInit {
     var doc = new jsPDF('landscape');
     doc.setFontSize(20);
     doc.addImage('assets/logotamColor.png', 'png', 9, 7, 57, 28);
-    doc.addImage('assets/cecit.png','png', 243, 5, 50, 40);
+    doc.addImage('assets/cecit.png','png', 243, 5, 50, 40).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+    doc.text('Consejo Tamaulipeco de Ciencia y Tecnología', 91, 37);
     doc.addImage(canvasImg, 'JPEG', 15, 50, 260, 135 );
     doc.save('Participantes-Por-Categoria.pdf');
   }

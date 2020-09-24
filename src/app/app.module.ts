@@ -35,6 +35,7 @@ import { GraForCatComponent } from './gra-for-cat/gra-for-cat.component';
 import { GraForAseComponent } from './gra-for-ase/gra-for-ase.component';
 import { GraForPartComponent } from './gra-for-part/gra-for-part.component';
 import { GraForProyComponent } from './gra-for-proy/gra-for-proy.component';
+import { TitleCasePipe } from '@angular/common';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { GraForProyComponent } from './gra-for-proy/gra-for-proy.component';
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
-    ServicesConfig
+    ServicesConfig,
+    TitleCasePipe
   ],
   bootstrap: [AppComponent]
 })
