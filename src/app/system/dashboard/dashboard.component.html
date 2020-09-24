@@ -227,12 +227,17 @@
                             <div class="qualified-projects-principal card-body m-0 p-0">
                                 <ul class="list-group " *ngFor="let proyecto of proyectosCalificados">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
+                                        
                                         <button class="ml-auto  btn btn-subboton-info"
                                             (click)="mostrarInfoCalificados(proyecto)">
                                             <i class="fas fa-question-circle"></i>
                                         </button>
-                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.id_proyectos)">
+                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.video)">
                                             <i class="fas fa-play-circle"></i>
+                                        </button>
+                                        <button class="ml-1  btn btn-subboton-info"
+                                            (click)="pdf(proyecto.pdf)">
+                                            <i class="fas fa-file-pdf"></i>
                                         </button>
                                     </li>
                                 </ul>
@@ -253,8 +258,12 @@
                                             <i class="fas fa-question-circle"></i>
                                         </button>
 
-                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.id_proyectos)">
+                                        <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.video)">
                                             <i class="fas fa-play-circle"></i>
+                                        </button>
+                                        <button class="ml-1  btn btn-subboton-info"
+                                            (click)="pdf(proyecto.pdf)">
+                                            <i class="fas fa-file-pdf"></i>
                                         </button>
 
                                     </li>

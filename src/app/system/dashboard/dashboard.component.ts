@@ -129,6 +129,7 @@ export class DashboardComponent implements OnInit {
         data => {
           this.totales = data.totales;
           this.adminProjects(data.proyectos);
+          
           this.estadisticasDeProyectos = data.estadisticas;
           this.construirGrafica(data.grafica);
         }
@@ -166,6 +167,7 @@ export class DashboardComponent implements OnInit {
       }).subscribe(
         data => {
           this.proyectosCalificados = data.proyectosCalificados;
+          console.log(data);
           this.proyectosPorCalificar = data.proyectosPorCalificar;
           this.estadisticasDeProyectos = data.estadisticas;
           this.construirGrafica(data.grafica);
@@ -200,6 +202,7 @@ export class DashboardComponent implements OnInit {
         .subscribe(data => {
           if (data[0].status === '1') {
             this.proyectosCalificados.push(res);
+            console.log(this.proyectosCalificados);
           } else {
             this.proyectosPorCalificar.push(res);
           }
@@ -359,8 +362,12 @@ export class DashboardComponent implements OnInit {
   abrirReproductor(evento: any, id) {
     console.log(this.videoTag);
     console.log(id);
-    this.video = 'https://mante.hosting.acm.org/API_COTACYT/video/fotos/' + id + '.mp4';
+    this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/'+id;
     this.swalReproductor.fire();
+  }
+
+  pdf(event){
+    window.open('http://plataforma.cotacyt.gob.mx/creatividad/'+event,'_blank');
   }
 
   saveAsPdf(index: number, autores: string[], proyecto: any) {
