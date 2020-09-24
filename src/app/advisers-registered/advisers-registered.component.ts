@@ -135,6 +135,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 45, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc.text(asesor.proyectos[i].proyecto, 80, 225);
       doc.setFontSize(16);
+      doc.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
       doc.setFont('Helvetica');
       doc.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
@@ -146,6 +147,8 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc1.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 45, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc1.text(asesor.proyectos[i].proyecto, 80, 225);
       doc1.setFontSize(16);
+      doc1.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
+      doc1.addImage('assets/image/DirectorReynosa.png', 'png', 140, 223, 36, 20); 
       doc1.setFont('Helvetica');
       doc1.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
@@ -157,6 +160,8 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc2.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 45, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc2.text(asesor.proyectos[i].proyecto, 80, 225);
       doc2.setFontSize(16);
+      doc2.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
+      doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 140, 221, 36, 20);
       doc2.setFont('Helvetica');
       doc2.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
@@ -168,6 +173,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc3.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 45, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc3.text(asesor.proyectos[i].proyecto, 80, 225);
       doc3.setFontSize(16);
+      doc3.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
       doc3.setFont('Helvetica');
       doc3.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
@@ -179,6 +185,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc4.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 45, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc4.text(asesor.proyectos[i].proyecto, 80, 225);
       doc4.setFontSize(16);
+      doc4.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
       doc4.setFont('Helvetica');
       doc4.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
@@ -190,6 +197,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc5.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 45, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc5.text(asesor.proyectos[i].proyecto, 80, 225);
       doc5.setFontSize(16);
+      doc5.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
       doc5.setFont('Helvetica');
       doc5.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
@@ -200,8 +208,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc6.addImage('assets/image/certificadoAsesorVictoria.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
       doc6.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 45, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc6.text(asesor.proyectos[i].proyecto, 80, 225);
-      doc6.setFontSize(16);
-      doc6.setFont('Helvetica');
+      doc6.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
       doc6.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
     break;

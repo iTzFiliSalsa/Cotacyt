@@ -233,6 +233,7 @@ export class JudgesComponent implements OnInit {
         const doc = new jsPDF();
         doc.addImage('assets/image/ReconocimientoJuradoMante.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc.text(this.titlecasePipe.transform(this.juezActual.nombre), 50, 182);
+        doc.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -240,7 +241,8 @@ export class JudgesComponent implements OnInit {
         const doc1 = new jsPDF();
         doc1.addImage('assets/image/ReconocimientoJuradoReynosa.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc1.text(this.titlecasePipe.transform(this.juezActual.nombre), 50, 182);
-        doc1.addImage('assets/image/DirectorReynosa.png', 'png', 140, 226, 36, 20);
+        doc1.addImage('assets/image/DirectorReynosa.png', 'png', 140, 223, 36, 20);
+        doc1.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc1.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -248,6 +250,8 @@ export class JudgesComponent implements OnInit {
         const doc2 = new jsPDF();
         doc2.addImage('assets/image/ReconocimientoJuradoMatamoros.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc2.text(this.titlecasePipe.transform(this.juezActual.nombre), 50, 182);
+        doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 140, 221, 36, 20);
+        doc2.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc2.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -255,6 +259,7 @@ export class JudgesComponent implements OnInit {
         const doc3 = new jsPDF();
         doc3.addImage('assets/image/ReconocimientoJuradoMadero.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc3.text(this.titlecasePipe.transform(this.juezActual.nombre), 50, 182);
+        doc3.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc3.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -262,6 +267,7 @@ export class JudgesComponent implements OnInit {
         const doc4 = new jsPDF();
         doc4.addImage('assets/image/ReconocimientoJuradoJaumave.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc4.text(this.titlecasePipe.transform(this.juezActual.nombre), 50, 182);
+        doc4.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc4.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -269,12 +275,14 @@ export class JudgesComponent implements OnInit {
         const doc5 = new jsPDF();
         doc5.addImage('assets/image/ReconocimientoJuradoNuevoLaredo.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc5.text(this.titlecasePipe.transform(this.juezActual.nombre), 50, 182);
+        doc5.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc5.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
       case 'Victoria':
         const doc6 = new jsPDF();
         doc6.addImage('assets/image/ReconocimientoJuradoVictoria.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc6.text(this.titlecasePipe.transform(this.juezActual.nombre), 50, 182);
+        doc6.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc6.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
       default:
@@ -286,3 +294,4 @@ export class JudgesComponent implements OnInit {
     }
   }
 }
+

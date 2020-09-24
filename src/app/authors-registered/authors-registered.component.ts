@@ -164,6 +164,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc.addImage('assets/image/ConstanciaParticipantesMante.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc.text(this.autorActual.proyecto, 72, 225);
+        doc.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
       case '2':
@@ -172,6 +173,8 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc1.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc1.text(this.autorActual.proyecto, 72, 225);
         doc1.setFontSize(16);
+        doc1.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
+        doc1.addImage('assets/image/DirectorReynosa.png', 'png', 140, 223, 36, 20);
         doc1.setFont('Helvetica');
         doc1.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
@@ -181,6 +184,8 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc2.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc2.text(this.autorActual.proyecto, 72, 225);
         doc2.setFontSize(16);
+        doc2.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
+        doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 140, 221, 36, 20);
         doc2.setFont('Helvetica');
         doc2.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
@@ -190,6 +195,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc3.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc3.text(this.autorActual.proyecto, 72, 225);
         doc3.setFontSize(16);
+        doc3.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc3.setFont('Helvetica');
         doc3.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
@@ -199,6 +205,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc4.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc4.text(this.autorActual.proyecto, 72, 225);
         doc4.setFontSize(16);
+        doc4.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc4.setFont('Helvetica');
         doc4.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
@@ -209,6 +216,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc5.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc5.text(this.autorActual.proyecto, 72, 225);
         doc5.setFontSize(16);
+        doc5.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc5.setFont('Helvetica');
         doc5.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
@@ -218,6 +226,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc6.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc6.text(this.autorActual.proyecto, 72, 225);
         doc6.setFontSize(16);
+        doc6.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
         doc6.setFont('Helvetica');
         doc6.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
