@@ -28,6 +28,7 @@ import '../../../assets/fonts/Helvetica.ttf';
 import '../../../assets/fonts/Caviar.ttf';
 import { SedesService } from '../../services/sedes.service';
 import { Sedes } from 'src/app/models/sedes.model';
+import Swal from 'sweetalert2';
 
 
 
@@ -222,7 +223,15 @@ export class DashboardComponent implements OnInit {
   }
 
   mostrarProyectosPorCalificacion(evt: any) {
-    this.swalCalificaciones.fire();
+    this.swalCalificaciones.fire().then(
+      res=>{
+        if(res.dismiss === Swal.DismissReason.backdrop){
+          this.reiniciarVariable();
+        }
+        console.log(res);
+      }, err=> {
+        console.log(err);
+      });
   }
   onChangeSede(value) {
     this.sedeActual = value;
@@ -902,7 +911,7 @@ export class DashboardComponent implements OnInit {
   }
 
   imprimir(proyecto: any, categoria: any) {
-
+    if(proyecto.length !== 0){
     switch (categoria) {
       case 'petit':
         let nombrePetit = '';
@@ -912,7 +921,7 @@ export class DashboardComponent implements OnInit {
 
           nombrePetit = nombrePetit.concat(proyecto[i].nombre, '\r\n');
           totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedePetit2 = sedePetit2.concat(proyecto[i].sede, '\r\n');
+          sedePetit2 = proyecto[i].sede;
 
         }
         const doc1 = new jsPDF({orientation: 'landscape'});
@@ -939,14 +948,14 @@ export class DashboardComponent implements OnInit {
 
           nombreKids = nombreKids.concat(proyecto[i].nombre, '\r\n');
           totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeKids = sedeKids.concat(proyecto[i].sede, '\r\n');
+          sedeKids = proyecto[i].sede;
 
         }
         const doc8 = new jsPDF({orientation: 'landscape', unit: 'in', format: [4,2]});
         doc8.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
         doc8.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
         doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 44, 37).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc8.text('Lista de Proyectos Categoría Kids', 64, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc8.text('Lista de Proyectos Categoría Kids sede '+sedeKids+'', 64, 49).setFont('Caviar').setFontSize(16).setTextColor('#646464');
         doc8.text('Proyecto', 35, 75);
         doc8.text(nombreKids, 35, 90);
         doc8.text('Calificación', 220, 75);
@@ -967,7 +976,7 @@ export class DashboardComponent implements OnInit {
 
           nombreJuvenil = nombreJuvenil.concat(proyecto[i].nombre, '\r\n');
           totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeJuvenil = sedeJuvenil.concat(proyecto[i].sede, '\r\n');
+          sedeJuvenil = proyecto[i].sede;
 
         }
         const doc7 = new jsPDF({orientation: 'landscape'});
@@ -994,7 +1003,7 @@ export class DashboardComponent implements OnInit {
 
           nombreMS = nombreMS.concat(proyecto[i].nombre, '\r\n');
           totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeMS = sedeMS.concat(proyecto[i].sede, '\r\n');
+          sedeMS = proyecto[i].sede;
 
         }
         const doc2 = new jsPDF({orientation: 'landscape'});
@@ -1021,14 +1030,14 @@ export class DashboardComponent implements OnInit {
 
           nombreSuperior = nombreSuperior.concat(proyecto[i].nombre, '\r\n');
           totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeSuperior = sedeSuperior.concat(proyecto[i].sede, '\r\n');
+          sedeSuperior = proyecto[i].sede;
 
         }
         const doc3 = new jsPDF({orientation: 'landscape'});
         doc3.addImage('assets/image/logotamColor.png','png', 14, 13, 48,24);
         doc3.addImage('assets/image/cecit.png','png', 243, 8, 39,39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
         doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 85, 34).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-        doc3.text('Lista de Proyectos Categoría Superior sede '+sedeSuperior+'', 84, 46).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+        doc3.text('Lista de Proyectos Categoría Superior Sede '+sedeSuperior+'', 78, 46).setFont('Caviar').setFontSize(16).setTextColor('#646464');
         doc3.text('Proyecto', 35, 75);
         doc3.text(nombreSuperior, 35, 90);
         doc3.text('Calificación', 220, 75);
@@ -1048,7 +1057,7 @@ export class DashboardComponent implements OnInit {
 
           nombrePosgrado = nombrePosgrado.concat(proyecto[i].nombre, '\r\n');
           totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedePosgrado = sedePosgrado.concat(proyecto[i].sede, '\r\n');
+          sedePosgrado = proyecto[i].sede;
 
         }
         const doc4 = new jsPDF({orientation: 'landscape'});
@@ -1074,6 +1083,12 @@ export class DashboardComponent implements OnInit {
         break;
 
     }
+  }
+}
+  reiniciarVariable(evt: any = null){
+    this.categoriaActual = '';
+    this.sedeActual = '';
+    this.proyectosCalificacion = new Array <any>();
   }
 }
 

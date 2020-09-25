@@ -168,7 +168,7 @@
                         </button>
 
                         <!-- ventana sweetalert -->
-                        <swal class="swal-wide" #swalid title="Calificaciones de los proyectos"
+                        <swal (confirm) = "reiniciarVariable($event)" class="swal-wide" #swalid title="Calificaciones de los proyectos"
                             [swalOptions]="{customClass: 'clase'}">
                             <div *swalPortal>
                                 <div>
