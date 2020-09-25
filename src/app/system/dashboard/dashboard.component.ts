@@ -72,6 +72,9 @@ export class DashboardComponent implements OnInit {
   public barChartPlugins = [];
   public barChartData: ChartDataSets[];
   public ht;
+  public hr;
+  public hm;
+  public hs;
   public util: Util;
 
   totales: Totales[];
@@ -118,7 +121,25 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => {
       const d = new Date();
-      this.ht = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+      if(d.getHours() < 10){
+        this.hr = '0' + d.getHours() + ' :';
+      }
+      else{
+        this.hr = d.getHours() + ' :';
+      }
+      if(d.getMinutes() < 10){
+        this.hm = '0' + d.getMinutes() + ' :';
+      }
+      else{
+        this.hm = d.getMinutes() + ' :';
+      }
+      if(d.getSeconds() < 10){
+        this.hs = '0' + d.getSeconds();
+      }
+      else{
+        this.hs = d.getSeconds();
+      }
+      
     }, 1000);
 
     this.barChartData = [
