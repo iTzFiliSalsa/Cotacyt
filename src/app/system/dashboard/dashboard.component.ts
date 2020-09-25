@@ -1100,6 +1100,7 @@ export class DashboardComponent implements OnInit {
         swal.fire({
           icon: 'error',
           title: 'No se encontró la categoría'
+          
         });
         break;
 
