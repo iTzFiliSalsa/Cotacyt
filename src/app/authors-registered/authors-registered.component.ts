@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutoresService } from '../services/autores.service';
 import { UtilsService } from '../services/utils.service';
 import { Autores } from '../models/autores.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Escuelas } from '../models/escuelas.model';
 import { Municipios } from '../models/municipios.model';
 import { Localidades } from '../models/localidades.model';
@@ -55,16 +55,16 @@ export class AuthorsRegisteredComponent implements OnInit {
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formAutores = this.formBuilder.group({
-      nombres: [''],
-      a_paterno: [''],
-      a_materno: [''],
-      telefono: [''],
-      email: [''],
-      id_proyectos: [''],
-      id_sedes: [''],
-      id_escuelas: [''],
-      id_municipios: [''],
-      id_localidades: [''],
+      nombres:        ['', [Validators.required]],
+      a_paterno:      ['', [Validators.required]],
+      a_materno:      [''],
+      telefono:       ['', [Validators.required]],
+      email:          ['', [Validators.required, Validators.email]],
+      id_proyectos:   ['', [Validators.required]],
+      id_sedes:       ['', [Validators.required]],
+      id_escuelas:    ['', [Validators.required]],
+      id_municipios:  ['', [Validators.required]],
+      id_localidades: ['', [Validators.required]],
     });
     this.utils._loading = true;
     if (this.sessionData.rol === 'superuser') {

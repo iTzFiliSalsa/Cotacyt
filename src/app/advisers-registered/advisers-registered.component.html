@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    <swal (confirm)="editarAsesor()" #swalid title="Editar Autor" [showCancelButton] ="true">
+    <swal #swalid title="Editar Autor" [showConfirmButton] ="false">
         <form *swalPortal [formGroup]="formAsesores">
             <div class="form-group">
                 <label for="">Nombre:</label>
@@ -87,6 +87,7 @@
                 <label for="">Descripción:</label>
                 <textarea formControlName="descripcion" class="form-control" id="Textarea1" rows="3" placeholder="Descripción"></textarea>
             </div>
+            <button [disabled]="!formAsesores.valid" (click)="editarAsesor()" class="btn btn-primary" data-dismiss="modal">Editar</button>
         </form>
     </swal>
 </div>

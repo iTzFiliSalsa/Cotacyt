@@ -62,7 +62,7 @@
         </div>
     </div>
     <!-- swal editar  -->
-    <swal (confirm)="editarProyecto()" #swalid title="Editar Proyecto" [showCancelButton] ="true">
+    <swal #swalid title="Editar Proyecto" [showConfirmButton] ="false">
         <form *swalPortal [formGroup]="formProyecto">
             <div class="form-group">
                 <label for="">Nombre:</label>
@@ -114,6 +114,7 @@
                 <label for="">Resumen:</label>
                 <textarea formControlName="resumen" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Resumen del proyecto"></textarea>
             </div>
+            <button (click)="editarProyecto()" [disabled]="!formProyecto.valid" class="btn btn-primary">Editar</button>
         </form>
     </swal>
 </div>

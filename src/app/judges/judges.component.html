@@ -56,7 +56,7 @@
         </div>
     </div>
     <!-- swal editar -->
-    <swal (confirm)="editarJuez()" #swalid title="Editar Juez" [showCancelButton] ="true">
+    <swal #swalid title="Editar Juez" [showConfirmButton]="false">
         <form *swalPortal [formGroup]="formJuez">
             <div class="form-group">
                 <label for="">Categoria:</label>
@@ -108,6 +108,7 @@
                 <input [value]="juezActual.contrasena" class="form-control" formControlName="contrasena"
                     placeholder="Contraseña">
             </div>
+            <button (click)="editarJuez()" [disabled]="!formJuez.valid" class="btn btn-primary">Editar</button>
         </form>
     </swal>
 </div>

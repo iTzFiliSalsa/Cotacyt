@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <swal (confirm)="editarAutor()" #swalid title="Editar Autor" [showCancelButton] ="true">
+    <swal #swalid title="Editar Autor" [showConfirmButton] ="false">
         <form *swalPortal [formGroup]="formAutores">
             <div class="form-group">
                 <label for="">Nombre:</label>
@@ -116,6 +116,7 @@
                     <option [value]="localidad.id_localidades" *ngFor="let localidad of localidades">{{localidad.localidad}}</option>
                 </select>
             </div>
+            <button (click)="editarAutor()" [disabled]="!formAutores.valid" class="btn btn-primary" data-dismiss="modal">Editar</button>
         </form>
     </swal>
 </div>

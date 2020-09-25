@@ -40,7 +40,7 @@ export class AdvisersRegisteredComponent implements OnInit {
     this.formAsesores = this.formBuilder.group({
       nombres:     ['', [Validators.required]],
       a_paterno:   ['', [Validators.required]],
-      a_materno:   ['', [Validators.required]],
+      a_materno:   [''],
       email:       ['', [Validators.required, Validators.email]],
       id_sedes:    this.sessionData.id_sedes,
       descripcion: ['', [Validators.required]],

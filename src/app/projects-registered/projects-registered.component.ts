@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectsRegisteredService } from '../services/project-registered.service'
 import { ProjectRegistered } from '../models/project-regis.model';
 import { UtilsService } from '../services/utils.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Areas } from '../models/areas.model';
 import { Sedes } from '../models/sedes.model';
 import { Asesores } from '../models/asesores.model';
@@ -76,14 +76,14 @@ export class ProjectsRegisteredComponent implements OnInit {
     this._utilService.loading = true;
     this.formProyecto = this.formBuilder.group({
       id_proyectos:  [''],
-      id_asesores:   [''],
-      id_areas:      [''],
+      id_asesores:   ['', [Validators.required]],
+      id_areas:      ['', [Validators.required]],
       id_sedes:      this.sessionData.id_sedes,
-      id_categorias: [''],
+      id_categorias: ['', [Validators.required]],
       ids_autores_viejos: [''],
       ids_autores_nuevos : [''],
-      nombre:        [''],
-      resumen:       [''],
+      nombre:        ['', [Validators.required]],
+      resumen:       ['', [Validators.required]],
     });
     if (this.sessionData.rol === 'superuser') {
       this.superUser = false;

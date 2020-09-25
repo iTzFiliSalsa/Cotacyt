@@ -53,14 +53,14 @@ export class JudgesComponent implements OnInit {
     this.proyectosViejos = new Array<any>();
     this._utilService.loading = true;
     this.formJuez = this.formBuilder.group({
-      id_jueces: [''],
-      id_categorias: ['', [Validators.required]],
-      id_sedes:      [''],
-      usuario:       ['', [Validators.required]],
-      contrasena:    ['', [Validators.required]],
+      id_jueces:            [''],
+      id_categorias:        ['', [Validators.required]],
+      id_sedes:             ['', [Validators.required]],
+      usuario:              ['', [Validators.required]],
+      contrasena:           ['', [Validators.required]],
       ids_proyectos_viejos: [''],
       ids_proyectos_nuevos: [''],
-      nombre:        ['', [Validators.required]],
+      nombre:               ['', [Validators.required]],
     });
   }
 
