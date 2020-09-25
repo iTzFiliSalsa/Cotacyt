@@ -34,7 +34,7 @@ export class AddAuthorsComponent implements OnInit {
   sessionData: Session;
   superUser: boolean;
   formRegistroAutores: FormGroup;
-  sedeActual = '1';
+  sedeActual: string;
   constructor(
     private municipiosService: MunicipiosService,
     private asesoresService: AsesoresService,
@@ -48,7 +48,7 @@ export class AddAuthorsComponent implements OnInit {
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formRegistroAutores = this.formBuilder.group({
-      id_proyectos:   ['', [Validators.required]],
+      id_proyectos:   [''],
       id_escuelas:    ['1', [Validators.required]],
       id_municipios:  ['1', [Validators.required]],
       id_localidades: ['1', [Validators.required]],
@@ -57,12 +57,13 @@ export class AddAuthorsComponent implements OnInit {
       a_paterno:      ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:      ['', [Validators.required, Validators.maxLength(50)]],
       telefono:       ['', [Validators.required, Validators.maxLength(10)]],
-      email:          ['', [Validators.required, Validators.maxLength(50)]], 
+      email:          ['', [Validators.required, Validators.maxLength(50)]],
     });
     this._utilService._loading = true;
     if (this.sessionData.rol === 'superuser') {
       this.superUser = false;
     } else {
+      this.sedeActual = this.sessionData.id_sedes;
       this.superUser = true;
     }
   }
@@ -102,7 +103,7 @@ export class AddAuthorsComponent implements OnInit {
     console.log(this.formRegistroAutores.value);
     this.autoresService.postAutor( this.formRegistroAutores.value )
     .subscribe(
-      data => {
+      _ => {
         swal.fire({
           icon: 'success',
           title: 'Exito',
@@ -113,6 +114,7 @@ export class AddAuthorsComponent implements OnInit {
         });
       },
       err => {
+        console.log(err);
         swal.fire({
           icon: 'error',
           title: 'Error',
