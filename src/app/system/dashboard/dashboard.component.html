@@ -173,34 +173,27 @@
                             <div *swalPortal>
                                 <div>
                                     <div class="row justify-content-center mb-2">
-                                        <form action="" [formGroup]="formsFiltro">
-                                            <select formControlName="id_categorias" class="custom-select"
-                                                id="inputGroupSelect04">
-                                                <option selected="true" value="petit">Petit</option>
-                                                <option value="kids">Kids</option>
-                                                <option value="juvenil">Juvenil</option>
-                                                <option value="media-superior">Media superior</option>
-                                                <option value="superior">Superior</option>
-                                                <option value="posgrado">Posgrado</option>
+                                            <select #sc (change)="onChangeCategoria(sc.value)" class="custom-select">
+                                                <option selected="true" value="1">Petit</option>
+                                                <option value="2">Kids</option>
+                                                <option value="3">Juvenil</option>
+                                                <option value="4">Media superior</option>
+                                                <option value="5">Superior</option>
+                                                <option value="6">Posgrado</option>
                                             </select>
-                                        </form>
-
-                                        <button (click)="mostrarListaCalificaciones()" class="btn btn-select "
-                                            type="button">Filtrar</button>
-                                           
+                                            <select *ngIf="superUser" #sd (change)="onChangeSede(sd.value)" class="custom-select mt-2">
+                                                <option *ngFor="let sede of sedes" [value]="sede.id_sedes">{{sede.sede}}</option>
+                                            </select>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <table class="table table-lg table-hover" >
+                                        <table class="table table-lg table-hover" *ngIf="proyectosCalificacion" >
                                             <thead class="background-table-projects" >
                                                 <tr>
                                                     <th>Nombre</th>
-                                                    <th>Calificación</th>
-                                                                                                        
+                                                    <th>Calificación</th>                                                 
                                                 </tr>
                                             </thead>
-
-                                            <tr class="table"
-                                                *ngFor="let proyecto of proyectosCalificacion;let i = index">
+                                            <tr class="table" *ngFor="let proyecto of proyectosCalificacion;let i = index">
                                                 <td>
                                                     <div class="row">
                                                         <span class="badge badge-position mr-3"> {{i+1}} </span>

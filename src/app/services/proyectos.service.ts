@@ -15,10 +15,10 @@ export class ProyectosService {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
   }
 
-  obtenerTodosLosProyectos(): Observable<Proyectos[]> {
+  obtenerTodosLosProyectos(idSedes: string): Observable<Proyectos[]> {
     return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT
       + 'api/proyectos/all?id_sedes='
-      + this.sessionData.id_sedes);
+      + idSedes);
   }
   obtenerTodosLosProyectosCategoria(idCategorias: string): Observable<Proyectos[]> {
     return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT
@@ -29,6 +29,12 @@ export class ProyectosService {
   obtenerProyectosSuperUser(idCategorias: string): Observable<Proyectos[]> {
     return this.http.get<Proyectos[]>(this.servicesConfig.APP_ENDPOINT
       + 'api/proyectos/all-list-categoria?id_categorias=' + idCategorias);
+  }
+  obtenerProyectosSuperUserTemp(idCategorias: string, idSedes: string): Observable<Proyectos[]> {
+    return this.http.get<Proyectos[]>( this.servicesConfig.APP_ENDPOINT
+      + 'api/proyectos/all-categoria?id_sedes='
+      + idSedes
+      + '&id_categorias=' + idCategorias);
   }
   obtenerProyecto(idProyectos: string): Observable<Proyectos> {
     return this.http.get<Proyectos>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/' + idProyectos);

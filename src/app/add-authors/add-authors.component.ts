@@ -34,6 +34,7 @@ export class AddAuthorsComponent implements OnInit {
   sessionData: Session;
   superUser: boolean;
   formRegistroAutores: FormGroup;
+  sedeActual = '1';
   constructor(
     private municipiosService: MunicipiosService,
     private asesoresService: AsesoresService,
@@ -71,14 +72,13 @@ export class AddAuthorsComponent implements OnInit {
       escuelas: this.escuelasService.getEscuelas(),
       localidades: this.localidadesService.getLocalidades(),
       municipios: this.municipiosService.getMunicipios(),
-      proyectos: this.proyectosService.obtenerTodosLosProyectos(),
+      proyectos: this.proyectosService.obtenerTodosLosProyectos(this.sedeActual),
       sedes: this.sedesService.getSedes()
     }).subscribe(
       data => {
       this.escuelas = data.escuelas;
       this.localidades = data.localidades;
       this.municipios = data.municipios;
-      console.log(data.proyectos);
       this.proyectos = data.proyectos;
       this.sedes = data.sedes;
     }, err => {
@@ -88,7 +88,16 @@ export class AddAuthorsComponent implements OnInit {
       this.asesores = data;
     } );
   }
-
+  onChangeSedeActual(value) {
+    this._utilService._loading = true;
+    this.proyectosService.obtenerTodosLosProyectos(value)
+      .subscribe(
+        data => {
+          this.proyectos = data;
+        },
+        err => console.log(err)
+      ).add(() => this._utilService._loading = false);
+  }
   reigstrarAutor() {
     console.log(this.formRegistroAutores.value);
     this.autoresService.postAutor( this.formRegistroAutores.value )

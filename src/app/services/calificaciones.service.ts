@@ -30,12 +30,20 @@ export class CalificacionesService {
       + 'api/calificaciones-generales-por-sede?id_sedes=' + this.sessionData.id_sedes);
   }
   //obtener calificaciones por categorias
-  listaDeCalificaciones(): Observable < CalificacionesPorCategoria[]>{
+  listaDeCalificaciones(idCategoria: string): Observable < CalificacionesPorCategoria[]>{
     return this.http.get < CalificacionesPorCategoria[]>(
-      this.servicesConfig.APP_ENDPOINT + 'api/calificaciones-generales-por-categoria?id_sedes=' + this.sessionData.id_sedes);
+      this.servicesConfig.APP_ENDPOINT
+      + 'api/calificaciones-generales-por-categoria?id_sedes='
+      + this.sessionData.id_sedes
+      + '&id_categorias=' + idCategoria);
   }
-
-  
+  listaDeCalificacionesAdmin(idCategoria: string, idSedes: string): Observable < CalificacionesPorCategoria[]>{
+    return this.http.get < CalificacionesPorCategoria[]>(
+      this.servicesConfig.APP_ENDPOINT
+      + 'api/calificaciones-generales-por-categoria?id_sedes='
+      + idSedes
+      + '&id_categorias=' + idCategoria);
+  }
 
 
 }

@@ -95,10 +95,11 @@ export class AddProjectsComponent implements OnInit {
         sedes: this.sedesService.getSedes(),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
-        autores: this.superUser ? this.autoresService.getAutoresSelect() : this.autoresService.getAutoresSelectSuperUser(),
+        autores: this.superUser ? this.autoresService.getAutoresSelect() : this.autoresService.getAutoresSelectSuperUser('1'),
       }
     ).subscribe(
       data => {
+        console.log(this.sessionData.id_sedes);
         this.areas = data.areas;
         this.sedes = data.sedes;
         this.categorias = data.categorias;
@@ -154,6 +155,20 @@ export class AddProjectsComponent implements OnInit {
     };
   }
 
+  onChangeSedeActual(value) {
+    this._utilService._loading = true;
+    this.autoresService.getAutoresSelectSuperUser(value)
+      .subscribe (
+        data => {
+          this.autores = data;
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService._loading = false;
+      });
+  }
   registrarProyecto() {
     // console.log(this.formRegistroProyecto.value);
     const fileUpload = this.fileUpload.nativeElement;

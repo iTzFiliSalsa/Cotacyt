@@ -37,6 +37,8 @@ export class JudgesComponent implements OnInit {
   settingsProyectosViejos: IDropdownSettings;
   settingsProyectosNuevos: IDropdownSettings;
   superUser: boolean;
+  categoriaActual = '1';
+  sedeActual = '1';
   constructor(
     private judgesService: JudgesRegisteredService,
     private _utilService: UtilsService,
@@ -65,10 +67,8 @@ export class JudgesComponent implements OnInit {
   ngOnInit(): void {
     if (this.sessionData.rol === 'superuser') {
       this.superUser = false;
-      console.log(this.superUser);
     } else {
       this.superUser = true;
-      console.log(this.superUser);
     }
     this.settingsProyectosViejos = {
       singleSelection: false,
@@ -147,12 +147,21 @@ export class JudgesComponent implements OnInit {
       .subscribe( data => {
         this.proyectosViejos = data;
       });
-    this.formJuez.patchValue({
+    this.superUser
+    ? this.formJuez.patchValue({
       id_jueces: this.juezActual.id_jueces,
       usuario: this.juezActual.usuario,
       contrasena: this.juezActual.contrasena,
       nombre: this.juezActual.nombre,
       id_sedes: this.sessionData.id_sedes,
+      id_categorias: this.verificarCat(this.juezActual.categoria)
+    })
+    : this.formJuez.patchValue({
+      id_jueces: this.juezActual.id_jueces,
+      usuario: this.juezActual.usuario,
+      contrasena: this.juezActual.contrasena,
+      nombre: this.juezActual.nombre,
+      id_sedes: this.juezActual.id_sedes,
       id_categorias: this.verificarCat(this.juezActual.categoria)
     });
     this.swalEdit.fire();
@@ -197,17 +206,27 @@ export class JudgesComponent implements OnInit {
   addProyectoNuevo(item) {
     this.proyectosNuevos.push(item);
   }
-  categoriaActual(value) {
+  onChangeSedeActual(value) {
+    this._utilService._loading = true;
+    this.sedeActual = value;
+    this.proyectosService.obtenerProyectosSuperUserTemp(this.categoriaActual, value)
+    .subscribe( data => {
+      this.proyectos = data;
+    }).add(() => this._utilService._loading = false);
+  }
+  onChangeCategoriaActual(value) {
+    this._utilService._loading = true;
+    this.categoriaActual = value;
     if (this.sessionData.rol === 'superuser') {
-      this.proyectosService.obtenerProyectosSuperUser(value)
+      this.proyectosService.obtenerProyectosSuperUserTemp(value, this.sedeActual)
       .subscribe( data => {
         this.proyectos = data;
-      });
+      }).add(() => this._utilService._loading = false);
     } else {
       this.proyectosService.obtenerTodosLosProyectosCategoria(value)
       .subscribe( data => {
         this.proyectos = data;
-      });
+      }).add(() => this._utilService._loading = false);
     }
   }
   verificarCat(categoria: string) {
