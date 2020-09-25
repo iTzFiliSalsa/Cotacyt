@@ -170,7 +170,7 @@ export class AuthorsRegisteredComponent implements OnInit {
       case '2':
         const doc1 = new jsPDF();
         doc1.addImage('assets/image/ConstanciaParticipantesReynosa.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc1.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 54, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        doc1.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 22, 187).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc1.text(this.autorActual.proyecto, 72, 225);
         doc1.setFontSize(16);
         doc1.addImage('assets/image/DirectorGeneral.png', 'png', 40, 223, 36, 20);
