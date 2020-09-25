@@ -94,7 +94,7 @@
             </div>
             <div class="form-group">
                 <label for="">Sede:</label>
-                <select formControlName="id_sedes" class="form-control" [attr.disabled]="superUser ? 'disabled':null">
+                <select #sd (change)="onChangeSedeActual(sd.value)" formControlName="id_sedes" class="form-control" [attr.disabled]="superUser ? 'disabled':null">
                     <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
                 </select>
             </div>

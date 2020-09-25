@@ -60,7 +60,7 @@
         <form *swalPortal [formGroup]="formJuez">
             <div class="form-group">
                 <label for="">Categoria:</label>
-                <select #s (change)="categoriaActual(s.value)" [value]="verificarCat(juezActual.categoria)" formControlName="id_categorias" class="form-control">
+                <select #s (change)="onChangeCategoriaActual(s.value)" [value]="verificarCat(juezActual.categoria)" formControlName="id_categorias" class="form-control">
                     <option value="1">Petit</option>
                     <option value="2">Kits</option>
                     <option value="3">Juvenil</option>
@@ -99,7 +99,7 @@
             </div>
             <div class="form-group">
                 <label for="">Sede:</label>
-                <select formControlName="id_sedes" class="form-control" [attr.disabled]="superUser ? 'disabled': null">
+                <select #sd (change)="onChangeSedeActual(sd.value)" formControlName="id_sedes" class="form-control" [attr.disabled]="superUser ? 'disabled': null">
                     <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
                 </select>
             </div>

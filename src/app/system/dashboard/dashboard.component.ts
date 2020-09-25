@@ -26,6 +26,8 @@ import { ProyectosService } from '../../services/proyectos.service'
 import { jsPDF } from "jspdf";
 import '../../../assets/fonts/Helvetica.ttf';
 import '../../../assets/fonts/Caviar.ttf';
+import { SedesService } from '../../services/sedes.service';
+import { Sedes } from 'src/app/models/sedes.model';
 
 
 
@@ -85,6 +87,10 @@ export class DashboardComponent implements OnInit {
 
   sessionData: Session;
   asesorActual: any;
+  sedeActual: string;
+  categoriaActual: string;
+  sedes: Sedes[];
+  superUser: boolean;
   constructor(
     private dashboardService: DashboardService,
     private categoriasService: CategoriasService,
@@ -94,15 +100,12 @@ export class DashboardComponent implements OnInit {
     public readonly swalTargets: SwalPortalTargets,
     public formBuilder: FormBuilder,
     private infoProject: ProyectosService,
+    private sedeService: SedesService,
     private proyectosService: ProyectosService,
   ) {
-
     this.proyectosCalificacion = new Array<any>();
-    this.formsFiltro = formBuilder.group({
-      id_categorias: ['', [Validators.required]],
-    });
-
     this.totales = new Array<Totales>();
+    this.sedes = new Array<Sedes>();
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
@@ -111,6 +114,7 @@ export class DashboardComponent implements OnInit {
     this.util = new Util;
     this.proyectos = new Array<ProjectRegistered>();
     this.proyectosCalificadosPorCategoria = new Array<CalificacionesPorCategoria>();
+    this.sessionData.rol === 'superuser' ? this.superUser = true : this.superUser = false;
   }
 
   ngOnInit(): void {
@@ -146,12 +150,13 @@ export class DashboardComponent implements OnInit {
         totales: this.dashboardService.getTotalesSuperUser(),
         estadisticas: this.calificacionesService.proyectosEstadisticas(),
         grafica: this.dashboardService.getProyectosPorCategorias(),
+        sedes: this.sedeService.getSedes(),
       }).subscribe (
         data => {
           this.totales = data.totales;
           this.adminProjects(data.proyectos);
-          
           this.estadisticasDeProyectos = data.estadisticas;
+          this.sedes = data.sedes,
           this.construirGrafica(data.grafica);
         }
       ).add(() => this._utilsService._loading = false);
@@ -188,7 +193,6 @@ export class DashboardComponent implements OnInit {
       }).subscribe(
         data => {
           this.proyectosCalificados = data.proyectosCalificados;
-          console.log(data);
           this.proyectosPorCalificar = data.proyectosPorCalificar;
           this.estadisticasDeProyectos = data.estadisticas;
           this.construirGrafica(data.grafica);
@@ -238,94 +242,69 @@ export class DashboardComponent implements OnInit {
     };
   }
 
-  //abrir swal de calificaciones por categoria
   mostrarProyectosPorCalificacion(evt: any) {
     this.swalCalificaciones.fire();
-    this.calificacionesService.listaDeCalificaciones().subscribe(
-      data => {
-        console.log(this.formsFiltro.value['id_categorias']);
-        this.proyectosCalificadosPorCategoria = data;
-        const petit = data['petit'];
-        this.proyectosCalificacion = petit;
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService.loading = false;
-    });
   }
-
-
-
-  //mostrar tabla de calificaciones por categorias de mayor a menor
-  mostrarListaCalificaciones() {
-    this.calificacionesService.listaDeCalificaciones().subscribe(
-      data => {
-        console.log(this.formsFiltro.value['id_categorias']);
+  onChangeSede(value) {
+    this.sedeActual = value;
+    this._utilsService._loading = true;
+    this.calificacionesService.listaDeCalificacionesAdmin(this.categoriaActual, this.sedeActual)
+      .subscribe( data => this.mostrarListaCalificaiones(data, this.categoriaActual))
+      .add(() => this._utilsService.loading = false);
+  }
+  onChangeCategoria(value) {
+    this.categoriaActual = value;
+    this.superUser
+    ? this.calificacionesService.listaDeCalificacionesAdmin(value, this.sedeActual)
+      .subscribe( data => this.mostrarListaCalificaiones(data, value))
+      .add(() => this._utilsService.loading = false)
+    : this.calificacionesService.listaDeCalificaciones(value)
+      .subscribe((data: any) => this.mostrarListaCalificaiones(data, value),
+      err => console.log(err))
+      .add(() => this._utilsService.loading = false);
+  }
+  mostrarListaCalificaiones(data: any, value) {
         this.proyectosCalificadosPorCategoria = data;
-        const petit = data['petit'];
-        const kids = data['kids'];
-        const juvenil = data['juvenil'];
+        const petit = data.petit;
+        const kids = data.kids;
+        const juvenil = data.juvenil;
         const mediaSuperior = data['media_superior'];
-        const superior = data['superior'];
-        const posgrado = data['posgrado'];
-        const category = this.formsFiltro.value['id_categorias'];
-        switch (this.formsFiltro.value['id_categorias']) {
-          case 'petit':
-            console.log(petit);
+        const superior = data.superior;
+        const posgrado = data.posgrado;
+        switch (value) {
+          case '1':
             this.proyectosCalificacion = petit;
-            this.imprimir(this.proyectosCalificacion, category);
-            console.log('holsss');
-            console.log(this.proyectosCalificacion);
-            
-            
+            this.imprimir(this.proyectosCalificacion, 'petit');
             console.log(this.proyectosCalificacion.sort(function (prev: any, next: any) {
               return next.total - prev.total;
-
             }));
             break;
-
-          case 'kids':
-            console.log(kids);
+          case '2':
             this.proyectosCalificacion = kids;
-            this.imprimir(this.proyectosCalificacion, category);
+            this.imprimir(this.proyectosCalificacion, 'kids');
             break;
-
-          case 'juvenil':
-            console.log(juvenil);
+          case '3':
             this.proyectosCalificacion = juvenil;
-            this.imprimir(this.proyectosCalificacion, category);
+            this.imprimir(this.proyectosCalificacion, 'juvenil');
             break;
-
-          case 'media-superior':
-            console.log(mediaSuperior);
+          case '4':
             this.proyectosCalificacion = mediaSuperior;
-            this.imprimir(this.proyectosCalificacion, category);
+            this.imprimir(this.proyectosCalificacion, 'media-superior');
             break;
-
-          case 'superior':
-            console.log(superior);
+          case '5':
             this.proyectosCalificacion = superior;
-            this.imprimir(this.proyectosCalificacion, category);
+            this.imprimir(this.proyectosCalificacion, 'superior');
             break;
-
-          case 'posgrado':
-            console.log(posgrado);
+          case '6':
             this.proyectosCalificacion = posgrado;
-            this.imprimir(this.proyectosCalificacion, category);
-
+            this.imprimir(this.proyectosCalificacion, 'posgrado');
             break;
-          default: this.proyectosCalificacion = petit;
-            break
+          default:
+            this.proyectosCalificacion = petit;
+            break;
         }
-      },
-      err => console.log(err)
-    ).add(() => {
-      this._utilsService.loading = false;
-    });
   }
-
-
-  //mostrar informacion de proyecto seleccionado
+  // mostrar informacion de proyecto seleccionado
   mostrarInfoCalificados(proyecto: ProyectosCalificados) {
     if (this.sessionData.rol === 'admin') {
       this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(

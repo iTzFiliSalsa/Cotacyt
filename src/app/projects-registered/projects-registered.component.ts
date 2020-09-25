@@ -49,6 +49,7 @@ export class ProjectsRegisteredComponent implements OnInit {
   agregado: number;
   superUser: boolean;
   sessionData: Session;
+  sedeActual = '1';
   constructor(
     private projectsService: ProjectsRegisteredService,
     private _utilService: UtilsService,
@@ -96,7 +97,9 @@ export class ProjectsRegisteredComponent implements OnInit {
       {
         areas: this.areasService.getAreas(),
         sedes: this.sedesService.getSedes(),
-        autores: this.autoresService.getAutoresSelect(),
+        autores: this.superUser
+        ? this.autoresService.getAutoresSelect()
+        :  this.autoresService.getAutoresSelectSuperUser(this.sedeActual),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
         proyectos: this.superUser
@@ -150,6 +153,18 @@ export class ProjectsRegisteredComponent implements OnInit {
         this._utilService.loading = false;
       });
   }
+  onChangeSedeActual(value) {
+    this._utilService._loading = true;
+    this.autoresService.getAutoresSelectSuperUser(value)
+      .subscribe(
+        data => {
+          this.autores = data;
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => this._utilService._loading = false);
+  }
   openSwal(proyecto: ProjectRegistered) {
     this.proyectoActual = proyecto;
     this.obtenerProyecto.getAutoresProyecto(this.proyectoActual.id_proyectos)
@@ -167,11 +182,21 @@ export class ProjectsRegisteredComponent implements OnInit {
     });
     this.obtenerProyecto.obtenerProyecto(proyecto.id_proyectos).subscribe(
       data => {
-        this.formProyecto.patchValue({
+        this.superUser
+        ? this.formProyecto.patchValue({
           id_proyectos:  data.id_proyectos,
           id_asesores:   data.id_asesores,
           id_areas:      data.id_areas,
           id_sedes:      this.sessionData.id_sedes,
+          id_categorias: data.id_categorias,
+          nombre:        data.nombre,
+          resumen:       data.resumen,
+        })
+        : this.formProyecto.patchValue({
+          id_proyectos:  data.id_proyectos,
+          id_asesores:   data.id_asesores,
+          id_areas:      data.id_areas,
+          id_sedes:      data.id_sedes,
           id_categorias: data.id_categorias,
           nombre:        data.nombre,
           resumen:       data.resumen,
