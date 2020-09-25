@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AsesoresService } from '../services/asesores.service';
 import { Asesores } from '../models/asesores.model';
 import { UtilsService } from '../services/utils.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
 import { Sedes } from '../models/sedes.model';
@@ -38,12 +38,12 @@ export class AdvisersRegisteredComponent implements OnInit {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this._utilService.loading = true;
     this.formAsesores = this.formBuilder.group({
-      nombres: [''],
-      a_paterno: [''],
-      a_materno: [''],
-      email: [''],
-      id_sedes: this.sessionData.id_sedes,
-      descripcion: [''],
+      nombres:     ['', [Validators.required]],
+      a_paterno:   ['', [Validators.required]],
+      a_materno:   ['', [Validators.required]],
+      email:       ['', [Validators.required, Validators.email]],
+      id_sedes:    this.sessionData.id_sedes,
+      descripcion: ['', [Validators.required]],
     });
     if (this.sessionData.rol === 'superuser') {
       this.superUser = false;
@@ -77,7 +77,7 @@ export class AdvisersRegisteredComponent implements OnInit {
     this._asesoresService.deleteAsesor(this.asesorActual.id_asesores)
       .subscribe(data => {
         Swal.fire({
-          title: 'Se elimino el asesor correctamente',
+          title: 'Se elimino correctamente',
           icon: 'success'
         });
       },

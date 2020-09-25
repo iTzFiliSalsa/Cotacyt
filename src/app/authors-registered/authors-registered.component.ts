@@ -105,10 +105,17 @@ export class AuthorsRegisteredComponent implements OnInit {
     this.utils._loading = true;
     this.autoresService.deleteAutores(this.autorActual.id_autores)
       .subscribe(data => {
-        alert(data);
+        Swal.fire({
+          title: 'Se elimino correctamente',
+          icon: 'success'
+        });
       },
         err => {
           console.log(err);
+          Swal.fire({
+            title: 'Ocurrio un error al eliminar',
+            icon: 'error'
+          });
         }).add(() => {
           this.utils._loading = false;
           this.ngOnInit();

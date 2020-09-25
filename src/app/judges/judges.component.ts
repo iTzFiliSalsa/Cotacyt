@@ -49,13 +49,13 @@ export class JudgesComponent implements OnInit {
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.jueces = new Array<JudgesRegistered>();
-    this.proyectosNuevos = Array<any>();
-    this.proyectosViejos = Array<any>();
+    this.proyectosNuevos = new Array<any>();
+    this.proyectosViejos = new Array<any>();
     this._utilService.loading = true;
     this.formJuez = this.formBuilder.group({
       id_jueces: [''],
       id_categorias: ['', [Validators.required]],
-      id_sedes:      [this.sessionData.id_sedes],
+      id_sedes:      [''],
       usuario:       ['', [Validators.required]],
       contrasena:    ['', [Validators.required]],
       ids_proyectos_viejos: [''],
@@ -103,12 +103,10 @@ export class JudgesComponent implements OnInit {
       forkJoin({
         jueces: this.judgesService.getJudgesDetails(),
         sedes: this.sedesService.getSedes(),
-        proyectos: this.proyectosService.obtenerTodosLosProyectosCategoria('1'),
       }).subscribe(
         data => {
           this.jueces = data.jueces;
           this.sedes = data.sedes;
-          this.proyectos = data.proyectos;
         },
         err => {
           console.log(err);
@@ -143,10 +141,18 @@ export class JudgesComponent implements OnInit {
   }
   open(juez: JudgesRegistered) {
     this.juezActual = juez;
-    this.proyectosService.obtenerProyectosSelect(this.juezActual.id_jueces)
-      .subscribe( data => {
-        this.proyectosViejos = data;
-      });
+    this._utilService._loading = true;
+    forkJoin({
+      proyectos: this.superUser
+      ? this.proyectosService.obtenerTodosLosProyectosCategoria(this.juezActual.id_categorias)
+      : this.proyectosService.obtenerProyectosSuperUser(this.juezActual.id_categorias),
+      proyectosViejos: this.proyectosService.obtenerProyectosSelect(this.juezActual.id_categorias)
+    }).subscribe(
+      data => {
+        this.proyectos = data.proyectos;
+        this.proyectosViejos = data.proyectosViejos;
+      }
+    ).add(() => this._utilService._loading = false);
     this.superUser
     ? this.formJuez.patchValue({
       id_jueces: this.juezActual.id_jueces,
@@ -164,7 +170,22 @@ export class JudgesComponent implements OnInit {
       id_sedes: this.juezActual.id_sedes,
       id_categorias: this.verificarCat(this.juezActual.categoria)
     });
-    this.swalEdit.fire();
+    this.swalEdit.fire().then(
+      res => {
+        if (res.dismiss === Swal.DismissReason.backdrop) {
+          this.vaciarInfo();
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+  vaciarInfo() {
+    this.proyectosNuevos = [];
+    this.proyectosViejos = [];
+    this.proyectos = [];
+    console.log(this.proyectosNuevos, this.proyectosViejos);
   }
   editarJuez() {
     this._utilService._loading = true;
@@ -175,13 +196,14 @@ export class JudgesComponent implements OnInit {
           title: data,
         });
         this.ngOnInit();
+        this.vaciarInfo();
       },
         err => {
           console.log(err);
           Swal.fire({
             title: 'Ocurrio un error',
             icon: 'error'
-          })
+          });
         }).add(() => {
           this._utilService._loading = false;
         });

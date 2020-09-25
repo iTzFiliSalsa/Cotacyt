@@ -92,6 +92,7 @@ export class DashboardComponent implements OnInit {
   categoriaActual: string;
   sedes: Sedes[];
   superUser: boolean;
+  juez: boolean;
   constructor(
     private dashboardService: DashboardService,
     private categoriasService: CategoriasService,
@@ -116,6 +117,7 @@ export class DashboardComponent implements OnInit {
     this.proyectos = new Array<ProjectRegistered>();
     this.proyectosCalificadosPorCategoria = new Array<CalificacionesPorCategoria>();
     this.sessionData.rol === 'superuser' ? this.superUser = true : this.superUser = false;
+    this.sessionData.rol === 'juez' ? this.juez = true : this.juez = false;
   }
 
   ngOnInit(): void {

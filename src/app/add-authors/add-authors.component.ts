@@ -57,7 +57,7 @@ export class AddAuthorsComponent implements OnInit {
       a_paterno:      ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:      ['', [Validators.required, Validators.maxLength(50)]],
       telefono:       ['', [Validators.required, Validators.maxLength(10)]],
-      email:          ['', [Validators.required, Validators.maxLength(50)]],
+      email:          ['', [Validators.required, Validators.maxLength(50)], Validators.email],
     });
     this._utilService._loading = true;
     if (this.sessionData.rol === 'superuser') {
