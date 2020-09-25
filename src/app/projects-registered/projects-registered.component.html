@@ -21,12 +21,18 @@
         <tr class="table" *ngFor="let proyecto of proyectos">
             <td>{{proyecto.nombre}}</td>
             <td>{{proyecto.asesor}}</td>
-            <td>{{proyecto.autores}}</td>
+            <td>
+                <div class="scroll">
+                    {{proyecto.autores}}
+                </div>
+            </td>
             <td>{{proyecto.area}}</td>
             <td>{{proyecto.categorias}}</td>
             <td>{{proyecto.sede}}</td>
-            <td>{{proyecto.resumen}}
-
+            <td>
+                <div class="scroll">
+                    {{proyecto.resumen}}
+                </div>
             </td>
             <td class="d-flex">
                 <button (click)="openSwal(proyecto)" class="btn btn-edit mr-2" data-toggle="modal" data-target="#modalEditar"><i
