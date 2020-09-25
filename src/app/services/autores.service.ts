@@ -37,8 +37,8 @@ export class AutoresService {
     return this.http.get<Autores[]>(this.servicesConfig.APP_ENDPOINT
       + 'api/autores/all-list?id_sedes=' + this.sessionData.id_sedes);
   }
-  getAutoresSelectSuperUser(): Observable<Autores[]> {
+  getAutoresSelectSuperUser(idSede: string): Observable<Autores[]> {
     return this.http.get<Autores[]>(this.servicesConfig.APP_ENDPOINT
-      + 'api/autores/all-admin');
+      + 'api/autores/all-list?id_sedes=' + idSede);
   }
 }

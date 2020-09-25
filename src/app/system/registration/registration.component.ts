@@ -29,6 +29,8 @@ export class RegistrationComponent implements OnInit {
   dropdownSettingsProyecto: IDropdownSettings;
   public formsRegistroJuez: FormGroup;
   superUser: boolean;
+  categoriaActua = '1';
+  sedeActual = '1';
   constructor(
     public formBuilder: FormBuilder,
     private juecesService: JuecesService,
@@ -46,7 +48,7 @@ export class RegistrationComponent implements OnInit {
       contrasena:    ['', [Validators.required, Validators.maxLength(20)]],
       nombre:        ['', [Validators.required, Validators.maxLength(100)]],
       id_sedes:      [this.sessionData.id_sedes],
-      ids_proyectos: ['', [Validators.required]]
+      ids_proyectos: ['']
     });
     this._utilService._loading = true;
   }
@@ -59,7 +61,7 @@ export class RegistrationComponent implements OnInit {
     }
     if ( this.sessionData.rol === 'superuser') {
       forkJoin({
-        proyectos: this.proyectosService.obtenerProyectosSuperUser('1'),
+        proyectos: this.proyectosService.obtenerProyectosSuperUserTemp(this.categoriaActua, this.sedeActual),
         sedes: this.sedesService.getSedes()
       }).subscribe(
         data => {
@@ -99,7 +101,6 @@ export class RegistrationComponent implements OnInit {
     }
     }
     registrarJuez() {
-    if (this.proyectosSeleccionados.length > 0) {
       this._utilService.loading = true;
       console.log(this.formsRegistroJuez.value);
       this.juecesService.registrarJuez(this.formsRegistroJuez.value).subscribe(
@@ -124,13 +125,6 @@ export class RegistrationComponent implements OnInit {
       ).add(() => {
         this._utilService.loading = false;
       });
-    } else {
-      Swal.fire({
-        title: 'Error',
-        text: 'Selecciona al menos un proyecto para registrar el juez',
-        icon: 'error'
-      });
-    }
   }
   addProyecto(item: any) {
     this.proyectosSeleccionados.push(item);
@@ -142,17 +136,27 @@ export class RegistrationComponent implements OnInit {
       }
     });
   }
-  categoriaActual(value) {
-    if ( this.sessionData.rol === 'admin') {
-      this.proyectosService.obtenerProyectosSuperUser(value)
+  onChangesedeActual(value) {
+    this._utilService._loading = true;
+    this.sedeActual = value;
+    this.proyectosService.obtenerProyectosSuperUserTemp(this.categoriaActua, value)
         .subscribe( data => {
           this.proyectos = data;
-        });
+        }).add(() => this._utilService._loading = false);
+  }
+  onChangecategoriaActual(value) {
+    this._utilService._loading = true;
+    this.categoriaActua = value;
+    if ( this.sessionData.rol === 'superuser') {
+      this.proyectosService.obtenerProyectosSuperUserTemp(value, this.sedeActual)
+        .subscribe( data => {
+          this.proyectos = data;
+        }).add(() => this._utilService._loading = false );
       } else {
         this.proyectosService.obtenerTodosLosProyectosCategoria(value)
           .subscribe( data => {
             this.proyectos = data;
-          });
+          }).add(() => this._utilService._loading = false);
       }
   }
 }

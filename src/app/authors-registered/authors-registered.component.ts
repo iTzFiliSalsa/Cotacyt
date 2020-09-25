@@ -41,6 +41,7 @@ export class AuthorsRegisteredComponent implements OnInit {
   proyectos: Proyectos[];
   sessionData: Session;
   superUser: boolean;
+  sedeActual: string;
   constructor(
     private municipiosService: MunicipiosService,
     private escuelasService: EscuelasService,
@@ -60,7 +61,7 @@ export class AuthorsRegisteredComponent implements OnInit {
       telefono: [''],
       email: [''],
       id_proyectos: [''],
-      id_sedes: this.sessionData.id_jueces,
+      id_sedes: [''],
       id_escuelas: [''],
       id_municipios: [''],
       id_localidades: [''],
@@ -78,19 +79,15 @@ export class AuthorsRegisteredComponent implements OnInit {
       escuelas: this.escuelasService.getEscuelas(),
       localidades: this.localidadesService.getLocalidades(),
       municipios: this.municipiosService.getMunicipios(),
-      proyectos: this.superUser
-      ? this.proyectosService.obtenerTodosLosProyectos()
-      : this.proyectosService.obtenerProyectosSuperUser('1'),
       sedes: this.sedesService.getSedes(),
       autores: this.superUser
       ? this.autoresService.getAutores()
-      : this.autoresService.getAutoresSelectSuperUser()
+      : this.autoresService.getAutoresSuperUser()
     }).subscribe(
       data => {
         this.escuelas = data.escuelas;
         this.localidades = data.localidades;
         this.municipios = data.municipios;
-        this.proyectos = data.proyectos;
         this.autores = data.autores;
         this.sedes = data.sedes;
       }, err => {
@@ -118,9 +115,29 @@ export class AuthorsRegisteredComponent implements OnInit {
         });
   }
 
+  onChangeSedeActual(value) {
+    this.utils._loading = true;
+    this.proyectosService.obtenerTodosLosProyectos(value)
+      .subscribe(
+        data => {
+          this.proyectos = data;
+        },
+        err => console.log(err)
+      ).add(() => this.utils._loading = false);
+  }
   openSwal(autor: Autores) {
     this.autorActual = autor;
-    this.formAutores.patchValue({
+    this.sedeActual = this.autorActual.id_sedes;
+    this.proyectosService.obtenerTodosLosProyectos(this.sedeActual)
+      .subscribe (
+        data => {
+          this.proyectos = data;
+        },
+        err => console.log(err)
+      );
+
+    this.superUser
+    ? this.formAutores.patchValue({
       nombres:        autor.nombre,
       a_paterno:      autor.a_paterno,
       a_materno:      autor.a_materno,
@@ -128,6 +145,18 @@ export class AuthorsRegisteredComponent implements OnInit {
       email:          autor.email,
       id_proyectos:   autor.id_proyectos,
       id_sedes:       this.sessionData.id_sedes,
+      id_escuelas:    autor.id_escuelas,
+      id_municipios:  autor.id_municipios,
+      id_localidades: autor.id_localidades,
+    })
+    : this.formAutores.patchValue({
+      nombres:        autor.nombre,
+      a_paterno:      autor.a_paterno,
+      a_materno:      autor.a_materno,
+      telefono:       autor.telefono,
+      email:          autor.email,
+      id_proyectos:   autor.id_proyectos,
+      id_sedes:       autor.id_sedes,
       id_escuelas:    autor.id_escuelas,
       id_municipios:  autor.id_municipios,
       id_localidades: autor.id_localidades,
