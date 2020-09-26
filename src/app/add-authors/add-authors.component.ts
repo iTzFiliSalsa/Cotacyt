@@ -48,7 +48,7 @@ export class AddAuthorsComponent implements OnInit {
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.formRegistroAutores = this.formBuilder.group({
-      id_proyectos:   [''],
+      id_proyectos:   ['', [Validators.required]],
       id_escuelas:    ['1', [Validators.required]],
       id_municipios:  ['1', [Validators.required]],
       id_localidades: ['1', [Validators.required]],
@@ -57,7 +57,7 @@ export class AddAuthorsComponent implements OnInit {
       a_paterno:      ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:      ['', [Validators.required, Validators.maxLength(50)]],
       telefono:       ['', [Validators.required, Validators.maxLength(10)]],
-      email:          ['', [Validators.required, Validators.maxLength(50)], Validators.email],
+      email:          ['', [Validators.required, Validators.maxLength(50),  Validators.email]],
     });
     this._utilService._loading = true;
     if (this.sessionData.rol === 'superuser') {

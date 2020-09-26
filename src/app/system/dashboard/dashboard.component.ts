@@ -563,7 +563,9 @@ export class DashboardComponent implements OnInit {
         }
         console.log(index);
         console.log(this.categoriaActual);
-        switch (this.sessionData.id_sedes) {
+        console.log(this.sessionData.id_sedes);
+        
+        switch (id_sedes) {
           case '1':
             switch (this.categoriaActual) {
               case '1':
@@ -730,7 +732,7 @@ export class DashboardComponent implements OnInit {
           }
           console.log(index);
           console.log(this.categoriaActual);
-          switch (this.sessionData.id_sedes) {
+          switch (id_sedes) {
             case '1':
               switch (this.categoriaActual) {
                 case '1':
@@ -900,7 +902,7 @@ export class DashboardComponent implements OnInit {
 
 
   firstPlace({ nombre = '' }, autores: any[], sede: string = '', sede2: string = '', categoriaSede: string = '') {
-    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo' || sede === 'mante' || sede === 'victoria') {
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
       console.log(sede);
       let array = 1;
       if(!autores){
@@ -931,7 +933,7 @@ export class DashboardComponent implements OnInit {
         doc5.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc5.text(nombre, 4.2, 7.8, { align: "center" });
         doc5.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
-        doc5.addImage('assets/image/Director' + sede2 + '.png', 'png', 11.8, 8, 1, 1);
+        doc5.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
         doc5.setFont('Helvetica');
         doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
       }
@@ -939,7 +941,9 @@ export class DashboardComponent implements OnInit {
   }
 
   secondPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
-    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo' || sede === 'mante' || sede === 'victoria') {
+    console.log(sede);
+    
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
       if(!autores){
         swal.fire({
           icon: 'error',
@@ -949,7 +953,7 @@ export class DashboardComponent implements OnInit {
       for (let i = 0; i < autores.length; i++) {
         console.log(nombre);
         const doc6 = new jsPDF('p', 'in', 'letter');
-        doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc6.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc6.text(nombre, 4.2, 7.8, { align: "center" });
         doc6.setFont('Helvetica');
@@ -976,7 +980,9 @@ export class DashboardComponent implements OnInit {
     }
   }
   thirdPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
-    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo' || sede === 'mante' || sede === 'victoria') {
+    console.log(sede);
+    
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
       if(!autores){
         swal.fire({
           icon: 'error',

@@ -275,6 +275,7 @@ export class JudgesComponent implements OnInit {
         doc.addImage('assets/image/ReconocimientoJuradoMante.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
         doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+        doc.addImage('assets/image/DirectorMante.png', 'png', 5.7, 8, 1.3, 1);
         doc.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -324,6 +325,7 @@ export class JudgesComponent implements OnInit {
         doc6.addImage('assets/image/ReconocimientoJuradoVictoria.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc6.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
         doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+        doc1.addImage('assets/image/DirectorVictoria.png', 'png', 5.7, 8, 1.3, 1);
         doc6.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
       default:

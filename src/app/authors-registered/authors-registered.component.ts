@@ -201,6 +201,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc.text(this.titlecasePipe.transform(this.autorActual.nombre)+ " "+ this.titlecasePipe.transform(this.autorActual.a_paterno) + " " + this.titlecasePipe.transform(this.autorActual.a_materno), 4.2, 6.9, {align: "center"}).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc.text(this.autorActual.proyecto, 4.2, 8.1, {align: "center"});
         doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+        doc.addImage('assets/image/DirectorMante.png', 'png', 5.7, 8.2, 1.3, 1);
         doc.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;
       case '2':
@@ -263,6 +264,7 @@ export class AuthorsRegisteredComponent implements OnInit {
         doc6.text(this.autorActual.proyecto, 4.2, 8.1, {align: "center"});
         doc6.setFontSize(16);
         doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+        doc1.addImage('assets/image/DirectorVictoria.png', 'png', 5.7, 8.2, 1.3, 1);
         doc6.setFont('Helvetica');
         doc6.save("Constancia Autor "+this.autorActual.nombre + "_" + this.autorActual.a_paterno + "_" + this.autorActual.a_materno + ".pdf");
       break;

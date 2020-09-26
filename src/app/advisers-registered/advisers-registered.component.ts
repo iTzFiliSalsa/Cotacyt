@@ -136,6 +136,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
       doc.setFontSize(16);
       doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+      doc.addImage('assets/image/DirectorMante.png', 'png', 11.8, 8, 1, 1); 
       doc.setFont('Helvetica');
       doc.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
@@ -209,6 +210,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc6.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"} ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
       doc6.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
       doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+      doc6.addImage('assets/image/DirectorVictoria.png', 'png', 11.8, 8, 1, 1); 
       doc6.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }
     break;
