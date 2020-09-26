@@ -28,7 +28,7 @@ export class AddAdvisersComponent implements OnInit {
       nombres:     ['', [Validators.required, Validators.maxLength(50)]],
       a_paterno:   ['', [Validators.required, Validators.maxLength(50)]],
       a_materno:   ['', [Validators.required, Validators.maxLength(50)]],
-      email:       ['', [Validators.required, Validators.maxLength(50)], Validators.email],
+      email:       ['', [Validators.required, Validators.maxLength(50), Validators.email]],
       id_sedes:    this.sessionData.id_sedes,
       descripcion: ['', [Validators.required, Validators.maxLength(150)]],
     });
