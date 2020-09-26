@@ -161,7 +161,7 @@ export class AdvisersRegisteredComponent implements OnInit {
       doc2.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
       doc2.setFontSize(16);
       doc2.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
-      doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 140, 221, 36, 20);
+      doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 11.8, 8, 1, 1);
       doc2.setFont('Helvetica');
       doc2.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
       }

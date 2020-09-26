@@ -29,6 +29,7 @@ import '../../../assets/fonts/Caviar.ttf';
 import { SedesService } from '../../services/sedes.service';
 import { Sedes } from 'src/app/models/sedes.model';
 import Swal from 'sweetalert2';
+import { auto } from '@popperjs/core';
 
 
 
@@ -123,44 +124,44 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => {
       const d = new Date();
-      if(d.getHours() < 10){
+      if (d.getHours() < 10) {
         this.hr = '0' + d.getHours() + ' :';
       }
-      else{
+      else {
         this.hr = d.getHours() + ' :';
       }
-      if(d.getMinutes() < 10){
+      if (d.getMinutes() < 10) {
         this.hm = '0' + d.getMinutes() + ' :';
       }
-      else{
+      else {
         this.hm = d.getMinutes() + ' :';
       }
-      if(d.getSeconds() < 10){
+      if (d.getSeconds() < 10) {
         this.hs = '0' + d.getSeconds();
       }
-      else{
+      else {
         this.hs = d.getSeconds();
       }
-      
+
     }, 1000);
 
     this.barChartData = [
       { data: [], label: 'Proyectos' }
     ];
-    if ( this.sessionData.rol === 'superuser') {
+    if (this.sessionData.rol === 'superuser') {
       forkJoin({
         proyectos: this.dashboardService.getProyectosSuperUser(),
         totales: this.dashboardService.getTotalesSuperUser(),
         estadisticas: this.calificacionesService.proyectosEstadisticas(),
         grafica: this.dashboardService.getProyectosPorCategorias(),
         sedes: this.sedeService.getSedes(),
-      }).subscribe (
+      }).subscribe(
         data => {
           this.totales = data.totales;
           this.adminProjects(data.proyectos);
           this.estadisticasDeProyectos = data.estadisticas;
           this.sedes = data.sedes,
-          this.construirGrafica(data.grafica);
+            this.construirGrafica(data.grafica);
         }
       ).add(() => this._utilsService._loading = false);
       this.dashboardService.getTotalesSuperUser().subscribe(
@@ -247,12 +248,12 @@ export class DashboardComponent implements OnInit {
 
   mostrarProyectosPorCalificacion(evt: any) {
     this.swalCalificaciones.fire().then(
-      res=>{
-        if(res.dismiss === Swal.DismissReason.backdrop){
+      res => {
+        if (res.dismiss === Swal.DismissReason.backdrop) {
           this.reiniciarVariable();
         }
         console.log(res);
-      }, err=> {
+      }, err => {
         console.log(err);
       });
   }
@@ -260,60 +261,60 @@ export class DashboardComponent implements OnInit {
     this.sedeActual = value;
     this._utilsService._loading = true;
     this.calificacionesService.listaDeCalificacionesAdmin(this.categoriaActual, this.sedeActual)
-      .subscribe( data => this.mostrarListaCalificaiones(data, this.categoriaActual))
+      .subscribe(data => this.mostrarListaCalificaiones(data, this.categoriaActual))
       .add(() => this._utilsService.loading = false);
   }
   onChangeCategoria(value) {
     this.categoriaActual = value;
     this.superUser
-    ? this.calificacionesService.listaDeCalificacionesAdmin(value, this.sedeActual)
-      .subscribe( data => this.mostrarListaCalificaiones(data, value))
-      .add(() => this._utilsService.loading = false)
-    : this.calificacionesService.listaDeCalificaciones(value)
-      .subscribe((data: any) => this.mostrarListaCalificaiones(data, value),
-      err => console.log(err))
-      .add(() => this._utilsService.loading = false);
+      ? this.calificacionesService.listaDeCalificacionesAdmin(value, this.sedeActual)
+        .subscribe(data => this.mostrarListaCalificaiones(data, value))
+        .add(() => this._utilsService.loading = false)
+      : this.calificacionesService.listaDeCalificaciones(value)
+        .subscribe((data: any) => this.mostrarListaCalificaiones(data, value),
+          err => console.log(err))
+        .add(() => this._utilsService.loading = false);
   }
   mostrarListaCalificaiones(data: any, value) {
-        this.proyectosCalificadosPorCategoria = data;
-        const petit = data.petit;
-        const kids = data.kids;
-        const juvenil = data.juvenil;
-        const mediaSuperior = data['media_superior'];
-        const superior = data.superior;
-        const posgrado = data.posgrado;
-        switch (value) {
-          case '1':
-            this.proyectosCalificacion = petit;
-            this.imprimir(this.proyectosCalificacion, 'petit');
-            console.log(this.proyectosCalificacion.sort(function (prev: any, next: any) {
-              return next.total - prev.total;
-            }));
-            break;
-          case '2':
-            this.proyectosCalificacion = kids;
-            this.imprimir(this.proyectosCalificacion, 'kids');
-            break;
-          case '3':
-            this.proyectosCalificacion = juvenil;
-            this.imprimir(this.proyectosCalificacion, 'juvenil');
-            break;
-          case '4':
-            this.proyectosCalificacion = mediaSuperior;
-            this.imprimir(this.proyectosCalificacion, 'media-superior');
-            break;
-          case '5':
-            this.proyectosCalificacion = superior;
-            this.imprimir(this.proyectosCalificacion, 'superior');
-            break;
-          case '6':
-            this.proyectosCalificacion = posgrado;
-            this.imprimir(this.proyectosCalificacion, 'posgrado');
-            break;
-          default:
-            this.proyectosCalificacion = petit;
-            break;
-        }
+    this.proyectosCalificadosPorCategoria = data;
+    const petit = data.petit;
+    const kids = data.kids;
+    const juvenil = data.juvenil;
+    const mediaSuperior = data['media_superior'];
+    const superior = data.superior;
+    const posgrado = data.posgrado;
+    switch (value) {
+      case '1':
+        this.proyectosCalificacion = petit;
+        this.imprimir(this.proyectosCalificacion, 'petit');
+        console.log(this.proyectosCalificacion.sort(function (prev: any, next: any) {
+          return next.total - prev.total;
+        }));
+        break;
+      case '2':
+        this.proyectosCalificacion = kids;
+        this.imprimir(this.proyectosCalificacion, 'kids');
+        break;
+      case '3':
+        this.proyectosCalificacion = juvenil;
+        this.imprimir(this.proyectosCalificacion, 'juvenil');
+        break;
+      case '4':
+        this.proyectosCalificacion = mediaSuperior;
+        this.imprimir(this.proyectosCalificacion, 'media-superior');
+        break;
+      case '5':
+        this.proyectosCalificacion = superior;
+        this.imprimir(this.proyectosCalificacion, 'superior');
+        break;
+      case '6':
+        this.proyectosCalificacion = posgrado;
+        this.imprimir(this.proyectosCalificacion, 'posgrado');
+        break;
+      default:
+        this.proyectosCalificacion = petit;
+        break;
+    }
   }
   // mostrar informacion de proyecto seleccionado
   mostrarInfoCalificados(proyecto: ProyectosCalificados) {
@@ -377,177 +378,177 @@ export class DashboardComponent implements OnInit {
   abrirReproductor(evento: any, id) {
     console.log(this.videoTag);
     console.log(id);
-    this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/'+id;
+    this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/' + id;
     this.swalReproductor.fire();
   }
 
-  pdf(event){
-    window.open('http://plataforma.cotacyt.gob.mx/creatividad/'+event,'_blank');
+  pdf(event) {
+    window.open('http://plataforma.cotacyt.gob.mx/creatividad/' + event, '_blank');
   }
 
   saveAsPdf(index: number, autores: string[], proyecto: any) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
-    if (index === 0) {
-      if (!autores) {
-        swal.fire({
-          icon: 'error',
-          title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
-        });
-      }
 
-      switch (this.sessionData.id_sedes) {
+    this.sessionData.rol === 'superuser'
+      ? this.metodoImprimir(index, proyecto, autores, this.sedeActual)
+      : this.metodoImprimir(index, proyecto, autores, this.sessionData.id_sedes)
+  }
+
+  metodoImprimir(index: number, proyecto: any, autores: string[], id_sedes: string) {
+    if (index === 0) {
+      switch (id_sedes) {
         case '1':
-          switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit':
-              this.firstPlace(proyecto, autores, 'mante', 'PetitMante');
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlace(proyecto, autores, 'mante', 'Mante', 'PetitMante');
               break;
-            case 'kids':
-              this.firstPlace(proyecto, autores, 'mante', 'KidsMante');
+            case '2':
+              this.firstPlace(proyecto, autores, 'mante', 'Mante', 'KidsMante');
               break;
-            case 'juvenil':
-              this.firstPlace(proyecto, autores, 'mante', 'JuvenilMante');
+            case '3':
+              this.firstPlace(proyecto, autores, 'mante', 'Mante', 'JuvenilMante');
               break;
-            case 'media-superior':
-              this.firstPlace(proyecto, autores, 'mante', 'MSMante');
+            case '4':
+              this.firstPlace(proyecto, autores, 'mante', 'Mante', 'MSMante');
               break;
-            case 'superior':
-              this.firstPlace(proyecto, autores, 'mante', 'SuperiorMante');
+            case '5':
+              this.firstPlace(proyecto, autores, 'mante', 'Mante', 'SuperiorMante');
               break;
-            case 'posgrado':
-              this.firstPlace(proyecto, autores, 'mante', 'PosgradoMante');
+            case '6':
+              this.firstPlace(proyecto, autores, 'mante', 'Mante', 'PosgradoMante');
               break;
           }
 
           break;
         case '2':
-          switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit':
-              this.firstPlace(proyecto, autores, 'reynosa', 'PetitReynosa');
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PetitReynosa');
               break;
-            case 'kids':
-              this.firstPlace(proyecto, autores, 'reynosa', 'KidsReynosa');
+            case '2':
+              this.firstPlace(proyecto, autores, 'reynosa', 'Reynosa', 'KidsReynosa');
               break;
-            case 'juvenil':
-              this.firstPlace(proyecto, autores, 'reynosa', 'JuvenilReynosa');
+            case '3':
+              this.firstPlace(proyecto, autores, 'reynosa', 'Reynosa', 'JuvenilReynosa');
               break;
-            case 'media-superior':
-              this.firstPlace(proyecto, autores, 'reynosa', 'MSReynosa');
+            case '4':
+              this.firstPlace(proyecto, autores, 'reynosa', 'Reynosa', 'MSReynosa');
               break;
-            case 'superior':
-              this.firstPlace(proyecto, autores, 'reynosa', 'SuperiorReynosa');
+            case '5':
+              this.firstPlace(proyecto, autores, 'reynosa', 'Reynosa', 'SuperiorReynosa');
               break;
-            case 'posgrado':
-              this.firstPlace(proyecto, autores, 'reynosa', 'PosgradoReynosa');
+            case '6':
+              this.firstPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PosgradoReynosa');
               break;
           }
           break;
         case '3':
-          switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit':
-              this.firstPlace(proyecto, autores, 'matamoros', 'PetitMatamoros');
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PetitMatamoros');
               break;
-            case 'kids':
-              this.firstPlace(proyecto, autores, 'matamoros', 'KidsMatamoros');
+            case '2':
+              this.firstPlace(proyecto, autores, 'matamoros', 'Matamoros', 'KidsMatamoros');
               break;
-            case 'juvenil':
-              this.firstPlace(proyecto, autores, 'matamoros', 'JuvenilMatamoros');
+            case '3':
+              this.firstPlace(proyecto, autores, 'matamoros', 'Matamoros', 'JuvenilMatamoros');
               break;
-            case 'media-superior':
-              this.firstPlace(proyecto, autores, 'matamoros', 'MSMatamoros');
+            case '4':
+              this.firstPlace(proyecto, autores, 'matamoros', 'Matamoros', 'MSMatamoros');
               break;
-            case 'superior':
-              this.firstPlace(proyecto, autores, 'matamoros', 'SuperiorMatamoros');
+            case '5':
+              this.firstPlace(proyecto, autores, 'matamoros', 'Matamoros', 'SuperiorMatamoros');
               break;
-            case 'posgrado':
-              this.firstPlace(proyecto, autores, 'matamoros', 'PosgradoMatamoros');
+            case '6':
+              this.firstPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PosgradoMatamoros');
               break;
           }
           break;
         case '4':
-          switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit':
-              this.firstPlace(proyecto, autores, 'madero', 'PetitMadero');
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlace(proyecto, autores, 'madero', 'Madero', 'PetitMadero');
               break;
-            case 'kids':
-              this.firstPlace(proyecto, autores, 'madero', 'KidsMadero');
+            case '2':
+              this.firstPlace(proyecto, autores, 'madero', 'Madero', 'KidsMadero');
               break;
-            case 'juvenil':
-              this.firstPlace(proyecto, autores, 'madero', 'JuvenilMadero');
+            case '3':
+              this.firstPlace(proyecto, autores, 'madero', 'Madero', 'JuvenilMadero');
               break;
-            case 'media-superior':
-              this.firstPlace(proyecto, autores, 'madero', 'MSMadero');
+            case '4':
+              this.firstPlace(proyecto, autores, 'madero', 'Madero', 'MSMadero');
               break;
-            case 'superior':
-              this.firstPlace(proyecto, autores, 'madero', 'SuperiorMadero');
+            case '5':
+              this.firstPlace(proyecto, autores, 'madero', 'Madero', 'SuperiorMadero');
               break;
-            case 'posgrado':
-              this.firstPlace(proyecto, autores, 'madero', 'PosgradoMadero');
+            case '6':
+              this.firstPlace(proyecto, autores, 'madero', 'Madero', 'PosgradoMadero');
               break;
           }
           break;
         case '5':
-          switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit':
-              this.firstPlace(proyecto, autores, 'jaumave', 'PetitJaumave');
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PetitJaumave');
               break;
-            case 'kids':
-              this.firstPlace(proyecto, autores, 'jaumave', 'KidsJaumave');
+            case '2':
+              this.firstPlace(proyecto, autores, 'jaumave', 'Jaumave', 'KidsJaumave');
               break;
-            case 'juvenil':
-              this.firstPlace(proyecto, autores, 'jaumave', 'JuvenilJaumave');
+            case '3':
+              this.firstPlace(proyecto, autores, 'jaumave', 'Jaumave', 'JuvenilJaumave');
               break;
-            case 'media-superior':
-              this.firstPlace(proyecto, autores, 'jaumave', 'MSJaumave');
+            case '4':
+              this.firstPlace(proyecto, autores, 'jaumave', 'Jaumave', 'MSJaumave');
               break;
-            case 'superior':
-              this.firstPlace(proyecto, autores, 'jaumave', 'SuperiorJaumave');
+            case '5':
+              this.firstPlace(proyecto, autores, 'jaumave', 'Jaumave', 'SuperiorJaumave');
               break;
-            case 'posgrado':
-              this.firstPlace(proyecto, autores, 'jaumave', 'PosgradoJaumave');
+            case '6':
+              this.firstPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PosgradoJaumave');
               break;
           }
           break;
         case '6':
-          switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit':
-              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'PetitNuevoLaredo');
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PetitNuevoLaredo');
               break;
-            case 'kids':
-              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'KidsNuevoLaredo');
+            case '2':
+              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'KidsNuevoLaredo');
               break;
-            case 'juvenil':
-              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'JuvenilNuevoLaredo');
+            case '3':
+              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'JuvenilNuevoLaredo');
               break;
-            case 'media-superior':
-              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'MSNuevoLaredo');
+            case '4':
+              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'MSNuevoLaredo');
               break;
-            case 'superior':
-              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'SuperiorNuevoLaredo');
+            case '5':
+              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'SuperiorNuevoLaredo');
               break;
-            case 'posgrado':
-              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'PosgradoNuevoLaredo');
+            case '6':
+              this.firstPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PosgradoNuevoLaredo');
               break;
           }
           break;
         case '7':
-          switch (this.formsFiltro.value['id_categorias']) {
-            case 'petit':
-              this.firstPlace(proyecto, autores, 'victoria', 'PetitVictoria');
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlace(proyecto, autores, 'victoria', 'Victoria', 'PetitVictoria');
               break;
-            case 'kids':
-              this.firstPlace(proyecto, autores, 'victoria', 'KidsVictoria');
+            case '2':
+              this.firstPlace(proyecto, autores, 'victoria', 'Victoria', 'KidsVictoria');
               break;
-            case 'juvenil':
-              this.firstPlace(proyecto, autores, 'victoria', 'JuvenilVictoria');
+            case '3':
+              this.firstPlace(proyecto, autores, 'victoria', 'Victoria', 'JuvenilVictoria');
               break;
-            case 'media-superior':
-              this.firstPlace(proyecto, autores, 'victoria', 'MSVictoria');
+            case '4':
+              this.firstPlace(proyecto, autores, 'victoria', 'Victoria', 'MSVictoria');
               break;
-            case 'superior':
-              this.firstPlace(proyecto, autores, 'victoria', 'SuperiorVictoria');
+            case '5':
+              this.firstPlace(proyecto, autores, 'victoria', 'Victoria', 'SuperiorVictoria');
               break;
-            case 'posgrado':
-              this.firstPlace(proyecto, autores, 'victoria', 'PosgradoVictoria');
+            case '6':
+              this.firstPlace(proyecto, autores, 'victoria', 'Victoria', 'PosgradoVictoria');
               break;
           }
           break;
@@ -561,159 +562,160 @@ export class DashboardComponent implements OnInit {
           });
         }
         console.log(index);
-        console.log(this.formsFiltro.value['id_categorias']);
+        console.log(this.categoriaActual);
         switch (this.sessionData.id_sedes) {
           case '1':
-            switch (this.formsFiltro.value['id_categorias']) {
-              case 'petit':
-                this.secondPlace(proyecto, autores, 'mante', 'PetitMante');
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlace(proyecto, autores, 'mante', 'Mante', 'PetitMante');
                 break;
-              case 'kids':
-                this.secondPlace(proyecto, autores, 'mante', 'KidsMante');
+              case '2':
+                this.secondPlace(proyecto, autores, 'mante', 'Mante', 'KidsMante');
                 break;
-              case 'juvenil':
-                this.secondPlace(proyecto, autores, 'mante', 'JuvenilMante');
+              case '3':
+                this.secondPlace(proyecto, autores, 'mante', 'Mante', 'JuvenilMante');
                 break;
-              case 'media-superior':
-                this.secondPlace(proyecto, autores, 'mante', 'MSMante');
+              case '4':
+                this.secondPlace(proyecto, autores, 'mante', 'Mante', 'MSMante');
                 break;
-              case 'superior':
-                this.secondPlace(proyecto, autores, 'mante', 'SuperiorMante');
+              case '5':
+                this.secondPlace(proyecto, autores, 'mante', 'Mante', 'SuperiorMante');
                 break;
-              case 'posgrado':
-                this.secondPlace(proyecto, autores, 'mante', 'PosgradoMante');
+              case '6':
+                this.secondPlace(proyecto, autores, 'mante', 'Mante', 'PosgradoMante');
                 break;
             }
+
             break;
           case '2':
-            switch (this.formsFiltro.value['id_categorias']) {
-              case 'petit':
-                this.secondPlace(proyecto, autores, 'reynosa', 'PetitReynosa');
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PetitReynosa');
                 break;
-              case 'kids':
-                this.secondPlace(proyecto, autores, 'reynosa', 'KidsReynosa');
+              case '2':
+                this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'KidsReynosa');
                 break;
-              case 'juvenil':
-                this.secondPlace(proyecto, autores, 'reynosa', 'JuvenilReynosa');
+              case '3':
+                this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'JuvenilReynosa');
                 break;
-              case 'media-superior':
-                this.secondPlace(proyecto, autores, 'reynosa', 'MSReynosa');
+              case '4':
+                this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'MSReynosa');
                 break;
-              case 'superior':
-                this.secondPlace(proyecto, autores, 'reynosa', 'SuperiorReynosa');
+              case '5':
+                this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'SuperiorReynosa');
                 break;
-              case 'posgrado':
-                this.secondPlace(proyecto, autores, 'reynosa', 'PosgradoReynosa');
+              case '6':
+                this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PosgradoReynosa');
                 break;
             }
             break;
           case '3':
-            switch (this.formsFiltro.value['id_categorias']) {
-              case 'petit':
-                this.secondPlace(proyecto, autores, 'matamoros', 'PetitMatamoros');
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PetitMatamoros');
                 break;
-              case 'kids':
-                this.secondPlace(proyecto, autores, 'matamoros', 'KidsMatamoros');
+              case '2':
+                this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'KidsMatamoros');
                 break;
-              case 'juvenil':
-                this.secondPlace(proyecto, autores, 'matamoros', 'JuvenilMatamoros');
+              case '3':
+                this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'JuvenilMatamoros');
                 break;
-              case 'media-superior':
-                this.secondPlace(proyecto, autores, 'matamoros', 'MSMatamoros');
+              case '4':
+                this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'MSMatamoros');
                 break;
-              case 'superior':
-                this.secondPlace(proyecto, autores, 'matamoros', 'SuperiorMatamoros');
+              case '5':
+                this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'SuperiorMatamoros');
                 break;
-              case 'posgrado':
-                this.secondPlace(proyecto, autores, 'matamoros', 'PosgradoMatamoros');
+              case '6':
+                this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PosgradoMatamoros');
                 break;
             }
             break;
           case '4':
-            switch (this.formsFiltro.value['id_categorias']) {
-              case 'petit':
-                this.secondPlace(proyecto, autores, 'madero', 'PetitMadero');
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlace(proyecto, autores, 'madero', 'Madero', 'PetitMadero');
                 break;
-              case 'kids':
-                this.secondPlace(proyecto, autores, 'madero', 'KidsMadero');
+              case '2':
+                this.secondPlace(proyecto, autores, 'madero', 'Madero', 'KidsMadero');
                 break;
-              case 'juvenil':
-                this.secondPlace(proyecto, autores, 'madero', 'JuvenilMadero');
+              case '3':
+                this.secondPlace(proyecto, autores, 'madero', 'Madero', 'JuvenilMadero');
                 break;
-              case 'media-superior':
-                this.secondPlace(proyecto, autores, 'madero', 'MSMadero');
+              case '4':
+                this.secondPlace(proyecto, autores, 'madero', 'Madero', 'MSMadero');
                 break;
-              case 'superior':
-                this.secondPlace(proyecto, autores, 'madero', 'SuperiorMadero');
+              case '5':
+                this.secondPlace(proyecto, autores, 'madero', 'Madero', 'SuperiorMadero');
                 break;
-              case 'posgrado':
-                this.secondPlace(proyecto, autores, 'madero', 'PosgradoMadero');
+              case '6':
+                this.secondPlace(proyecto, autores, 'madero', 'Madero', 'PosgradoMadero');
                 break;
             }
             break;
           case '5':
-            switch (this.formsFiltro.value['id_categorias']) {
-              case 'petit':
-                this.secondPlace(proyecto, autores, 'jaumave', 'PetitJaumave');
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PetitJaumave');
                 break;
-              case 'kids':
-                this.secondPlace(proyecto, autores, 'jaumave', 'KidsJaumave');
+              case '2':
+                this.secondPlace(proyecto, autores, 'jaumave', 'Jaumave', 'KidsJaumave');
                 break;
-              case 'juvenil':
-                this.secondPlace(proyecto, autores, 'jaumave', 'JuvenilJaumave');
+              case '3':
+                this.secondPlace(proyecto, autores, 'jaumave', 'Jaumave', 'JuvenilJaumave');
                 break;
-              case 'media-superior':
-                this.secondPlace(proyecto, autores, 'jaumave', 'MSJaumave');
+              case '4':
+                this.secondPlace(proyecto, autores, 'jaumave', 'Jaumave', 'MSJaumave');
                 break;
-              case 'superior':
-                this.secondPlace(proyecto, autores, 'jaumave', 'SuperiorJaumave');
+              case '5':
+                this.secondPlace(proyecto, autores, 'jaumave', 'Jaumave', 'SuperiorJaumave');
                 break;
-              case 'posgrado':
-                this.secondPlace(proyecto, autores, 'jaumave', 'PosgradoJaumave');
+              case '6':
+                this.secondPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PosgradoJaumave');
                 break;
             }
             break;
           case '6':
-            switch (this.formsFiltro.value['id_categorias']) {
-              case 'petit':
-                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'PetitNuevoLaredo');
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PetitNuevoLaredo');
                 break;
-              case 'kids':
-                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'KidsNuevoLaredo');
+              case '2':
+                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'KidsNuevoLaredo');
                 break;
-              case 'juvenil':
-                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'JuvenilNuevoLaredo');
+              case '3':
+                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'JuvenilNuevoLaredo');
                 break;
-              case 'media-superior':
-                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'MSNuevoLaredo');
+              case '4':
+                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'MSNuevoLaredo');
                 break;
-              case 'superior':
-                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'SuperiorNuevoLaredo');
+              case '5':
+                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'SuperiorNuevoLaredo');
                 break;
-              case 'posgrado':
-                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'PosgradoNuevoLaredo');
+              case '6':
+                this.secondPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PosgradoNuevoLaredo');
                 break;
             }
             break;
           case '7':
-            switch (this.formsFiltro.value['id_categorias']) {
-              case 'petit':
-                this.secondPlace(proyecto, autores, 'victoria', 'PetitVictoria');
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlace(proyecto, autores, 'victoria', 'Victoria', 'PetitVictoria');
                 break;
-              case 'kids':
-                this.secondPlace(proyecto, autores, 'victoria', 'KidsVictoria');
+              case '2':
+                this.secondPlace(proyecto, autores, 'victoria', 'Victoria', 'KidsVictoria');
                 break;
-              case 'juvenil':
-                this.secondPlace(proyecto, autores, 'victoria', 'JuvenilVictoria');
+              case '3':
+                this.secondPlace(proyecto, autores, 'victoria', 'Victoria', 'JuvenilVictoria');
                 break;
-              case 'media-superior':
-                this.secondPlace(proyecto, autores, 'victoria', 'MSVictoria');
+              case '4':
+                this.secondPlace(proyecto, autores, 'victoria', 'Victoria', 'MSVictoria');
                 break;
-              case 'superior':
-                this.secondPlace(proyecto, autores, 'victoria', 'SuperiorVictoria');
+              case '5':
+                this.secondPlace(proyecto, autores, 'victoria', 'Victoria', 'SuperiorVictoria');
                 break;
-              case 'posgrado':
-                this.secondPlace(proyecto, autores, 'victoria', 'PosgradoVictoria');
+              case '6':
+                this.secondPlace(proyecto, autores, 'victoria', 'Victoria', 'PosgradoVictoria');
                 break;
             }
             break;
@@ -727,160 +729,160 @@ export class DashboardComponent implements OnInit {
             });
           }
           console.log(index);
-          console.log(this.formsFiltro.value['id_categorias']);
+          console.log(this.categoriaActual);
           switch (this.sessionData.id_sedes) {
             case '1':
-              switch (this.formsFiltro.value['id_categorias']) {
-                case 'petit':
-                  this.thirdPlace(proyecto, autores, 'mante', 'PetitMante');
+              switch (this.categoriaActual) {
+                case '1':
+                  this.thirdPlace(proyecto, autores, 'mante', 'Mante', 'PetitMante');
                   break;
-                case 'kids':
-                  this.thirdPlace(proyecto, autores, 'mante', 'KidsMante');
+                case '2':
+                  this.thirdPlace(proyecto, autores, 'mante', 'Mante', 'KidsMante');
                   break;
-                case 'juvenil':
-                  this.thirdPlace(proyecto, autores, 'mante', 'JuvenilMante');
+                case '3':
+                  this.thirdPlace(proyecto, autores, 'mante', 'Mante', 'JuvenilMante');
                   break;
-                case 'media-superior':
-                  this.thirdPlace(proyecto, autores, 'mante', 'MSMante');
+                case '4':
+                  this.thirdPlace(proyecto, autores, 'mante', 'Mante', 'MSMante');
                   break;
-                case 'superior':
-                  this.thirdPlace(proyecto, autores, 'mante', 'SuperiorMante');
+                case '5':
+                  this.thirdPlace(proyecto, autores, 'mante', 'Mante', 'SuperiorMante');
                   break;
-                case 'posgrado':
-                  this.thirdPlace(proyecto, autores, 'mante', 'PosgradoMante');
+                case '6':
+                  this.thirdPlace(proyecto, autores, 'mante', 'Mante', 'PosgradoMante');
                   break;
               }
 
               break;
             case '2':
-              switch (this.formsFiltro.value['id_categorias']) {
-                case 'petit':
-                  this.thirdPlace(proyecto, autores, 'reynosa', 'PetitReynosa');
+              switch (this.categoriaActual) {
+                case '1':
+                  this.thirdPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PetitReynosa');
                   break;
-                case 'kids':
-                  this.thirdPlace(proyecto, autores, 'reynosa', 'KidsReynosa');
+                case '2':
+                  this.thirdPlace(proyecto, autores, 'reynosa', 'Reynosa', 'KidsReynosa');
                   break;
-                case 'juvenil':
-                  this.thirdPlace(proyecto, autores, 'reynosa', 'JuvenilReynosa');
+                case '3':
+                  this.thirdPlace(proyecto, autores, 'reynosa', 'Reynosa', 'JuvenilReynosa');
                   break;
-                case 'media-superior':
-                  this.thirdPlace(proyecto, autores, 'reynosa', 'MSReynosa');
+                case '4':
+                  this.thirdPlace(proyecto, autores, 'reynosa', 'Reynosa', 'MSReynosa');
                   break;
-                case 'superior':
-                  this.thirdPlace(proyecto, autores, 'reynosa', 'SuperiorReynosa');
+                case '5':
+                  this.thirdPlace(proyecto, autores, 'reynosa', 'Reynosa', 'SuperiorReynosa');
                   break;
-                case 'posgrado':
-                  this.thirdPlace(proyecto, autores, 'reynosa', 'PosgradoReynosa');
+                case '6':
+                  this.thirdPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PosgradoReynosa');
                   break;
               }
               break;
             case '3':
-              switch (this.formsFiltro.value['id_categorias']) {
-                case 'petit':
-                  this.thirdPlace(proyecto, autores, 'matamoros', 'PetitMatamoros');
+              switch (this.categoriaActual) {
+                case '1':
+                  this.thirdPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PetitMatamoros');
                   break;
-                case 'kids':
-                  this.thirdPlace(proyecto, autores, 'matamoros', 'KidsMatamoros');
+                case '2':
+                  this.thirdPlace(proyecto, autores, 'matamoros', 'Matamoros', 'KidsMatamoros');
                   break;
-                case 'juvenil':
-                  this.thirdPlace(proyecto, autores, 'matamoros', 'JuvenilMatamoros');
+                case '3':
+                  this.thirdPlace(proyecto, autores, 'matamoros', 'Matamoros', 'JuvenilMatamoros');
                   break;
-                case 'media-superior':
-                  this.thirdPlace(proyecto, autores, 'matamoros', 'MSMatamoros');
+                case '4':
+                  this.thirdPlace(proyecto, autores, 'matamoros', 'Matamoros', 'MSMatamoros');
                   break;
-                case 'superior':
-                  this.thirdPlace(proyecto, autores, 'matamoros', 'SuperiorMatamoros');
+                case '5':
+                  this.thirdPlace(proyecto, autores, 'matamoros', 'Matamoros', 'SuperiorMatamoros');
                   break;
-                case 'posgrado':
-                  this.thirdPlace(proyecto, autores, 'matamoros', 'PosgradoMatamoros');
+                case '6':
+                  this.thirdPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PosgradoMatamoros');
                   break;
               }
               break;
             case '4':
-              switch (this.formsFiltro.value['id_categorias']) {
-                case 'petit':
-                  this.thirdPlace(proyecto, autores, 'madero', 'PetitMadero');
+              switch (this.categoriaActual) {
+                case '1':
+                  this.thirdPlace(proyecto, autores, 'madero', 'Madero', 'PetitMadero');
                   break;
-                case 'kids':
-                  this.thirdPlace(proyecto, autores, 'madero', 'KidsMadero');
+                case '2':
+                  this.thirdPlace(proyecto, autores, 'madero', 'Madero', 'KidsMadero');
                   break;
-                case 'juvenil':
-                  this.thirdPlace(proyecto, autores, 'madero', 'JuvenilMadero');
+                case '3':
+                  this.thirdPlace(proyecto, autores, 'madero', 'Madero', 'JuvenilMadero');
                   break;
-                case 'media-superior':
-                  this.thirdPlace(proyecto, autores, 'madero', 'MSMadero');
+                case '4':
+                  this.thirdPlace(proyecto, autores, 'madero', 'Madero', 'MSMadero');
                   break;
-                case 'superior':
-                  this.thirdPlace(proyecto, autores, 'madero', 'SuperiorMadero');
+                case '5':
+                  this.thirdPlace(proyecto, autores, 'madero', 'Madero', 'SuperiorMadero');
                   break;
-                case 'posgrado':
-                  this.thirdPlace(proyecto, autores, 'madero', 'PosgradoMadero');
+                case '6':
+                  this.thirdPlace(proyecto, autores, 'madero', 'Madero', 'PosgradoMadero');
                   break;
               }
               break;
             case '5':
-              switch (this.formsFiltro.value['id_categorias']) {
-                case 'petit':
-                  this.thirdPlace(proyecto, autores, 'jaumave', 'PetitJaumave');
+              switch (this.categoriaActual) {
+                case '1':
+                  this.thirdPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PetitJaumave');
                   break;
-                case 'kids':
-                  this.thirdPlace(proyecto, autores, 'jaumave', 'KidsJaumave');
+                case '2':
+                  this.thirdPlace(proyecto, autores, 'jaumave', 'Jaumave', 'KidsJaumave');
                   break;
-                case 'juvenil':
-                  this.thirdPlace(proyecto, autores, 'jaumave', 'JuvenilJaumave');
+                case '3':
+                  this.thirdPlace(proyecto, autores, 'jaumave', 'Jaumave', 'JuvenilJaumave');
                   break;
-                case 'media-superior':
-                  this.thirdPlace(proyecto, autores, 'jaumave', 'MSJaumave');
+                case '4':
+                  this.thirdPlace(proyecto, autores, 'jaumave', 'Jaumave', 'MSJaumave');
                   break;
-                case 'superior':
-                  this.thirdPlace(proyecto, autores, 'jaumave', 'SuperiorJaumave');
+                case '5':
+                  this.thirdPlace(proyecto, autores, 'jaumave', 'Jaumave', 'SuperiorJaumave');
                   break;
-                case 'posgrado':
-                  this.thirdPlace(proyecto, autores, 'jaumave', 'PosgradoJaumave');
-                  break;
-              }
-              break;
-            case '6':
-              switch (this.formsFiltro.value['id_categorias']) {
-                case 'petit':
-                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'PetitNuevoLaredo');
-                  break;
-                case 'kids':
-                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'KidsNuevoLaredo');
-                  break;
-                case 'juvenil':
-                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'JuvenilNuevoLaredo');
-                  break;
-                case 'media-superior':
-                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'MSNuevoLaredo');
-                  break;
-                case 'superior':
-                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'SuperiorNuevoLaredo');
-                  break;
-                case 'posgrado':
-                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'PosgradoNuevoLaredo');
+                case '6':
+                  this.thirdPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PosgradoJaumave');
                   break;
               }
               break;
             case '6':
-              switch (this.formsFiltro.value['id_categorias']) {
-                case 'petit':
-                  this.thirdPlace(proyecto, autores, 'victoria', 'PetitVictoria');
+              switch (this.categoriaActual) {
+                case '1':
+                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PetitNuevoLaredo');
                   break;
-                case 'kids':
-                  this.thirdPlace(proyecto, autores, 'victoria', 'KidsVictoria');
+                case '2':
+                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'KidsNuevoLaredo');
                   break;
-                case 'juvenil':
-                  this.thirdPlace(proyecto, autores, 'victoria', 'JuvenilVictoria');
+                case '3':
+                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'JuvenilNuevoLaredo');
                   break;
-                case 'media-superior':
-                  this.thirdPlace(proyecto, autores, 'victoria', 'MSVictoria');
+                case '4':
+                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'MSNuevoLaredo');
                   break;
-                case 'superior':
-                  this.thirdPlace(proyecto, autores, 'victoria', 'SuperiorVictoria');
+                case '5':
+                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'SuperiorNuevoLaredo');
                   break;
-                case 'posgrado':
-                  this.thirdPlace(proyecto, autores, 'victoria', 'PosgradoVictoria');
+                case '6':
+                  this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PosgradoNuevoLaredo');
+                  break;
+              }
+              break;
+            case '7':
+              switch (this.categoriaActual) {
+                case '1':
+                  this.thirdPlace(proyecto, autores, 'victoria', 'Victoria', 'PetitVictoria');
+                  break;
+                case '2':
+                  this.thirdPlace(proyecto, autores, 'victoria', 'Victoria', 'KidsVictoria');
+                  break;
+                case '3':
+                  this.thirdPlace(proyecto, autores, 'victoria', 'Victoria', 'JuvenilVictoria');
+                  break;
+                case '4':
+                  this.thirdPlace(proyecto, autores, 'victoria', 'Victoria', 'MSVictoria');
+                  break;
+                case '5':
+                  this.thirdPlace(proyecto, autores, 'victoria', 'Victoria', 'SuperiorVictoria');
+                  break;
+                case '6':
+                  this.thirdPlace(proyecto, autores, 'victoria', 'Victoria', 'PosgradoVictoria');
                   break;
               }
               break;
@@ -895,224 +897,300 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  firstPlace({ nombre = '' }, autores: any[], sede: string = '', categoriaSede: string = '') {
-    //console.log(autores[0].autor);
-    let array = 1;
-    for (let i = 0; i < autores.length; i++) {
-      const doc5 = new jsPDF();
-      doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc5.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc5.text(nombre, 85, 215);
-      doc5.setFontSize(16);
-      doc5.setFont('Helvetica');
-      doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+
+
+  firstPlace({ nombre = '' }, autores: any[], sede: string = '', sede2: string = '', categoriaSede: string = '') {
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo' || sede === 'mante' || sede === 'victoria') {
+      console.log(sede);
+      let array = 1;
+      if(!autores){
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      for (let i = 0; i < autores.length; i++) {
+        const doc5 = new jsPDF('p', 'in', 'letter');
+        doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc5.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        doc5.text(nombre, 4.2, 7.8, { align: "center" });
+        doc5.setFont('Helvetica');
+        doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+      }
+      }else{
+        let array = 1;
+        if(!autores){
+          swal.fire({
+            icon: 'error',
+            title: 'El proyecto no tiene autores registrados'
+          });
+        }
+      for (let i = 0; i < autores.length; i++) {
+        const doc5 = new jsPDF('p', 'in', 'letter');
+        doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc5.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        doc5.text(nombre, 4.2, 7.8, { align: "center" });
+        doc5.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+        doc5.addImage('assets/image/Director' + sede2 + '.png', 'png', 11.8, 8, 1, 1);
+        doc5.setFont('Helvetica');
+        doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+      }
     }
   }
 
-  secondPlace({ nombre = '' }, autores: any[], sede: string, categoriaSede: string) {
-    for (let i = 0; i < autores.length; i++) {
-      console.log(nombre);
-      const doc6 = new jsPDF();
-      doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc6.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc6.text(nombre, 85, 215);
-      doc6.setFontSize(16);
-      doc6.setFont('Helvetica');
-      doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+  secondPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo' || sede === 'mante' || sede === 'victoria') {
+      if(!autores){
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      for (let i = 0; i < autores.length; i++) {
+        console.log(nombre);
+        const doc6 = new jsPDF('p', 'in', 'letter');
+        doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        doc6.text(nombre, 4.2, 7.8, { align: "center" });
+        doc6.setFont('Helvetica');
+        doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+      }
+      }else{
+        if(!autores){
+          swal.fire({
+            icon: 'error',
+            title: 'El proyecto no tiene autores registrados'
+          });
+        }
+        for (let i = 0; i < autores.length; i++) {
+          console.log(nombre);
+          const doc6 = new jsPDF('p', 'in', 'letter');
+          doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+          doc6.text(nombre, 4.2, 7.8, { align: "center" });
+          doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+          doc6.addImage('assets/image/Director' + sede2 + '.png', 'png', 11.8, 8, 1, 1);
+          doc6.setFont('Helvetica');
+          doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+      }
     }
   }
-  thirdPlace({ nombre = '' }, autores: any[], sede: string, categoriaSede: string) {
-    for (let i = 0; i < autores.length; i++) {
-      const doc7 = new jsPDF();
-      doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 210, 300).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc7.text(autores[i].autor, 80, 175).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc7.text(nombre, 85, 215);
-      doc7.setFontSize(16);
-      doc7.setFont('Helvetica');
-      doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+  thirdPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo' || sede === 'mante' || sede === 'victoria') {
+      if(!autores){
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      for (let i = 0; i < autores.length; i++) {
+        const doc7 = new jsPDF('p', 'in', 'letter');
+        doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombre, 4.2, 7.8, { align: "center" });
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+      }
+      }else{
+        if(!autores){
+          swal.fire({
+            icon: 'error',
+            title: 'El proyecto no tiene autores registrados'
+          });
+        }
+        for (let i = 0; i < autores.length; i++) {
+          const doc7 = new jsPDF('p', 'in', 'letter');
+          doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 11.8, 8, 1, 1);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+      }
     }
   }
 
   imprimir(proyecto: any, categoria: any) {
-    if(proyecto.length !== 0){
-    switch (categoria) {
-      case 'petit':
-        let nombrePetit = '';
-        let totalPetit = '';
-        let sedePetit2 = '';
-        for (let i = 0; i < proyecto.length; i++) {
+    if (proyecto.length !== 0) {
+      switch (categoria) {
+        case '1':
+          let nombrePetit = '';
+          let totalPetit = '';
+          let sedePetit2 = '';
+          for (let i = 0; i < proyecto.length; i++) {
 
-          nombrePetit = nombrePetit.concat(proyecto[i].nombre, '\r\n');
-          totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedePetit2 = proyecto[i].sede;
+            nombrePetit = nombrePetit.concat(proyecto[i].nombre, '\r\n');
+            totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+            sedePetit2 = proyecto[i].sede;
 
-        }
-        const doc1 = new jsPDF({orientation: 'landscape'});
-        doc1.addImage('assets/image/logotamColor.png','png', 14, 13, 48,24);
-        doc1.addImage('assets/image/cecit.png','png', 243, 8, 39,39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-        doc1.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, {align: "center"}).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-        doc1.text('Lista de Proyectos Categoría Superior sede '+sedePetit2+'', 151, 46, {align: "center"}).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc1.text('Proyecto', 35, 75);
-        doc1.text(nombrePetit, 35, 90);
-        doc1.text('Calificación', 220, 75);
-        doc1.text(totalPetit, 220,  90);
-    
-        doc1.setFontSize(16);
-        doc1.setFont('Caviar');
-        doc1.save("lista petit.pdf");
-        break;
+          }
+          const doc1 = new jsPDF({ orientation: 'landscape' });
+          doc1.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+          doc1.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+          doc1.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc1.text('Lista de Proyectos Categoría Superior sede ' + sedePetit2 + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc1.text('Proyecto', 35, 75);
+          doc1.text(nombrePetit, 35, 90);
+          doc1.text('Calificación', 220, 75);
+          doc1.text(totalPetit, 220, 90);
 
-      case 'kids':
-        console.log('hola' + categoria);
-        let nombreKids = '';
-        let totalKids = '';
-        let sedeKids = '';
-        for (let i = 0; i < proyecto.length; i++) {
+          doc1.setFontSize(16);
+          doc1.setFont('Caviar');
+          doc1.save("lista petit.pdf");
+          break;
 
-          nombreKids = nombreKids.concat(proyecto[i].nombre, '\r\n');
-          totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeKids = proyecto[i].sede;
+        case 'kids':
+          console.log('hola' + categoria);
+          let nombreKids = '';
+          let totalKids = '';
+          let sedeKids = '';
+          for (let i = 0; i < proyecto.length; i++) {
 
-        }
-        const doc8 = new jsPDF({orientation: 'landscape', unit: 'in', format: [4,2]});
-        doc8.addImage('assets/image/logotamColor.png','png', 12, 13, 38,17);
-        doc8.addImage('assets/image/cecit.png','png', 164, 8, 35,35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-        doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, {align: "center"}).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc8.text('Lista de Proyectos Categoría Kids sede '+sedeKids+'', 151, 46, {align: "center"}).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc8.text('Proyecto', 35, 75);
-        doc8.text(nombreKids, 35, 90);
-        doc8.text('Calificación', 220, 75);
-        doc8.text(totalKids, 220,  90);
+            nombreKids = nombreKids.concat(proyecto[i].nombre, '\r\n');
+            totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+            sedeKids = proyecto[i].sede;
 
-        doc8.setFontSize(16);
-        doc8.setFont('Caviar');
-        doc8.save("lista kids.pdf");
+          }
+          const doc8 = new jsPDF({ orientation: 'landscape', unit: 'in', format: [4, 2] });
+          doc8.addImage('assets/image/logotamColor.png', 'png', 12, 13, 38, 17);
+          doc8.addImage('assets/image/cecit.png', 'png', 164, 8, 35, 35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc8.text('Lista de Proyectos Categoría Kids sede ' + sedeKids + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc8.text('Proyecto', 35, 75);
+          doc8.text(nombreKids, 35, 90);
+          doc8.text('Calificación', 220, 75);
+          doc8.text(totalKids, 220, 90);
 
-        break;
+          doc8.setFontSize(16);
+          doc8.setFont('Caviar');
+          doc8.save("lista kids.pdf");
 
-      case 'juvenil':
-        console.log('hola' + categoria);
-        let nombreJuvenil = '';
-        let totalJuvenil = '';
-        let sedeJuvenil = '';
-        for (let i = 0; i < proyecto.length; i++) {
+          break;
 
-          nombreJuvenil = nombreJuvenil.concat(proyecto[i].nombre, '\r\n');
-          totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeJuvenil = proyecto[i].sede;
+        case 'juvenil':
+          console.log('hola' + categoria);
+          let nombreJuvenil = '';
+          let totalJuvenil = '';
+          let sedeJuvenil = '';
+          for (let i = 0; i < proyecto.length; i++) {
 
-        }
-        const doc7 = new jsPDF({orientation: 'landscape'});
-        doc7.addImage('assets/image/logotamColor.png','png', 14, 13, 48,24);
-        doc7.addImage('assets/image/cecit.png','png', 243, 8, 39,39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-        doc7.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, {align: "center"}).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-        doc7.text('Lista de Proyectos Categoría Superior sede '+sedeJuvenil+'', 151, 46, {align: "center"}).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc7.text('Proyecto', 35, 75);
-        doc7.text(nombreJuvenil, 35, 90);
-        doc7.text('Calificación', 220, 75);
-        doc7.text(totalJuvenil, 220,  90);
-      
-        doc7.setFontSize(16);
-        doc7.setFont('Caviar');
-        doc7.save("lista juvenil.pdf");
-        break;
+            nombreJuvenil = nombreJuvenil.concat(proyecto[i].nombre, '\r\n');
+            totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+            sedeJuvenil = proyecto[i].sede;
 
-      case 'media-superior':
-        console.log('hola' + categoria);
-        let nombreMS = '';
-        let totalMS = '';
-        let sedeMS = '';
-        for (let i = 0; i < proyecto.length; i++) {
+          }
+          const doc7 = new jsPDF({ orientation: 'landscape' });
+          doc7.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+          doc7.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+          doc7.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc7.text('Lista de Proyectos Categoría Superior sede ' + sedeJuvenil + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc7.text('Proyecto', 35, 75);
+          doc7.text(nombreJuvenil, 35, 90);
+          doc7.text('Calificación', 220, 75);
+          doc7.text(totalJuvenil, 220, 90);
 
-          nombreMS = nombreMS.concat(proyecto[i].nombre, '\r\n');
-          totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeMS = proyecto[i].sede;
+          doc7.setFontSize(16);
+          doc7.setFont('Caviar');
+          doc7.save("lista juvenil.pdf");
+          break;
 
-        }
-        const doc2 = new jsPDF({orientation: 'landscape'});
-        doc2.addImage('assets/image/logotamColor.png','png', 14, 13, 48,24);
-        doc2.addImage('assets/image/cecit.png','png', 243, 8, 39,39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-        doc2.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, {align: "center"}).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-        doc2.text('Lista de Proyectos Categoría Superior sede '+sedeMS+'', 151, 46, ).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc2.text('Proyecto', 35, 75);
-        doc2.text(nombreMS, 35, 90);
-        doc2.text('Calificación', 220, 75);
-        doc2.text(totalMS, 220,  90)
-        doc2.setFontSize(16);
-        doc2.setFont('Caviar');
-        doc2.save("lista media-superior.pdf");
+        case 'media-superior':
+          console.log('hola' + categoria);
+          let nombreMS = '';
+          let totalMS = '';
+          let sedeMS = '';
+          for (let i = 0; i < proyecto.length; i++) {
 
-        break;
+            nombreMS = nombreMS.concat(proyecto[i].nombre, '\r\n');
+            totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+            sedeMS = proyecto[i].sede;
 
-      case 'superior':
-        console.log('hola' + categoria);
-        let nombreSuperior = '';
-        let totalSuperior = '';
-        let sedeSuperior = '';
-        for (let i = 0; i < proyecto.length; i++) {
+          }
+          const doc2 = new jsPDF({ orientation: 'landscape' });
+          doc2.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+          doc2.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+          doc2.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc2.text('Lista de Proyectos Categoría Superior sede ' + sedeMS + '', 151, 46,).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc2.text('Proyecto', 35, 75);
+          doc2.text(nombreMS, 35, 90);
+          doc2.text('Calificación', 220, 75);
+          doc2.text(totalMS, 220, 90)
+          doc2.setFontSize(16);
+          doc2.setFont('Caviar');
+          doc2.save("lista media-superior.pdf");
 
-          nombreSuperior = nombreSuperior.concat(proyecto[i].nombre, '\r\n');
-          totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedeSuperior = proyecto[i].sede;
+          break;
 
-        }
-        const doc3 = new jsPDF({orientation: 'landscape'});
-        doc3.addImage('assets/image/logotamColor.png','png', 14, 13, 48,24);
-        doc3.addImage('assets/image/cecit.png','png', 243, 8, 39,39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-        doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34,{align: "center"}).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-        doc3.text('Lista de Proyectos Categoría Superior Sede '+sedeSuperior+'', 151, 46, {align: "center"}).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc3.text('Proyecto', 35, 75);
-        doc3.text(nombreSuperior, 35, 90);
-        doc3.text('Calificación', 220, 75);
-        doc3.text(totalSuperior, 220,  90);
-        doc3.setFontSize(16);
-        doc3.setFont('Caviar');
-        doc3.save("lista superior.pdf");
+        case 'superior':
+          console.log('hola' + categoria);
+          let nombreSuperior = '';
+          let totalSuperior = '';
+          let sedeSuperior = '';
+          for (let i = 0; i < proyecto.length; i++) {
 
-        break;
+            nombreSuperior = nombreSuperior.concat(proyecto[i].nombre, '\r\n');
+            totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+            sedeSuperior = proyecto[i].sede;
 
-      case 'posgrado':
-        console.log('hola' + categoria);
-        let nombrePosgrado = '';
-        let totalPosgrado = '';
-        let sedePosgrado = '';
-        for (let i = 0; i < proyecto.length; i++) {
+          }
+          const doc3 = new jsPDF({ orientation: 'landscape' });
+          doc3.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+          doc3.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+          doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc3.text('Lista de Proyectos Categoría Superior Sede ' + sedeSuperior + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc3.text('Proyecto', 35, 75);
+          doc3.text(nombreSuperior, 35, 90);
+          doc3.text('Calificación', 220, 75);
+          doc3.text(totalSuperior, 220, 90);
+          doc3.setFontSize(16);
+          doc3.setFont('Caviar');
+          doc3.save("lista superior.pdf");
 
-          nombrePosgrado = nombrePosgrado.concat(proyecto[i].nombre, '\r\n');
-          totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
-          sedePosgrado = proyecto[i].sede;
+          break;
 
-        }
-        const doc4 = new jsPDF({orientation: 'landscape'});
-        doc4.addImage('assets/image/logotamColor.png','png', 14, 13, 48,24);
-        doc4.addImage('assets/image/cecit.png','png', 243, 8, 39,39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-        doc4.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, {align: "center"}).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-        doc4.text('Lista de Proyectos Categoría Superior sede '+sedePosgrado+'', 151, 46, {align: "center"}).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-        doc4.text('Proyecto', 35, 75);
-        doc4.text(nombrePosgrado, 35, 90);
-        doc4.text('Calificación', 220, 75);
-        doc4.text(totalPosgrado, 220,  90);
-        
-        doc4.setFontSize(16);
-        doc4.setFont('Caviar');
-        doc4.save("lista posgrado.pdf");
+        case 'posgrado':
+          console.log('hola' + categoria);
+          let nombrePosgrado = '';
+          let totalPosgrado = '';
+          let sedePosgrado = '';
+          for (let i = 0; i < proyecto.length; i++) {
 
-        break;
-      default:
-        swal.fire({
-          icon: 'error',
-          title: 'No se encontró la categoría'
-          
-        });
-        break;
+            nombrePosgrado = nombrePosgrado.concat(proyecto[i].nombre, '\r\n');
+            totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+            sedePosgrado = proyecto[i].sede;
 
+          }
+          const doc4 = new jsPDF({ orientation: 'landscape' });
+          doc4.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+          doc4.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+          doc4.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc4.text('Lista de Proyectos Categoría Superior sede ' + sedePosgrado + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc4.text('Proyecto', 35, 75);
+          doc4.text(nombrePosgrado, 35, 90);
+          doc4.text('Calificación', 220, 75);
+          doc4.text(totalPosgrado, 220, 90);
+
+          doc4.setFontSize(16);
+          doc4.setFont('Caviar');
+          doc4.save("lista posgrado.pdf");
+
+          break;
+        default:
+          swal.fire({
+            icon: 'error',
+            title: 'No se encontró la categoría'
+
+          });
+          break;
+
+      }
     }
   }
-}
-  reiniciarVariable(evt: any = null){
+  reiniciarVariable(evt: any = null) {
     this.categoriaActual = '';
     this.sedeActual = '';
-    this.proyectosCalificacion = new Array <any>();
+    this.proyectosCalificacion = new Array<any>();
   }
 }
 
