@@ -932,7 +932,7 @@ export class DashboardComponent implements OnInit {
         doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc5.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         doc5.text(nombre, 4.2, 7.8, { align: "center" });
-        doc5.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
+        doc5.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
         doc5.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
         doc5.setFont('Helvetica');
         doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
@@ -972,8 +972,8 @@ export class DashboardComponent implements OnInit {
           doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
           doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
           doc6.text(nombre, 4.2, 7.8, { align: "center" });
-          doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
-          doc6.addImage('assets/image/Director' + sede2 + '.png', 'png', 11.8, 8, 1, 1);
+          doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+          doc6.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
           doc6.setFont('Helvetica');
           doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
       }
@@ -1009,8 +1009,8 @@ export class DashboardComponent implements OnInit {
           doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
           doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
           doc7.text(nombre, 4.2, 7.8, { align: "center" });
-          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 8, 1, 1);
-          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 11.8, 8, 1, 1);
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
           doc7.setFont('Helvetica');
           doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
       }
