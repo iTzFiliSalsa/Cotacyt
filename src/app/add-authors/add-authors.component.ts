@@ -100,7 +100,6 @@ export class AddAuthorsComponent implements OnInit {
       ).add(() => this._utilService._loading = false);
   }
   reigstrarAutor() {
-    console.log(this.formRegistroAutores.value);
     this.autoresService.postAutor( this.formRegistroAutores.value )
     .subscribe(
       _ => {

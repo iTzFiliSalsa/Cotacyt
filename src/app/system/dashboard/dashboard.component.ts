@@ -231,7 +231,6 @@ export class DashboardComponent implements OnInit {
         .subscribe(data => {
           if (data[0].status === '1') {
             this.proyectosCalificados.push(res);
-            console.log(this.proyectosCalificados);
           } else {
             this.proyectosPorCalificar.push(res);
           }
@@ -252,7 +251,6 @@ export class DashboardComponent implements OnInit {
         if (res.dismiss === Swal.DismissReason.backdrop) {
           this.reiniciarVariable();
         }
-        console.log(res);
       }, err => {
         console.log(err);
       });
@@ -321,9 +319,7 @@ export class DashboardComponent implements OnInit {
     if (this.sessionData.rol === 'admin') {
       this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
         data => {
-          console.log(data);
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
       ).add(() => {
@@ -332,9 +328,7 @@ export class DashboardComponent implements OnInit {
     } else {
       this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
         data => {
-          console.log(data);
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
       ).add(() => {
@@ -350,9 +344,7 @@ export class DashboardComponent implements OnInit {
     if (this.sessionData.rol === 'admin') {
       this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
         data => {
-          console.log(data);
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
       ).add(() => {
@@ -361,9 +353,7 @@ export class DashboardComponent implements OnInit {
     } else {
       this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
         data => {
-          console.log(data);
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
       ).add(() => {
@@ -376,8 +366,6 @@ export class DashboardComponent implements OnInit {
 
 
   abrirReproductor(evento: any, id) {
-    console.log(this.videoTag);
-    console.log(id);
     this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/' + id;
     this.swalReproductor.fire();
   }
@@ -561,9 +549,6 @@ export class DashboardComponent implements OnInit {
             title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
           });
         }
-        console.log(index);
-        console.log(this.categoriaActual);
-        console.log(this.sessionData.id_sedes);
         
         switch (id_sedes) {
           case '1':
@@ -730,8 +715,6 @@ export class DashboardComponent implements OnInit {
               title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
             });
           }
-          console.log(index);
-          console.log(this.categoriaActual);
           switch (id_sedes) {
             case '1':
               switch (this.categoriaActual) {
@@ -903,7 +886,6 @@ export class DashboardComponent implements OnInit {
 
   firstPlace({ nombre = '' }, autores: any[], sede: string = '', sede2: string = '', categoriaSede: string = '') {
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
-      console.log(sede);
       let array = 1;
       if(!autores){
         swal.fire({
@@ -941,7 +923,6 @@ export class DashboardComponent implements OnInit {
   }
 
   secondPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
-    console.log(sede);
     
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
       if(!autores){
@@ -951,7 +932,6 @@ export class DashboardComponent implements OnInit {
         });
       }
       for (let i = 0; i < autores.length; i++) {
-        console.log(nombre);
         const doc6 = new jsPDF('p', 'in', 'letter');
         doc6.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
@@ -967,7 +947,6 @@ export class DashboardComponent implements OnInit {
           });
         }
         for (let i = 0; i < autores.length; i++) {
-          console.log(nombre);
           const doc6 = new jsPDF('p', 'in', 'letter');
           doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
           doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
@@ -980,7 +959,6 @@ export class DashboardComponent implements OnInit {
     }
   }
   thirdPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
-    console.log(sede);
     
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
       if(!autores){
@@ -1047,7 +1025,6 @@ export class DashboardComponent implements OnInit {
           break;
 
         case 'kids':
-          console.log('hola' + categoria);
           let nombreKids = '';
           let totalKids = '';
           let sedeKids = '';
@@ -1075,7 +1052,6 @@ export class DashboardComponent implements OnInit {
           break;
 
         case 'juvenil':
-          console.log('hola' + categoria);
           let nombreJuvenil = '';
           let totalJuvenil = '';
           let sedeJuvenil = '';
@@ -1102,7 +1078,6 @@ export class DashboardComponent implements OnInit {
           break;
 
         case 'media-superior':
-          console.log('hola' + categoria);
           let nombreMS = '';
           let totalMS = '';
           let sedeMS = '';
@@ -1129,7 +1104,6 @@ export class DashboardComponent implements OnInit {
           break;
 
         case 'superior':
-          console.log('hola' + categoria);
           let nombreSuperior = '';
           let totalSuperior = '';
           let sedeSuperior = '';
@@ -1156,7 +1130,6 @@ export class DashboardComponent implements OnInit {
           break;
 
         case 'posgrado':
-          console.log('hola' + categoria);
           let nombrePosgrado = '';
           let totalPosgrado = '';
           let sedePosgrado = '';

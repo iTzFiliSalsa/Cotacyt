@@ -99,7 +99,6 @@ export class AddProjectsComponent implements OnInit {
       }
     ).subscribe(
       data => {
-        console.log(this.sessionData.id_sedes);
         this.areas = data.areas;
         this.sedes = data.sedes;
         this.categorias = data.categorias;
@@ -277,7 +276,6 @@ export class AddProjectsComponent implements OnInit {
 
   handleFileInput(files: FileList) {
     // this.fileToUpload = files.item(0);
-    console.log(files[0].name);
     this.label = files[0].name;
   }
 
@@ -293,7 +291,6 @@ export class AddProjectsComponent implements OnInit {
               icon: 'success'
             });
           }
-          console.log(data);
         }, err => {
           success = false;
           if (index === this.importes.length - 1) {

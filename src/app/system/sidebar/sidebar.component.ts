@@ -49,10 +49,8 @@ export class SidebarComponent implements OnInit {
 
   toggle(){
     if(!this.toggleClass){
-      console.log(this.mobile.nativeElement.style.left = '-250px');
       this.toggleClass = true;
     }else{
-      console.log(this.mobile.nativeElement.style.left = '0');
       this.toggleClass = false;
     }
   }

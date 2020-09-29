@@ -212,7 +212,6 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.swalEdit.fire();
   }
   editarProyecto() {
-    console.log(this.formProyecto.value);
     this.projectsService.updateProyect( this.formProyecto.value)
     .subscribe( data => {
       Swal.fire({
@@ -256,7 +255,6 @@ export class ProjectsRegisteredComponent implements OnInit {
   }
   saveAsPdf(proyecto: ProjectRegistered){
     this.proyectoActual = proyecto;
-    console.log(this.proyectoActual);
     switch(this.proyectoActual.sede){
       case 'El mante':
         const doc = new jsPDF();

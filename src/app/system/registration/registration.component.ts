@@ -66,7 +66,6 @@ export class RegistrationComponent implements OnInit {
       }).subscribe(
         data => {
           this.proyectos = data.proyectos;
-          console.log(data.proyectos, 'superuser');
           this.sedes = data.sedes;
         }
         ).add(() => {
@@ -102,7 +101,6 @@ export class RegistrationComponent implements OnInit {
     }
     registrarJuez() {
       this._utilService.loading = true;
-      console.log(this.formsRegistroJuez.value);
       this.juecesService.registrarJuez(this.formsRegistroJuez.value).subscribe(
         data => {
           swal.fire({

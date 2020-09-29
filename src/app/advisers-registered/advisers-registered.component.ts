@@ -60,10 +60,8 @@ export class AdvisersRegisteredComponent implements OnInit {
       sedes: this.sedesService.getSedes()
     }).subscribe(
       data => {
-        console.log(data.asesores);
         this.asesores = data.asesores;
         this.sedes = data.sedes;
-        console.log(this.asesores);
       }
     ).add(() => {
       this._utilService._loading = false;
@@ -126,7 +124,6 @@ export class AdvisersRegisteredComponent implements OnInit {
   }
   saveAsPdf(asesor: any) {
     this.asesorActual = asesor;
-    console.log(this.asesorActual);
   switch(this.asesorActual.id_sedes){
     case '1':
       for (let i = 0; i < asesor.proyectos.length; i++) {

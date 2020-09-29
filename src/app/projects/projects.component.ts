@@ -91,7 +91,6 @@ export class ProjectsComponent implements OnInit {
         res => {
           this.allProjects = res;
           this.adminProjects(this.allProjects);
-          console.log(res);
         },
         err => {
           console.log(<any>err);
@@ -141,7 +140,6 @@ export class ProjectsComponent implements OnInit {
         this.proyectoActual = data;
         this.proyectosService.getStatusProyecto(this.proyectoActual.id_proyectos)
           .subscribe((res) => {
-            console.log(res);
             if (res[0].status === '1') {
               this.calificarProyectoService.getCalificaciones(
                 this.categoria, Number(this.proyectoActual.id_proyectos)
@@ -387,7 +385,6 @@ export class ProjectsComponent implements OnInit {
                 });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
-                  console.log(data);
                 }, err => {
                   Swal.fire({
                     title: 'Ocurrio un error',
@@ -448,7 +445,6 @@ export class ProjectsComponent implements OnInit {
                   });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
-                  console.log(data);
                 }, err => {
                   Swal.fire({
                     title: 'Ocurrio un error',
@@ -514,7 +510,6 @@ export class ProjectsComponent implements OnInit {
                 });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
-                  console.log(data);
                 }, err => {
                   Swal.fire({
                     title: 'Ocurrio un error',
@@ -578,7 +573,6 @@ export class ProjectsComponent implements OnInit {
                   });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
-                  console.log(data);
                 }, err => {
                   Swal.fire({
                     title: 'Ocurrio un error',
@@ -642,7 +636,6 @@ export class ProjectsComponent implements OnInit {
                   });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
-                  console.log(data);
                 }, err => {
                   Swal.fire({
                     title: 'Ocurrio un error',
@@ -658,7 +651,6 @@ export class ProjectsComponent implements OnInit {
   }
   generarForm(categoria: string) {
     const expReg = RegExp('^[0-9]+$');
-    console.log(categoria);
     switch (categoria) {
       case 'petit':
         this.formPuntos = this.formBuilder.group({
@@ -735,9 +727,7 @@ export class ProjectsComponent implements OnInit {
     if ( this.sessionData.rol === 'admin') {
       this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
         data => {
-          console.log(data);
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
         ).add(() => {
@@ -746,9 +736,7 @@ export class ProjectsComponent implements OnInit {
       } else {
         this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
           data => {
-            console.log(data);
             this.informacionDeLosProyectos = data;
-            console.log(this.informacionDeLosProyectos);
           },
           err => console.log(err)
           ).add(() => {
@@ -765,7 +753,6 @@ export class ProjectsComponent implements OnInit {
       this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
         data => {
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
       ).add(() => {
@@ -775,7 +762,6 @@ export class ProjectsComponent implements OnInit {
       this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
         data => {
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
       ).add(() => {
@@ -792,7 +778,6 @@ export class ProjectsComponent implements OnInit {
       this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
         data => {
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
         ).add(() => {
@@ -802,7 +787,6 @@ export class ProjectsComponent implements OnInit {
       this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
         data => {
           this.informacionDeLosProyectos = data;
-          console.log(this.informacionDeLosProyectos);
         },
         err => console.log(err)
         ).add(() => {

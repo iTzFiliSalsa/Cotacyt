@@ -185,7 +185,6 @@ export class JudgesComponent implements OnInit {
     this.proyectosNuevos = [];
     this.proyectosViejos = [];
     this.proyectos = [];
-    console.log(this.proyectosNuevos, this.proyectosViejos);
   }
   editarJuez() {
     this._utilService._loading = true;
