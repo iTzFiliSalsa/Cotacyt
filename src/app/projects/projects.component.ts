@@ -455,7 +455,7 @@ export class ProjectsComponent implements OnInit {
               this.ngOnInit();
             }
             break;
-          case 'media-superior':
+          case 'media superior':
             if (res[0].status === '1') {
               this.calificarProyectoService.putCalificacionesMediaSuperior(
                 Number(this.proyectoActual.id_proyectos),
