@@ -271,6 +271,7 @@ export class ProjectsComponent implements OnInit {
   guardarPuntos() {
     this.valores = this.formPuntos.value;
     this._utilService.loading = true;
+    console.log(this.categoria);
     this.proyectosService.getStatusProyecto(this.proyectoActual.id_proyectos)
       .subscribe((res) => {
         switch (this.categoria) {
@@ -647,6 +648,9 @@ export class ProjectsComponent implements OnInit {
             }
             break;
         }
+        this.generarForm(this.categoria);
+        this.isCollapsed = !this.isCollapsed;
+        this.proyectoActual = null;
       });
   }
   generarForm(categoria: string) {

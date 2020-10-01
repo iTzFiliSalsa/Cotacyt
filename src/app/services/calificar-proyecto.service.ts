@@ -307,7 +307,7 @@ export class CalificarProyectoService {
       obtenido7,
       obtenido8
     };
-    return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/superior/modificar', body);
+    return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/superior/modificar', body);
   }
 
   putCalificacionesPosgrado(
