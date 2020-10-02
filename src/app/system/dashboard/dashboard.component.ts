@@ -1016,10 +1016,10 @@ export class DashboardComponent implements OnInit {
               nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
               nombre += proyecto[j].nombre.substring(60);
-              totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
+              totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
             }else{
               nombre = proyecto[j].nombre;
-              totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+              totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
             }
             nombrePetit = nombrePetit.concat(nombre, '\r\n');
             sedePetit2 = proyecto[j].sede;
@@ -1062,10 +1062,10 @@ export class DashboardComponent implements OnInit {
               nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
               nombre += proyecto[j].nombre.substring(60);
-              totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
+              totalKids = totalKids.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
             }else{
               nombre = proyecto[j].nombre;
-              totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+              totalKids = totalKids.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
             }
             nombreKids = nombreKids.concat(nombre, '\r\n');
             sedeKids = proyecto[j].sede;
@@ -1109,10 +1109,10 @@ export class DashboardComponent implements OnInit {
               nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
               nombre += proyecto[j].nombre.substring(60);
-              totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
+              totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
             }else{
               nombre = proyecto[j].nombre;
-              totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+              totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
             }
             nombreJuvenil = nombreJuvenil.concat(nombre, '\r\n');
             sedeJuvenil = proyecto[j].sede;
@@ -1154,10 +1154,10 @@ export class DashboardComponent implements OnInit {
               nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
               nombre += proyecto[j].nombre.substring(60);
-              totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
+              totalMS = totalMS.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
             }else{
               nombre = proyecto[j].nombre;
-              totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
+              totalMS = totalMS.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
             }
             nombreMS = nombreMS.concat(nombre, '\r\n');
             sedeMS = proyecto[j].sede;
