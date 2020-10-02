@@ -1005,39 +1005,39 @@ export class DashboardComponent implements OnInit {
           let nombrePetit = '';
           let totalPetit = '';
           let sedePetit2 = '';
-          for (let j = contador6; j < contador6 + 10; j++) {
+          for (let j = contador6; j < contador6 + 11; j++) {
             if(j >= proyecto.length){
               continue;
 
             }
             let nombre:string;
-            if(proyecto[i].nombre.length>=60){
+            if(proyecto[j].nombre.length>=60){
               
-              nombre = proyecto[i].nombre.substring(0, 60);
+              nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
-              nombre += proyecto[i].nombre.substring(60);
+              nombre += proyecto[j].nombre.substring(60);
               totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
             }else{
-              nombre = proyecto[i].nombre;
+              nombre = proyecto[j].nombre;
               totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
             }
             nombrePetit = nombrePetit.concat(nombre, '\r\n');
-            sedePetit2 = proyecto[i].sede;
+            sedePetit2 = proyecto[j].sede;
             
 
           }
-          contador6 += 10;
+          contador6 += 11;
           i = contador6;
           doc1.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
           doc1.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
           doc1.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc1.text('Lista de Proyectos Categoría Petit Sede ' + sedePetit2 + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc1.text('Lista de Proyectos Categoría Petit Sede ' + sedePetit2 + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
           doc1.text('Proyecto', 35, 75);
           doc1.text(nombrePetit, 35, 90);
           doc1.text('Calificación', 220, 75);
           doc1.text(totalPetit, 220, 90);
 
-          doc1.setFontSize(16);
+          doc1.setFontSize(14);
           doc1.setFont('Caviar');
           doc1.addPage();
         }
@@ -1051,39 +1051,39 @@ export class DashboardComponent implements OnInit {
           let nombreKids = '';
           let totalKids = '';
           let sedeKids = '';
-          for (let j = contador5; j < contador5 + 10; j++) {
+          for (let j = contador5; j < contador5 + 11; j++) {
             if(j >= proyecto.length){
               continue;
 
             }
             let nombre:string;
-            if(proyecto[i].nombre.length>=60){
+            if(proyecto[j].nombre.length>=60){
               
-              nombre = proyecto[i].nombre.substring(0, 60);
+              nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
-              nombre += proyecto[i].nombre.substring(60);
+              nombre += proyecto[j].nombre.substring(60);
               totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
             }else{
-              nombre = proyecto[i].nombre;
+              nombre = proyecto[j].nombre;
               totalKids = totalKids.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
             }
             nombreKids = nombreKids.concat(nombre, '\r\n');
-            sedeKids = proyecto[i].sede;
+            sedeKids = proyecto[j].sede;
             
 
           }
-          contador5 += 10;
+          contador5 += 11;
           i = contador5;
           doc8.addImage('assets/image/logotamColor.png', 'png', 12, 13, 38, 17);
           doc8.addImage('assets/image/cecit.png', 'png', 164, 8, 35, 35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
-          doc8.text('Lista de Proyectos Categoría Kids Sede ' + sedeKids + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc8.text('Lista de Proyectos Categoría Kids Sede ' + sedeKids + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
           doc8.text('Proyecto', 35, 75);
           doc8.text(nombreKids, 35, 90);
           doc8.text('Calificación', 220, 75);
           doc8.text(totalKids, 220, 90);
 
-          doc8.setFontSize(16);
+          doc8.setFontSize(14);
           doc8.setFont('Caviar');
           doc8.addPage();
         }
@@ -1098,38 +1098,38 @@ export class DashboardComponent implements OnInit {
           let nombreJuvenil = '';
           let totalJuvenil = '';
           let sedeJuvenil = '';
-          for (let j = contador4; j < contador4 + 10; j++) {
+          for (let j = contador4; j < contador4 + 11; j++) {
             if(j >= proyecto.length){
               continue;
 
             }
             let nombre:string;
-            if(proyecto[i].nombre.length>=60){
+            if(proyecto[j].nombre.length>=60){
               
-              nombre = proyecto[i].nombre.substring(0, 60);
+              nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
-              nombre += proyecto[i].nombre.substring(60);
+              nombre += proyecto[j].nombre.substring(60);
               totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
             }else{
-              nombre = proyecto[i].nombre;
+              nombre = proyecto[j].nombre;
               totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
             }
             nombreJuvenil = nombreJuvenil.concat(nombre, '\r\n');
-            sedeJuvenil = proyecto[i].sede;
+            sedeJuvenil = proyecto[j].sede;
           
           }
-          contador4 += 10;
+          contador4 += 11;
           i = contador4;
           doc7.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
           doc7.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
           doc7.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc7.text('Lista de Proyectos Categoría Juvenil Sede ' + sedeJuvenil + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc7.text('Lista de Proyectos Categoría Juvenil Sede ' + sedeJuvenil + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
           doc7.text('Proyecto', 35, 75);
           doc7.text(nombreJuvenil, 35, 90);
           doc7.text('Calificación', 220, 75);
           doc7.text(totalJuvenil, 220, 90);
 
-          doc7.setFontSize(16);
+          doc7.setFontSize(14);
           doc7.setFont('Caviar');
           doc7.addPage();
         }
@@ -1143,38 +1143,38 @@ export class DashboardComponent implements OnInit {
           let nombreMS = '';
           let totalMS = '';
           let sedeMS = '';
-          for (let j = contador3; j < contador3 + 10; j++) {
+          for (let j = contador3; j < contador3 + 11; j++) {
             if(j >= proyecto.length){
               continue;
 
             }
             let nombre:string;
-            if(proyecto[i].nombre.length>=60){
+            if(proyecto[j].nombre.length>=60){
               
-              nombre = proyecto[i].nombre.substring(0, 60);
+              nombre = proyecto[j].nombre.substring(0, 60);
               nombre += '\r\n';
-              nombre += proyecto[i].nombre.substring(60);
+              nombre += proyecto[j].nombre.substring(60);
               totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n','\r\n');
             }else{
-              nombre = proyecto[i].nombre;
+              nombre = proyecto[j].nombre;
               totalMS = totalMS.concat(Math.round(parseInt(proyecto[i].total)).toString(), '\r\n');
             }
             nombreMS = nombreMS.concat(nombre, '\r\n');
-            sedeMS = proyecto[i].sede;
+            sedeMS = proyecto[j].sede;
             
 
           }
-          contador3 += 10;
+          contador3 += 11;
           i = contador3;
           doc2.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
           doc2.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
           doc2.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc2.text('Lista de Proyectos Categoría Media-Superior Sede ' + sedeMS + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc2.text('Lista de Proyectos Categoría Media-Superior Sede ' + sedeMS + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
           doc2.text('Proyecto', 35, 75);
           doc2.text(nombreMS, 35, 90);
           doc2.text('Calificación', 220, 75);
           doc2.text(totalMS, 220, 90)
-          doc2.setFontSize(16);
+          doc2.setFontSize(14);
           doc2.setFont('Caviar');
           doc2.addPage();
         }
@@ -1190,7 +1190,7 @@ export class DashboardComponent implements OnInit {
           let totalSuperior = '';
           let sedeSuperior = '';
           
-          for (let j = contador; j < contador + 10; j++) {
+          for (let j = contador; j < contador + 11; j++) {
             if(j >= proyecto.length){
               continue;
 
@@ -1211,17 +1211,17 @@ export class DashboardComponent implements OnInit {
             sedeSuperior = proyecto[j].sede;
             
           }
-          contador += 10;
+          contador += 11;
           i = contador;
           doc3.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
           doc3.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
           doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc3.text('Lista de Proyectos Categoría Superior Sede ' + sedeSuperior + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc3.text('Lista de Proyectos Categoría Superior Sede ' + sedeSuperior + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
           doc3.text('Proyecto', 35, 75);
           doc3.text(nombreSuperior, 35, 90);
           doc3.text('Calificación', 220, 75);
           doc3.text(totalSuperior, 220, 90);
-          doc3.setFontSize(16);
+          doc3.setFontSize(14);
           doc3.setFont('Caviar');
           doc3.addPage(); 
         }
@@ -1235,7 +1235,7 @@ export class DashboardComponent implements OnInit {
           let nombrePosgrado = '';
           let totalPosgrado = '';
           let sedePosgrado = '';
-          for (let j = contador2; j < contador2 + 10; j++) {
+          for (let j = contador2; j < contador2 + 11; j++) {
             if(j >= proyecto.length){
               continue;
             }
@@ -1254,18 +1254,18 @@ export class DashboardComponent implements OnInit {
             sedePosgrado = proyecto[j].sede;
             
           }
-          contador2 += 10;
+          contador2 += 11;
           i = contador2;
           doc4.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
           doc4.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
           doc4.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc4.text('Lista de Proyectos Categoría Posgrado Sede ' + sedePosgrado + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(16).setTextColor('#646464');
+          doc4.text('Lista de Proyectos Categoría Posgrado Sede ' + sedePosgrado + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
           doc4.text('Proyecto', 35, 75);
           doc4.text(nombrePosgrado, 35, 90);
           doc4.text('Calificación', 220, 75);
           doc4.text(totalPosgrado, 220, 90);
 
-          doc4.setFontSize(16);
+          doc4.setFontSize(14);
           doc4.setFont('Caviar');
           doc4.addPage();
         }
