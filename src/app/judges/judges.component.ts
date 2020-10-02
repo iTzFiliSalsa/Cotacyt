@@ -273,8 +273,8 @@ export class JudgesComponent implements OnInit {
         const doc = new jsPDF('p', 'in', 'letter');
         doc.addImage('assets/image/ReconocimientoJuradoMante.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
-        doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-        doc.addImage('assets/image/DirectorMante.png', 'png', 5.7, 8, 1.3, 1);
+        //doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+        //doc.addImage('assets/image/DirectorMante.png', 'png', 5.7, 8, 1.3, 1);
         doc.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -282,8 +282,8 @@ export class JudgesComponent implements OnInit {
         const doc1 = new jsPDF('p', 'in', 'letter');
         doc1.addImage('assets/image/ReconocimientoJuradoReynosa.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc1.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
-        doc1.addImage('assets/image/DirectorReynosa.png', 'png', 5.7, 7.8, 1.3, 1.3);
-        doc1.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+        //doc1.addImage('assets/image/DirectorReynosa.png', 'png', 5.7, 7.8, 1.3, 1.3);
+        //doc1.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
         doc1.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
@@ -291,28 +291,28 @@ export class JudgesComponent implements OnInit {
         const doc2 = new jsPDF('p', 'in', 'letter');
         doc2.addImage('assets/image/ReconocimientoJuradoMatamoros.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc2.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
-        doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 5.7, 8, 1.3, 1);
-        doc2.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+        //doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 5.7, 8, 1.3, 1);
+        //doc2.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
         doc2.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
       case 'Madero':
         const doc3 = new jsPDF('p', 'in', 'letter');
-        doc3.addImage('assets/image/ReconocimientoJuradoMadero.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        //doc3.addImage('assets/image/ReconocimientoJuradoMadero.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc3.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
         doc3.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
       case 'Jaumave':
         const doc4 = new jsPDF('p', 'in', 'letter');
-        doc4.addImage('assets/image/ReconocimientoJuradoJaumave.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        //doc4.addImage('assets/image/ReconocimientoJuradoJaumave.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc4.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.73, {align: "center"});
         doc4.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
 
       case 'Nuevo Laredo':
         const doc5 = new jsPDF('p', 'in', 'letter');
-        doc5.addImage('assets/image/ReconocimientoJuradoNuevoLaredo.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        //doc5.addImage('assets/image/ReconocimientoJuradoNuevoLaredo.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc5.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
         doc5.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
@@ -320,8 +320,8 @@ export class JudgesComponent implements OnInit {
         const doc6 = new jsPDF('p', 'in', 'letter');
         doc6.addImage('assets/image/ReconocimientoJuradoVictoria.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc6.text(this.titlecasePipe.transform(this.juezActual.nombre), 4.2, 6.6, {align: "center"});
-        doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-        doc1.addImage('assets/image/DirectorVictoria.png', 'png', 5.7, 8, 1.3, 1);
+        //doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+        //doc1.addImage('assets/image/DirectorVictoria.png', 'png', 5.7, 8, 1.3, 1);
         doc6.save("constancia Juez "+this.juezActual.nombre+".pdf");
       break;
       default:
