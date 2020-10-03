@@ -1075,7 +1075,7 @@ export class DashboardComponent implements OnInit {
           contador5 += 11;
           i = contador5;
           doc8.addImage('assets/image/logotamColor.png', 'png', 12, 13, 38, 17);
-          doc8.addImage('assets/image/cecit.png', 'png', 164, 8, 35, 35).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+          doc8.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
           doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
           doc8.text('Lista de Proyectos Categoría Kids Sede ' + sedeKids + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
           doc8.text('Proyecto', 35, 75);
