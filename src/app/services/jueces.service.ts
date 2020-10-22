@@ -19,4 +19,7 @@ export class JuecesService {
   getJueces(): Observable<any> {
     return this.http.get( this.servicesConfig.APP_ENDPOINT + 'api/jueces' );
   }
+  updateEvaluacion(body: any): Observable<any>{
+    return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/jueces/termino', body);
+  }
 }

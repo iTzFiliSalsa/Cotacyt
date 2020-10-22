@@ -2,7 +2,7 @@
 <swal class="swal-wide" #swalid1 title="Información del proyecto" [swalOptions]="{customClass: 'clase'}">
     <div *swalPortal>
         <div>
-            <table class="table table-light" *ngFor="let info of informacionDeLosProyectos" >
+            <table class="table table-light" *ngFor="let info of informacionDeLosProyectos">
                 <thead>
                     <tr>
                         <th>
@@ -80,7 +80,8 @@
     <div class="row">
         <!-- columna Izquierda -->
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <div class="CardPrincipal card">
+            <button class="btn btn-outline-success mb-1" (click)="terminarEvaluacion" disabled>Terminar evaluación</button>
+            <div class="CardPrincipal card mb-3">
                 <div class="card-header background-table">
                     <h6>Todos los proyectos</h6>
                 </div>
@@ -175,8 +176,8 @@
                     </table>
                 </div>
             </div>
-            
-            
+
+
             <div class="CardIzquierdo projects2 card mt-3">
                 <div class="firstHeader card-header">
                     <h6 class="m-0">Opciones de proyecto</h6>
