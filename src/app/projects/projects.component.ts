@@ -11,9 +11,8 @@ import { Util } from '../utils/utils';
 import { ProjectRegistered } from '../models/project-regis.model';
 import { ProjectsRegisteredService } from '../services/project-registered.service';
 import { Session } from 'src/app/models/session.model';
-import { SwalComponent, SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import swal from 'sweetalert2';
-import { InformacionDeLosProyectos } from '../models/proyectos.model'
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { InformacionDeLosProyectos } from '../models/proyectos.model';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -35,6 +34,7 @@ export class ProjectsComponent implements OnInit {
 
 
   categoria: string;
+  video: string;
   proyectosCalificados: ProyectosCalificados[];
   proyectosPorCalificar: ProyectosPorCalificar[];
   util: Util = new Util;
@@ -84,21 +84,6 @@ export class ProjectsComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    //TODOS LOS PROYECTOS, ESTO SE CAMBIARA POR CATEGORIAS
-    if (this.sessionData.rol === 'admin') {
-      this.projectsService.getProjects().subscribe(
-        res => {
-          this.allProjects = res;
-          this.adminProjects(this.allProjects);
-        },
-        err => {
-          console.log(<any>err);
-        }
-      ).add(() => {
-        this._utilService.loading = false;
-      });
-    } else {
       forkJoin({
         proyectosCalificados: this.dashboardService.getProyectosCalificados(),
         proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar(),
@@ -107,6 +92,7 @@ export class ProjectsComponent implements OnInit {
         (data: any) => {
           this.proyectosCalificados = data.proyectosCalificados;
           this.proyectosPorCalificar = data.proyectosPorCalificar;
+          console.log(data.todosLosProyectos);
           this.allProjects = data.todosLosProyectos;
         },
         err => {
@@ -115,21 +101,14 @@ export class ProjectsComponent implements OnInit {
       ).add(() => {
         this._utilService._loading = false;
       });
-    }
-
+  }
+  abrirReproductor(evento: any, id) {
+    this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/' + id;
+    this.swalReproductor.fire();
   }
 
-  adminProjects(proyectos) {
-    proyectos.filter((res) => {
-      this.proyectosService.getStatusAdmin(res.id_proyectos)
-        .subscribe(data => {
-          if (data[0].status === '1') {
-            this.proyectosCalificados.push(res);
-          } else {
-            this.proyectosPorCalificar.push(res);
-          }
-        });
-    });
+  pdf(event) {
+    window.open('http://plataforma.cotacyt.gob.mx/creatividad/' + event, '_blank');
   }
 
   traerProyecto(idProyecto: string) {
@@ -137,6 +116,7 @@ export class ProjectsComponent implements OnInit {
     this._utilService.loading = true;
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
       data => {
+        console.log(data);
         this.proyectoActual = data;
         this.proyectosService.getStatusProyecto(this.proyectoActual.id_proyectos)
           .subscribe((res) => {
@@ -327,6 +307,7 @@ export class ProjectsComponent implements OnInit {
                 .subscribe(data => {
                   console.log(data);
                 }, err => {
+                  console.log(err);
                   Swal.fire({
                     title: 'Ocurrio un error',
                     icon: 'error'
@@ -386,7 +367,9 @@ export class ProjectsComponent implements OnInit {
                 });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
+                  console.log(data);
                 }, err => {
+                  console.log(err);
                   Swal.fire({
                     title: 'Ocurrio un error',
                     icon: 'error'
@@ -446,7 +429,9 @@ export class ProjectsComponent implements OnInit {
                   });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
+                  console.log(data);
                 }, err => {
+                  console.log(err);
                   Swal.fire({
                     title: 'Ocurrio un error',
                     icon: 'error'
@@ -511,7 +496,9 @@ export class ProjectsComponent implements OnInit {
                 });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
+                  console.log(data);
                 }, err => {
+                  console.log(err);
                   Swal.fire({
                     title: 'Ocurrio un error',
                     icon: 'error'
@@ -574,7 +561,9 @@ export class ProjectsComponent implements OnInit {
                   });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
+                  console.log(data);
                 }, err => {
+                  console.log(err);
                   Swal.fire({
                     title: 'Ocurrio un error',
                     icon: 'error'
@@ -637,7 +626,9 @@ export class ProjectsComponent implements OnInit {
                   });
               this.proyectosService.setProyectoCalificado(this.proyectoActual.id_proyectos, this.proyectoActual.id_categorias)
                 .subscribe(data => {
+                  console.log(data);
                 }, err => {
+                  console.log(err);
                   Swal.fire({
                     title: 'Ocurrio un error',
                     icon: 'error'
@@ -740,6 +731,7 @@ export class ProjectsComponent implements OnInit {
       } else {
         this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
           data => {
+            console.log(data);
             this.informacionDeLosProyectos = data;
           },
           err => console.log(err)

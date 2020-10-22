@@ -73,8 +73,19 @@
         </div>
     </div>
 </swal>
+<!-- swal reproductor de video -->
+<swal class="swal-wide " #swalid2 title="Demostración del proyecto" [swalOptions]="{customClass: 'clase'}">
+    <div *swalPortal>
+        <div *ngIf="video">
+            <div class="contenedor-video">
+                <video  width="400" controls>
+                    <source [src]="video" type="video/mp4" >
+                </video>
+            </div>
+        </div>
 
-
+    </div>
+</swal>
 
 <div class="container-fluid pb-3">
     <div class="row">
@@ -89,8 +100,7 @@
                         <thead class="thead-ligth">
                             <tr>
                                 <th scope="col">Nombre del proyecto</th>
-                                <!-- <th scope="col">Fecha de calificación</th> -->
-                                <!-- <th scope="col">Status</th> -->
+                                <th scope="col">Estado</th>
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
@@ -101,11 +111,13 @@
                                 </button>{{i.nombre}}
                                 </td>
                                 <td>
-                                    <!-- <h6 *ngIf="i.status == '0'" class="custom-btn-danger text-center">Sin calificar</h6>
-                                    <h6 *ngIf="i.status == '1'" class="custom-btn-success text-center">Calificado</h6> -->
+                                    <div *ngIf="i.status == '0'" class="custom-btn-danger text-center">Sin calificar</div>
+                                    <div *ngIf="i.status == '1'" class="custom-btn-success text-center">Calificado</div>
                                 </td>
                                 <td>
-                                    <button class="btn-edit-project btn-see-projects btn ml-3" (click)="traerProyecto(i.id_proyectos)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-edit-project btn-see-projects btn mr-1 mb-1" (click)="traerProyecto(i.id_proyectos)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-edit-project btn-see-projects btn" (click)="pdf(i.pdf)"><i class="fas fa-file-pdf"></i></button>
+                                    <button class="btn-edit-project btn-see-projects btn" (click)="abrirReproductor($event, i.video)"><i class="fas fa-video"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -115,69 +127,7 @@
         </div>
         <!-- columna derecha -->
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <div class="CardIzquierdoTop projects card">
-                <div class="card-header background-table">
-                    <h6>Proyectos calificados</h6>
-                </div>
-                <div class="qualified-projects card-body scroll p-0">
-                    <table class="table table-hover">
-                        <thead class="thead-ligth">
-                            <tr>
-                                <th scope="col">Nombre del proyecto</th>
-                                <!-- <th scope="col">Fecha de calificación</th> -->
-                                <th scope="col">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let proyecto of proyectosCalificados">
-                                <td>{{proyecto.nombre}}
-                                    <!-- <small>{{proyecto.resumen}}</small> -->
-                                </td>
-                                <!-- <td>{{proyecto.fecha | date}}</td> -->
-                                <td class="d-flex">
-                                    <button class="btn btn-subboton-info" (click)="mostrarInfoCalificados(proyecto)">
-                                        <i class="fas fa-question-circle"></i>
-                                    </button>
-                                    <button class="btn-edit-project btn-see-projects btn ml-3" (click)="traerProyecto(proyecto.id_proyectos)"><i class="fas fa-edit"></i></button>
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="CardIzquierdo projects card mt-3" *ngIf="sessionData.rol !== 'admin'">
-                <div class="card-header background-table">
-                    <h6>Proyectos por calificar</h6>
-                </div>
-                <div class="qualified-projects card-body scroll p-0">
-                    <table class="table table-hover">
-                        <thead class="thead-ligth ">
-                            <tr>
-                                <th scope="col ">Nombre del proyecto</th>
-                                <th scope="col ">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let proyecto of proyectosPorCalificar ">
-                                <td>{{proyecto.nombre}}
-                                    <!-- <br><small>{{proyecto.resumen}}</small> -->
-                                </td>
-                                <td class="d-flex">
-                                    <button class="btn btn-subboton-info" (click)="mostrarInfoPorCalificar(proyecto)">
-                                        <i class="fas fa-question-circle"></i>
-                                    </button>
-                                    <button class="btn-qualify-project btn-see-projects btn ml-3" (click)="traerProyecto(proyecto.id_proyectos) "><i class="fas fa-check"></i></button>
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            
-            <div class="CardIzquierdo projects2 card mt-3">
+            <div class="CardIzquierdo projects2 card">
                 <div class="firstHeader card-header">
                     <h6 class="m-0">Opciones de proyecto</h6>
                 </div>
@@ -195,11 +145,8 @@
                                 <td class="text-center">
                                     <button class="custom-btn-success" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Calificar</button>
                                 </td>
-
                             </tr>
-
                         </tbody>
-
                     </table>
                     <!-- <button type="button" class="custom-btn-edit" (click)="isCollapsed = !isCollapsed"
                                     [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Editar</button> -->
