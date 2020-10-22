@@ -1,51 +1,55 @@
-.principal{
+.principal {
     height: 100vh;
-    
 }
-.padre{
-    
-   background: url("../../../assets/portada-cotacyt.jpg");
+
+.padre {
+    background: url("../../../assets/portada-cotacyt.jpg");
     width: 100%;
     height: 100%;
     background-size: cover;
     position: relative;
     font-family: 'Poppins', Helvetica, sans-serif;
-&::before{
-    content: "";
-    top: 0;
-    left: 0;
-    position: absolute ;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(#0064A7,#43B4E4 ); opacity: .8 ;
-}
+    &::before {
+        content: "";
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#0064A7, #43B4E4);
+        opacity: .8;
+    }
 }
 
-%texto{
+%texto {
     text-align: center;
 }
-@mixin texto($color){
-color: $color;
+
+@mixin texto($color) {
+    color: $color;
 }
-.login{
-    background-color:white;
+
+.login {
+    background-color: white;
     padding: 45px;
     border-radius: 1em;
     width: 100%;
-        box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.3);
-    h5{
+    box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.3);
+    h5 {
         @extend %texto;
         @include texto(black);
         font-weight: 500;
     }
-    label{
+    label {
         color: #8b8b8b;
     }
 }
-.row{
+
+.row {
     width: 100%;
 }
-.logotam{
+
+.logotam {
     width: 180px;
     height: 80px;
     position: relative;
@@ -53,7 +57,7 @@ color: $color;
     right: 32px;
 }
 
-.logocertamen{
+.logocertamen {
     width: 180px;
     height: 180px;
     position: relative;
@@ -61,26 +65,28 @@ color: $color;
     right: 60px;
 }
 
-.text{
+.text {
     top: 10px;
     position: relative;
-    h3{
+    h3 {
         color: white;
     }
-    p{
+    p {
         color: white;
         font-size: 10px;
     }
 }
+
 input[type="text"],
-input[type="password"]{
+input[type="password"] {
     border: none;
 }
-.input-group{
+
+.input-group {
     border: 1px solid #eaeaea;
 }
- 
-.icon{
+
+.icon {
     position: relative;
     min-width: 40px;
     height: 15px;
@@ -88,21 +94,23 @@ input[type="password"]{
     top: 12px;
     color: gray;
 }
-.form-control{
+
+.form-control {
     border: none;
 }
-.boton-iniciar{
+
+.boton-iniciar {
     border: none;
     border-radius: 1em;
     width: 100%;
     background: #0064A7;
     cursor: pointer;
-    &:hover{
+    &:hover {
         background: #43B4E4;
     }
 }
 
-.boton-iniciar:disabled{
+.boton-iniciar:disabled {
     background: #67baca;
     cursor: default;
 }

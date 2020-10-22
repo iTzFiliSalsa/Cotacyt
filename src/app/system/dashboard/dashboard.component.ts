@@ -549,7 +549,7 @@ export class DashboardComponent implements OnInit {
             title: 'No tienes autores registrados en este proyecto, agrega para descargar.'
           });
         }
-        
+
         switch (id_sedes) {
           case '1':
             switch (this.categoriaActual) {
@@ -886,82 +886,180 @@ export class DashboardComponent implements OnInit {
 
   firstPlace({ nombre = '' }, autores: any[], sede: string = '', sede2: string = '', categoriaSede: string = '') {
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
-      let array = 1;
-      if(!autores){
+      if (!autores) {
         swal.fire({
           icon: 'error',
           title: 'El proyecto no tiene autores registrados'
         });
       }
       for (let i = 0; i < autores.length; i++) {
-        const doc5 = new jsPDF('p', 'in', 'letter');
-        doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc5.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-        doc5.text(nombre, 4.2, 7.8, { align: "center" });
-        doc5.setFont('Helvetica');
-        doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
-      }
-      }else{
-        let array = 1;
-        if(!autores){
-          swal.fire({
-            icon: 'error',
-            title: 'El proyecto no tiene autores registrados'
-          });
+        const doc7 = new jsPDF('p', 'in', 'letter');
+        doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        if (nombre.length >= 30 && nombre.length <= 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.setFontSize(14);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+        } else {
+          if (nombre.length > 100) {
+            let nombreTemp = nombre.substr(0, 50);
+            let nombreTemp2 = nombre.substr(50, 50);
+            let nombreTemp3 = nombre.substr(100, nombre.length);
+            doc7.text('', 0, 0).setFontSize(14);
+            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.setFontSize(14);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+          } else {
+            doc7.text(nombre, 4.2, 7.8, { align: "center" });
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+          }
         }
+      }
+    } else {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
       for (let i = 0; i < autores.length; i++) {
-        const doc5 = new jsPDF('p', 'in', 'letter');
-        doc5.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc5.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-        doc5.text(nombre, 4.2, 7.8, { align: "center" });
-        doc5.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-        doc5.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-        doc5.setFont('Helvetica');
-        doc5.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+        const doc7 = new jsPDF('p', 'in', 'letter');
+        doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        if (nombre.length >= 30 && nombre.length <= 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
+        } else {
+          if(nombre.length > 100) {
+            let nombreTemp = nombre.substr(0, 50);
+            let nombreTemp2 = nombre.substr(50, 50);
+            let nombreTemp3 = nombre.substr(100, nombre.length);
+            doc7.text('', 0, 0).setFontSize(14);
+            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
+          } else {
+            doc7.text(nombre, 4.2, 7.8, { align: "center" });
+            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
+          }
+        }
       }
     }
   }
 
   secondPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
-    
+
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
-      if(!autores){
+      if (!autores) {
         swal.fire({
           icon: 'error',
           title: 'El proyecto no tiene autores registrados'
         });
       }
       for (let i = 0; i < autores.length; i++) {
-        const doc6 = new jsPDF('p', 'in', 'letter');
-        doc6.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-        doc6.text(nombre, 4.2, 7.8, { align: "center" });
-        doc6.setFont('Helvetica');
-        doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
-      }
-      }else{
-        if(!autores){
-          swal.fire({
-            icon: 'error',
-            title: 'El proyecto no tiene autores registrados'
-          });
+        const doc7 = new jsPDF('p', 'in', 'letter');
+        doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        if (nombre.length >= 30 && nombre.length <= 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.setFontSize(14);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+        } else {
+          if (nombre.length > 100) {
+            let nombreTemp = nombre.substr(0, 50);
+            let nombreTemp2 = nombre.substr(50, 50);
+            let nombreTemp3 = nombre.substr(100, nombre.length);
+            doc7.text('', 0, 0).setFontSize(14);
+            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.setFontSize(14);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+          } else {
+            doc7.text(nombre, 4.2, 7.8, { align: "center" });
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+          }
         }
-        for (let i = 0; i < autores.length; i++) {
-          const doc6 = new jsPDF('p', 'in', 'letter');
-          doc6.addImage('assets/image/diploma/' + sede.toString() + '/Segundo' + categoriaSede.toString() + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-          doc6.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-          doc6.text(nombre, 4.2, 7.8, { align: "center" });
-          doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-          doc6.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-          doc6.setFont('Helvetica');
-          doc6.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+      }
+    } else {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      for (let i = 0; i < autores.length; i++) {
+        const doc7 = new jsPDF('p', 'in', 'letter');
+        doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        if (nombre.length >= 30 && nombre.length <= 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+        } else {
+          if(nombre.length > 100) {
+            let nombreTemp = nombre.substr(0, 50);
+            let nombreTemp2 = nombre.substr(50, 50);
+            let nombreTemp3 = nombre.substr(100, nombre.length);
+            doc7.text('', 0, 0).setFontSize(14);
+            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+          } else {
+            doc7.text(nombre, 4.2, 7.8, { align: "center" });
+            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+          }
+        }
       }
     }
   }
   thirdPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
-    
+
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
-      if(!autores){
+      if (!autores) {
         swal.fire({
           icon: 'error',
           title: 'El proyecto no tiene autores registrados'
@@ -971,122 +1069,172 @@ export class DashboardComponent implements OnInit {
         const doc7 = new jsPDF('p', 'in', 'letter');
         doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-        doc7.text(nombre, 4.2, 7.8, { align: "center" });
-        doc7.setFont('Helvetica');
-        doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
-      }
-      }else{
-        if(!autores){
-          swal.fire({
-            icon: 'error',
-            title: 'El proyecto no tiene autores registrados'
-          });
+        if (nombre.length >= 30 && nombre.length <= 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.setFontSize(14);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+        } else {
+          if (nombre.length > 100) {
+            let nombreTemp = nombre.substr(0, 50);
+            let nombreTemp2 = nombre.substr(50, 50);
+            let nombreTemp3 = nombre.substr(100, nombre.length);
+            doc7.text('', 0, 0).setFontSize(14);
+            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.setFontSize(14);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+          } else {
+            doc7.text(nombre, 4.2, 7.8, { align: "center" });
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+          }
         }
-        for (let i = 0; i < autores.length; i++) {
-          const doc7 = new jsPDF('p', 'in', 'letter');
-          doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-          doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+      }
+    } else {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      for (let i = 0; i < autores.length; i++) {
+        const doc7 = new jsPDF('p', 'in', 'letter');
+        doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc7.text(autores[i].autor, 4.2, 6.5, { align: "center" }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
+        if (nombre.length >= 30 && nombre.length <= 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
           doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
           doc7.setFont('Helvetica');
           doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+        } else {
+          if(nombre.length > 100) {
+            let nombreTemp = nombre.substr(0, 50);
+            let nombreTemp2 = nombre.substr(50, 50);
+            let nombreTemp3 = nombre.substr(100, nombre.length);
+            doc7.text('', 0, 0).setFontSize(14);
+            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+          } else {
+            doc7.text(nombre, 4.2, 7.8, { align: "center" });
+            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+            doc7.setFont('Helvetica');
+            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+          }
+        }
       }
     }
   }
 
   imprimir(proyecto: any, categoria: any) {
-    if (proyecto.length !== 0) {    
+    if (proyecto.length !== 0) {
       switch (categoria) {
         case 'petit':
           let contador6 = 0;
           const doc1 = new jsPDF({ orientation: 'landscape' });
-          for (let i = 0; i < proyecto.length; i++) { 
-          let nombrePetit = '';
-          let totalPetit = '';
-          let sedePetit2 = '';
-          for (let j = contador6; j < contador6 + 11; j++) {
-            if(j >= proyecto.length){
-              continue;
+          for (let i = 0; i < proyecto.length; i++) {
+            let nombrePetit = '';
+            let totalPetit = '';
+            let sedePetit2 = '';
+            for (let j = contador6; j < contador6 + 11; j++) {
+              if (j >= proyecto.length) {
+                continue;
+
+              }
+              let nombre: string;
+              if (proyecto[j].nombre.length >= 60) {
+
+                nombre = proyecto[j].nombre.substring(0, 60);
+                nombre += '\r\n';
+                nombre += proyecto[j].nombre.substring(60);
+                totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n', '\r\n');
+              } else {
+                nombre = proyecto[j].nombre;
+                totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
+              }
+              nombrePetit = nombrePetit.concat(nombre, '\r\n');
+              sedePetit2 = proyecto[j].sede;
+
 
             }
-            let nombre:string;
-            if(proyecto[j].nombre.length>=60){
-              
-              nombre = proyecto[j].nombre.substring(0, 60);
-              nombre += '\r\n';
-              nombre += proyecto[j].nombre.substring(60);
-              totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
-            }else{
-              nombre = proyecto[j].nombre;
-              totalPetit = totalPetit.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
-            }
-            nombrePetit = nombrePetit.concat(nombre, '\r\n');
-            sedePetit2 = proyecto[j].sede;
-            
+            contador6 += 11;
+            i = contador6;
+            doc1.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+            doc1.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+            doc1.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+            doc1.text('Lista de Proyectos Categoría Petit Sede ' + sedePetit2 + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
+            doc1.text('Proyecto', 35, 75);
+            doc1.text(nombrePetit, 35, 90);
+            doc1.text('Calificación', 220, 75);
+            doc1.text(totalPetit, 220, 90);
 
+            doc1.setFontSize(14);
+            doc1.setFont('Caviar');
+            doc1.addPage();
           }
-          contador6 += 11;
-          i = contador6;
-          doc1.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
-          doc1.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-          doc1.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc1.text('Lista de Proyectos Categoría Petit Sede ' + sedePetit2 + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
-          doc1.text('Proyecto', 35, 75);
-          doc1.text(nombrePetit, 35, 90);
-          doc1.text('Calificación', 220, 75);
-          doc1.text(totalPetit, 220, 90);
-
-          doc1.setFontSize(14);
-          doc1.setFont('Caviar');
-          doc1.addPage();
-        }
           doc1.save("lista petit.pdf");
           break;
 
         case 'kids':
           let contador5 = 0;
           const doc8 = new jsPDF({ orientation: 'landscape' });
-          for (let i = 0; i < proyecto.length; i++) { 
-          let nombreKids = '';
-          let totalKids = '';
-          let sedeKids = '';
-          for (let j = contador5; j < contador5 + 11; j++) {
-            if(j >= proyecto.length){
-              continue;
+          for (let i = 0; i < proyecto.length; i++) {
+            let nombreKids = '';
+            let totalKids = '';
+            let sedeKids = '';
+            for (let j = contador5; j < contador5 + 11; j++) {
+              if (j >= proyecto.length) {
+                continue;
+
+              }
+              let nombre: string;
+              if (proyecto[j].nombre.length >= 60) {
+
+                nombre = proyecto[j].nombre.substring(0, 60);
+                nombre += '\r\n';
+                nombre += proyecto[j].nombre.substring(60);
+                totalKids = totalKids.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n', '\r\n');
+              } else {
+                nombre = proyecto[j].nombre;
+                totalKids = totalKids.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
+              }
+              nombreKids = nombreKids.concat(nombre, '\r\n');
+              sedeKids = proyecto[j].sede;
+
 
             }
-            let nombre:string;
-            if(proyecto[j].nombre.length>=60){
-              
-              nombre = proyecto[j].nombre.substring(0, 60);
-              nombre += '\r\n';
-              nombre += proyecto[j].nombre.substring(60);
-              totalKids = totalKids.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
-            }else{
-              nombre = proyecto[j].nombre;
-              totalKids = totalKids.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
-            }
-            nombreKids = nombreKids.concat(nombre, '\r\n');
-            sedeKids = proyecto[j].sede;
-            
+            contador5 += 11;
+            i = contador5;
+            doc8.addImage('assets/image/logotamColor.png', 'png', 12, 13, 38, 17);
+            doc8.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+            doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+            doc8.text('Lista de Proyectos Categoría Kids Sede ' + sedeKids + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
+            doc8.text('Proyecto', 35, 75);
+            doc8.text(nombreKids, 35, 90);
+            doc8.text('Calificación', 220, 75);
+            doc8.text(totalKids, 220, 90);
 
+            doc8.setFontSize(14);
+            doc8.setFont('Caviar');
+            doc8.addPage();
           }
-          contador5 += 11;
-          i = contador5;
-          doc8.addImage('assets/image/logotamColor.png', 'png', 12, 13, 38, 17);
-          doc8.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-          doc8.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc8.text('Lista de Proyectos Categoría Kids Sede ' + sedeKids + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
-          doc8.text('Proyecto', 35, 75);
-          doc8.text(nombreKids, 35, 90);
-          doc8.text('Calificación', 220, 75);
-          doc8.text(totalKids, 220, 90);
-
-          doc8.setFontSize(14);
-          doc8.setFont('Caviar');
-          doc8.addPage();
-        }
           doc8.save("lista kids.pdf");
 
           break;
@@ -1094,181 +1242,181 @@ export class DashboardComponent implements OnInit {
         case 'juvenil':
           let contador4 = 0;
           const doc7 = new jsPDF({ orientation: 'landscape' });
-          for (let i = 0; i < proyecto.length; i++) { 
-          let nombreJuvenil = '';
-          let totalJuvenil = '';
-          let sedeJuvenil = '';
-          for (let j = contador4; j < contador4 + 11; j++) {
-            if(j >= proyecto.length){
-              continue;
+          for (let i = 0; i < proyecto.length; i++) {
+            let nombreJuvenil = '';
+            let totalJuvenil = '';
+            let sedeJuvenil = '';
+            for (let j = contador4; j < contador4 + 11; j++) {
+              if (j >= proyecto.length) {
+                continue;
+
+              }
+              let nombre: string;
+              if (proyecto[j].nombre.length >= 60) {
+
+                nombre = proyecto[j].nombre.substring(0, 60);
+                nombre += '\r\n';
+                nombre += proyecto[j].nombre.substring(60);
+                totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n', '\r\n');
+              } else {
+                nombre = proyecto[j].nombre;
+                totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
+              }
+              nombreJuvenil = nombreJuvenil.concat(nombre, '\r\n');
+              sedeJuvenil = proyecto[j].sede;
 
             }
-            let nombre:string;
-            if(proyecto[j].nombre.length>=60){
-              
-              nombre = proyecto[j].nombre.substring(0, 60);
-              nombre += '\r\n';
-              nombre += proyecto[j].nombre.substring(60);
-              totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
-            }else{
-              nombre = proyecto[j].nombre;
-              totalJuvenil = totalJuvenil.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
-            }
-            nombreJuvenil = nombreJuvenil.concat(nombre, '\r\n');
-            sedeJuvenil = proyecto[j].sede;
-          
+            contador4 += 11;
+            i = contador4;
+            doc7.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+            doc7.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+            doc7.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+            doc7.text('Lista de Proyectos Categoría Juvenil Sede ' + sedeJuvenil + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
+            doc7.text('Proyecto', 35, 75);
+            doc7.text(nombreJuvenil, 35, 90);
+            doc7.text('Calificación', 220, 75);
+            doc7.text(totalJuvenil, 220, 90);
+
+            doc7.setFontSize(14);
+            doc7.setFont('Caviar');
+            doc7.addPage();
           }
-          contador4 += 11;
-          i = contador4;
-          doc7.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
-          doc7.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-          doc7.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc7.text('Lista de Proyectos Categoría Juvenil Sede ' + sedeJuvenil + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
-          doc7.text('Proyecto', 35, 75);
-          doc7.text(nombreJuvenil, 35, 90);
-          doc7.text('Calificación', 220, 75);
-          doc7.text(totalJuvenil, 220, 90);
-
-          doc7.setFontSize(14);
-          doc7.setFont('Caviar');
-          doc7.addPage();
-        }
           doc7.save("lista juvenil.pdf");
           break;
 
         case 'media-superior':
           let contador3 = 0;
           const doc2 = new jsPDF({ orientation: 'landscape' });
-          for (let i = 0; i < proyecto.length; i++) { 
-          let nombreMS = '';
-          let totalMS = '';
-          let sedeMS = '';
-          for (let j = contador3; j < contador3 + 11; j++) {
-            if(j >= proyecto.length){
-              continue;
+          for (let i = 0; i < proyecto.length; i++) {
+            let nombreMS = '';
+            let totalMS = '';
+            let sedeMS = '';
+            for (let j = contador3; j < contador3 + 11; j++) {
+              if (j >= proyecto.length) {
+                continue;
+
+              }
+              let nombre: string;
+              if (proyecto[j].nombre.length >= 60) {
+
+                nombre = proyecto[j].nombre.substring(0, 60);
+                nombre += '\r\n';
+                nombre += proyecto[j].nombre.substring(60);
+                totalMS = totalMS.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n', '\r\n');
+              } else {
+                nombre = proyecto[j].nombre;
+                totalMS = totalMS.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
+              }
+              nombreMS = nombreMS.concat(nombre, '\r\n');
+              sedeMS = proyecto[j].sede;
+
 
             }
-            let nombre:string;
-            if(proyecto[j].nombre.length>=60){
-              
-              nombre = proyecto[j].nombre.substring(0, 60);
-              nombre += '\r\n';
-              nombre += proyecto[j].nombre.substring(60);
-              totalMS = totalMS.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
-            }else{
-              nombre = proyecto[j].nombre;
-              totalMS = totalMS.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
-            }
-            nombreMS = nombreMS.concat(nombre, '\r\n');
-            sedeMS = proyecto[j].sede;
-            
-
+            contador3 += 11;
+            i = contador3;
+            doc2.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+            doc2.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+            doc2.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+            doc2.text('Lista de Proyectos Categoría Media-Superior Sede ' + sedeMS + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
+            doc2.text('Proyecto', 35, 75);
+            doc2.text(nombreMS, 35, 90);
+            doc2.text('Calificación', 220, 75);
+            doc2.text(totalMS, 220, 90)
+            doc2.setFontSize(14);
+            doc2.setFont('Caviar');
+            doc2.addPage();
           }
-          contador3 += 11;
-          i = contador3;
-          doc2.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
-          doc2.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-          doc2.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc2.text('Lista de Proyectos Categoría Media-Superior Sede ' + sedeMS + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
-          doc2.text('Proyecto', 35, 75);
-          doc2.text(nombreMS, 35, 90);
-          doc2.text('Calificación', 220, 75);
-          doc2.text(totalMS, 220, 90)
-          doc2.setFontSize(14);
-          doc2.setFont('Caviar');
-          doc2.addPage();
-        }
-        doc2.save("lista media-superior.pdf");
+          doc2.save("lista media-superior.pdf");
           break;
 
         case 'superior':
           let contador = 0;
           const doc3 = new jsPDF({ orientation: 'landscape' });
-          for (let i = 0; i < proyecto.length; i++) { 
-            
-          let nombreSuperior = '';
-          let totalSuperior = '';
-          let sedeSuperior = '';
-          
-          for (let j = contador; j < contador + 11; j++) {
-            if(j >= proyecto.length){
-              continue;
+          for (let i = 0; i < proyecto.length; i++) {
+
+            let nombreSuperior = '';
+            let totalSuperior = '';
+            let sedeSuperior = '';
+
+            for (let j = contador; j < contador + 11; j++) {
+              if (j >= proyecto.length) {
+                continue;
+
+              }
+
+              let nombre: string;
+              if (proyecto[j].nombre.length >= 60) {
+
+                nombre = proyecto[j].nombre.substring(0, 60);
+                nombre += '\r\n';
+                nombre += proyecto[j].nombre.substring(60);
+                totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n', '\r\n');
+              } else {
+                nombre = proyecto[j].nombre;
+                totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
+              }
+              nombreSuperior = nombreSuperior.concat(nombre, '\r\n');
+              sedeSuperior = proyecto[j].sede;
 
             }
-            
-            let nombre:string;
-            if(proyecto[j].nombre.length>=60){
-              
-              nombre = proyecto[j].nombre.substring(0, 60);
-              nombre += '\r\n';
-              nombre += proyecto[j].nombre.substring(60);
-              totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
-            }else{
-              nombre = proyecto[j].nombre;
-              totalSuperior = totalSuperior.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
-            }
-            nombreSuperior = nombreSuperior.concat(nombre, '\r\n');
-            sedeSuperior = proyecto[j].sede;
-            
+            contador += 11;
+            i = contador;
+            doc3.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+            doc3.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+            doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+            doc3.text('Lista de Proyectos Categoría Superior Sede ' + sedeSuperior + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
+            doc3.text('Proyecto', 35, 75);
+            doc3.text(nombreSuperior, 35, 90);
+            doc3.text('Calificación', 220, 75);
+            doc3.text(totalSuperior, 220, 90);
+            doc3.setFontSize(14);
+            doc3.setFont('Caviar');
+            doc3.addPage();
           }
-          contador += 11;
-          i = contador;
-          doc3.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
-          doc3.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-          doc3.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc3.text('Lista de Proyectos Categoría Superior Sede ' + sedeSuperior + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
-          doc3.text('Proyecto', 35, 75);
-          doc3.text(nombreSuperior, 35, 90);
-          doc3.text('Calificación', 220, 75);
-          doc3.text(totalSuperior, 220, 90);
-          doc3.setFontSize(14);
-          doc3.setFont('Caviar');
-          doc3.addPage(); 
-        }
           doc3.save("lista superior.pdf");
           break;
 
         case 'posgrado':
           let contador2 = 0;
           const doc4 = new jsPDF({ orientation: 'landscape' });
-          for (let i = 0; i < proyecto.length; i++) { 
-          let nombrePosgrado = '';
-          let totalPosgrado = '';
-          let sedePosgrado = '';
-          for (let j = contador2; j < contador2 + 11; j++) {
-            if(j >= proyecto.length){
-              continue;
-            }
-            let nombre:string;
-            if(proyecto[j].nombre.length>=60){
-              
-              nombre = proyecto[j].nombre.substring(0, 60);
-              nombre += '\r\n';
-              nombre += proyecto[j].nombre.substring(60);
-              totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n','\r\n');
-            }else{
-              nombre = proyecto[j].nombre;
-              totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
-            }
-            nombrePosgrado = nombrePosgrado.concat(nombre, '\r\n');
-            sedePosgrado = proyecto[j].sede;
-            
-          }
-          contador2 += 11;
-          i = contador2;
-          doc4.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
-          doc4.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
-          doc4.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
-          doc4.text('Lista de Proyectos Categoría Posgrado Sede ' + sedePosgrado + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
-          doc4.text('Proyecto', 35, 75);
-          doc4.text(nombrePosgrado, 35, 90);
-          doc4.text('Calificación', 220, 75);
-          doc4.text(totalPosgrado, 220, 90);
+          for (let i = 0; i < proyecto.length; i++) {
+            let nombrePosgrado = '';
+            let totalPosgrado = '';
+            let sedePosgrado = '';
+            for (let j = contador2; j < contador2 + 11; j++) {
+              if (j >= proyecto.length) {
+                continue;
+              }
+              let nombre: string;
+              if (proyecto[j].nombre.length >= 60) {
 
-          doc4.setFontSize(14);
-          doc4.setFont('Caviar');
-          doc4.addPage();
-        }
+                nombre = proyecto[j].nombre.substring(0, 60);
+                nombre += '\r\n';
+                nombre += proyecto[j].nombre.substring(60);
+                totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n', '\r\n');
+              } else {
+                nombre = proyecto[j].nombre;
+                totalPosgrado = totalPosgrado.concat(Math.round(parseInt(proyecto[j].total)).toString(), '\r\n');
+              }
+              nombrePosgrado = nombrePosgrado.concat(nombre, '\r\n');
+              sedePosgrado = proyecto[j].sede;
+
+            }
+            contador2 += 11;
+            i = contador2;
+            doc4.addImage('assets/image/logotamColor.png', 'png', 14, 13, 48, 24);
+            doc4.addImage('assets/image/cecit.png', 'png', 243, 8, 39, 39).setFont('Caviar').setFontSize(20).setTextColor('#646464');
+            doc4.text('Consejo Tamaulipeco de Ciencia y Tecnología', 150, 34, { align: "center" }).setFont('Caviar').setFontSize(18).setTextColor('#646464');
+            doc4.text('Lista de Proyectos Categoría Posgrado Sede ' + sedePosgrado + '', 151, 46, { align: "center" }).setFont('Caviar').setFontSize(14).setTextColor('#646464');
+            doc4.text('Proyecto', 35, 75);
+            doc4.text(nombrePosgrado, 35, 90);
+            doc4.text('Calificación', 220, 75);
+            doc4.text(totalPosgrado, 220, 90);
+
+            doc4.setFontSize(14);
+            doc4.setFont('Caviar');
+            doc4.addPage();
+          }
 
           doc4.save("lista posgrado.pdf");
 
