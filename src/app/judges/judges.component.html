@@ -1,6 +1,13 @@
 <div class="p-3">
-    <div class="subtitle">
+    <div class="subtitle d-flex justify-content-between align-items-center">
         <h4>Jueces registrados</h4>
+        <div class="form-group" *ngIf="sessionData.rol === 'superuser'">
+            <label for="">Filtro por sede:</label>
+            <select #sd (change)="onChangeSedeActualFiltro(sd.value)" class="form-control" [attr.disabled]="superUser ? 'disabled': null">
+                <option value="todo">Todos</option>
+                <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
+            </select>
+        </div>
     </div>
     <hr>
     <table class="table table-lg table-hover table-responsive-lg">
