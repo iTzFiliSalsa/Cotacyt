@@ -1,6 +1,16 @@
 <!-- swal tabla informacion -->
 <swal class="swal-wide" #swalid1 title="Activar Plataforma" [swalOptions]="{customClass: 'clase'}">
     <div *swalPortal>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="fechaNac">Fecha de Inicio</label>
+                <input type="date" placeholder="Fecha de Inicio" class="form-control" id="fechaI" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="fechaNac">Fecha de Fin</label>
+                <input type="date" placeholder="Fecha de Fin" class="form-control" id="fechaF" required>
+            </div>
+        </div>
 
     </div>
 </swal>
@@ -8,7 +18,7 @@
 <div class="p-3">
     <div class="d-flex justify-content-between">
         <a [routerLink]="['/home/registered-judges']" routerLinkActive="active" class="btn-judges-registered btn mb-2"><span><i class="fas fa-balance-scale"></i></span> Jueces registrados</a>
-        <a class="btn-judges-registered btn mb-2"><span><i class="fas fa-balance-scale"></i></span> ESTABLECER FECHAS</a>
+        <a class="btn-judges-registered btn mb-2" (click)="mostrarSwal($event)"><span><i class="fas fa-balance-scale"></i></span> ESTABLECER FECHAS</a>
     </div>
     <div class="container-fluid color">
         <div class="row ">
