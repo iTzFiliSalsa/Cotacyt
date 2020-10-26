@@ -1,6 +1,14 @@
+<!-- swal tabla informacion -->
+<swal class="swal-wide" #swalid1 title="Activar Plataforma" [swalOptions]="{customClass: 'clase'}">
+    <div *swalPortal>
+
+    </div>
+</swal>
+
 <div class="p-3">
-    <div>
-        <a   [routerLink]="['/home/registered-judges']" routerLinkActive="active"  class="btn-judges-registered btn mb-2"><span><i class="fas fa-balance-scale"></i></span> Jueces registrados</a>
+    <div class="d-flex justify-content-between">
+        <a [routerLink]="['/home/registered-judges']" routerLinkActive="active" class="btn-judges-registered btn mb-2"><span><i class="fas fa-balance-scale"></i></span> Jueces registrados</a>
+        <a class="btn-judges-registered btn mb-2"><span><i class="fas fa-balance-scale"></i></span> ESTABLECER FECHAS</a>
     </div>
     <div class="container-fluid color">
         <div class="row ">
@@ -15,13 +23,11 @@
                         <h5 class="titulo font-weight-bold">Registrar Juez</h5>
                         <div class="form-group">
                             <label for="">Usuario:</label>
-                            <input type="text" class="form-control" formControlName="usuario"
-                                placeholder="Nombre de usuario">
+                            <input type="text" class="form-control" formControlName="usuario" placeholder="Nombre de usuario">
                         </div>
                         <div class="form-group">
                             <label for="">Nombre:</label>
-                            <input type="text" class="form-control" formControlName="nombre"
-                                placeholder="Nombre del juez">
+                            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del juez">
                         </div>
                         <div class="form-group">
                             <label for="">Sede:</label>
@@ -31,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Categoria:</label>
-                            <select #s (change)="onChangecategoriaActual(s.value)"formControlName="id_categorias" class="form-control">
+                            <select #s (change)="onChangecategoriaActual(s.value)" formControlName="id_categorias" class="form-control">
                                 <option value="1">Petit</option>
                                 <option value="2">Kids</option>
                                 <option value="3">Juvenil</option>
@@ -42,20 +48,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">Proyectos:</label>
-                            <ng-multiselect-dropdown formControlName="ids_proyectos"
-                            [settings]="dropdownSettingsProyecto"
-                            [data]="proyectos"
-                            (onSelect)="addProyecto($event)"
-                            (onDeSelect)="dropProyecto($event)"
-                            ></ng-multiselect-dropdown>
+                            <ng-multiselect-dropdown formControlName="ids_proyectos" [settings]="dropdownSettingsProyecto" [data]="proyectos" (onSelect)="addProyecto($event)" (onDeSelect)="dropProyecto($event)"></ng-multiselect-dropdown>
                         </div>
                         <div class="form-group">
                             <label for="">Contraseña:</label>
-                            <input type="password" class="form-control" formControlName="contrasena"
-                                placeholder="Contraseña">
+                            <input type="password" class="form-control" formControlName="contrasena" placeholder="Contraseña">
                         </div>
-                        <button [disabled]="!formsRegistroJuez.valid" class="btn btn-primary boton-iniciar"
-                            (click)="registrarJuez()">Registrar</button>
+                        <button [disabled]="!formsRegistroJuez.valid" class="btn btn-primary boton-iniciar" (click)="registrarJuez()">Registrar</button>
                     </form>
                 </div>
             </div>

@@ -75,15 +75,15 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.autoresSeleccionados = new Array<any>();
     this._utilService.loading = true;
     this.formProyecto = this.formBuilder.group({
-      id_proyectos:  [''],
-      id_asesores:   ['', [Validators.required]],
-      id_areas:      ['', [Validators.required]],
-      id_sedes:      this.sessionData.id_sedes,
+      id_proyectos: [''],
+      id_asesores: ['', [Validators.required]],
+      id_areas: ['', [Validators.required]],
+      id_sedes: this.sessionData.id_sedes,
       id_categorias: ['', [Validators.required]],
       ids_autores_viejos: [''],
-      ids_autores_nuevos : [''],
-      nombre:        ['', [Validators.required]],
-      resumen:       ['', [Validators.required]],
+      ids_autores_nuevos: [''],
+      nombre: ['', [Validators.required]],
+      resumen: ['', [Validators.required]],
     });
     if (this.sessionData.rol === 'superuser') {
       this.superUser = false;
@@ -98,13 +98,13 @@ export class ProjectsRegisteredComponent implements OnInit {
         areas: this.areasService.getAreas(),
         sedes: this.sedesService.getSedes(),
         autores: this.superUser
-        ? this.autoresService.getAutoresSelect()
-        :  this.autoresService.getAutoresSelectSuperUser(this.sedeActual),
+          ? this.autoresService.getAutoresSelect()
+          : this.autoresService.getAutoresSelectSuperUser(this.sedeActual),
         categorias: this.categoriasServices.getAllCategrias(),
         asesores: this.asesoresService.getAsesores(),
         proyectos: this.superUser
-        ? this.projectsService.obtenerTodosLosProyectosDetallesAdmin()
-        : this.projectsService.obtenerTodosLosProyectosDetalles()
+          ? this.projectsService.obtenerTodosLosProyectosDetallesAdmin()
+          : this.projectsService.obtenerTodosLosProyectosDetalles()
       }
     ).subscribe(
       data => {
@@ -168,39 +168,39 @@ export class ProjectsRegisteredComponent implements OnInit {
   openSwal(proyecto: ProjectRegistered) {
     this.proyectoActual = proyecto;
     this.obtenerProyecto.getAutoresProyecto(this.proyectoActual.id_proyectos)
-    .subscribe( data => {
-      this.autoresViejos = data;
-      this.agregado = (3 - this.autoresViejos.length);
-      this.settingsAutoresViejos = {
-        singleSelection: false,
-        idField: 'id_autores',
-        textField: 'nombre',
-        itemsShowLimit: 3,
-        limitSelection: this.autoresViejos.length,
-        allowSearchFilter: true
-      };
-    });
+      .subscribe(data => {
+        this.autoresViejos = data;
+        this.agregado = (3 - this.autoresViejos.length);
+        this.settingsAutoresViejos = {
+          singleSelection: false,
+          idField: 'id_autores',
+          textField: 'nombre',
+          itemsShowLimit: 3,
+          limitSelection: this.autoresViejos.length,
+          allowSearchFilter: true
+        };
+      });
     this.obtenerProyecto.obtenerProyecto(proyecto.id_proyectos).subscribe(
       data => {
         this.superUser
-        ? this.formProyecto.patchValue({
-          id_proyectos:  data.id_proyectos,
-          id_asesores:   data.id_asesores,
-          id_areas:      data.id_areas,
-          id_sedes:      this.sessionData.id_sedes,
-          id_categorias: data.id_categorias,
-          nombre:        data.nombre,
-          resumen:       data.resumen,
-        })
-        : this.formProyecto.patchValue({
-          id_proyectos:  data.id_proyectos,
-          id_asesores:   data.id_asesores,
-          id_areas:      data.id_areas,
-          id_sedes:      data.id_sedes,
-          id_categorias: data.id_categorias,
-          nombre:        data.nombre,
-          resumen:       data.resumen,
-        });
+          ? this.formProyecto.patchValue({
+            id_proyectos: data.id_proyectos,
+            id_asesores: data.id_asesores,
+            id_areas: data.id_areas,
+            id_sedes: this.sessionData.id_sedes,
+            id_categorias: data.id_categorias,
+            nombre: data.nombre,
+            resumen: data.resumen,
+          })
+          : this.formProyecto.patchValue({
+            id_proyectos: data.id_proyectos,
+            id_asesores: data.id_asesores,
+            id_areas: data.id_areas,
+            id_sedes: data.id_sedes,
+            id_categorias: data.id_categorias,
+            nombre: data.nombre,
+            resumen: data.resumen,
+          });
       }, err => {
         console.log(err);
         Swal.fire({
@@ -212,28 +212,28 @@ export class ProjectsRegisteredComponent implements OnInit {
     this.swalEdit.fire();
   }
   editarProyecto() {
-    this.projectsService.updateProyect( this.formProyecto.value)
-    .subscribe( data => {
-      Swal.fire({
-        icon: 'success',
-        title: data,
+    this.projectsService.updateProyect(this.formProyecto.value)
+      .subscribe(data => {
+        Swal.fire({
+          icon: 'success',
+          title: data,
+        });
+        this.ngOnInit();
+        this.autoresSeleccionados = Array<AutoresSelect>();
+        this.autoresViejosSeleccionados = Array<AutoresSelect>();
+      }, err => {
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'ocurrio un error al actualizar',
+        });
       });
-      this.ngOnInit();
-      this.autoresSeleccionados = Array<AutoresSelect>();
-      this.autoresViejosSeleccionados = Array<AutoresSelect>();
-    }, err => {
-      console.log(err);
-      Swal.fire({
-        icon: 'error',
-        title: 'ocurrio un error al actualizar',
-      });
-    });
   }
   addAutor(item: any) {
     this.autoresSeleccionados.push(item);
   }
   dropAutor(item: { id_autores: any; }) {
-    this.autoresSeleccionados.map( (res, index) => {
+    this.autoresSeleccionados.map((res, index) => {
       if (res.id_autores === item.id_autores) {
         this.autoresSeleccionados.splice(index, 1);
       }
@@ -242,77 +242,97 @@ export class ProjectsRegisteredComponent implements OnInit {
   addAutorViejo(item: AutoresSelect) {
     this.autoresViejosSeleccionados.push(item);
     this.lenght = (this.autoresViejosSeleccionados.length + this.agregado);
-    this.settingsAutoresNuevos = Object.assign({}, this.settingsAutoresNuevos, {limitSelection: this.lenght});
+    this.settingsAutoresNuevos = Object.assign({}, this.settingsAutoresNuevos, { limitSelection: this.lenght });
   }
   dropAutorViejo(item: AutoresSelect) {
-    this.autoresViejosSeleccionados.map( (res, index) => {
+    this.autoresViejosSeleccionados.map((res, index) => {
       if (res.id_autores === item.id_autores) {
         this.autoresViejosSeleccionados.splice(index, 1);
-        this.lenght = (this.autoresViejosSeleccionados.length +  this.agregado);
-        this.settingsAutoresNuevos = Object.assign({}, this.settingsAutoresNuevos, {limitSelection: this.lenght});
+        this.lenght = (this.autoresViejosSeleccionados.length + this.agregado);
+        this.settingsAutoresNuevos = Object.assign({}, this.settingsAutoresNuevos, { limitSelection: this.lenght });
       }
     });
   }
-  saveAsPdf(proyecto: ProjectRegistered){
+  saveAsPdf(proyecto: ProjectRegistered) {
     this.proyectoActual = proyecto;
-    switch(this.proyectoActual.sede){
+    switch (this.proyectoActual.sede) {
       case 'El mante':
         const doc = new jsPDF();
         doc.addImage('assets/image/certificadoJurado.jpg', 'jpg', 0, 0, 210, 300);
-        doc.text(this.proyectoActual.asesor , 65, 185);
-        doc.text(this.proyectoActual.nombre, 80, 225);
-        doc.setFontSize(16);
-        doc.setFont('Helvetica');
-        doc.save("constanciaAsesor.pdf");
-      break;
+        doc.text(this.proyectoActual.asesor, 65, 185);
+        if (this.proyectoActual.nombre.length >= 30 && this.proyectoActual.nombre.length <= 60) {
+          let nombreTemp = this.proyectoActual.nombre.substr(0, 30);
+          let nombreTemp2 = this.proyectoActual.nombre.substr(30, this.proyectoActual.nombre.length);
+          doc.text(nombreTemp, 90, 225, { align: "center" });
+          doc.text(nombreTemp2, 90, 230, { align: "center" });
+          doc.save('constanciaAsesor.pdf');
+        } else {
+          if (this.proyectoActual.nombre.length > 100) {
+            let nombreTemp = this.proyectoActual.nombre.substr(0, 50);
+            let nombreTemp2 = this.proyectoActual.nombre.substr(50, 50);
+            let nombreTemp3 = this.proyectoActual.nombre.substr(100, this.proyectoActual.nombre.length);
+            console.log(nombreTemp3);
+            doc.text('', 0, 0).setTextColor('#646464');
+            doc.text(nombreTemp, 100, 225, { align: "center" }).setTextColor('#646464');
+            doc.text(nombreTemp2, 100, 230, { align: "center" }).setTextColor('#646464');
+            doc.text(nombreTemp3, 100, 235, { align: "center" }).setTextColor('#646464');
+            doc.save('constanciaAsesor.pdf');
+          } else {
+            doc.text(this.proyectoActual.nombre, 80, 225);
+            doc.setFontSize(16);
+            doc.setFont('Helvetica');
+            doc.save('constanciaAsesor.pdf');
+          }
+        }
+        break;
       case 'Reynosa':
         const doc1 = new jsPDF();
         doc1.addImage('assets/image/certificadoJurado.jpg', 'jpg', 0, 0, 210, 300);
-        doc1.text(this.proyectoActual.asesor , 65, 185);
+        doc1.text(this.proyectoActual.asesor, 65, 185);
         doc1.text(this.proyectoActual.nombre, 80, 225);
         doc1.setFontSize(16);
         doc1.setFont('Helvetica');
-        doc1.save("constanciaAsesor.pdf");
-      break;
+        doc1.save('constanciaAsesor.pdf');
+        break;
       case 'Matamoros':
         const doc2 = new jsPDF();
         doc2.addImage('assets/image/certificadoJurado.jpg', 'jpg', 0, 0, 210, 300);
-        doc2.text(this.proyectoActual.asesor , 65, 185);
+        doc2.text(this.proyectoActual.asesor, 65, 185);
         doc2.text(this.proyectoActual.nombre, 80, 225);
         doc2.setFontSize(16);
         doc2.setFont('Helvetica');
-        doc2.save("constanciaAsesor.pdf");
-      break;
+        doc2.save('constanciaAsesor.pdf');
+        break;
       case 'Madero':
         const doc3 = new jsPDF();
         doc3.addImage('assets/image/certificadoJurado.jpg', 'jpg', 0, 0, 210, 300);
-        doc3.text(this.proyectoActual.asesor , 65, 185);
+        doc3.text(this.proyectoActual.asesor, 65, 185);
         doc3.text(this.proyectoActual.nombre, 80, 225);
         doc3.setFontSize(16);
         doc3.setFont('Helvetica');
-        doc3.save("constanciaAsesor.pdf");
-      break;
+        doc3.save('constanciaAsesor.pdf');
+        break;
       case 'Jaumave':
         const doc4 = new jsPDF();
         doc4.addImage('assets/image/certificadoJurado.jpg', 'jpg', 0, 0, 210, 300);
-        doc4.text(this.proyectoActual.asesor , 65, 185);
+        doc4.text(this.proyectoActual.asesor, 65, 185);
         doc4.text(this.proyectoActual.nombre, 80, 225);
         doc4.setFontSize(16);
         doc4.setFont('Helvetica');
-        doc4.save("constanciaAsesor.pdf");
-      break;
+        doc4.save('constanciaAsesor.pdf');
+        break;
       case 'Nuevo Laredo':
         const doc5 = new jsPDF();
         doc5.addImage('assets/image/certificadoJurado.jpg', 'jpg', 0, 0, 210, 300);
-        doc5.text(this.proyectoActual.asesor , 65, 185);
+        doc5.text(this.proyectoActual.asesor, 65, 185);
         doc5.text(this.proyectoActual.nombre, 80, 225);
         doc5.setFontSize(16);
         doc5.setFont('Helvetica');
-        doc5.save("constanciaAsesor.pdf");
-      break;
+        doc5.save('constanciaAsesor.pdf');
+        break;
     }
-    
-    
-    
+
+
+
   }
 }

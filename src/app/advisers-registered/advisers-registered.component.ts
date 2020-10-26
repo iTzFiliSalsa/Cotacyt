@@ -33,16 +33,16 @@ export class AdvisersRegisteredComponent implements OnInit {
     private _utilService: UtilsService,
     private sedesService: SedesService,
     private formBuilder: FormBuilder,
-    private titlecasePipe:TitleCasePipe 
+    private titlecasePipe: TitleCasePipe
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this._utilService.loading = true;
     this.formAsesores = this.formBuilder.group({
-      nombres:     ['', [Validators.required]],
-      a_paterno:   ['', [Validators.required]],
-      a_materno:   [''],
-      email:       ['', [Validators.required, Validators.email]],
-      id_sedes:    this.sessionData.id_sedes,
+      nombres: ['', [Validators.required]],
+      a_paterno: ['', [Validators.required]],
+      a_materno: [''],
+      email: ['', [Validators.required, Validators.email]],
+      id_sedes: this.sessionData.id_sedes,
       descripcion: ['', [Validators.required]],
     });
     if (this.sessionData.rol === 'superuser') {
@@ -55,8 +55,8 @@ export class AdvisersRegisteredComponent implements OnInit {
   ngOnInit(): void {
     forkJoin({
       asesores: this.superUser
-      ? this._asesoresService.getAsesores()
-      : this._asesoresService.getAsesoresSuperUser(),
+        ? this._asesoresService.getAsesores()
+        : this._asesoresService.getAsesoresSuperUser(),
       sedes: this.sedesService.getSedes()
     }).subscribe(
       data => {
@@ -124,101 +124,297 @@ export class AdvisersRegisteredComponent implements OnInit {
   }
   saveAsPdf(asesor: any) {
     this.asesorActual = asesor;
-  switch(this.asesorActual.id_sedes){
-    case '1':
-      for (let i = 0; i < asesor.proyectos.length; i++) {
-      const doc = new jsPDF('p', 'in', 'letter');
-      doc.addImage('assets/image/certificadoAsesorMante.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"}  ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
-      doc.setFontSize(16);
-      doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-      doc.addImage('assets/image/DirectorMante.png', 'png', 5.8, 7.9, 1.4, 1.3); 
-      doc.setFont('Helvetica');
-      doc.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
-      }
-    break;
-    case '2':
-      for (let i = 0; i < asesor.proyectos.length; i++) {
-      const doc1 = new jsPDF('p', 'in', 'letter');
-      doc1.addImage('assets/image/certificadoAsesorReynosa.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc1.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"} ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc1.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
-      doc1.setFontSize(16);
-      doc1.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-      doc1.addImage('assets/image/DirectorReynosa.png', 'png', 5.8, 7.9, 1.4, 1.3); 
-      doc1.setFont('Helvetica');
-      doc1.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
-      }
-    break;
-    case '3':
-      for (let i = 0; i < asesor.proyectos.length; i++) {
-      const doc2 = new jsPDF('p', 'in', 'letter');
-      doc2.addImage('assets/image/certificadoAsesorMatamoros.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');     
-      doc2.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"} ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc2.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
-      doc2.setFontSize(16);
-      doc2.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-      doc2.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
-      doc2.setFont('Helvetica');
-      doc2.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
-      }
-    break;
-    case '4':
-      for (let i = 0; i < asesor.proyectos.length; i++) {
-      const doc3 = new jsPDF('p', 'in', 'letter');
-      doc3.addImage('assets/image/certificadoAsesorMadero.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc3.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"} ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc3.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
-      doc3.setFontSize(16);
-      doc3.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-      doc3.setFont('Helvetica');
-      doc3.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
-      }
-    break;
-    case '5':
-      for (let i = 0; i < asesor.proyectos.length; i++) {
-      const doc4 = new jsPDF('p', 'in', 'letter');
-      doc4.addImage('assets/image/certificadoAsesorJaumave.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc4.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"} ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc4.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
-      doc4.setFontSize(16);
-      doc4.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-      doc4.setFont('Helvetica');
-      doc4.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
-      }
-    break;
-    case '6':
-      for (let i = 0; i < asesor.proyectos.length; i++) {
-      const doc5 = new jsPDF('p', 'in', 'letter');
-      doc5.addImage('assets/image/certificadoAsesorNuevoLaredo.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc5.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"} ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc5.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
-      doc5.setFontSize(16);
-      doc5.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-      doc5.setFont('Helvetica');
-      doc5.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
-      }
-    break;
-    case '7':
-      for (let i = 0; i < asesor.proyectos.length; i++) {
-      const doc6 = new jsPDF('p', 'in', 'letter');
-      doc6.addImage('assets/image/certificadoAsesorVictoria.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-      doc6.text(this.titlecasePipe.transform(this.asesorActual.nombres)+ " "+ this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno) , 4.2, 6.9, {align: "center"} ).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
-      doc6.text(asesor.proyectos[i].proyecto, 4.2, 8, {align: "center"});
-      doc6.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-      doc6.addImage('assets/image/DirectorVictoria.png', 'png', 5.8, 7.9, 1.4, 1.3); 
-      doc6.save("constancia Asesor "+this.asesorActual.nombres+" Proyecto "+asesor.proyectos[i].proyecto+".pdf");
-      }
-    break;
-    default:
-      console.log('sede no encontrada');
-      Swal.fire({
-        icon: 'error',
-        title: 'No se encontró la sede'
-      });
-    break;
-      
+    switch (this.asesorActual.id_sedes) {
+      case '1':
+        for (let i = 0; i < asesor.proyectos.length; i++) {
+          const doc = new jsPDF('p', 'in', 'letter');
+          doc.addImage('assets/image/certificadoAsesorMante.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc.text(this.titlecasePipe.transform(this.asesorActual.nombres) + " " + this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno), 4.2, 6.9, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          if (asesor.proyectos[i].proyecto.length >= 30 && asesor.proyectos[i].proyecto.length <= 100) {
+            let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+            let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, asesor.proyectos[i].proyecto.length);
+            doc.text('', 0, 0).setFontSize(14);
+            doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.text(nombreTemp2, 4.2, 8.3, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.setFontSize(14);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc.addImage('assets/image/DirectorMante.png', 'png', 5.8, 7.9, 1.4, 1.3);
+            doc.setFont('Helvetica');
+            doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+          } else {
+            if (asesor.proyectos[i].proyecto.length > 100) {
+              let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+              let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, 50);
+              let nombreTemp3 = asesor.proyectos[i].proyecto.substr(100, asesor.proyectos[i].proyecto.length);
+              doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp2, 4.2, 8.25, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp3, 4.2, 8.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorMante.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            } else {
+              doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: "center" });
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorMante.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            }
+          }
+
+        }
+        break;
+      case '2':
+        for (let i = 0; i < asesor.proyectos.length; i++) {
+          const doc = new jsPDF('p', 'in', 'letter');
+          doc.addImage('assets/image/certificadoAsesorReynosa.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc.text(this.titlecasePipe.transform(this.asesorActual.nombres) + " " + this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno), 4.2, 6.9, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          if (asesor.proyectos[i].proyecto.length >= 30 && asesor.proyectos[i].proyecto.length <= 100) {
+            let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+            let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, asesor.proyectos[i].proyecto.length);
+            doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.text(nombreTemp2, 4.2, 8.3, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.setFontSize(14);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc.addImage('assets/image/DirectorReynosa.png', 'png', 5.8, 7.9, 1.4, 1.3);
+            doc.setFont('Helvetica');
+            doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+          } else {
+            if (asesor.proyectos[i].proyecto.length > 100) {
+              let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+              let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, 50);
+              let nombreTemp3 = asesor.proyectos[i].proyecto.substr(100, asesor.proyectos[i].proyecto.length);
+              doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp2, 4.2, 8.25, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp3, 4.2, 8.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorReynosa.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            } else {
+              doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: "center" });
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorReynosa.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            }
+          }
+
+        }
+        break;
+      case '3':
+        for (let i = 0; i < asesor.proyectos.length; i++) {
+          const doc = new jsPDF('p', 'in', 'letter');
+          doc.addImage('assets/image/certificadoAsesorMatamoros.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc.text(this.titlecasePipe.transform(this.asesorActual.nombres) + " " + this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno), 4.2, 6.9, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          if (asesor.proyectos[i].proyecto.length >= 30 && asesor.proyectos[i].proyecto.length <= 100) {
+            let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+            let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, asesor.proyectos[i].proyecto.length);
+            doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.text(nombreTemp2, 4.2, 8.3, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.setFontSize(14);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+            doc.setFont('Helvetica');
+            doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+          } else {
+            if (asesor.proyectos[i].proyecto.length > 100) {
+              let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+              let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, 50);
+              let nombreTemp3 = asesor.proyectos[i].proyecto.substr(100, asesor.proyectos[i].proyecto.length);
+              doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp2, 4.2, 8.25, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp3, 4.2, 8.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            } else {
+              doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: "center" });
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            }
+          }
+
+        }
+        break;
+
+      case '4':
+        for (let i = 0; i < asesor.proyectos.length; i++) {
+          const doc = new jsPDF('p', 'in', 'letter');
+          doc.addImage('assets/image/certificadoAsesorMadero.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc.text(this.titlecasePipe.transform(this.asesorActual.nombres) + " " + this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno), 4.2, 6.9, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          if (asesor.proyectos[i].proyecto.length >= 30 && asesor.proyectos[i].proyecto.length <= 100) {
+            let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+            let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, asesor.proyectos[i].proyecto.length);
+            doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.text(nombreTemp2, 4.2, 8.3, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.setFontSize(14);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+            doc.setFont('Helvetica');
+            doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+          } else {
+            if (asesor.proyectos[i].proyecto.length > 100) {
+              let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+              let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, 50);
+              let nombreTemp3 = asesor.proyectos[i].proyecto.substr(100, asesor.proyectos[i].proyecto.length);
+              doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp2, 4.2, 8.25, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp3, 4.2, 8.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            } else {
+              doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: "center" });
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            }
+          }
+
+        }
+        break;
+      case '5':
+        for (let i = 0; i < asesor.proyectos.length; i++) {
+          const doc = new jsPDF('p', 'in', 'letter');
+          doc.addImage('assets/image/certificadoAsesorJaumave.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc.text(this.titlecasePipe.transform(this.asesorActual.nombres) + " " + this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno), 4.2, 6.9, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          if (asesor.proyectos[i].proyecto.length >= 30 && asesor.proyectos[i].proyecto.length <= 100) {
+            let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+            let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, asesor.proyectos[i].proyecto.length);
+            doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.text(nombreTemp2, 4.2, 8.3, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.setFontSize(14);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+            doc.setFont('Helvetica');
+            doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+          } else {
+            if (asesor.proyectos[i].proyecto.length > 100) {
+              let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+              let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, 50);
+              let nombreTemp3 = asesor.proyectos[i].proyecto.substr(100, asesor.proyectos[i].proyecto.length);
+              doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp2, 4.2, 8.25, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp3, 4.2, 8.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            } else {
+              doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: "center" });
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            }
+          }
+
+        }
+        break;
+      case '6':
+        for (let i = 0; i < asesor.proyectos.length; i++) {
+          const doc = new jsPDF('p', 'in', 'letter');
+          doc.addImage('assets/image/certificadoAsesorNuevoLaredo.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc.text(this.titlecasePipe.transform(this.asesorActual.nombres) + " " + this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno), 4.2, 6.9, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          if (asesor.proyectos[i].proyecto.length >= 30 && asesor.proyectos[i].proyecto.length <= 100) {
+            let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+            let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, asesor.proyectos[i].proyecto.length);
+            doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.text(nombreTemp2, 4.2, 8.3, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.setFontSize(14);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+            doc.setFont('Helvetica');
+            doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+          } else {
+            if (asesor.proyectos[i].proyecto.length > 100) {
+              let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+              let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, 50);
+              let nombreTemp3 = asesor.proyectos[i].proyecto.substr(100, asesor.proyectos[i].proyecto.length);
+              doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp2, 4.2, 8.25, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp3, 4.2, 8.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            } else {
+              doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: "center" });
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              //doc.addImage('assets/image/DirectorMatamoros.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            }
+          }
+
+        }
+        break;
+      case '7':
+        for (let i = 0; i < asesor.proyectos.length; i++) {
+          const doc = new jsPDF('p', 'in', 'letter');
+          doc.addImage('assets/image/certificadoAsesorVictoria.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+          doc.text(this.titlecasePipe.transform(this.asesorActual.nombres) + " " + this.titlecasePipe.transform(this.asesorActual.a_paterno) + " " + this.titlecasePipe.transform(this.asesorActual.a_materno), 4.2, 6.9, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          if (asesor.proyectos[i].proyecto.length >= 30 && asesor.proyectos[i].proyecto.length <= 100) {
+            let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+            let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, asesor.proyectos[i].proyecto.length);
+            doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.text(nombreTemp2, 4.2, 8.3, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+            doc.setFontSize(14);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+            doc.addImage('assets/image/DirectorVictoria.png', 'png', 5.8, 7.9, 1.4, 1.3);
+            doc.setFont('Helvetica');
+            doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+          } else {
+            if (asesor.proyectos[i].proyecto.length > 100) {
+              let nombreTemp = asesor.proyectos[i].proyecto.substr(0, 50);
+              let nombreTemp2 = asesor.proyectos[i].proyecto.substr(50, 50);
+              let nombreTemp3 = asesor.proyectos[i].proyecto.substr(100, asesor.proyectos[i].proyecto.length);
+              doc.text(nombreTemp, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp2, 4.2, 8.25, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.text(nombreTemp3, 4.2, 8.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorVictoria.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            } else {
+              doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: "center" });
+              doc.setFontSize(14);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+              doc.addImage('assets/image/DirectorVictoria.png', 'png', 5.8, 7.9, 1.4, 1.3);
+              doc.setFont('Helvetica');
+              doc.save("constancia Asesor " + this.asesorActual.nombres + " Proyecto " + asesor.proyectos[i].proyecto + ".pdf");
+            }
+          }
+
+        }
+        break;
+      default:
+        console.log('sede no encontrada');
+        Swal.fire({
+          icon: 'error',
+          title: 'No se encontró la sede'
+        });
+        break;
+
     }
   }
 }

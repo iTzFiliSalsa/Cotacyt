@@ -153,3 +153,30 @@ input[type="number"] {
     background: rgb(0, 100, 167);
     border-radius: 5px;
 }
+
+.btn-validar {
+    background-color: #fff;
+    padding: 8px 16px;
+    border: 2px solid #97C93D;
+    color: #97C93D;
+    border-radius: 1em;
+    transition: all 300ms ease;
+    &:hover {
+        background-color: #97C93D;
+        color: #fff;
+    }
+}
+
+.desactivar {
+    height: 80%;
+    width: 100%;
+    background-color: #eaeaea;
+    position: absolute;
+    z-index: 100000;
+    opacity: 0.4;
+    overflow: hidden;
+    &h1 {
+        position: absolute;
+        color: #000000;
+    }
+}

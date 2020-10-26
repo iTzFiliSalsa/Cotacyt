@@ -19,7 +19,17 @@ export class JuecesService {
   getJueces(): Observable<any> {
     return this.http.get( this.servicesConfig.APP_ENDPOINT + 'api/jueces' );
   }
-  updateEvaluacion(body: any): Observable<any>{
+  getValidacionProyectos(idJueces: string): Observable<any> {
+    return this.http.get(this.servicesConfig.APP_ENDPOINT + 'api/jueces/verificar-termino?id_jueces=' + idJueces);
+  }
+
+  updateEvaluation(idJueces: string): Observable<any> {
+    const body = {
+      id_jueces: idJueces
+    };
     return this.http.put(this.servicesConfig.APP_ENDPOINT + 'api/jueces/termino', body);
+  }
+  getValidarTermino(idJueces: string): Observable<any> {
+    return this.http.get(this.servicesConfig.APP_ENDPOINT + 'api/jueces/validar-termino?id_jueces=' + idJueces);
   }
 }
