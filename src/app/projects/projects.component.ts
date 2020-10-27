@@ -88,9 +88,25 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.sessionData.id_sedes === '8') {
       forkJoin({
-        proyectosCalificados: this.dashboardService.getProyectosCalificados(),
-        proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar(),
+        todosLosProyectos: this.proyectosService.obtenerTodosLosProyectosEstatal(),
+        validarProjectos: this.projectsJudges.getValidacionProyectos(this.sessionData.id_jueces),
+      }).subscribe(
+        (data: any) => {
+          this.proyectosCalificados = data.proyectosCalificados;
+          this.proyectosPorCalificar = data.proyectosPorCalificar;
+          this.allProjects = data.todosLosProyectos;
+          this.validacionProjectos = data.validarProjectos.termino;
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService._loading = false;
+      });
+    } else {
+      forkJoin({
         todosLosProyectos: this.proyectosService.obtenerTodosLosProyectosDeCategoria(),
         validarProjectos: this.projectsJudges.getValidacionProyectos(this.sessionData.id_jueces),
       }).subscribe(
@@ -106,6 +122,7 @@ export class ProjectsComponent implements OnInit {
       ).add(() => {
         this._utilService._loading = false;
       });
+    }
   }
   abrirReproductor(evento: any, id) {
     this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/' + id;
