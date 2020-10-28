@@ -220,9 +220,13 @@ export class DashboardComponent implements OnInit {
       data => {
 
         this.fechaI = new Date(data.fecha_inicio.replace(/-/g, '\/'));
+        this.fechaF = new Date(data.fecha_fin.replace(/-/g, '\/'));
         this.fechaH = new Date();
-
-        if(this.fechaI != this.fechaH && this.sessionData.rol == 'juez') {
+        this.fechaH.setHours(0,0,0,0);
+        console.log(this.fechaI);
+        console.log(this.fechaF);
+        console.log(this.fechaH);
+        if((this.fechaI.getTime() > this.fechaH.getTime() || this.fechaF.getTime() < this.fechaH.getTime()) && this.sessionData.rol == 'juez') {
           localStorage.removeItem('session');
           Swal.fire({
             title: 'Plataforma deshabilitada',
