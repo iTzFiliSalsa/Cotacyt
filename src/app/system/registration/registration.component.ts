@@ -33,6 +33,7 @@ export class RegistrationComponent implements OnInit {
   proyectosSeleccionados: Proyectos[];
   dropdownSettingsProyecto: IDropdownSettings;
   public formsRegistroJuez: FormGroup;
+  formFecha: FormGroup;
   superUser: boolean;
   categoriaActua = '1';
   sedeActual = '1';
@@ -56,8 +57,11 @@ export class RegistrationComponent implements OnInit {
       ids_proyectos: ['']
     });
     this._utilService._loading = true;
+    this.formFecha = formBuilder.group({
+      fechaInicio: ['', Validators.required],
+      fechaFin: ['', Validators.required]
+    });
   }
-
   ngOnInit(): void {
     if (this.sessionData.rol === 'superuser') {
       this.superUser = false;
@@ -164,5 +168,12 @@ export class RegistrationComponent implements OnInit {
   }
   mostrarSwal(evt: any) {
     this.swalid1.fire();
+  }
+  subirFechas() {
+    this.sedesService.fechas( this.sessionData.id_sedes, this.formFecha.value.fechaInicio, this.formFecha.value.fechaFin).subscribe(
+      data => {
+        this.swalid1.dismiss();
+      }
+     );
   }
 }
