@@ -66,7 +66,12 @@ export class ProyectosService {
       + '&id_jueces=' + this.sessionData.id_jueces
     );
   }
-
+  obtenerTodosLosProyectosEstatal() {
+    return this.http.get(this.servicesConfig.APP_ENDPOINT +
+      'api/proyectos-estatales/all/categoria?id_categorias='
+      + this.sessionData.id_categorias
+      + '&id_jueces=' + this.sessionData.id_jueces);
+  }
   obtenerInformacionDeUnProyecto(idProyectos: string): Observable<InformacionDeLosProyectos[]> {
     const body = {
       id_proyectos: idProyectos,

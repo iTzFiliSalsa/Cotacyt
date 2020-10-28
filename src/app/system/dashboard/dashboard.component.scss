@@ -1,31 +1,32 @@
-:root{
+:root {
     --grey: #efefef;
 }
 
-.menubar-label-category{
-    color: rgb(82,82,82);
+.menubar-label-category {
+    color: rgb(82, 82, 82);
     font-size: 12px;
 }
 
-.category-label{
+.category-label {
     color: white;
-    background: rgb(0,125,151);
+    background: rgb(0, 125, 151);
     border-radius: 1em;
     padding: 2px 10px;
 }
 
-.btn-cog{
+.btn-cog {
     cursor: pointer;
 }
-.btn-cog:hover{
-    color: rgb(0,125,151);
+
+.btn-cog:hover {
+    color: rgb(0, 125, 151);
 }
 
-.bg-grey{
+.bg-grey {
     background-color: var(--grey) !important;
 }
 
-.text-h1{
+.text-h1 {
     color: rgb(151, 201, 61);
     font-size: 50px;
     font-weight: bolder;
@@ -33,109 +34,110 @@
     text-align: center;
 }
 
-.custom-text{
+.custom-text {
     color: #8b8b8b;
     margin-bottom: 0;
 }
-.text-h6{
-    color: rgb(82,82,82);
+
+.text-h6 {
+    color: rgb(82, 82, 82);
     font-size: 8px;
     font-weight: 400;
 }
 
-.btn-see-projects{
+.btn-see-projects {
     margin-top: 10px;
     font-size: 12px;
     border-radius: 50px;
 }
 
-
-.card-clock{
-    background-color: rgb(0,100,167);
+.card-clock {
+    background-color: rgb(0, 100, 167);
     border-radius: 10px;
     color: white;
 }
 
-.text-h1-panel{
+.text-h1-panel {
     margin-left: 20px;
     color: white;
     font-size: 40px;
     font-weight: bolder;
 }
 
-.text-h6-panel{
+.text-h6-panel {
     margin-right: 10px;
     color: white;
     font-size: 10px;
     font-weight: 400;
 }
 
-.text-h6-graph{
+.text-h6-graph {
     font-size: 12px;
     font-weight: 300;
     margin-bottom: auto;
     margin-top: auto;
 }
 
-
-.icon-calendar{
+.icon-calendar {
     margin-right: 10px;
     justify-content: center;
 }
+
 // 10 175 209
-
-
-.qualified-projects-principal{
-    min-height:260px;
-    max-height:260px;
-    
+.qualified-projects-principal {
+    min-height: 260px;
+    max-height: 260px;
     overflow-y: scroll;
 }
 
-.qualified-projects-principal::-webkit-scrollbar{
+.qualified-projects-principal::-webkit-scrollbar {
     width: 5px;
 }
-.qualified-projects-principal::-webkit-scrollbar-thumb{
+
+.qualified-projects-principal::-webkit-scrollbar-thumb {
     background: #97c83c;
     border-radius: 5px;
 }
- 
 
 .qualified-projects {
-    min-height:300px;
-    max-height:300px;
-    
+    min-height: 300px;
+    max-height: 300px;
     overflow-y: scroll;
 }
-.qualified-projects::-webkit-scrollbar{
+
+.qualified-projects::-webkit-scrollbar {
     width: 5px;
 }
-.qualified-projects::-webkit-scrollbar-thumb{
+
+.qualified-projects::-webkit-scrollbar-thumb {
     background: #97c83c;
     border-radius: 5px;
 }
 
 .qualified-projects2 {
-    min-height:300px;
-    
+    height: 260px;
+    max-height: 260px;
     overflow-y: scroll;
 }
-.qualified-projects2::-webkit-scrollbar{
+
+.qualified-projects2::-webkit-scrollbar {
     width: 5px;
 }
-.qualified-projects2::-webkit-scrollbar-thumb{
+
+.qualified-projects2::-webkit-scrollbar-thumb {
     background: #97c83c;
     border-radius: 5px;
 }
 
-.custom-btn-danger{
+.custom-btn-danger {
     padding: 5px 15px;
     background-color: #DC3545;
     border: none;
     color: #fff;
     border-radius: 2em;
 }
-.custom-btn-edit{
+
+.custom-btn-edit {
     padding: 5px 15px !important;
     background-color: #97c83c;
     border-radius: 2em !important;
@@ -143,7 +145,8 @@
     color: #fff;
     border-radius: 1em;
 }
-.custom-btn-success{
+
+.custom-btn-success {
     padding: 5px 15px;
     background-color: #97C93D;
     border: none;
@@ -151,54 +154,50 @@
     border-radius: 2em;
 }
 
-.bg-custom{
+.bg-custom {
     background-color: #97c83c;
 }
 
 //-------------
 // TABLA CALIFICACIONES POR CATEGORIAS
 //-----------
-.btn-project-list{
+.btn-project-list {
     background: #97c83c;
     color: #fff;
 }
 
-.btn-select{
+.btn-select {
     background: #97c83c;
     color: #fff;
 }
 
- .background-table-projects{
+.background-table-projects {
     background: #97c83c;
     color: #fff;
- }
+}
 
- .badge-position{
-     background:  rgb(0,100,167);
-     color: #fff;
- }
+.badge-position {
+    background: rgb(0, 100, 167);
+    color: #fff;
+}
 
-
-.btn-subboton-video{
+.btn-subboton-video {
     background: #faf9f9;
     color: #97c83c;
 }
 
-
-.btn-subboton-info{
+.btn-subboton-info {
     background: #faf9f9;
-    color: rgb(0,100,167);
+    color: rgb(0, 100, 167);
 }
-
 
 // ----------------
 // REPRODUCTOR DE VIDEO
 // ----------------
-.contenedor-video{
+.contenedor-video {
     width: 100%;
 }
 
-.descarga{
-    background:  rgb(74, 161, 2);
+.descarga {
+    background: rgb(74, 161, 2);
 }
-
