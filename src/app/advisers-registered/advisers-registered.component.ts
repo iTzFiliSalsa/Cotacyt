@@ -419,7 +419,7 @@ export class AdvisersRegisteredComponent implements OnInit {
             doc.text(nombreTemp, 4.2, 8, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
             doc.text(nombreTemp2, 4.2, 8.3, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
             doc.setFontSize(14);
-            doc.addImage('assets/image/DirectorGeneral.png', 'png', 3.5, 8, 1.5, 1.5);
+            doc.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.75, 1.7, 1.7);
             doc.setFont('Helvetica');
             doc.save('Constancia Asesor Estatal ' + this.asesorActual.nombres + ' Proyecto ' + asesor.proyectos[i].proyecto + '.pdf');
           } else {
@@ -431,13 +431,13 @@ export class AdvisersRegisteredComponent implements OnInit {
               doc.text(nombreTemp2, 4.2, 8.25, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
               doc.text(nombreTemp3, 4.2, 8.5, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
               doc.setFontSize(14);
-              doc.addImage('assets/image/DirectorGeneral.png', 'png', 3.5, 8, 1.5, 1.5);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.75, 1.7, 1.7);
               doc.setFont('Helvetica');
               doc.save('Constancia Asesor Estatal ' + this.asesorActual.nombres + ' Proyecto ' + asesor.proyectos[i].proyecto + '.pdf');
             } else {
               doc.text(asesor.proyectos[i].proyecto, 4.2, 8, { align: 'center' });
               doc.setFontSize(14);
-              doc.addImage('assets/image/DirectorGeneral.png', 'png', 3.5, 8, 1.5, 1.5);
+              doc.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.75, 1.7, 1.7);
               doc.setFont('Helvetica');
               doc.save('constancia Asesor Estatal ' + this.asesorActual.nombres + ' Proyecto ' + asesor.proyectos[i].proyecto + '.pdf');
             }

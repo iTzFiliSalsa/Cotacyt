@@ -478,8 +478,6 @@ export class AuthorsRegisteredComponent implements OnInit {
         break;
         case '8':
 
-        
-
         const doc7 = new jsPDF('p', 'in', 'letter');
         doc6.addImage('assets/image/ConstanciaParticipantesEstatal.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc6.text(this.titlecasePipe.transform(this.autorActual.nombre) + ' ' + this.titlecasePipe.transform(this.autorActual.a_paterno) + ' ' + this.titlecasePipe.transform(this.autorActual.a_materno), 4.2, 6.9, { align: 'center' }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
@@ -490,7 +488,7 @@ export class AuthorsRegisteredComponent implements OnInit {
           doc.text(nombreTemp, 4.2, 8, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc.text(nombreTemp2, 4.2, 8.25, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc.setFontSize(14);
-          doc.addImage('assets/image/DirectorGeneral.png', 'png', 1.5, 7.9, 1.4, 1.4);
+          doc.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.6, 1.7, 1.7);
           doc.setFont('Helvetica');
           doc.save('Constancia Autor ' + this.autorActual.nombre + '_' + this.autorActual.a_paterno + '_' + this.autorActual.a_materno + '.pdf');
         } else {
@@ -502,7 +500,7 @@ export class AuthorsRegisteredComponent implements OnInit {
             doc7.text(nombreTemp, 4.2, 8, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
             doc7.text(nombreTemp2, 4.2, 8.25, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
             doc7.text(nombreTemp3, 4.2, 8.50, { align: 'center' }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.5, 7.9, 1.4, 1.4);
+            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.5, 7.9, 1.7, 1.7);
             doc7.setFont('Helvetica');
             doc7.save('Constancia Autor ' + this.autorActual.nombre + '_' + this.autorActual.a_paterno + '_' + this.autorActual.a_materno + '.pdf');            
           } else {

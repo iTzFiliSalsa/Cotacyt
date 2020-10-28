@@ -809,7 +809,6 @@ export class DashboardComponent implements OnInit {
                 case '7':
                   this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
                   break;
-              
               }
               break;
             case '3':
