@@ -119,7 +119,6 @@ export class ProjectsComponent implements OnInit {
     this._utilService.loading = true;
     this.proyectosService.obtenerProyecto(idProyecto).subscribe(
       data => {
-        console.log(data);
         this.proyectoActual = data;
         this.proyectosService.getStatusProyecto(this.proyectoActual.id_proyectos)
           .subscribe((res) => {
@@ -1105,7 +1104,6 @@ export class ProjectsComponent implements OnInit {
       } else {
         this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
           data => {
-            console.log(data);
             this.informacionDeLosProyectos = data;
           },
           err => console.log(err)
