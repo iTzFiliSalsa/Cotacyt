@@ -64,11 +64,21 @@ export class CalificacionesService {
     }
   }
   listaDeCalificacionesAdmin(idCategoria: string, idSedes: string): Observable < CalificacionesPorCategoria[]>{
-    return this.http.get < CalificacionesPorCategoria[]>(
-      this.servicesConfig.APP_ENDPOINT
-      + 'api/calificaciones-generales-por-categoria?id_sedes='
-      + idSedes
-      + '&id_categorias=' + idCategoria);
+    if (this.sessionData.id_sedes === '8') {
+      return this.http.get < CalificacionesPorCategoria[]>(
+        this.servicesConfig.APP_ENDPOINT
+        + 'api/calificaciones-generales-por-categoria-estatales');
+    } else if (this.sessionData.id_sedes === '9') {
+      return this.http.get < CalificacionesPorCategoria[]>(
+        this.servicesConfig.APP_ENDPOINT
+        + 'api/calificaciones-generales-por-categoria-internacionales');
+    } else {
+      return this.http.get < CalificacionesPorCategoria[]>(
+        this.servicesConfig.APP_ENDPOINT
+        + 'api/calificaciones-generales-por-categoria?id_sedes='
+        + idSedes
+        + '&id_categorias=' + idCategoria);
+    }
   }
 
 
