@@ -201,3 +201,17 @@
 .descarga {
     background: rgb(74, 161, 2);
 }
+
+.desactivar {
+    height: 100%;
+    width: 100%;
+    background-color: #eaeaea;
+    position: absolute;
+    z-index: 100000;
+    opacity: 0.4;
+    overflow: hidden;
+    &h1 {
+        position: absolute;
+        color: #000000;
+    }
+}

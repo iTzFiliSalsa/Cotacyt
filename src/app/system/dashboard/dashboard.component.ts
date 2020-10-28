@@ -88,6 +88,9 @@ export class DashboardComponent implements OnInit {
   informacionDeLosProyectos: InformacionDeLosProyectos[];
 
   sessionData: Session;
+  fechaI: Date;
+  fechaF: Date;
+  fechaH: Date;
   asesorActual: any;
   sedeActual: string;
   categoriaActual: string;
@@ -144,7 +147,6 @@ export class DashboardComponent implements OnInit {
       }
 
     }, 1000);
-
     this.barChartData = [
       { data: [], label: 'Proyectos' }
     ];
@@ -213,6 +215,25 @@ export class DashboardComponent implements OnInit {
     this.categoriasService.getCategorias().subscribe(data => {
       this.categoria = data.categoria;
     });
+
+    this.sedeService.getFechas(this.sessionData.id_sedes).subscribe(
+      data => {
+
+        this.fechaI = new Date(data.fecha_inicio.replace(/-/g, '\/'));
+        this.fechaH = new Date();
+
+        if(this.fechaI != this.fechaH && this.sessionData.rol == 'juez') {
+          localStorage.removeItem('session');
+          Swal.fire({
+            title: 'Plataforma deshabilitada',
+            text: 'Se cerrara la sesion',
+            icon: 'success'
+          }).then(() => {
+            window.location.reload();
+          });
+        }
+      }
+    );
   }
   construirGrafica(data: any) {
     const petit = data.petit;

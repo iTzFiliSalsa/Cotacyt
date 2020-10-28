@@ -81,7 +81,7 @@
     <div *swalPortal>
         <div *ngIf="video">
             <div class="contenedor-video">
-                <video  width="400" controls>
+                <video width="400" controls>
                     <source [src]="video" type="video/mp4" >
                 </video>
             </div>
@@ -89,7 +89,6 @@
 
     </div>
 </swal>
-
 
 
 <!-- container -->
@@ -132,8 +131,7 @@
                 <div class="col-lg-12">
                     <div class="row justify-content-center">
                         <h1 name="freloj" class="text-h1-panel mt-2"> <span> <a href="" class="fas fa-clock"></a>
-                            </span>
-                            {{ht}} {{hr}} {{hm}} {{hs}}
+                            </span> {{ht}} {{hr}} {{hm}} {{hs}}
                         </h1>
                     </div>
                 </div>
@@ -162,18 +160,16 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 
 
-                        <button *ngIf="!juez" class="btn-project-list btn btn-block mb-1"
-                            (click)="mostrarProyectosPorCalificacion($event)">
+                        <button *ngIf="!juez" class="btn-project-list btn btn-block mb-1" (click)="mostrarProyectosPorCalificacion($event)">
                             Mostrar proyectos por calificación
                         </button>
 
                         <!-- ventana sweetalert -->
-                        <swal (confirm) = "reiniciarVariable($event)" class="swal-wide" #swalid title="Calificaciones de los proyectos"
-                            [swalOptions]="{customClass: 'clase'}">
+                        <swal (confirm)="reiniciarVariable($event)" class="swal-wide" #swalid title="Calificaciones de los proyectos" [swalOptions]="{customClass: 'clase'}">
                             <div *swalPortal>
                                 <div>
                                     <div class="row justify-content-center mb-2">
-                                            <select #sc (change)="onChangeCategoria(sc.value)" class="custom-select">
+                                        <select #sc (change)="onChangeCategoria(sc.value)" class="custom-select">
                                                 <option selected="true" value="1">Petit</option>
                                                 <option value="2">Kids</option>
                                                 <option value="3">Juvenil</option>
@@ -181,26 +177,25 @@
                                                 <option value="5">Superior</option>
                                                 <option value="6">Posgrado</option>
                                             </select>
-                                            <select *ngIf="superUser" #sd (change)="onChangeSede(sd.value)" class="custom-select mt-2">
+                                        <select *ngIf="superUser" #sd (change)="onChangeSede(sd.value)" class="custom-select mt-2">
                                                 <option *ngFor="let sede of sedes" [value]="sede.id_sedes">{{sede.sede}}</option>
                                             </select>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <table class="table table-lg table-hover" *ngIf="proyectosCalificacion" >
-                                            <thead class="background-table-projects" >
+                                        <table class="table table-lg table-hover" *ngIf="proyectosCalificacion">
+                                            <thead class="background-table-projects">
                                                 <tr>
                                                     <th>Nombre</th>
-                                                    <th>Calificación</th>                                                 
+                                                    <th>Calificación</th>
                                                 </tr>
                                             </thead>
                                             <tr class="table" *ngFor="let proyecto of proyectosCalificacion;let i = index">
                                                 <td>
                                                     <div class="row">
-                                                        <span class="badge badge-position mr-3"> {{i+1}} </span>
-                                                        {{ proyecto.nombre}}
+                                                        <span class="badge badge-position mr-3"> {{i+1}} </span> {{ proyecto.nombre}}
                                                     </div>
                                                 </td>
-                                                <td>{{proyecto.total | number:'1.0-0'}} </td>                                                    
+                                                <td>{{proyecto.total | number:'1.0-0'}} </td>
                                                 <td>
                                                     <button class="btn btn-primary" (click)="saveAsPdf(i, proyecto.autores, proyecto)"><i class="fas fa-download"></i></button>
                                                 </td>
@@ -220,16 +215,14 @@
                             <div class="qualified-projects-principal card-body m-0 p-0">
                                 <ul class="list-group " *ngFor="let proyecto of proyectosCalificados">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        
-                                        <button class="ml-auto  btn btn-subboton-info"
-                                            (click)="mostrarInfoCalificados(proyecto)">
+
+                                        <button class="ml-auto  btn btn-subboton-info" (click)="mostrarInfoCalificados(proyecto)">
                                             <i class="fas fa-question-circle"></i>
                                         </button>
                                         <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.video)">
                                             <i class="fas fa-play-circle"></i>
                                         </button>
-                                        <button class="ml-1  btn btn-subboton-info"
-                                            (click)="pdf(proyecto.pdf)">
+                                        <button class="ml-1  btn btn-subboton-info" (click)="pdf(proyecto.pdf)">
                                             <i class="fas fa-file-pdf"></i>
                                         </button>
                                     </li>
@@ -246,16 +239,14 @@
                             <div class="card-body p-0 qualified-projects">
                                 <ul class="list-group " *ngFor="let proyecto of proyectosPorCalificar">
                                     <li class="d-flex list-group-item p-2">{{proyecto.nombre}}
-                                        <button class="ml-auto btn btn-subboton-info"
-                                            (click)="mostrarInfoPorCalificar(proyecto)">
+                                        <button class="ml-auto btn btn-subboton-info" (click)="mostrarInfoPorCalificar(proyecto)">
                                             <i class="fas fa-question-circle"></i>
                                         </button>
 
                                         <button class="ml-1 btn btn-subboton-video" (click)="abrirReproductor($event, proyecto.video)">
                                             <i class="fas fa-play-circle"></i>
                                         </button>
-                                        <button class="ml-1  btn btn-subboton-info"
-                                            (click)="pdf(proyecto.pdf)">
+                                        <button class="ml-1  btn btn-subboton-info" (click)="pdf(proyecto.pdf)">
                                             <i class="fas fa-file-pdf"></i>
                                         </button>
 
@@ -290,9 +281,7 @@
                             </div>
                             <div class="qualified-projects2 card-body p-0">
                                 <div style="display: block;">
-                                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                        [options]="barChartOptions" [plugins]="barChartPlugins"
-                                        [legend]="barChartLegend" [colors]="barChartColors" [chartType]="barChartType">
+                                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [colors]="barChartColors" [chartType]="barChartType">
                                     </canvas>
                                 </div>
 
@@ -319,8 +308,7 @@
                                             <td>{{proyectos.nombre}}</td>
                                             <td>
                                                 <div class="progress mb-3" style="height:20px;">
-                                                    <div class="progress-bar bg-custom" role="progressbar"
-                                                        [ngStyle]="getPercent(proyectos.total)"></div>
+                                                    <div class="progress-bar bg-custom" role="progressbar" [ngStyle]="getPercent(proyectos.total)"></div>
                                                 </div>
                                             </td>
                                             <td>{{proyectos.total | number}}%</td>
