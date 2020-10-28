@@ -16,6 +16,9 @@ import { InformacionDeLosProyectos } from '../models/proyectos.model';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import { JuecesService } from '../services/jueces.service';
+import { jsPDF } from "jspdf";
+import '../../assets/fonts/Helvetica.ttf';
+import { TitleCasePipe } from '@angular/common';
 
 
 @Component({
@@ -63,7 +66,8 @@ export class ProjectsComponent implements OnInit {
     private projectsService: ProjectsRegisteredService,
     private infoProject: ProyectosService,
     private _utilsService: UtilsService,
-    private projectsJudges: JuecesService
+    private projectsJudges: JuecesService,
+    private titlecasePipe: TitleCasePipe
   ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
@@ -96,6 +100,8 @@ export class ProjectsComponent implements OnInit {
           this.proyectosPorCalificar = data.proyectosPorCalificar;
           this.allProjects = data.todosLosProyectos;
           this.validacionProjectos = data.validarProjectos.termino;
+          console.log(this.validacionProjectos);
+          
         },
         err => {
           console.log(err);
@@ -1119,12 +1125,17 @@ export class ProjectsComponent implements OnInit {
     updateValidationProjects() {
       this.projectsJudges.updateEvaluation(this.sessionData.id_jueces).subscribe(
         data => {
+          console.log(data);
           localStorage.removeItem('session');
           Swal.fire({
             title: data,
             text: 'Se cerrara la sesion',
             icon: 'success'
           }).then(() => {
+            const doc = new jsPDF('p', 'in', 'letter');
+            doc.addImage('assets/image/acuse.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+            doc.text(this.titlecasePipe.transform(this.sessionData.nombre), 4.2, 6.9, { align: 'center' }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
+            doc.save('Acuse de recibo.pdf');
             window.location.reload();
           });
         },
