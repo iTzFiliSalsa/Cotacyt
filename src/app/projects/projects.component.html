@@ -2,7 +2,7 @@
 <swal class="swal-wide" #swalid1 title="Información del proyecto" [swalOptions]="{customClass: 'clase'}">
     <div *swalPortal>
         <div>
-            <table class="table table-light" *ngFor="let info of informacionDeLosProyectos" >
+            <table class="table table-light" *ngFor="let info of informacionDeLosProyectos">
                 <thead>
                     <tr>
                         <th>
@@ -78,7 +78,7 @@
     <div *swalPortal>
         <div *ngIf="video">
             <div class="contenedor-video">
-                <video  width="400" controls>
+                <video width="400" controls>
                     <source [src]="video" type="video/mp4" >
                 </video>
             </div>
@@ -86,14 +86,19 @@
 
     </div>
 </swal>
-
+<div class="desactivar d-flex align-items-center justify-content-center" *ngIf="sessionData.termino == 1">
+    <h1>PROYECTOS EVALUADOS</h1>
+</div>
 <div class="container-fluid pb-3">
+    <button class="btn-validar  mb-1" [disabled]="validacionProjectos != 1" (click)="updateValidationProjects()">Terminar evaluación
+    </button>
     <div class="row">
         <!-- columna Izquierda -->
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <div class="CardPrincipal card">
+
+            <div class="CardPrincipal card mb-3">
                 <div class="card-header background-table">
-                    <h6>Todos los proyectos</h6>
+                    <h6 class="m-0">Todos los proyectos</h6>
                 </div>
                 <div class="qualified-all-projects card-body p-0">
                     <table class="table table-hover">

@@ -12,6 +12,8 @@ import { JudgesRegisteredService } from '../../services/judges.service';
 import { forkJoin } from 'rxjs';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import Swal from 'sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+
 
 
 
@@ -21,6 +23,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+
+  @ViewChild('swalid1') private swalid1: SwalComponent;
+
   public isCollapsed = false;
   sedes: Sedes[];
   sessionData: Session;
@@ -156,5 +161,8 @@ export class RegistrationComponent implements OnInit {
             this.proyectos = data;
           }).add(() => this._utilService._loading = false);
       }
+  }
+  mostrarSwal(evt: any){
+    this.swalid1.fire();
   }
 }

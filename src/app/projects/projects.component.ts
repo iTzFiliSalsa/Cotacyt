@@ -13,8 +13,10 @@ import { ProjectsRegisteredService } from '../services/project-registered.servic
 import { Session } from 'src/app/models/session.model';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { InformacionDeLosProyectos } from '../models/proyectos.model';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { JuecesService } from '../services/jueces.service';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -50,6 +52,8 @@ export class ProjectsComponent implements OnInit {
   obtenido7: number;
   obtenido8: number;
   sessionData: Session;
+  validacionProjectos: number;
+
   constructor(
     private dashboardService: DashboardService,
     private categoriasService: CategoriasService,
@@ -60,6 +64,7 @@ export class ProjectsComponent implements OnInit {
     private projectsService: ProjectsRegisteredService,
     private infoProject: ProyectosService,
     private _utilsService: UtilsService,
+    private projectsJudges: JuecesService
   ) {
     this.proyectosCalificados = new Array<ProyectosCalificados>();
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
@@ -82,18 +87,17 @@ export class ProjectsComponent implements OnInit {
     this._utilService.loading = true;
   }
 
-
   ngOnInit(): void {
+    if (this.sessionData.id_sedes === '8') {
       forkJoin({
-        proyectosCalificados: this.dashboardService.getProyectosCalificados(),
-        proyectosPorCalificar: this.dashboardService.getProyectosPorCalificar(),
-        todosLosProyectos: this.proyectosService.obtenerTodosLosProyectosDeCategoria()
+        todosLosProyectos: this.proyectosService.obtenerTodosLosProyectosEstatal(),
+        validarProjectos: this.projectsJudges.getValidacionProyectos(this.sessionData.id_jueces),
       }).subscribe(
         (data: any) => {
           this.proyectosCalificados = data.proyectosCalificados;
           this.proyectosPorCalificar = data.proyectosPorCalificar;
-          console.log(data.todosLosProyectos);
           this.allProjects = data.todosLosProyectos;
+          this.validacionProjectos = data.validarProjectos.termino;
         },
         err => {
           console.log(err);
@@ -101,6 +105,24 @@ export class ProjectsComponent implements OnInit {
       ).add(() => {
         this._utilService._loading = false;
       });
+    } else {
+      forkJoin({
+        todosLosProyectos: this.proyectosService.obtenerTodosLosProyectosDeCategoria(),
+        validarProjectos: this.projectsJudges.getValidacionProyectos(this.sessionData.id_jueces),
+      }).subscribe(
+        (data: any) => {
+          this.proyectosCalificados = data.proyectosCalificados;
+          this.proyectosPorCalificar = data.proyectosPorCalificar;
+          this.allProjects = data.todosLosProyectos;
+          this.validacionProjectos = data.validarProjectos.termino;
+        },
+        err => {
+          console.log(err);
+        }
+      ).add(() => {
+        this._utilService._loading = false;
+      });
+    }
   }
   abrirReproductor(evento: any, id) {
     this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/' + id;
@@ -642,6 +664,7 @@ export class ProjectsComponent implements OnInit {
         this.generarForm(this.categoria);
         this.isCollapsed = !this.isCollapsed;
         this.proyectoActual = null;
+        this.ngOnInit();
       });
   }
   generarForm(categoria: string) {
@@ -790,6 +813,24 @@ export class ProjectsComponent implements OnInit {
         });
     }
     this.swalInformacion.fire();
+    }
+
+    updateValidationProjects(){
+      this.projectsJudges.updateEvaluation(this.sessionData.id_jueces).subscribe(
+        data => {
+          localStorage.removeItem('session');
+          Swal.fire({
+            title: data,
+            text: 'Se cerrara la sesion',
+            icon: 'success'
+          }).then(() => {
+            window.location.reload();
+          });
+        },
+        err => {
+          console.log(err);
+        }
+      );
     }
 
 }

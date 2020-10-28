@@ -27,6 +27,7 @@ export class JudgesComponent implements OnInit {
 
   @ViewChild('swalid') private swalEdit: SwalComponent;
   jueces: JudgesRegistered[];
+  juecesFiltro: JudgesRegistered[];
   juezActual: JudgesRegistered;
   sedes: Sedes[];
   formJuez: FormGroup;
@@ -91,6 +92,7 @@ export class JudgesComponent implements OnInit {
         data => {
           this.jueces = data.jueces;
           this.sedes = data.sedes;
+          this.juecesFiltro = this.jueces;
           this.proyectos = data.proyectos;
         },
         err => {
@@ -339,6 +341,20 @@ export class JudgesComponent implements OnInit {
           title: 'No se encontró la sede'
         });
       break;
+    }
+  }
+
+  onChangeSedeActualFiltro(idSede: string) {
+    if (idSede !== 'todo') {
+      const juecesTemp: JudgesRegistered[] = [];
+      this.juecesFiltro.forEach((value, _) => {
+        if (value.id_sedes === idSede) {
+          juecesTemp.push(value);
+        }
+      });
+      this.jueces = juecesTemp;
+    } else {
+      this.jueces = this.juecesFiltro;
     }
   }
 }
