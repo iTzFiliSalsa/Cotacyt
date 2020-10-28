@@ -162,7 +162,7 @@ export class RegistrationComponent implements OnInit {
           }).add(() => this._utilService._loading = false);
       }
   }
-  mostrarSwal(evt: any){
+  mostrarSwal(evt: any) {
     this.swalid1.fire();
   }
 }

@@ -339,7 +339,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  //mostrar informacion de proyecto seleccionado
+  // mostrar informacion de proyecto seleccionado
   mostrarInfoPorCalificar(proyecto: ProyectosPorCalificar) {
     if (this.sessionData.rol === 'admin') {
       this.infoProject.obtenerInformacionDeUnProyectoAdmin(proyecto.id_proyectos).subscribe(
