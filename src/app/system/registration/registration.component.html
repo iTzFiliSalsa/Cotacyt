@@ -1,16 +1,17 @@
 <!-- swal tabla informacion -->
-<swal class="swal-wide" #swalid1 title="Activar Plataforma" [swalOptions]="{customClass: 'clase'}">
+<swal class="swal-wide" #swalid1 title="Activar Plataforma" [swalOptions]="{customClass: 'clase'}" [showConfirmButton]="false">
     <div *swalPortal>
-        <div class="row">
+        <form [formGroup]="formFecha">
             <div class="col-md-6 mb-3">
                 <label for="fechaNac">Fecha de Inicio</label>
-                <input type="date" placeholder="Fecha de Inicio" class="form-control" id="fechaI" required>
+                <input formControlName="fechaInicio" type="date" placeholder="Fecha de Inicio" class="form-control" id="fechaI" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="fechaNac">Fecha de Fin</label>
-                <input type="date" placeholder="Fecha de Fin" class="form-control" id="fechaF" required>
+                <input formControlName="fechaFin" type="date" placeholder="Fecha de Fin" class="form-control" id="fechaF" required>
             </div>
-        </div>
+        </form>
+        <button (click)="subirFechas()">Confirmar</button>
     </div>
 </swal>
 
