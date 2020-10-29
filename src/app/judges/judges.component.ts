@@ -271,7 +271,6 @@ export class JudgesComponent implements OnInit {
   }
   saveAsPdf(juez: JudgesRegistered) {
     this.juezActual = juez;
-    console.log(this.juezActual);
     
     switch (this.juezActual.sede) {
       case 'El mante':
