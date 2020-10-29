@@ -381,7 +381,8 @@ export class DashboardComponent implements OnInit {
       ? this.metodoImprimir(index, proyecto, autores, this.sedeActual)
       : this.metodoImprimir(index, proyecto, autores, this.sessionData.id_sedes)
   }
-
+  
+  // filtra la informacion para mandarla al metodo de impresion
   metodoImprimir(index: number, proyecto: any, autores: string[], id_sedes: string) {
     console.log(autores);
     this.categoriaActual = '7';
@@ -407,7 +408,7 @@ export class DashboardComponent implements OnInit {
             case '6':
               this.firstPlace(proyecto, autores, 'mante', 'Mante', 'PosgradoMante');
               break;
-              case '7':
+            case '7':
               this.firstPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
               break;
           }
@@ -433,7 +434,7 @@ export class DashboardComponent implements OnInit {
             case '6':
               this.firstPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PosgradoReynosa');
               break;
-              case '7':
+            case '7':
               this.firstPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
               break;
           }
@@ -458,7 +459,7 @@ export class DashboardComponent implements OnInit {
             case '6':
               this.firstPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PosgradoMatamoros');
               break;
-              case '7':
+            case '7':
               this.firstPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
               break;
           }
@@ -483,7 +484,7 @@ export class DashboardComponent implements OnInit {
             case '6':
               this.firstPlace(proyecto, autores, 'madero', 'Madero', 'PosgradoMadero');
               break;
-              case '7':
+            case '7':
               this.firstPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
               break;
           }
@@ -508,7 +509,7 @@ export class DashboardComponent implements OnInit {
             case '6':
               this.firstPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PosgradoJaumave');
               break;
-              case '7':
+            case '7':
               this.firstPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
               break;
           }
@@ -533,7 +534,7 @@ export class DashboardComponent implements OnInit {
             case '6':
               this.firstPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PosgradoNuevoLaredo');
               break;
-              case '7':
+            case '7':
               this.firstPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
               break;
           }
@@ -558,8 +559,29 @@ export class DashboardComponent implements OnInit {
             case '6':
               this.firstPlace(proyecto, autores, 'victoria', 'Victoria', 'PosgradoVictoria');
               break;
-              case '7':
-              this.firstPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+          }
+        case '8':
+          switch (this.categoriaActual) {
+            case '1':
+              this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PetitEstatal');
+              break;
+            case '2':
+              this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'KidsEstatal');
+              break;
+            case '3':
+              this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'JuvenilEstatal');
+              break;
+            case '4':
+              this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'MSEstatal');
+              break;
+            case '5':
+              this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'SuperiorEstatal');
+              break;
+            case '6':
+              this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+              break;
+            case '7':
+              this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
               break;
           }
           break;
@@ -594,9 +616,9 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'mante', 'Mante', 'PosgradoMante');
                 break;
-                case '7':
-              this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
+              case '7':
+                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
             }
 
             break;
@@ -620,9 +642,9 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PosgradoReynosa');
                 break;
-                case '7':
-              this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
+              case '7':
+                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
             }
             break;
           case '3':
@@ -645,9 +667,9 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PosgradoMatamoros');
                 break;
-                case '7':
-              this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
+              case '7':
+                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
             }
             break;
           case '4':
@@ -670,9 +692,9 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'madero', 'Madero', 'PosgradoMadero');
                 break;
-                case '7':
-              this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
+              case '7':
+                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
             }
             break;
           case '5':
@@ -695,9 +717,6 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PosgradoJaumave');
                 break;
-                case '7':
-              this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
             }
             break;
           case '6':
@@ -720,9 +739,31 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PosgradoNuevoLaredo');
                 break;
-                case '7':
-              this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
+            }
+            break;
+          case '8':
+            switch (this.categoriaActual) {
+              case '1':
+                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PetitEstatal');
+                break;
+              case '2':
+                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'KidsEstatal');
+                break;
+              case '3':
+                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'JuvenilEstatal');
+                break;
+              case '4':
+                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'MSEstatal');
+                break;
+              case '5':
+                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'SuperiorEstatal');
+                break;
+              case '6':
+                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
+              case '7':
+                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
             }
             break;
           case '7':
@@ -745,9 +786,6 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'victoria', 'Victoria', 'PosgradoVictoria');
                 break;
-                case '7':
-              this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
             }
             break;
         }
@@ -780,9 +818,6 @@ export class DashboardComponent implements OnInit {
                 case '6':
                   this.thirdPlace(proyecto, autores, 'mante', 'Mante', 'PosgradoMante');
                   break;
-                  case '7':
-              this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-              break;
               }
 
               break;
@@ -806,9 +841,6 @@ export class DashboardComponent implements OnInit {
                 case '6':
                   this.thirdPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PosgradoReynosa');
                   break;
-                case '7':
-                  this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                  break;
               }
               break;
             case '3':
@@ -830,9 +862,6 @@ export class DashboardComponent implements OnInit {
                   break;
                 case '6':
                   this.thirdPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PosgradoMatamoros');
-                  break;
-                  case '7':
-                  this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
                   break;
               }
               break;
@@ -856,9 +885,6 @@ export class DashboardComponent implements OnInit {
                 case '6':
                   this.thirdPlace(proyecto, autores, 'madero', 'Madero', 'PosgradoMadero');
                   break;
-                  case '7':
-                  this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                  break;
               }
               break;
             case '5':
@@ -880,9 +906,6 @@ export class DashboardComponent implements OnInit {
                   break;
                 case '6':
                   this.thirdPlace(proyecto, autores, 'jaumave', 'Jaumave', 'PosgradoJaumave');
-                  break;
-                  case '7':
-                  this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
                   break;
               }
               break;
@@ -906,11 +929,33 @@ export class DashboardComponent implements OnInit {
                 case '6':
                   this.thirdPlace(proyecto, autores, 'nuevo-laredo', 'NuevoLaredo', 'PosgradoNuevoLaredo');
                   break;
-                  case '7':
-                  this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                  break;
               }
               break;
+              case '8':
+            switch (this.categoriaActual) {
+              case '1':
+                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PetitEstatal');
+                break;
+              case '2':
+                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'KidsEstatal');
+                break;
+              case '3':
+                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'JuvenilEstatal');
+                break;
+              case '4':
+                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'MSEstatal');
+                break;
+              case '5':
+                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'SuperiorEstatal');
+                break;
+              case '6':
+                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
+              case '7':
+                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
+                break;
+            }
+            break;
             case '7':
               switch (this.categoriaActual) {
                 case '1':
@@ -931,9 +976,6 @@ export class DashboardComponent implements OnInit {
                 case '6':
                   this.thirdPlace(proyecto, autores, 'victoria', 'Victoria', 'PosgradoVictoria');
                   break;
-                  case '7':
-                  this.thirdPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                  break;
               }
               break;
           }
@@ -947,8 +989,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
-
+  // metodos para imprimir los 3 primeros lugares de regional y estatal
   firstPlace({ nombre = '' }, autores: any[], sede: string = '', sede2: string = '', categoriaSede: string = '') {
     let nombresAutores: any[] = autores;
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
@@ -958,50 +999,50 @@ export class DashboardComponent implements OnInit {
           title: 'El proyecto no tiene autores registrados'
         });
       }
-      
-        const doc7 = new jsPDF('p', 'in', 'letter');
-        doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
-        if(nombresAutores.length == 1){
-          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');        
-        }else{
-          if(nombresAutores.length == 2){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45,{ align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-          }else{
-            if(nombresAutores.length == 3){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-            }
+
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
           }
         }
-        if (nombre.length >= 30 && nombre.length <= 100) {
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.setFontSize(14);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
           let nombreTemp = nombre.substr(0, 50);
-          let nombreTemp2 = nombre.substr(50, nombre.length);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
           doc7.text('', 0, 0).setFontSize(14);
           doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.setFontSize(14);
           doc7.setFont('Helvetica');
           doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
         } else {
-          if (nombre.length > 100) {
-            let nombreTemp = nombre.substr(0, 50);
-            let nombreTemp2 = nombre.substr(50, 50);
-            let nombreTemp3 = nombre.substr(100, nombre.length);
-            doc7.text('', 0, 0).setFontSize(14);
-            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.setFontSize(14);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
-          } else {
-            doc7.text(nombre, 4.2, 7.8, { align: "center" });
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
-          }
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
         }
+      }
     } else {
       if (!autores) {
         swal.fire({
@@ -1009,59 +1050,167 @@ export class DashboardComponent implements OnInit {
           title: 'El proyecto no tiene autores registrados'
         });
       }
-      
-        const doc7 = new jsPDF('p', 'in', 'letter');
-        doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
-        
-        if(nombresAutores.length == 1){
-          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');        
-        }else{
-          if(nombresAutores.length == 2){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45,{ align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-          }else{
-            if(nombresAutores.length == 3){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-            }
+
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
           }
         }
-        if (nombre.length >= 30 && nombre.length <= 100) {
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+        doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
           let nombreTemp = nombre.substr(0, 50);
-          let nombreTemp2 = nombre.substr(50, nombre.length);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
           doc7.text('', 0, 0).setFontSize(14);
           doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
           doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
           doc7.setFont('Helvetica');
           doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
         } else {
-          if(nombre.length > 100) {
-            let nombreTemp = nombre.substr(0, 50);
-            let nombreTemp2 = nombre.substr(50, 50);
-            let nombreTemp3 = nombre.substr(100, nombre.length);
-            doc7.text('', 0, 0).setFontSize(14);
-            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
-          } else {
-            doc7.text(nombre, 4.2, 7.8, { align: "center" });
-            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
-          }
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
         }
-      
+      }
+
     }
   }
+  firstPlaceEstatal({ nombre = '' }, autores: any[], sede: string = '', sede2: string = '', categoriaSede: string = '') {
+    let nombresAutores: any[] = autores;
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
 
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+          }
+        }
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.setFontSize(14);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.setFontSize(14);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+        } else {
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primer Lugar proyecto " + nombre + ".pdf");
+        }
+      }
+    } else {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Primero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+          }
+        }
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
+        } else {
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Primero Lugar proyecto " + nombre + ".pdf");
+        }
+      }
+
+    }
+  }
   secondPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
     let nombresAutores: any[] = autores;
     if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
@@ -1071,50 +1220,50 @@ export class DashboardComponent implements OnInit {
           title: 'El proyecto no tiene autores registrados'
         });
       }
-        const doc7 = new jsPDF('p', 'in', 'letter');
-        doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
-        if(nombresAutores.length == 1){
-          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');        
-        }else{
-          if(nombresAutores.length == 2){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45,{ align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-          }else{
-            if(nombresAutores.length == 3){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-            }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
           }
         }
-        if (nombre.length >= 30 && nombre.length <= 100) {
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.setFontSize(14);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
           let nombreTemp = nombre.substr(0, 50);
-          let nombreTemp2 = nombre.substr(50, nombre.length);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
           doc7.text('', 0, 0).setFontSize(14);
           doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.setFontSize(14);
           doc7.setFont('Helvetica');
           doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
         } else {
-          if (nombre.length > 100) {
-            let nombreTemp = nombre.substr(0, 50);
-            let nombreTemp2 = nombre.substr(50, 50);
-            let nombreTemp3 = nombre.substr(100, nombre.length);
-            doc7.text('', 0, 0).setFontSize(14);
-            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.setFontSize(14);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
-          } else {
-            doc7.text(nombre, 4.2, 7.8, { align: "center" });
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
-          }
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
         }
-      
+      }
+
     } else {
       if (!autores) {
         swal.fire({
@@ -1122,53 +1271,159 @@ export class DashboardComponent implements OnInit {
           title: 'El proyecto no tiene autores registrados'
         });
       }
-        const doc7 = new jsPDF('p', 'in', 'letter');
-        doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
-        if(nombresAutores.length == 1){
-          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(18).setFont('Helvetica').setTextColor('#646464');        
-        }else{
-          if(nombresAutores.length == 2){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45,{ align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
-          }else{
-            if(nombresAutores.length == 3){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
-            }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(18).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
           }
         }
-        if (nombre.length >= 30 && nombre.length <= 100) {
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+        doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
           let nombreTemp = nombre.substr(0, 50);
-          let nombreTemp2 = nombre.substr(50, nombre.length);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
           doc7.text('', 0, 0).setFontSize(14);
           doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
           doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
           doc7.setFont('Helvetica');
           doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
         } else {
-          if(nombre.length > 100) {
-            let nombreTemp = nombre.substr(0, 50);
-            let nombreTemp2 = nombre.substr(50, 50);
-            let nombreTemp3 = nombre.substr(100, nombre.length);
-            doc7.text('', 0, 0).setFontSize(14);
-            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
-          } else {
-            doc7.text(nombre, 4.2, 7.8, { align: "center" });
-            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+        }
+      }
+    }
+  }
+  secondPlaceEstatal({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
+    let nombresAutores: any[] = autores;
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
           }
         }
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.setFontSize(14);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.setFontSize(14);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+        } else {
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+        }
+      }
+
+    } else {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Segundo' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(18).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(16).setFont('Helvetica').setTextColor('#646464');
+          }
+        }
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+        } else {
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Segundo Lugar proyecto " + nombre + ".pdf");
+        }
+      }
     }
   }
   thirdPlace({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
@@ -1180,50 +1435,50 @@ export class DashboardComponent implements OnInit {
           title: 'El proyecto no tiene autores registrados'
         });
       }
-        const doc7 = new jsPDF('p', 'in', 'letter');
-        doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
-        if(nombresAutores.length == 1){
-          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');        
-        }else{
-          if(nombresAutores.length == 2){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45,{ align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-          }else{
-            if(nombresAutores.length == 3){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.65, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-            }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.65, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
           }
         }
-        if (nombre.length >= 30 && nombre.length <= 100) {
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.setFontSize(14);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
           let nombreTemp = nombre.substr(0, 50);
-          let nombreTemp2 = nombre.substr(50, nombre.length);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
           doc7.text('', 0, 0).setFontSize(14);
           doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.setFontSize(14);
           doc7.setFont('Helvetica');
           doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
         } else {
-          if (nombre.length > 100) {
-            let nombreTemp = nombre.substr(0, 50);
-            let nombreTemp2 = nombre.substr(50, 50);
-            let nombreTemp3 = nombre.substr(100, nombre.length);
-            doc7.text('', 0, 0).setFontSize(14);
-            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.setFontSize(14);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
-          } else {
-            doc7.text(nombre, 4.2, 7.8, { align: "center" });
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
-          }
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
         }
-      
+      }
+
     } else {
       if (!autores) {
         swal.fire({
@@ -1231,56 +1486,170 @@ export class DashboardComponent implements OnInit {
           title: 'El proyecto no tiene autores registrados'
         });
       }
-        const doc7 = new jsPDF('p', 'in', 'letter');
-        doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
-        if(nombresAutores.length == 1){
-          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');        
-        }else{
-          if(nombresAutores.length == 2){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45,{ align: "center" }).setFontSize(17 ).setFont('Helvetica').setTextColor('#646464');
-          }else{
-            if(nombresAutores.length == 3){
-              doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-              doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
-            }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
           }
         }
-        if (nombre.length >= 30 && nombre.length <= 100) {
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+        doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
           let nombreTemp = nombre.substr(0, 50);
-          let nombreTemp2 = nombre.substr(50, nombre.length);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
           doc7.text('', 0, 0).setFontSize(14);
           doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
           doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
           doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
           doc7.setFont('Helvetica');
           doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
         } else {
-          if(nombre.length > 100) {
-            let nombreTemp = nombre.substr(0, 50);
-            let nombreTemp2 = nombre.substr(50, 50);
-            let nombreTemp3 = nombre.substr(100, nombre.length);
-            doc7.text('', 0, 0).setFontSize(14);
-            doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
-            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
-          } else {
-            doc7.text(nombre, 4.2, 7.8, { align: "center" });
-            doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
-            doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
-            doc7.setFont('Helvetica');
-            doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
-          }
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 1.8, 7.8, 1.3, 1.3);
+          doc7.addImage('assets/image/Director' + sede2 + '.png', 'png', 5.8, 8, 1.2, 1.2);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
         }
-      
+      }
+
     }
   }
+  thirdPlaceEstatal({ nombre = '' }, autores: any[], sede: string, sede2: string = '', categoriaSede: string) {
+    let nombresAutores: any[] = autores;
+    if (sede === 'madero' || sede === 'jaumave' || sede === 'nuevo-laredo') {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(17).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text('',0,0).setFontSize(17);
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.29, { align: "center" }).setFontSize(19).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.49, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text('',0,0).setFontSize(15);
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.65, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+          }
+        }
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.setFontSize(14);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.setFontSize(14);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+        } else {
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+        }
+      }
+
+    } else {
+      if (!autores) {
+        swal.fire({
+          icon: 'error',
+          title: 'El proyecto no tiene autores registrados'
+        });
+      }
+      const doc7 = new jsPDF('p', 'in', 'letter');
+      doc7.addImage('assets/image/diploma/' + sede + '/Tercero' + categoriaSede + '.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+      if (nombresAutores.length == 1) {
+        doc7.text('',0,0).setFontSize(19);
+        doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(19).setFont('Helvetica').setTextColor('#646464');
+      } else {
+        if (nombresAutores.length == 2) {
+          doc7.text('',0,0).setFontSize(18);
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.29, { align: "center" }).setFontSize(18).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.54, { align: "center" }).setFontSize(18).setFont('Helvetica').setTextColor('#646464');
+        } else {
+          if (nombresAutores.length == 3) {
+            doc7.text('',0,0).setFontSize(15);
+            doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+            doc7.text(nombresAutores[2].autor.toString(), 4.2, 6.70, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
+          }
+        }
+      }
+      if (nombre.length >= 30 && nombre.length <= 100) {
+        let nombreTemp = nombre.substr(0, 50);
+        let nombreTemp2 = nombre.substr(50, nombre.length);
+        doc7.text('', 0, 0).setFontSize(14);
+        doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+        doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+        doc7.setFont('Helvetica');
+        doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+      } else {
+        if (nombre.length > 100) {
+          let nombreTemp = nombre.substr(0, 50);
+          let nombreTemp2 = nombre.substr(50, 50);
+          let nombreTemp3 = nombre.substr(100, nombre.length);
+          doc7.text('', 0, 0).setFontSize(14);
+          doc7.text(nombreTemp, 4.2, 7.5, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp2, 4.2, 7.75, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombreTemp3, 4.2, 8, { align: "center" }).setFontSize(14).setFont('Helvetica').setTextColor('#646464');
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+        } else {
+          doc7.text(nombre, 4.2, 7.8, { align: "center" });
+          doc7.addImage('assets/image/DirectorGeneral.png', 'png', 3.45, 7.7, 1.7, 1.7);
+          doc7.setFont('Helvetica');
+          doc7.save("constancia Tercer Lugar proyecto " + nombre + ".pdf");
+        }
+      }
+
+    }
+  }
+
+
 
   imprimir(proyecto: any, categoria: any) {
     if (proyecto.length !== 0) {
