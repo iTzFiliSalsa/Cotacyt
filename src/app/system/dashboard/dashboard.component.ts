@@ -407,8 +407,6 @@ export class DashboardComponent implements OnInit {
   
   // filtra la informacion para mandarla al metodo de impresion
   metodoImprimir(index: number, proyecto: any, autores: string[], id_sedes: string) {
-    console.log(autores);
-    this.categoriaActual = '7';
     if (index === 0) {
       switch (id_sedes) {
         case '1':
@@ -584,6 +582,7 @@ export class DashboardComponent implements OnInit {
               break;
           }
         case '8':
+          console.log(this.categoriaActual);
           switch (this.categoriaActual) {
             case '1':
               this.firstPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PetitEstatal');
@@ -639,9 +638,6 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'mante', 'Mante', 'PosgradoMante');
                 break;
-              case '7':
-                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                break;
             }
 
             break;
@@ -665,9 +661,6 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'reynosa', 'Reynosa', 'PosgradoReynosa');
                 break;
-              case '7':
-                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                break;
             }
             break;
           case '3':
@@ -690,9 +683,6 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.secondPlace(proyecto, autores, 'matamoros', 'Matamoros', 'PosgradoMatamoros');
                 break;
-              case '7':
-                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                break;
             }
             break;
           case '4':
@@ -714,9 +704,6 @@ export class DashboardComponent implements OnInit {
                 break;
               case '6':
                 this.secondPlace(proyecto, autores, 'madero', 'Madero', 'PosgradoMadero');
-                break;
-              case '7':
-                this.secondPlace(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
                 break;
             }
             break;
@@ -782,9 +769,6 @@ export class DashboardComponent implements OnInit {
                 this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'SuperiorEstatal');
                 break;
               case '6':
-                this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                break;
-              case '7':
                 this.secondPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
                 break;
             }
@@ -974,9 +958,6 @@ export class DashboardComponent implements OnInit {
               case '6':
                 this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
                 break;
-              case '7':
-                this.thirdPlaceEstatal(proyecto, autores, 'estatal', 'Estatal', 'PosgradoEstatal');
-                break;
             }
             break;
             case '7':
@@ -1141,8 +1122,8 @@ export class DashboardComponent implements OnInit {
         doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
       } else {
         if (nombresAutores.length == 2) {
-          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
-          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.45, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.3, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
+          doc7.text(nombresAutores[1].autor.toString(), 4.2, 6.55, { align: "center" }).setFontSize(17).setFont('Helvetica').setTextColor('#646464');
         } else {
           if (nombresAutores.length == 3) {
             doc7.text(nombresAutores[0].autor.toString(), 4.2, 6.2, { align: "center" }).setFontSize(15).setFont('Helvetica').setTextColor('#646464');
