@@ -15,7 +15,7 @@
                 <th>Categorias</th>
                 <th>Sede</th>
                 <th>Información</th>
-                <th>Opciones</th>
+                <!-- <th>Opciones</th> -->
             </tr>
         </thead>
         <tr class="table" *ngFor="let proyecto of proyectos">
@@ -35,10 +35,10 @@
                 </div>
             </td>
             <td class="d-flex">
-                <button (click)="openSwal(proyecto)" class="btn btn-edit mr-2" data-toggle="modal" data-target="#modalEditar"><i
+                <!-- <button (click)="openSwal(proyecto)" class="btn btn-edit mr-2" data-toggle="modal" data-target="#modalEditar"><i
                         class="fas fa-edit"></i></button>
                 <button (click)="setProyectoActual(proyecto)" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i
-                        class="fas fa-trash-alt"></i></button>
+                        class="fas fa-trash-alt"></i></button> -->
                 <!--<button class="btn btn-primary" (click)="saveAsPdf(proyecto)"><i class="fas fa-download"></i></button>-->
             </td>
         </tr>

@@ -76,21 +76,6 @@
 
 
 
-<!-- swal reproductor de video -->
-<swal class="swal-wide " #swalid2 title="Demostración del proyecto" [swalOptions]="{customClass: 'clase'}">
-    <div *swalPortal>
-        <div *ngIf="video">
-            <div class="contenedor-video">
-                <video width="400" controls>
-                    <source [src]="video" type="video/mp4" >
-                </video>
-            </div>
-        </div>
-
-    </div>
-</swal>
-
-
 <!-- container -->
 <div class="container-fluid">
     <!-- Primera seccion -->

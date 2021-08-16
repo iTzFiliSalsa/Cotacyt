@@ -124,20 +124,17 @@ export class DashboardComponent implements OnInit {
       const d = new Date();
       if (d.getHours() < 10) {
         this.hr = '0' + d.getHours() + ' :';
-      }
-      else {
+      } else {
         this.hr = d.getHours() + ' :';
       }
       if (d.getMinutes() < 10) {
         this.hm = '0' + d.getMinutes() + ' :';
-      }
-      else {
+      } else {
         this.hm = d.getMinutes() + ' :';
       }
       if (d.getSeconds() < 10) {
         this.hs = '0' + d.getSeconds();
-      }
-      else {
+      } else {
         this.hs = d.getSeconds();
       }
 
@@ -149,14 +146,15 @@ export class DashboardComponent implements OnInit {
       forkJoin({
         proyectos: this.dashboardService.getProyectosSuperUser(),
         totales: this.dashboardService.getTotalesSuperUser(),
-        estadisticas: this.calificacionesService.proyectosEstadisticas(),
+        // estadisticas: this.calificacionesService.proyectosEstadisticas(),
         grafica: this.dashboardService.getProyectosPorCategorias(),
         sedes: this.sedeService.getSedes(),
       }).subscribe(
         data => {
+          console.log(data);
           this.totales = data.totales;
           this.adminProjects(data.proyectos);
-          this.estadisticasDeProyectos = data.estadisticas;
+          // this.estadisticasDeProyectos = data.estadisticas;
           this.sedes = data.sedes,
             this.construirGrafica(data.grafica);
         }
@@ -211,26 +209,25 @@ export class DashboardComponent implements OnInit {
       this.categoria = data.categoria;
     });
 
-    this.sedeService.getFechas(this.sessionData.id_sedes).subscribe(
-      data => {
-
-        this.fechaI = new Date(data.fecha_inicio.replace(/-/g, '\/'));
-        this.fechaF = new Date(data.fecha_fin.replace(/-/g, '\/'));
-        this.fechaH = new Date();
-        this.fechaH.setHours(0, 0, 0, 0);
-        if ((this.fechaI.getTime() > this.fechaH.getTime() || this.fechaF.getTime() < this.fechaH.getTime())
-        && this.sessionData.rol == 'juez') {
-          localStorage.removeItem('session');
-          Swal.fire({
-            title: 'Plataforma deshabilitada',
-            text: 'Se cerrara la sesion',
-            icon: 'success'
-          }).then(() => {
-            window.location.reload();
-          });
-        }
-      }
-    );
+    // this.sedeService.getFechas(this.sessionData.id_sedes).subscribe(
+    //   data => {
+    //     this.fechaI = new Date(data.fecha_inicio.replace(/-/g, '\/'));
+    //     this.fechaF = new Date(data.fecha_fin.replace(/-/g, '\/'));
+    //     this.fechaH = new Date();
+    //     this.fechaH.setHours(0, 0, 0, 0);
+    //     if ((this.fechaI.getTime() > this.fechaH.getTime() || this.fechaF.getTime() < this.fechaH.getTime())
+    //     && this.sessionData.rol == 'juez') {
+    //       localStorage.removeItem('session');
+    //       Swal.fire({
+    //         title: 'Plataforma deshabilitada',
+    //         text: 'Se cerrara la sesion',
+    //         icon: 'success'
+    //       }).then(() => {
+    //         window.location.reload();
+    //       });
+    //     }
+    //   }
+    // );
   }
   construirGrafica(data: any) {
     const petit = data.petit;
@@ -384,12 +381,11 @@ export class DashboardComponent implements OnInit {
 
 
   abrirReproductor(evento: any, id) {
-    this.video = 'http://plataforma.cotacyt.gob.mx/creatividad/' + id;
-    this.swalReproductor.fire();
+    window.open(id, '_blank');
   }
 
   pdf(event) {
-    window.open('http://plataforma.cotacyt.gob.mx/creatividad/' + event, '_blank');
+    window.open('https://mante.hosting.acm.org/api-cecit-2021/uploads/' + event, '_blank');
   }
 
   saveAsPdf(index: number, autores: string[], proyecto: any) {
