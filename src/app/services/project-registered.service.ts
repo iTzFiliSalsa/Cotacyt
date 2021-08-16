@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { ProjectRegistered } from '../models/project-regis.model';
 import { ServicesConfig } from '../config/services.config';
 import { Session } from '../models/session.model';
-import { UtilsService } from './utils.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +16,7 @@ import { UtilsService } from './utils.service';
       ) {
       this.sessionData = JSON.parse(localStorage.getItem('session'));
     }
-    getProjects(): Observable<ProjectRegistered[]>{
+    getProjects(): Observable<ProjectRegistered[]> {
         return this.http.get<ProjectRegistered[]>(
           this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all?id_sedes=' + this.sessionData.id_sedes);
     }

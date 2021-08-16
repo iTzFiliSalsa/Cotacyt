@@ -3,24 +3,29 @@ import { ChartOptions, ChartType, ChartDataSets, plugins } from 'chart.js';
 import plugin, * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Color, defaultColors, Label } from 'ng2-charts';
 import jsPDF from 'jspdf';
-import { ProyectosService } from '../services/proyectos.service';
+import { ProyectosService } from '../../services/proyectos.service';
 
 @Component({
-  selector: 'app-gra-for-proy',
-  templateUrl: './gra-for-proy.component.html',
-  styleUrls: ['./gra-for-proy.component.scss']
+  selector: 'app-gra-for-cat',
+  templateUrl: './gra-for-cat.component.html',
+  styleUrls: ['./gra-for-cat.component.scss']
 })
-export class GraForProyComponent implements OnInit {
+export class GraForCatComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: { xAxes: [{}], yAxes: [{
+      ticks: {
+        beginAtZero: true
+        }
+      }] 
+    },
     plugins: {
       datalabels: {
         anchor: 'center',
         align: 'center',
         color: 'black',
-      }
+      },
     }
   };
 
@@ -31,20 +36,21 @@ export class GraForProyComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
-
   public barChartData: ChartDataSets[];
 
-  participantesCat:[];
-  constructor(private participantesPorCat: ProyectosService) { }
+  categorias:[];
+  constructor(private proyectosPorCat: ProyectosService) { }
 
   ngOnInit() {
+
     this.barChartData = [{
       data: [],
-      label: 'Participantes por categoría'
+      label: 'Proyectos por sede'
     }];
-    this.participantesPorCat.getParticipantesPorCategoria().subscribe(
+
+    this.proyectosPorCat.getProyectosPorCategoria().subscribe(
       data => {
-        this.participantesCat = data;
+        this.categorias = data;
         const cat1 = data['petit'];
         const cat2 = data['kids'];
         const cat3 = data['juvenil'];
@@ -54,7 +60,7 @@ export class GraForProyComponent implements OnInit {
 
         this.barChartData = [{
           data: [cat1, cat2, cat3, cat4, cat5, cat6],
-          label: 'Participantes por categoría'
+          label: 'Proyectos Por Categoria'
         }];
       },
       err => {
@@ -72,8 +78,9 @@ export class GraForProyComponent implements OnInit {
     console.log(event, active);
   }
 
+
   downloadPDF() {
-    var canvas: any = document.getElementById('graficaProy6');
+    var canvas: any = document.getElementById('graficaProy3');
     //creates image
     var canvasImg = canvas.toDataURL("image/png", 1.0);
     
@@ -84,7 +91,7 @@ export class GraForProyComponent implements OnInit {
     doc.addImage('assets/cecit.png','png', 243, 5, 50, 40).setFont('Caviar').setFontSize(18).setTextColor('#646464');
     doc.text('Consejo Tamaulipeco de Ciencia y Tecnología', 91, 37);
     doc.addImage(canvasImg, 'JPEG', 15, 50, 260, 135 );
-    doc.save('Participantes-Por-Categoria.pdf');
+    doc.save('Proyectos-Por-Categoria.pdf');
   }
 
 }

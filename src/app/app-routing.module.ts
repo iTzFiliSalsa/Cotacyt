@@ -4,22 +4,21 @@ import { LoginComponent } from './auth/login/login.component';
 import { SidebarComponent } from './system/sidebar/sidebar.component';
 import { RegistrationComponent } from './system/registration/registration.component';
 import { DashboardComponent } from './system/dashboard/dashboard.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { AddProjectsComponent } from './add-projects/add-projects.component'
-import { JudgesComponent } from './judges/judges.component'
-import { ProjectsRegisteredComponent } from './projects-registered/projects-registered.component'
-import { AddAdvisersComponent } from './add-advisers/add-advisers.component'
-import { AdvisersRegisteredComponent } from './advisers-registered/advisers-registered.component'
-import { AddAuthorsComponent } from './add-authors/add-authors.component'
-import { AuthorsRegisteredComponent } from './authors-registered/authors-registered.component'
-import { EstadisticsComponent } from './estadistics/estadistics.component'
+import { ProjectsComponent } from './Components/Projects/projects/projects.component';
+import { JudgesComponent } from './Components/Judges/judges/judges.component';
+import { ProjectsRegisteredComponent } from './Components/Projects/projects-registered/projects-registered.component';
+import { AdvisersRegisteredComponent } from './Components/Advisers/advisers-registered/advisers-registered.component';
+import { AuthorsRegisteredComponent } from './Components/Authors/authors-registered/authors-registered.component';
+import { EstadisticsComponent } from './estadistics/estadistics.component';
 
 const routes: Routes = [
   {
     path: '', component: LoginComponent
   },
   {
-    path: 'home', component: SidebarComponent, children: [
+    path: 'home',
+    component: SidebarComponent,
+    children: [
       {
         path: 'dashboard', component: DashboardComponent
       },
@@ -33,10 +32,6 @@ const routes: Routes = [
         path: 'projects', component: ProjectsComponent
       },
       {
-        path: 'add-projects', component: AddProjectsComponent
-      },
-
-      {
         path: 'registered-judges', component: JudgesComponent
       },
 
@@ -44,13 +39,7 @@ const routes: Routes = [
         path: 'projects-registered', component: ProjectsRegisteredComponent
       },
       {
-        path: 'add-advisers', component: AddAdvisersComponent
-      },
-      {
         path: 'advisers-registered', component: AdvisersRegisteredComponent
-      },
-      {
-        path: 'add-authors', component: AddAuthorsComponent
       },
       {
         path: 'add-estadistics', component: EstadisticsComponent

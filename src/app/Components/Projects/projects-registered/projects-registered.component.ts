@@ -1,26 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProjectsRegisteredService } from '../services/project-registered.service'
-import { ProjectRegistered } from '../models/project-regis.model';
-import { UtilsService } from '../services/utils.service';
+import { ProjectsRegisteredService } from '../../../services/project-registered.service'
+import { ProjectRegistered } from '../../../models/project-regis.model';
+import { UtilService } from '../../../services/util.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Areas } from '../models/areas.model';
-import { Sedes } from '../models/sedes.model';
-import { Asesores } from '../models/asesores.model';
-import { Categorias } from '../models/categorias.model';
-import { SedesService } from '../services/sedes.service';
-import { AreasService } from '../services/areas.service';
-import { CategoriasService } from '../services/categorias.service';
-import { AsesoresService } from '../services/asesores.service';
+import { Areas } from '../../../models/areas.model';
+import { Sedes } from '../../../models/sedes.model';
+import { Asesores } from '../../../models/asesores.model';
+import { Categorias } from '../../../models/categorias.model';
+import { SedesService } from '../../../services/sedes.service';
+import { AreasService } from '../../../services/areas.service';
+import { CategoriasService } from '../../../services/categorias.service';
+import { AsesoresService } from '../../../services/asesores.service';
 import { forkJoin } from 'rxjs';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { Proyectos } from '../models/proyectos.model';
-import { ProyectosService } from '../services/proyectos.service';
+import { Proyectos } from '../../../models/proyectos.model';
+import { ProyectosService } from '../../../services/proyectos.service';
 import Swal from 'sweetalert2';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Session } from '../models/session.model';
+import { Session } from '../../../models/session.model';
 import { jsPDF } from "jspdf";
-import { Autores, AutoresSelect } from '../models/autores.model';
-import { AutoresService } from '../services/autores.service';
+import { Autores, AutoresSelect } from '../../../models/autores.model';
+import { AutoresService } from '../../../services/autores.service';
 import { Router } from '@angular/router';
 
 
@@ -52,7 +52,7 @@ export class ProjectsRegisteredComponent implements OnInit {
   sedeActual = '1';
   constructor(
     private projectsService: ProjectsRegisteredService,
-    private _utilService: UtilsService,
+    private _utilService: UtilService,
     private formBuilder: FormBuilder,
     private sedesService: SedesService,
     private autoresService: AutoresService,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UtilsService } from './services/utils.service';
+import { UtilService } from './services/util.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public _utilService: UtilsService
+    public utilService: UtilService
     ) { }
 
   ngOnInit(): void {

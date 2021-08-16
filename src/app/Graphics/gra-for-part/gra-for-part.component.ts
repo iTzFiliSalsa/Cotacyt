@@ -3,7 +3,7 @@ import { ChartOptions, ChartType, ChartDataSets, plugins } from 'chart.js';
 import plugin, * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Color, defaultColors, Label } from 'ng2-charts';
 import jsPDF from 'jspdf';
-import { ProyectosService } from '../services/proyectos.service';
+import { ProyectosService } from '../../services/proyectos.service';
 
 @Component({
   selector: 'app-gra-for-part',

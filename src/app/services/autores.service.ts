@@ -10,12 +10,8 @@ import { Session } from '../models/session.model';
 })
 export class AutoresService {
   sessionData: Session;
-  constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) { 
+  constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
-  }
-
-  postAutor( body: any ): Observable<any> {
-    return this.http.post(this.servicesConfig.APP_ENDPOINT + 'api/autores/nuevo', body);
   }
   getAutores(): Observable<Autores[]> {
     return this.http.get<Autores[]>( this.servicesConfig.APP_ENDPOINT

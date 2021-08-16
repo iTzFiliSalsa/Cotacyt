@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { JudgesRegisteredService } from '../services/judges.service';
-import { JudgesRegistered } from '../models/judges.model';
-import { UtilsService } from '../services/utils.service';
+import { JudgesRegisteredService } from '../../../services/judges.service';
+import { JudgesRegistered } from '../../../models/judges.model';
+import { UtilService } from '../../../services/util.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Sedes } from '../models/sedes.model';
-import { SedesService } from '../services/sedes.service';
+import { Sedes } from '../../../models/sedes.model';
+import { SedesService } from '../../../services/sedes.service';
 import { forkJoin } from 'rxjs';
-import { Session } from '../models/session.model';
+import { Session } from '../../../models/session.model';
 import { jsPDF } from 'jspdf';
-import '../../assets/fonts/Helvetica.ttf';
-import { Proyectos, ProyectSelect } from '../models/proyectos.model';
+import '../../../../assets/fonts/Helvetica.ttf';
+import { Proyectos, ProyectSelect } from '../../../models/proyectos.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { ProyectosService } from '../services/proyectos.service';
+import { ProyectosService } from '../../../services/proyectos.service';
 import { TitleCasePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
@@ -43,7 +43,7 @@ export class JudgesComponent implements OnInit {
   sedeActual = '1';
   constructor(
     private judgesService: JudgesRegisteredService,
-    private _utilService: UtilsService,
+    private _utilService: UtilService,
     private sedesService: SedesService,
     private proyectosService: ProyectosService,
     private formBuilder: FormBuilder,

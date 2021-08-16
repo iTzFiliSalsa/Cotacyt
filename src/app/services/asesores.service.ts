@@ -10,7 +10,7 @@ import { Session } from '../models/session.model';
 })
 export class AsesoresService {
   sessionData: Session;
-  constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) { 
+  constructor( private http: HttpClient, private servicesConfig: ServicesConfig ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
   }
   getAsesores(): Observable<Asesores[]> {
@@ -19,9 +19,6 @@ export class AsesoresService {
   }
   getAsesoresSuperUser(): Observable<Asesores[]> {
     return this.http.get<Asesores[]>(this.servicesConfig.APP_ENDPOINT + 'api/asesores/all-admin');
-  }
-  postAsesor(body: any): Observable<any> {
-    return this.http.post( this.servicesConfig.APP_ENDPOINT + 'api/asesores/nuevo', body );
   }
   deleteAsesor(idAsesor: string) {
     return this.http.delete(this.servicesConfig.APP_ENDPOINT + 'api/asesores/eliminar/' + idAsesor);

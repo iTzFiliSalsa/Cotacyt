@@ -1,18 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AreasService } from 'src/app/services/areas.service';
-import { Subscriber, forkJoin } from 'rxjs';
 import { DashboardService } from '../../services/dashboard.service';
-import { JsonPipe } from '@angular/common';
 import { Totales, ProyectosCalificados, ProyectosPorCalificar } from '../../models/dashboard.model';
 import { Session } from 'src/app/models/session.model';
 import { CategoriasService } from '../../services/categorias.service';
 import { CalificacionesService } from '../../services/calificaciones.service';
 import { Calificaciones } from '../../models/calificaciones.model';
-import { AppComponent } from 'src/app/app.component';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilService } from 'src/app/services/util.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
-import { Observable } from 'rxjs';
 import swal from 'sweetalert2';
 import { Util } from 'src/app/utils/utils';
 import { ProjectsRegisteredService } from 'src/app/services/project-registered.service';
@@ -20,16 +15,16 @@ import { ProjectRegistered } from 'src/app/models/project-regis.model';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CalificacionesPorCategoria } from '../../models/calificaciones.model'
-import { InformacionDeLosProyectos } from '../../models/proyectos.model'
-import { ProyectosService } from '../../services/proyectos.service'
+import { CalificacionesPorCategoria } from '../../models/calificaciones.model';
+import { InformacionDeLosProyectos } from '../../models/proyectos.model';
+import { ProyectosService } from '../../services/proyectos.service';
 import { jsPDF } from "jspdf";
 import '../../../assets/fonts/Helvetica.ttf';
 import '../../../assets/fonts/Caviar.ttf';
 import { SedesService } from '../../services/sedes.service';
 import { Sedes } from 'src/app/models/sedes.model';
 import Swal from 'sweetalert2';
-import { auto } from '@popperjs/core';
+import { forkJoin } from 'rxjs';
 
 
 
@@ -101,7 +96,7 @@ export class DashboardComponent implements OnInit {
     private dashboardService: DashboardService,
     private categoriasService: CategoriasService,
     private calificacionesService: CalificacionesService,
-    private _utilsService: UtilsService,
+    private _utilsService: UtilService,
     private projectsService: ProjectsRegisteredService,
     public readonly swalTargets: SwalPortalTargets,
     public formBuilder: FormBuilder,

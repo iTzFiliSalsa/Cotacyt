@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AsesoresService } from '../services/asesores.service';
-import { Asesores } from '../models/asesores.model';
-import { UtilsService } from '../services/utils.service';
+import { AsesoresService } from '../../../services/asesores.service';
+import { Asesores } from '../../../models/asesores.model';
+import { UtilService } from '../../../services/util.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
-import { Sedes } from '../models/sedes.model';
-import { SedesService } from '../services/sedes.service';
+import { Sedes } from '../../../models/sedes.model';
+import { SedesService } from '../../../services/sedes.service';
 import { forkJoin } from 'rxjs';
-import { Session } from '../models/session.model';
+import { Session } from '../../../models/session.model';
 import { jsPDF } from 'jspdf';
-import '../../assets/fonts/Helvetica.ttf';
+import '../../../../assets/fonts/Helvetica.ttf';
 import { TitleCasePipe } from '@angular/common';
 
 
@@ -30,7 +30,7 @@ export class AdvisersRegisteredComponent implements OnInit {
   superUser: boolean;
   constructor(
     private _asesoresService: AsesoresService,
-    private _utilService: UtilsService,
+    private _utilService: UtilService,
     private sedesService: SedesService,
     private formBuilder: FormBuilder,
     private titlecasePipe: TitleCasePipe

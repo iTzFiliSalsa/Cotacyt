@@ -1,23 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DashboardService } from '../services/dashboard.service';
-import { ProyectosCalificados, ProyectosPorCalificar } from '../models/dashboard.model';
-import { CategoriasService } from '../services/categorias.service';
-import { ProyectosService } from '../services/proyectos.service';
-import { Proyectos } from '../models/proyectos.model';
+import { DashboardService } from '../../../services/dashboard.service';
+import { ProyectosCalificados, ProyectosPorCalificar } from '../../../models/dashboard.model';
+import { CategoriasService } from '../../../services/categorias.service';
+import { ProyectosService } from '../../../services/proyectos.service';
+import { Proyectos } from '../../../models/proyectos.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CalificarProyectoService } from '../services/calificar-proyecto.service';
-import { UtilsService } from '../services/utils.service';
-import { Util } from '../utils/utils';
-import { ProjectRegistered } from '../models/project-regis.model';
-import { ProjectsRegisteredService } from '../services/project-registered.service';
+import { CalificarProyectoService } from '../../../services/calificar-proyecto.service';
+import { UtilService } from '../../../services/util.service';
+import { Util } from '../../../utils/utils';
+import { ProjectRegistered } from '../../../models/project-regis.model';
+import { ProjectsRegisteredService } from '../../../services/project-registered.service';
 import { Session } from 'src/app/models/session.model';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { InformacionDeLosProyectos } from '../models/proyectos.model';
+import { InformacionDeLosProyectos } from '../../../models/proyectos.model';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
-import { JuecesService } from '../services/jueces.service';
+import { JuecesService } from '../../../services/jueces.service';
 import { jsPDF } from 'jspdf';
-import '../../assets/fonts/Helvetica.ttf';	
+import '../../../../assets/fonts/Helvetica.ttf';	
 import { TitleCasePipe } from '@angular/common';
 
 
@@ -62,10 +62,9 @@ export class ProjectsComponent implements OnInit {
     private proyectosService: ProyectosService,
     private formBuilder: FormBuilder,
     private calificarProyectoService: CalificarProyectoService,
-    private _utilService: UtilsService,
+    private _utilService: UtilService,
     private projectsService: ProjectsRegisteredService,
     private infoProject: ProyectosService,
-    private _utilsService: UtilsService,
     private projectsJudges: JuecesService,
     private titlecasePipe: TitleCasePipe
   ) {
@@ -1103,7 +1102,7 @@ export class ProjectsComponent implements OnInit {
         },
         err => console.log(err)
         ).add(() => {
-          this._utilsService._loading = false;
+          this._utilService._loading = false;
         });
       } else {
         this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
@@ -1112,7 +1111,7 @@ export class ProjectsComponent implements OnInit {
           },
           err => console.log(err)
           ).add(() => {
-            this._utilsService._loading = false;
+            this._utilService._loading = false;
           });
         }
     this.swalInformacion.fire();

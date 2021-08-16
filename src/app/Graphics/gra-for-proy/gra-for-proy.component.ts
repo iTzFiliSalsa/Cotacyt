@@ -3,28 +3,23 @@ import { ChartOptions, ChartType, ChartDataSets, plugins } from 'chart.js';
 import plugin, * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Color, defaultColors, Label } from 'ng2-charts';
 import jsPDF from 'jspdf';
-import { ProyectosService } from '../services/proyectos.service';
+import { ProyectosService } from '../../services/proyectos.service';
 
 @Component({
-  selector: 'app-gra-for-ase',
-  templateUrl: './gra-for-ase.component.html',
-  styleUrls: ['./gra-for-ase.component.scss']
+  selector: 'app-gra-for-proy',
+  templateUrl: './gra-for-proy.component.html',
+  styleUrls: ['./gra-for-proy.component.scss']
 })
-export class GraForAseComponent implements OnInit {
+export class GraForProyComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [
-      {
-        ticks: {
-          beginAtZero: true
-          }
-      }] },
+    scales: { xAxes: [{}], yAxes: [{}] },
     plugins: {
       datalabels: {
         anchor: 'center',
         align: 'center',
-        color: 'black'
+        color: 'black',
       }
     }
   };
@@ -32,42 +27,40 @@ export class GraForAseComponent implements OnInit {
   public barChartColors: Color[] = [
     { backgroundColor: '#97c83c'},
   ];
-  public barChartLabels: Label[] = ['El Mante', 'Jaumave', 'Madero', 'Matamoros', 'Nuevo Laredo', 'Reynosa', 'Victoria'];
+  public barChartLabels: Label[] = ['Petit', 'Kids', 'Juvenil', 'Media superior', 'Superior', 'Posgrado'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[];
 
-  asesores:[];
-  constructor(private asesoresPorSede: ProyectosService) { }
+  participantesCat:[];
+  constructor(private participantesPorCat: ProyectosService) { }
 
   ngOnInit() {
     this.barChartData = [{
       data: [],
-      label: 'Asesores por sede'
+      label: 'Participantes por categoría'
     }];
-    this.asesoresPorSede.getAsesoresPorSede().subscribe(
+    this.participantesPorCat.getParticipantesPorCategoria().subscribe(
       data => {
-        this.asesores = data;
-        const sede1 = data['El Mante'];
-        const sede2 = data['Jaumave'];
-        const sede3 = data['Madero'];
-        const sede4 = data['Matamoros'];
-        const sede5 = data['Nuevo Laredo'];
-        const sede6 = data['Reynosa'];
-        const sede7 = data['Victoria'];
-        
+        this.participantesCat = data;
+        const cat1 = data['petit'];
+        const cat2 = data['kids'];
+        const cat3 = data['juvenil'];
+        const cat4 = data['media-superior'];
+        const cat5 = data['superior'];
+        const cat6 = data['posgrado'];
+
         this.barChartData = [{
-          data: [sede1, sede2, sede3, sede4, sede5, sede6, sede7],
-          label: 'Asesores Por Sede'
+          data: [cat1, cat2, cat3, cat4, cat5, cat6],
+          label: 'Participantes por categoría'
         }];
       },
       err => {
         console.log(err);
       }
-    )
-
+    );
   }
 
   // events
@@ -79,9 +72,8 @@ export class GraForAseComponent implements OnInit {
     console.log(event, active);
   }
 
-  
   downloadPDF() {
-    var canvas: any = document.getElementById('graficaProy4');
+    var canvas: any = document.getElementById('graficaProy6');
     //creates image
     var canvasImg = canvas.toDataURL("image/png", 1.0);
     
@@ -92,7 +84,7 @@ export class GraForAseComponent implements OnInit {
     doc.addImage('assets/cecit.png','png', 243, 5, 50, 40).setFont('Caviar').setFontSize(18).setTextColor('#646464');
     doc.text('Consejo Tamaulipeco de Ciencia y Tecnología', 91, 37);
     doc.addImage(canvasImg, 'JPEG', 15, 50, 260, 135 );
-    doc.save('Asesores-Por-Sede.pdf');
+    doc.save('Participantes-Por-Categoria.pdf');
   }
 
 }

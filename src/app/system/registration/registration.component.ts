@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { JuecesService } from '../../services/jueces.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilService } from 'src/app/services/util.service';
 import swal from 'sweetalert2';
 import { SedesService } from '../../services/sedes.service';
 import { Sedes } from '../../models/sedes.model';
@@ -43,7 +43,7 @@ export class RegistrationComponent implements OnInit {
     private sedesService: SedesService,
     private judgeRegistredService: JudgesRegisteredService,
     private proyectosService: ProyectosService,
-    private _utilService: UtilsService
+    private _utilService: UtilService
     ) {
     this.proyectos = new Array<Proyectos>();
     this.proyectosSeleccionados = new Array<Proyectos>();

@@ -1,25 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AutoresService } from '../services/autores.service';
-import { UtilsService } from '../services/utils.service';
-import { Autores } from '../models/autores.model';
+import { AutoresService } from '../../../services/autores.service';
+import { UtilService } from '../../../services/util.service';
+import { Autores } from '../../../models/autores.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Escuelas } from '../models/escuelas.model';
-import { Municipios } from '../models/municipios.model';
-import { Localidades } from '../models/localidades.model';
-import { Proyectos } from '../models/proyectos.model';
-import { MunicipiosService } from '../services/municipios.service';
-import { EscuelasService } from '../services/escuelas.service';
-import { LocalidadesService } from '../services/localidades.service';
-import { ProyectosService } from '../services/proyectos.service';
+import { Escuelas } from '../../../models/escuelas.model';
+import { Municipios } from '../../../models/municipios.model';
+import { Localidades } from '../../../models/localidades.model';
+import { Proyectos } from '../../../models/proyectos.model';
+import { MunicipiosService } from '../../../services/municipios.service';
+import { EscuelasService } from '../../../services/escuelas.service';
+import { LocalidadesService } from '../../../services/localidades.service';
+import { ProyectosService } from '../../../services/proyectos.service';
 import { forkJoin } from 'rxjs';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { auto } from '@popperjs/core';
 import Swal from 'sweetalert2';
-import { Sedes } from '../models/sedes.model';
-import { SedesService } from '../services/sedes.service';
-import { Session } from '../models/session.model';
+import { Sedes } from '../../../models/sedes.model';
+import { SedesService } from '../../../services/sedes.service';
+import { Session } from '../../../models/session.model';
 import { jsPDF } from 'jspdf';
-import '../../assets/fonts/Helvetica.ttf';
+import '../../../../assets/fonts/Helvetica.ttf';
 import { TitleCasePipe } from '@angular/common';
 
 
@@ -48,7 +48,7 @@ export class AuthorsRegisteredComponent implements OnInit {
     private localidadesService: LocalidadesService,
     private proyectosService: ProyectosService,
     private autoresService: AutoresService,
-    private utils: UtilsService,
+    private utils: UtilService,
     private sedesService: SedesService,
     private formBuilder: FormBuilder,
     private titlecasePipe: TitleCasePipe

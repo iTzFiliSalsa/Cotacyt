@@ -4,7 +4,7 @@ import { ServicesConfig } from '../config/services.config';
 import { Observable } from 'rxjs';
 import { Proyectos, ProyectSelect } from '../models/proyectos.model';
 import { Session } from '../models/session.model';
-import { InformacionDeLosProyectos } from '../models/proyectos.model'
+import { InformacionDeLosProyectos } from '../models/proyectos.model';
 
 @Injectable({
   providedIn: 'root'

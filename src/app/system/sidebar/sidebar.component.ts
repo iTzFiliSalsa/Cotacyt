@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Session } from '../../models/session.model';
 import { CategoriasService } from 'src/app/services/categorias.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private categoriasService: CategoriasService,
-    private _utilService: UtilsService ) {
+    private _utilService: UtilService ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.categoria = 'Cargando...';
   }

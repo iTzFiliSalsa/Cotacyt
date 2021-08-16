@@ -4,7 +4,7 @@ import { ServicesConfig } from '../config/services.config';
 import { Session } from '../models/session.model';
 import { Observable } from 'rxjs';
 import { Calificaciones } from '../models/calificaciones.model';
-import { CalificacionesPorCategoria }  from '../models/calificaciones.model'
+import { CalificacionesPorCategoria }  from '../models/calificaciones.model';
 
 @Injectable({
   providedIn: 'root'

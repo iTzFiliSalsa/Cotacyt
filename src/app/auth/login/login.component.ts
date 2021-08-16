@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JuecesService } from '../../services/jueces.service';
 import { ServicesConfig } from '../../config/services.config';
 import { RouterLinkActive, Router } from '@angular/router';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilService } from 'src/app/services/util.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               private juecesService: JuecesService,
               private router: Router,
-              private _utilService:UtilsService) {
+              private utilService: UtilService) {
 
     this.formLoginJudge = formBuilder.group({
       usuario: ['', [Validators.required]],
@@ -28,13 +28,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   iniciarSesion() {
-    this._utilService.loading = true;
+    this.utilService.loading = true;
     this.juecesService.iniciarSesionJuez(this.formLoginJudge.value).subscribe(
       data => {
         if (data) {
           this.router.navigateByUrl('home');
           localStorage.setItem('session', JSON.stringify(data));
         } else {
+          console.log(data);
           swal.fire({
             icon: 'error',
             title: 'Error',
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
       },
       err => console.log(err)
     ).add(() => {
-      this._utilService.loading = false;
+      this.utilService._loading = false;
     });
   }
 
