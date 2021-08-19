@@ -13,7 +13,6 @@ import { LocalidadesService } from '../../../services/localidades.service';
 import { ProyectosService } from '../../../services/proyectos.service';
 import { forkJoin } from 'rxjs';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { auto } from '@popperjs/core';
 import Swal from 'sweetalert2';
 import { Sedes } from '../../../models/sedes.model';
 import { SedesService } from '../../../services/sedes.service';
@@ -34,10 +33,10 @@ export class AuthorsRegisteredComponent implements OnInit {
   autores: Autores[];
   autorActual: Autores;
   formAutores: FormGroup;
-  escuelas: Escuelas[];
-  municipios: Municipios[];
-  localidades: Localidades[];
-  sedes: Sedes[];
+  // escuelas: Escuelas[];
+  // municipios: Municipios[];
+  // localidades: Localidades[];
+  // sedes: Sedes[];
   proyectos: Proyectos[];
   sessionData: Session;
   superUser: boolean;
@@ -54,18 +53,18 @@ export class AuthorsRegisteredComponent implements OnInit {
     private titlecasePipe: TitleCasePipe
   ) {
     this.sessionData = JSON.parse(localStorage.getItem('session'));
-    this.formAutores = this.formBuilder.group({
-      nombres: ['', [Validators.required]],
-      a_paterno: ['', [Validators.required]],
-      a_materno: [''],
-      telefono: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      id_proyectos: ['', [Validators.required]],
-      id_sedes: ['', [Validators.required]],
-      id_escuelas: ['', [Validators.required]],
-      id_municipios: ['', [Validators.required]],
-      id_localidades: ['', [Validators.required]],
-    });
+    // this.formAutores = this.formBuilder.group({
+    //   nombres: ['', [Validators.required]],
+    //   a_paterno: ['', [Validators.required]],
+    //   a_materno: [''],
+    //   telefono: ['', [Validators.required]],
+    //   email: ['', [Validators.required, Validators.email]],
+    //   id_proyectos: ['', [Validators.required]],
+    //   id_sedes: ['', [Validators.required]],
+    //   id_escuelas: ['', [Validators.required]],
+    //   id_municipios: ['', [Validators.required]],
+    //   id_localidades: ['', [Validators.required]],
+    // });
     this.utils._loading = true;
     if (this.sessionData.rol === 'superuser') {
       this.superUser = false;
@@ -76,55 +75,52 @@ export class AuthorsRegisteredComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin({
-      escuelas: this.escuelasService.getEscuelas(),
-      localidades: this.localidadesService.getLocalidades(),
-      municipios: this.municipiosService.getMunicipios(),
-      sedes: this.sedesService.getSedes(),
+      // escuelas: this.escuelasService.getEscuelas(),
+      // localidades: this.localidadesService.getLocalidades(),
+      // municipios: this.municipiosService.getMunicipios(),
+      // sedes: this.sedesService.getSedes(),
       autores: this.superUser
         ? this.autoresService.getAutores()
         : this.autoresService.getAutoresSuperUser()
     }).subscribe(
       data => {
-        this.escuelas = data.escuelas;
-        this.localidades = data.localidades;
-        this.municipios = data.municipios;
+        // this.escuelas = data.escuelas;
+        // this.localidades = data.localidades;
+        // this.municipios = data.municipios;
         this.autores = data.autores;
-        this.sedes = data.sedes;
+        // this.sedes = data.sedes;
         console.log(this.autores);
-        
       }, err => {
         console.log(err);
       }).add(() => {
         this.utils._loading = false;
       });
-      
-      
   }
 
   setAutor(autor: Autores) {
     this.autorActual = autor;
   }
 
-  deleteAutor() {
-    this.utils._loading = true;
-    this.autoresService.deleteAutores(this.autorActual.id_autores)
-      .subscribe(data => {
-        Swal.fire({
-          title: 'Se elimino correctamente',
-          icon: 'success'
-        });
-      },
-        err => {
-          console.log(err);
-          Swal.fire({
-            title: 'Ocurrio un error al eliminar',
-            icon: 'error'
-          });
-        }).add(() => {
-          this.utils._loading = false;
-          this.ngOnInit();
-        });
-  }
+  // deleteAutor() {
+  //   this.utils._loading = true;
+  //   this.autoresService.deleteAutores(this.autorActual.id_autores)
+  //     .subscribe(data => {
+  //       Swal.fire({
+  //         title: 'Se elimino correctamente',
+  //         icon: 'success'
+  //       });
+  //     },
+  //       err => {
+  //         console.log(err);
+  //         Swal.fire({
+  //           title: 'Ocurrio un error al eliminar',
+  //           icon: 'error'
+  //         });
+  //       }).add(() => {
+  //         this.utils._loading = false;
+  //         this.ngOnInit();
+  //       });
+  // }
 
   onChangeSedeActual(value) {
     this.utils._loading = true;
@@ -202,11 +198,11 @@ export class AuthorsRegisteredComponent implements OnInit {
     let id_nombres: any[];
     let id_paterno: any[];
     let id_materno: any[];
-    
     switch (this.autorActual.id_sedes) {
       case '1':
         const doc = new jsPDF('p', 'in', 'letter');
-        doc.addImage('assets/image/ConstanciaParticipantesMante.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc.addImage('assets/image/ConstanciaParticipantesMante.jpg', 'jpg', 0, 0, 8.5, 11)
+        .setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc.text(this.titlecasePipe.transform(this.autorActual.nombre) + ' ' + this.titlecasePipe.transform(this.autorActual.a_paterno) + ' ' + this.titlecasePipe.transform(this.autorActual.a_materno), 4.2, 6.9, { align: 'center' }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         if (this.autorActual.proyecto.length >= 30 && this.autorActual.proyecto.length <= 100) {
           const nombreTemp = this.autorActual.proyecto.substr(0, 50);
@@ -244,7 +240,8 @@ export class AuthorsRegisteredComponent implements OnInit {
         break;
       case '2':
         const doc1 = new jsPDF('p', 'in', 'letter');
-        doc1.addImage('assets/image/ConstanciaParticipantesReynosa.jpg', 'jpg', 0, 0, 8.5, 11).setFont('Helvetica').setFontSize(28).setTextColor('#646464');
+        doc1.addImage('assets/image/ConstanciaParticipantesReynosa.jpg', 'jpg', 0, 0, 8.5, 11)
+        .setFont('Helvetica').setFontSize(28).setTextColor('#646464');
         doc1.text(this.titlecasePipe.transform(this.autorActual.nombre) + ' ' + this.titlecasePipe.transform(this.autorActual.a_paterno) + ' ' + this.titlecasePipe.transform(this.autorActual.a_materno), 4.2, 6.9, { align: 'center' }).setFontSize(20).setFont('Helvetica').setTextColor('#646464');
         if (this.autorActual.proyecto.length >= 30 && this.autorActual.proyecto.length <= 100) {
           const nombreTemp = this.autorActual.proyecto.substr(0, 50);

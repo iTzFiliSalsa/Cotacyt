@@ -80,7 +80,7 @@ export class ProyectosService {
     };
     return this.http.post<InformacionDeLosProyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/calificacion', body);
   }
-  obtenerInformacionDeUnProyectoAdmin(id_proyectos:string): Observable<InformacionDeLosProyectos[]> {
+  obtenerInformacionDeUnProyectoAdmin(id_proyectos: string): Observable<InformacionDeLosProyectos[]> {
     return this.http.get<InformacionDeLosProyectos[]>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/all/details/' + id_proyectos);
   }
   getStatusAdmin(idProyectos: string): Observable<any> {
@@ -97,19 +97,19 @@ export class ProyectosService {
     return this.http.post<any>(this.servicesConfig.APP_ENDPOINT + 'api/proyectos/obtener-status', body);
   }
 
-  getProyectosPorCategoria(): Observable<any>{
-    return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria'); 
+  getProyectosPorCategoria(): Observable<any> {
+    return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/proyectos-por-categoria');
   }
 
-  getAsesoresPorSede(): Observable<any>{
+  getAsesoresPorSede(): Observable<any> {
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/asesores-por-sede');
   }
 
-  getParticipantesPorSede(): Observable<any>{
+  getParticipantesPorSede(): Observable<any> {
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/participantes-por-sede');
   }
 
-  getParticipantesPorCategoria(): Observable<any>{
+  getParticipantesPorCategoria(): Observable<any> {
     return this.http.get<any>(this.servicesConfig.APP_ENDPOINT + 'api/dashboard/participantes-por-categoria');
   }
   getAutoresProyecto(idProyecto: string): Observable<any> {

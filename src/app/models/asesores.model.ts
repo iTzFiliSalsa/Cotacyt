@@ -1,8 +1,8 @@
 export interface Asesores {
     id_asesores: string;
-    nombres: string;
-    a_paterno: string;
-    a_materno: string;
+    nombre: string;
+    ape_pat: string;
+    ape_mat: string;
     email: string;
     sede: string;
     id_sedes: string;

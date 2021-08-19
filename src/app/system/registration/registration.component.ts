@@ -43,7 +43,7 @@ export class RegistrationComponent implements OnInit {
     private sedesService: SedesService,
     private judgeRegistredService: JudgesRegisteredService,
     private proyectosService: ProyectosService,
-    private _utilService: UtilService
+    private utilService: UtilService
     ) {
     this.proyectos = new Array<Proyectos>();
     this.proyectosSeleccionados = new Array<Proyectos>();
@@ -54,20 +54,17 @@ export class RegistrationComponent implements OnInit {
       contrasena:    ['', [Validators.required, Validators.maxLength(20)]],
       nombre:        ['', [Validators.required, Validators.maxLength(100)]],
       id_sedes:      [this.sessionData.id_sedes],
-      ids_proyectos: ['']
+      ids_proyectos: [''],
+      rol: ['juez'],
     });
-    this._utilService._loading = true;
+    this.utilService._loading = true;
     this.formFecha = formBuilder.group({
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required]
     });
   }
   ngOnInit(): void {
-    if (this.sessionData.rol === 'superuser') {
-      this.superUser = false;
-    } else {
-      this.superUser = true;
-    }
+    this.superUser = this.sessionData.rol === 'superuser';
     if ( this.sessionData.rol === 'superuser') {
       forkJoin({
         proyectos: this.proyectosService.obtenerProyectosSuperUserTemp(this.categoriaActua, this.sedeActual),
@@ -78,13 +75,14 @@ export class RegistrationComponent implements OnInit {
           this.sedes = data.sedes;
         }
         ).add(() => {
-          this._utilService._loading = false;
+          this.utilService._loading = false;
           // Settings para proyecto
           this.dropdownSettingsProyecto = {
             singleSelection: false,
             idField: 'id_proyectos',
             textField: 'nombre',
-            allowSearchFilter: true
+            allowSearchFilter: true,
+            noDataAvailablePlaceholderText: 'No hay proyectos'
           };
         });
     } else {
@@ -97,19 +95,20 @@ export class RegistrationComponent implements OnInit {
           this.sedes = data.sedes;
         }
         ).add(() => {
-          this._utilService._loading = false;
+          this.utilService._loading = false;
           // Settings para proyecto
           this.dropdownSettingsProyecto = {
             singleSelection: false,
             idField: 'id_proyectos',
             textField: 'nombre',
-            allowSearchFilter: true
+            allowSearchFilter: true,
+            noDataAvailablePlaceholderText: 'No hay proyectos'
           };
         });
     }
     }
     registrarJuez() {
-      this._utilService.loading = true;
+      this.utilService.loading = true;
       this.juecesService.registrarJuez(this.formsRegistroJuez.value).subscribe(
         data => {
           swal.fire({
@@ -130,7 +129,7 @@ export class RegistrationComponent implements OnInit {
           console.log(err);
         }
       ).add(() => {
-        this._utilService.loading = false;
+        this.utilService.loading = false;
       });
   }
   addProyecto(item: any) {
@@ -144,26 +143,26 @@ export class RegistrationComponent implements OnInit {
     });
   }
   onChangesedeActual(value) {
-    this._utilService._loading = true;
+    this.utilService._loading = true;
     this.sedeActual = value;
     this.proyectosService.obtenerProyectosSuperUserTemp(this.categoriaActua, value)
         .subscribe( data => {
           this.proyectos = data;
-        }).add(() => this._utilService._loading = false);
+        }).add(() => this.utilService._loading = false);
   }
   onChangecategoriaActual(value) {
-    this._utilService._loading = true;
+    this.utilService._loading = true;
     this.categoriaActua = value;
     if ( this.sessionData.rol === 'superuser') {
       this.proyectosService.obtenerProyectosSuperUserTemp(value, this.sedeActual)
         .subscribe( data => {
           this.proyectos = data;
-        }).add(() => this._utilService._loading = false );
+        }).add(() => this.utilService._loading = false );
       } else {
         this.proyectosService.obtenerTodosLosProyectosCategoria(value)
           .subscribe( data => {
             this.proyectos = data;
-          }).add(() => this._utilService._loading = false);
+          }).add(() => this.utilService._loading = false);
       }
   }
   mostrarSwal(evt: any) {

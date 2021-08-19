@@ -18,9 +18,9 @@
     </thead>
 
     <tr class="table" *ngFor="let i of asesores">
-        <td>{{i.nombres}}</td>
-        <td>{{i.a_paterno}}</td>
-        <td>{{i.a_materno}}</td>
+        <td>{{i.nombre}}</td>
+        <td>{{i.ape_pat}}</td>
+        <td>{{i.ape_mat}}</td>
         <td>{{i.email}}</td>
         <td>{{i.sede}}</td>
         <td>
@@ -29,15 +29,9 @@
             </div>
         </td>
         <td class="d-flex">
-            <button (click)="openSwal(i)" class="btn btn-edit mr-3"><i class="fas fa-edit"></i></button>
-            <button (click)="setAsesor(i)" class="btn btn-danger mr-3" data-toggle="modal" data-target="#modalEliminar"><i
-                class="fas fa-trash-alt"></i></button>
             <button class="btn btn-primary" (click)="saveAsPdf(i)"><i class="fas fa-download"></i></button>
-            
         </td>
     </tr>
-
-
 </table>
 
 
@@ -48,7 +42,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="row justify-content-center">
-                        <h4>¿Desea eliminar <span *ngIf="asesorActual" class="text-name-remove">{{asesorActual.nombres}}</span>?</h4>
+                        <h4>¿Desea eliminar <span *ngIf="asesorActual" class="text-name-remove">{{asesorActual.nombre}}</span>?</h4>
                     </div>
                     <div class="row justify-content-center mt-3">
                         <button class="btn btn-secondary mr-4" data-dismiss="modal">Cancelar</button>

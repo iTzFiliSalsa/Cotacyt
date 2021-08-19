@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Sede:</label>
-                            <select #sd (change)="onChangesedeActual(sd.value)" formControlName="id_sedes" class="form-control" [attr.disabled]="superUser ? 'disabled': null">
+                            <select #sd (change)="onChangesedeActual(sd.value)" formControlName="id_sedes" class="form-control" [attr.disabled]="superUser ? null: 'disabled'">
                                 <option [value]="sede.id_sedes" *ngFor="let sede of sedes">{{sede.sede}}</option>
                             </select>
                         </div>
@@ -63,6 +63,13 @@
                         <div class="form-group">
                             <label for="">Contraseña:</label>
                             <input type="password" class="form-control" formControlName="contrasena" placeholder="Contraseña">
+                        </div>
+                        <div class="form-group" *ngIf="superUser">
+                            <label for="">Tipo:</label>
+                            <select class="form-control" formControlName='rol'>
+                                <option value="juez">Juez</option>
+                                <option value="admin">Administrador de sede</option>
+                            </select>
                         </div>
                         <button [disabled]="!formsRegistroJuez.valid" class="btn btn-primary boton-iniciar" (click)="registrarJuez()">Registrar</button>
                     </form>

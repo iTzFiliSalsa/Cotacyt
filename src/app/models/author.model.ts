@@ -13,11 +13,11 @@ export interface Autor {
     id_proyectos: string;
     localidad: string;
     municipio: string;
-    nivel_ingles: string;
     nombre: string;
     password: string;
     rfc: string;
     telefono: string;
     twitter: string;
     usuario: string;
+    nivel_ingles: string;
 }
