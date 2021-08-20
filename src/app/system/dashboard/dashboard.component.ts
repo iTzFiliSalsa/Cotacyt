@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit {
     private dashboardService: DashboardService,
     private categoriasService: CategoriasService,
     private calificacionesService: CalificacionesService,
-    private _utilsService: UtilService,
+    private utilsService: UtilService,
     private projectsService: ProjectsRegisteredService,
     public readonly swalTargets: SwalPortalTargets,
     public formBuilder: FormBuilder,
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
     this.proyectosPorCalificar = new Array<ProyectosPorCalificar>();
     this.sessionData = JSON.parse(localStorage.getItem('session'));
     this.estadisticasDeProyectos = new Array<Calificaciones>();
-    this._utilsService._loading = true;
+    this.utilsService._loading = true;
     this.util = new Util;
     this.proyectos = new Array<ProjectRegistered>();
     this.proyectosCalificadosPorCategoria = new Array<CalificacionesPorCategoria>();
@@ -158,7 +158,7 @@ export class DashboardComponent implements OnInit {
           this.sedes = data.sedes,
             this.construirGrafica(data.grafica);
         }
-      ).add(() => this._utilsService._loading = false);
+      ).add(() => this.utilsService._loading = false);
       this.dashboardService.getTotalesSuperUser().subscribe(
         data => {
           this.totales = data;
@@ -173,6 +173,7 @@ export class DashboardComponent implements OnInit {
         grafica: this.dashboardService.getProyectosPorCategoriasAdmin(),
       }).subscribe(
         data => {
+          console.log(data);
           this.totales = data.totales;
           this.adminProjects(data.proyectos);
           this.estadisticasDeProyectos = data.estadisticas;
@@ -181,7 +182,7 @@ export class DashboardComponent implements OnInit {
         err => {
           console.log(err);
         }
-      ).add(() => this._utilsService._loading = false);
+      ).add(() => this.utilsService._loading = false);
     } else {
       forkJoin({
         proyectosCalificados: this.dashboardService.getProyectosCalificados(),
@@ -200,7 +201,7 @@ export class DashboardComponent implements OnInit {
         err => {
           console.log(err);
         }
-      ).add(() => this._utilsService._loading = false);
+      ).add(() => this.utilsService._loading = false);
     }
 
     this.sessionData = JSON.parse(localStorage.getItem('session'));
@@ -272,21 +273,21 @@ export class DashboardComponent implements OnInit {
   }
   onChangeSede(value) {
     this.sedeActual = value;
-    this._utilsService._loading = true;
+    this.utilsService._loading = true;
     this.calificacionesService.listaDeCalificacionesAdmin(this.categoriaActual, this.sedeActual)
       .subscribe(data => this.mostrarListaCalificaiones(data, this.categoriaActual))
-      .add(() => this._utilsService.loading = false);
+      .add(() => this.utilsService.loading = false);
   }
   onChangeCategoria(value) {
     this.categoriaActual = value;
     this.superUser
       ? this.calificacionesService.listaDeCalificacionesAdmin(value, this.sedeActual)
         .subscribe(data => this.mostrarListaCalificaiones(data, value))
-        .add(() => this._utilsService.loading = false)
+        .add(() => this.utilsService.loading = false)
       : this.calificacionesService.listaDeCalificaciones(value)
         .subscribe((data: any) => this.mostrarListaCalificaiones(data, value),
           err => console.log(err))
-        .add(() => this._utilsService.loading = false);
+        .add(() => this.utilsService.loading = false);
   }
   mostrarListaCalificaiones(data: any, value) {
     this.proyectosCalificadosPorCategoria = data;
@@ -338,7 +339,7 @@ export class DashboardComponent implements OnInit {
         },
         err => console.log(err)
       ).add(() => {
-        this._utilsService._loading = false;
+        this.utilsService._loading = false;
       });
     } else {
       this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
@@ -347,7 +348,7 @@ export class DashboardComponent implements OnInit {
         },
         err => console.log(err)
       ).add(() => {
-        this._utilsService._loading = false;
+        this.utilsService._loading = false;
       });
     }
     this.swalInformacion.fire();
@@ -363,7 +364,7 @@ export class DashboardComponent implements OnInit {
         },
         err => console.log(err)
       ).add(() => {
-        this._utilsService._loading = false;
+        this.utilsService._loading = false;
       });
     } else {
       this.infoProject.obtenerInformacionDeUnProyecto(proyecto.id_proyectos).subscribe(
@@ -372,7 +373,7 @@ export class DashboardComponent implements OnInit {
         },
         err => console.log(err)
       ).add(() => {
-        this._utilsService._loading = false;
+        this.utilsService._loading = false;
       });
     }
     this.swalInformacion.fire();
